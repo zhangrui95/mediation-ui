@@ -1,0 +1,62 @@
+import {NAV_LIST,BANNER,ENT_BIND,LOAD_USER,UPDATE_PASS,VALIDATE_PASS,SELECT_DATA,LIST_ENT,LIST_ENT_RELOAD,LIST_ENT_QUERY,SIGN_IN_USER,SIGN_OUT_USER} from '../../constants/ActionTypes'
+import {SIGN_IN_URL} from '../../constants/Constant'
+import {formData2Param} from '../../utils/param'
+
+const listApiMsg = (actionMsg) => {
+    const option = actionMsg.option;
+    let body = option.body||'';
+    body += (body.length==0?'':'&')+'offset='+option.start+'&max='+option.limit;
+    return {
+        endpoint: option.url,
+        option:{
+            method: 'POST',
+            body: body,
+            headers:{ 'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }
+    }
+};
+
+const option = {
+    [NAV_LIST]:{endpoint: 'api/user/menu.json'},
+    [LOAD_USER]:{endpoint: 'api/user/me.json'},
+    [SIGN_OUT_USER]:{endpoint: 'api/signOut'},
+    [SIGN_IN_USER]:(actionMsg,formData) => {return{endpoint: SIGN_IN_URL,
+        option:{ method: 'POST', body: formData2Param(formData),
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [BANNER]:actionMsg => {return{endpoint: actionMsg.option.url}},
+    [ENT_BIND]:(actionMsg,entId,userId) => {return{endpoint: 'api/enterprise/assgiedEnterpriseToUser.json',
+        option:{ method: 'POST', body: 'entId='+entId+'&userId='+userId,
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [UPDATE_PASS]: (actionMsg,oldPass,newPass) => {return {endpoint: 'api/user/uppass.json',
+        option:{ method: 'POST', body: "oldPassword="+oldPass+"&newPassword="+newPass,
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [VALIDATE_PASS]: (actionMsg,oldPass) => {return {endpoint: 'api/user/validatePass.json',
+        option:{ method: 'POST', body: "oldPassword="+oldPass,
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [SELECT_DATA]: (actionMsg,url) => {return {endpoint: url}},
+    [LIST_ENT]:listApiMsg,
+    [LIST_ENT_RELOAD]:{
+        type:LIST_ENT,
+        apiMsg:listApiMsg,
+        mergeMsg: (state) =>{return{option:state.lists.option}}
+    },
+    [LIST_ENT_QUERY]:{
+        type:LIST_ENT,
+        apiMsg:listApiMsg,
+        mergeMsg: (state,actionMsg,formData) =>{
+            const option = state.lists.option;
+            const oldBody = option.body;
+            const body = formData2Param(formData);
+            option.body = body;
+            option.start = 0;
+            option.current = 1;
+            return{option:state.lists.option}
+        }
+    }
+};
+
+export default option;

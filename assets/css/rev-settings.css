@@ -1,0 +1,71 @@
+html {
+	overflow-x: hidden;
+	padding: 0 !important;
+	/*background: #fff;*/
+	margin: 0px !important;
+}
+.bg-img {
+	background: url(../images/login-bg.jpg) no-repeat;
+	height: 750px;
+	width: 100%;
+}
+.fullwidthbanner-container {
+	width: 100% !important;
+	position: relative;
+	padding: 0;
+	overflow: hidden;
+	background: #666;
+}
+.revolution-slider {
+	max-height: 700px !important;
+	display: block;
+	position: relative;
+}
+.med-white {    /*med size*/
+	color: #fff;
+	font-size: 18px !important;
+	text-shadow: #333 0px 3px 8px;
+}
+.very-big-white {    /*big1 size*/
+	font-size: 42px !important;
+	line-height:70px;
+	color: #fff;
+	text-shadow: #333 0px 3px 8px;
+	text-align: left;
+}
+.tp-simpleresponsive .caption, .tp-simpleresponsive .tp-caption {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	-moz-opacity: 0;
+	-khtml-opacity: 0;
+	opacity: 0;
+	position: absolute;
+	visibility: hidden;
+}
+.tp-simpleresponsive ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.tp-simpleresponsive >ul >li {
+	list-stye: none;
+	position: absolute;
+	visibility: hidden;
+}
+
+.sfb{
+	left: 20%;
+	top: 120px;
+	position: absolute;
+}
+
+.lfl{
+	left: 20%;
+	top: 465px;
+	position: absolute;
+}
+
+.lfr{
+	left: 20%;
+	top: 500px;
+	position: absolute;
+}
