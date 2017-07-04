@@ -64,7 +64,7 @@ gulp.task('webpack-dev-server',function(callback){
         }
     }
     var host = "localhost";
-    var port = 8080;
+    var port = 8081;
     var portStr = port==80?'':(':'+port);
     var url = 'http://'+host+portStr+'/webpack-dev-server/';
     myConfig.plugins = myConfig.plugins.concat(

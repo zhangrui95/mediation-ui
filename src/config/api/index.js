@@ -25,10 +25,6 @@ const option = {
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [BANNER]:actionMsg => {return{endpoint: actionMsg.option.url}},
-    [ENT_BIND]:(actionMsg,entId,userId) => {return{endpoint: 'api/enterprise/assgiedEnterpriseToUser.json',
-        option:{ method: 'POST', body: 'entId='+entId+'&userId='+userId,
-            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
-        }}},
     [UPDATE_PASS]: (actionMsg,oldPass,newPass) => {return {endpoint: 'api/user/uppass.json',
         option:{ method: 'POST', body: "oldPassword="+oldPass+"&newPassword="+newPass,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
@@ -56,7 +52,11 @@ const option = {
             option.current = 1;
             return{option:state.lists.option}
         }
-    }
+    },
+    [ENT_BIND]:(actionMsg,entId,userId) => {return{endpoint: 'api/enterprise/assgiedEnterpriseToUser.json',
+    option:{ method: 'POST', body: 'entId='+entId+'&userId='+userId,
+        headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+    }}}
 };
 
 export default option;
