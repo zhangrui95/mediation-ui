@@ -2,7 +2,7 @@
 const option = {
     // init:false,
     title:'全部用户',
-    btnName:'',
+    titleBtn:'',
     limit:15,
     columns:[
         {label:'序号',cell:'IndexCell',width:40},

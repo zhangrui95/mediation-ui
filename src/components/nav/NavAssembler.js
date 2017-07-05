@@ -21,22 +21,22 @@ class Nav extends Component {
         actions.request(NAV_LIST);
     }
 
-    componentWillReceiveProps(next) {
-        if(!this.inited){
-            const list = this.getList(next);
-            if(list.length!=0){
-                let routeUrl = list[0].route;
-                const init = getRoute(list,NAV_ROUTE_CONFIG.key);
-                if(init){
-                    routeUrl = init.route;
-                    this.setState({current:init.idx})
-                }
-                const	{router}	=	this.context;
-                router.push(routeUrl);
-                this.inited = true;
-            }
-        }
-    }
+    // componentWillReceiveProps(next) {
+    //     if(!this.inited){
+    //         const list = this.getList(next);
+    //         if(list.length!=0){
+    //             let routeUrl = list[0].route;
+    //             const init = getRoute(list,NAV_ROUTE_CONFIG.key);
+    //             if(init){
+    //                 routeUrl = init.route;
+    //                 this.setState({current:init.idx})
+    //             }
+    //             const	{router}	=	this.context;
+    //             router.push(routeUrl);
+    //             this.inited = true;
+    //         }
+    //     }
+    // }
 
     handlerClick(e){
         const li = e.target;

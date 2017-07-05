@@ -2,8 +2,13 @@
 const option = {
     // init:false,
     title:'全部卷宗',
-    btnName:'创建新案件',
+    titleBtn:'创建新案件',
+    titleBtnHandler: () => {
+        console.log('创建新案件',this)
+        window.location.href = '/archive';
+    },
     limit:15,
+    displayTotalInHead:true,
     columns:[
         {label:'序号',cell:'IndexCell',width:40},
         {label:'卷宗名称',cell:'ViewEntCell',idKey:"id",dataKey:"name",width:230},

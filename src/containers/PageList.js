@@ -10,6 +10,8 @@ import * as syncActions from '../actions/syncAction';
 
 const baseOption = {
     title:'',
+    titleBtn:undefined,
+    titleBtnHandler:undefined,
     limit:10,
     current:0,
     start:0,
@@ -19,6 +21,7 @@ const baseOption = {
     count:0,
     url:undefined,
     init:true,
+    displayTotalInHead:false,
     fillEmptyRow:false,
     columns:[]
 };
@@ -99,9 +102,7 @@ class PageList extends Component {
         this.page(page);
         return false;
     }
-    handleClick(){
-        alert('创建');
-    }
+
     render(){
         const response = this.props.lists.response||{};
         const data = response.data||[];
@@ -110,11 +111,18 @@ class PageList extends Component {
         if(option==null){
             return null;
         }
+        const title = option.title + (option.displayTotalInHead ? ('('+option.count+')'):'');
+        const titleBtn = option.titleBtn;
+        const titleBtnHandler = option.titleBtnHandler;
+        let titleBtnDiv;
+        if(titleBtn !== null && titleBtn !== undefined && titleBtn !== '' && titleBtnHandler !== null && titleBtnHandler !== undefined){
+            titleBtnDiv = <div className="list-right"  onClick={titleBtnHandler.bind(this)}>{titleBtn}</div>
+        }
         return (
             <div className="rightpagebox">
                 <div className="list-top">
-                    <div className="list-left">{option.title}</div>
-                    <div className="list-right"  onClick={this.handleClick.bind(this)}>创建新案件</div>
+                    <div className="list-left">{title}</div>
+                    {titleBtnDiv}
                 </div>
                 <div className="widget-table">
                     <List id={this.id+'_list'} data={data} extra={extra} reload={this.reload.bind(this)} start={option.start} limit={option.limit} fillEmptyRow={option.fillEmptyRow} columns={option.columns}/>
