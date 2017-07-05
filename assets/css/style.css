@@ -303,6 +303,7 @@ body {
 	min-height: 850px;
 	position: relative;
 	z-index: 1;
+	display: none;
 }
 #subnav {
 	margin: 5px auto;
@@ -342,7 +343,7 @@ body {
 }
 #mainright {
 	float: right;
-	width: 825px;
+	width: 1000px;
 	background: #fff;
 	min-height: 850px;
 }
