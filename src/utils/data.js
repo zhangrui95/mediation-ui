@@ -26,5 +26,5 @@ export function getPathValNotEmpty(data, dataKey,defaultVal){
 }
 
 export function getPathValSep(data, dataKey){
-    return getPathValNotEmpty(data,dataKey,'— —');
+    return getPathValNotEmpty(data,dataKey,'');
 }
