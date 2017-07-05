@@ -99,9 +99,7 @@ class PageList extends Component {
         this.page(page);
         return false;
     }
-    handleClick(){
-        alert('创建');
-    }
+
     render(){
         const response = this.props.lists.response||{};
         const data = response.data||[];
@@ -114,7 +112,6 @@ class PageList extends Component {
             <div className="rightpagebox">
                 <div className="list-top">
                     <div className="list-left">{option.title}</div>
-                    <div className="list-right"  onClick={this.handleClick.bind(this)}>创建新案件</div>
                 </div>
                 <div className="widget-table">
                     <List id={this.id+'_list'} data={data} extra={extra} reload={this.reload.bind(this)} start={option.start} limit={option.limit} fillEmptyRow={option.fillEmptyRow} columns={option.columns}/>
