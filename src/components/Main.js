@@ -2,10 +2,9 @@ import React, { Component, PropTypes } from 'react'
 class Main extends Component {
 
     render(){
-        const {Banner,Form,PageList} = this.props;
+        const {Form,PageList} = this.props;
         return (
             <div id="mainright">
-                { Banner }
                 { Form }
                 { PageList }
             </div>
@@ -14,7 +13,6 @@ class Main extends Component {
 }
 
 Main.propTypes = {
-    Banner: PropTypes.node,
     Form: PropTypes.node,
     List: PropTypes.node
 };

@@ -369,6 +369,17 @@ body {
 	padding: 12px 0 0 10px;
 	font-weight: bold;
 }
+.list-right {
+	float: right;
+	padding: 6px;
+	font-weight: bold;
+	background: #1860c2;
+	margin: 5px 10px;
+	border-radius: 4px;
+	color: #fff;
+	font-size: 12px;
+	cursor: pointer;
+}
 .widget-table {
 	margin: 0 auto 5px auto;
 }
@@ -470,7 +481,7 @@ body {
 	margin: auto;
 	height: 40px;
 	line-height: 40px;
-	width: 800px;
+	width: 350px;
 	float: left;
 }
 .search-title {
@@ -493,7 +504,7 @@ body {
 	line-height: 26px;
 	margin-top: 5px;
 	padding: 0 5px;
-	width: 553px;
+	width: 203px;
 }
 .text-input-pop {
 	border: 1px solid #98a2ad;

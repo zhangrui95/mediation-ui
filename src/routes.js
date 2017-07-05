@@ -40,7 +40,7 @@ export default function routes(store){
             <Route path='/' onEnter={validUser(store)} component={App}>
                 <Route path='/list/:list' component={Main}>
                     <IndexRoute components={{Form,PageList}}/>
-                    <Route path='banner' components={{Banner,Form,PageList}}/>
+                    <Route path='banner' components={{Form,PageList}}/>
                 </Route>
             </Route>
         </Route>

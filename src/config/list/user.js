@@ -5,11 +5,9 @@ const option = {
     limit:15,
     columns:[
         {label:'序号',cell:'IndexCell',width:40},
-        {label:'企业名称',cell:'ViewEntCell',idKey:"id",url:"api/enterprise/detail?uuid=",dataKey:"name",width:230},
-        {label:'企业类型',dataKey:"enterpriseType.name"},
-        {label:'行政区划',dataKey:"area.name"},
-        {label:'监管负责人',dataKey:"supervise.superviseResponsible.name"},
-        {label:'注册时间',cell:'DateCell',type:'date',dataKey:"createDate"}
+        {label:'用户名称',cell:'ViewEntCell',idKey:"id",url:"api/enterprise/detail?uuid=",dataKey:"name",width:230},
+        {label:'用户类型',dataKey:"enterpriseType.name"},
+        {label:'立卷时间',cell:'DateCell',type:'date',dataKey:"createDate"}
     ],
     url:'api/user/list.json'
 };
