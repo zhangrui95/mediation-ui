@@ -24,6 +24,8 @@ fetchMock.post(DEV_REQ_HOST+'api/signIn',function(url,option){
     return {state:-1,msg:'用户名或密码输入有误'}
 });
 
+fetchMock.mock(DEV_REQ_HOST+'api/archiveType/options.json',[{id:'1',name:'邻里纠纷'},{id:'2',name:'权属纠纷'},{id:'13',name:'其他纠纷'}]);
+
 fetchMock.post(DEV_REQ_HOST+'api/user/list.json',function(){
     return {total:3,data:[
         {id:'1',name:'管理员'},
@@ -34,8 +36,10 @@ fetchMock.post(DEV_REQ_HOST+'api/user/list.json',function(){
 
 fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
     return {total:3,data:[
-        {id:'1',name:'卷宗1'},
-        {id:'2',name:'卷宗2'},
-        {id:'3',name:'卷宗3'},
+        {id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,canPause:0},
+        {id:'2',name:'卷宗2',type:{id:'1',name:'邻里纠纷'},state:1,createTime:1499240237246,canPause:0},
+        {id:'3',name:'卷宗3',type:{id:'2',name:'权属纠纷'},state:2,createTime:1499240237246,canPause:0},
+        {id:'4',name:'卷宗4',type:{id:'2',name:'权属纠纷'},state:-1,createTime:1499240237246,canPause:0},
+        {id:'5',name:'卷宗5',type:{id:'2',name:'权属纠纷'},state:0,createTime:1499240237246,canPause:-1},
     ]}
 });
