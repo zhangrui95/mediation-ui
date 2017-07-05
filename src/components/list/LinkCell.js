@@ -14,7 +14,7 @@ class LinkCell extends Component {
             linkName = '中止';
         }
         const children = links.map(function(i){
-            return <a title={text}>{linkName}</a>;
+            return <a>{linkName}</a>;
         });
         return (
             <td width={width} className={classes}>

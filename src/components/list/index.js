@@ -1,6 +1,7 @@
 import React from 'react'
 import Cell from './Cell'
 import DataCell from './DataCell'
+import StateCell from './StateCell'
 import DateCell from './DateCell'
 import IndexCell from './IndexCell'
 import NewCheckedCell from './NewCheckedCell'
@@ -12,6 +13,7 @@ const types = {
     DataCell,
     DateCell,
     IndexCell,
+    StateCell,
     NewCheckedCell,
     LinkCell,
     ViewEntCell
