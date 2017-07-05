@@ -1,7 +1,7 @@
 import user from './user'
 import archive from './archive'
 const listConfig = {
-    archive
+    archive,user
 };
 
 export default listConfig;
