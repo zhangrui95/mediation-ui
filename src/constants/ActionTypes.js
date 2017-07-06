@@ -29,3 +29,5 @@ export const LIST_ENT_QUERY = 'LIST_ENT_QUERY';
 
 export const ENT_BIND = 'ENT_BIND';
 export const ENT_BIND_RESET = 'ENT_BIND_RESET';
+
+export const SUSPEND_WORK = 'SUSPEND_WORK';

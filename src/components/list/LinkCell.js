@@ -1,7 +1,16 @@
 import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import {getPathVal} from '../../utils/data'
+import {SUSPEND_WORK} from '../../constants/ActionTypes'
+import * as syncActions from '../../actions/syncAction'
 
 class LinkCell extends Component {
+    handClick(e){
+        var id = e.nativeEvent.target.parentNode.id;
+        const	{actions}	=	this.props;
+        actions.request(SUSPEND_WORK,null,id,0);
+    }
     render(){
         const {width,classes,links,data,dataKey,maxLength} = this.props;
         const value = getPathVal(data,dataKey);
@@ -17,7 +26,7 @@ class LinkCell extends Component {
             return <a>{linkName}</a>;
         });
         return (
-            <td width={width} className={classes}>
+            <td width={width} id={data.id} className={classes}  onClick={this.handClick.bind(this)}>
                 {children}
             </td>
         )
@@ -34,4 +43,15 @@ LinkCell.propTypes = {
     dataKey: PropTypes.string
 };
 
-export default LinkCell;
+function mapStateToProps(state) {
+    return {
+        header:state.header
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(syncActions, dispatch)
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(LinkCell);

@@ -1,4 +1,4 @@
-import {NAV_LIST,BANNER,ENT_BIND,LOAD_USER,UPDATE_PASS,VALIDATE_PASS,SELECT_DATA,LIST_ENT,LIST_ENT_RELOAD,LIST_ENT_QUERY,SIGN_IN_USER,SIGN_OUT_USER} from '../../constants/ActionTypes'
+import {NAV_LIST,BANNER,ENT_BIND,LOAD_USER,UPDATE_PASS,VALIDATE_PASS,SELECT_DATA,LIST_ENT,LIST_ENT_RELOAD,LIST_ENT_QUERY,SIGN_IN_USER,SIGN_OUT_USER,SUSPEND_WORK} from '../../constants/ActionTypes'
 import {SIGN_IN_URL} from '../../constants/Constant'
 import {formData2Param} from '../../utils/param'
 
@@ -56,7 +56,11 @@ const option = {
     [ENT_BIND]:(actionMsg,entId,userId) => {return{endpoint: 'api/enterprise/assgiedEnterpriseToUser.json',
     option:{ method: 'POST', body: 'entId='+entId+'&userId='+userId,
         headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
-    }}}
+    }}},
+    [SUSPEND_WORK]: (actionMsg,id,suspend) => {return {endpoint: 'api/suspend.json',
+        option:{ method: 'POST', body: "id="+id+"&suspend="+suspend,
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+    }}},
 };
 
 export default option;
