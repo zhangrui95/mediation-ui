@@ -11,7 +11,7 @@ const option = {
     displayTotalInHead:true,
     columns:[
         {label:'序号',cell:'IndexCell',width:40},
-        {label:'卷宗名称',cell:'ViewEntCell',idKey:"id",dataKey:"name",width:230},
+        {label:'卷宗名称',cell:'ArchiveLinkCell',idKey:"id",dataKey:"name",width:230,url:'/archive'},
         {label:'卷宗类型',dataKey:"type.name"},
         {label:'卷宗状态',cell:'StateCell',dataKey:"state"},
         {label:'立卷时间',cell:'DateCell',type:'date',dataKey:"createTime"},

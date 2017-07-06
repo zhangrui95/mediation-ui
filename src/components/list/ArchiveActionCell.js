@@ -31,7 +31,7 @@ class ArchiveActionCell extends Component {
         const value = getPathVal(data,dataKey);
         let linkName = '';
         if(value == 0){
-            linkName = <a onClick={this.handClick.bind(this)}>下载</a>;
+            linkName = <a href='javascript:;' onClick={this.handClick.bind(this)}>中止</a>;
         }
         return (
             <td width={width} id={data.id} className={classes}>
