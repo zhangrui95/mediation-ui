@@ -7,8 +7,8 @@ class ArchiveDetail extends Component {
         const { children } = this.props;
         return (
             <div>
-                <div className="title-form-name">人民调解登记表</div>
-                <div className="formBorder">
+                    <div className="title-form-name">人民调解登记表</div>
+                    <div className="formBorder">
                     <div className="border-box">
                         <div className="formArch">
                             <div className="margin-form">卷宗名称：<Input className="text-input" style={{ width: 350 }} placeholder="" /></div>

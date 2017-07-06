@@ -5,6 +5,7 @@ import Archive from './containers/Archive'
 import ArchiveDetail from './components/archive/ArchiveDetail'
 import EvidenceList from './components/archive/EvidenceList'
 import MediateList from './components/archive/MediateList'
+import ApplyFor from './components/archive/ApplyFor'
 import Mediate from './components/archive/Mediate'
 import InvestigationList from './components/archive/InvestigationList'
 import Investigation from './components/archive/Investigation'
@@ -60,6 +61,7 @@ export default function routes(store){
                     <Route path=':id/mediate/:mid' component={Mediate}/>
                     <Route path=':id/protocol' component={Protocol}/>
                     <Route path=':id/checkVisit' component={CheckVisit}/>
+                    <Route path=':id/applyFor' component={ApplyFor}/>
                 </Route>
             </Route>
         </Route>
