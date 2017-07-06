@@ -6,8 +6,9 @@ import navs from './navReducer'
 import selectItemData from './selectItemReducer'
 import header from './headerReducer'
 import enterprise from './enterprise'
+import archive from './archive'
 
-const reducers = {banners,selectItemData,lists,navs,header,enterprise};
+const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive};
 
 const rootReducer = combineReducers(Object.assign({},reducers,{routing}));
 

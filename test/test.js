@@ -43,4 +43,4 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
         {id:'5',name:'卷宗5',type:{id:'2',name:'权属纠纷'},state:0,createTime:1499240237246,canPause:-1},
     ]}
 });
-fetchMock.mock(DEV_REQ_HOST+'api/suspend.json',{state:'0'});
+fetchMock.mock(DEV_REQ_HOST+'api/archive/suspend.json',{state:0});

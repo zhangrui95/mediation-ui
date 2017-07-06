@@ -31,3 +31,4 @@ export const ENT_BIND = 'ENT_BIND';
 export const ENT_BIND_RESET = 'ENT_BIND_RESET';
 
 export const SUSPEND_WORK = 'SUSPEND_WORK';
+export const SUSPEND_WORK_RESET = 'SUSPEND_WORK_RESET';

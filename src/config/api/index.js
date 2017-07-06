@@ -57,7 +57,7 @@ const option = {
     option:{ method: 'POST', body: 'entId='+entId+'&userId='+userId,
         headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
     }}},
-    [SUSPEND_WORK]: (actionMsg,id,suspend) => {return {endpoint: 'api/suspend.json',
+    [SUSPEND_WORK]: (actionMsg,id,suspend) => {return {endpoint: 'api/archive/suspend.json',
         option:{ method: 'POST', body: "id="+id+"&suspend="+suspend,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
     }}},

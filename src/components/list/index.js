@@ -7,6 +7,7 @@ import IndexCell from './IndexCell'
 import NewCheckedCell from './NewCheckedCell'
 import LinkCell from './LinkCell'
 import ViewEntCell from './ViewEntCell'
+import ArchiveActionCell from './ArchiveActionCell'
 
 const types = {
     Cell,
@@ -16,7 +17,8 @@ const types = {
     StateCell,
     NewCheckedCell,
     LinkCell,
-    ViewEntCell
+    ViewEntCell,
+    ArchiveActionCell
 };
 
 function element(type,props,children, defEle) {

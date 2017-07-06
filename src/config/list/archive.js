@@ -15,7 +15,7 @@ const option = {
         {label:'卷宗类型',dataKey:"type.name"},
         {label:'卷宗状态',cell:'StateCell',dataKey:"state"},
         {label:'立卷时间',cell:'DateCell',type:'date',dataKey:"createTime"},
-        {label:'操作',cell:'LinkCell',dataKey:"canPause",links:[{key:'asssxx'}]}
+        {label:'操作',cell:'ArchiveActionCell',dataKey:"canPause"}
     ],
     url:'api/archive/list.json'
 };
