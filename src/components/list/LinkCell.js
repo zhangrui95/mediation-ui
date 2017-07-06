@@ -43,18 +43,13 @@ LinkCell.propTypes = {
     links: PropTypes.array,
     data: PropTypes.object,
     maxLength: PropTypes.number,
-    dataKey: PropTypes.string
+    dataKey: PropTypes.string,
+    actions: PropTypes.object.isRequired
 };
-
-function mapStateToProps(state) {
-    return {
-        header:state.header
-    }
-}
 
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(syncActions, dispatch)
     }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(LinkCell);
+export default connect(mapDispatchToProps)(LinkCell);
