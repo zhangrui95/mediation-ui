@@ -8,8 +8,11 @@ import * as syncActions from '../../actions/syncAction'
 class LinkCell extends Component {
     handClick(e){
         var id = e.nativeEvent.target.parentNode.id;
-        const	{actions}	=	this.props;
-        actions.request(SUSPEND_WORK,null,id,0);
+        var con = confirm("确定中止该卷宗？");
+        if(con == true){
+            const	{actions}	=	this.props;
+            actions.request(SUSPEND_WORK,null,id,0);
+        }
     }
     render(){
         const {width,classes,links,data,dataKey,maxLength} = this.props;
