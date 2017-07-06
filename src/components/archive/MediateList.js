@@ -11,7 +11,7 @@ class MediateList extends Component {
         )
     }
 }
-
+ 
 MediateList.propTypes = {
     children: PropTypes.node
 };

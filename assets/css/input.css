@@ -531,3 +531,59 @@ textarea.ant-input {
   height: 22px;
   border-radius: 4px;
 }
+.formArch{
+  width: 90%;
+  margin: 10px auto;
+  height: auto;
+  overflow: hidden;
+}
+.margin-form{
+  float: left;
+  margin: 5px;
+}
+.title-form-name{
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+}
+.addPerson{
+  height: 36px;
+  width: 150px;
+  line-height: 36px;
+  background: #1860c2;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 0 50%;
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  left: -75px;
+}
+.header-top{
+  width: 100px;
+  text-align: center;
+  background: #CCCCCC;
+  color: #ffffff;
+  line-height: 36px;
+  height: 36px;
+  float: left;
+  margin-left: 22px;
+  cursor: pointer;
+}
+.archeader-box{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  margin: 10px 0;
+}
+.formBorder{
+  width: 86%;
+  margin: 10px 7% 50px;
+  height: auto;
+  overflow: hidden;
+  border: 1px solid #000;
+}
+.border-box{
+  width: 100%;
+  border-bottom: 1px solid #000;
+}

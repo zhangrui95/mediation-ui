@@ -6,4 +6,4 @@ const option = {
         {type:'SelectItem',label:'卷宗状态',name:'state',data:[{id:'0',name:'未完成'},{id:'1',name:'调解成功'},{id:'-1',name:'调解失败'},{id:'2',name:'调解中止'}]}
     ]
 };
-export default option;
+export default option; 
