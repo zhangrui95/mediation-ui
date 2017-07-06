@@ -47,9 +47,15 @@ LinkCell.propTypes = {
     actions: PropTypes.object.isRequired
 };
 
+function mapStateToProps(state) {
+    return {
+        header:state.header
+    }
+}
+
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(syncActions, dispatch)
     }
 }
-export default connect(mapDispatchToProps)(LinkCell);
+export default connect(mapStateToProps,mapDispatchToProps)(LinkCell);
