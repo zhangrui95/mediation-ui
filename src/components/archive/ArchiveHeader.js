@@ -6,7 +6,7 @@ class ArchiveHeader extends Component {
     clickHandler(e){
         const { params } = this.props;
         const {id} = params;
-        if(id !== 'create'){
+        if(id !==null && id !== undefined && id!== ''){
             const div = e.target;
             const routeUrl = div.getAttribute('data-route')||'';
             const	{router}	=	this.context;
@@ -15,8 +15,7 @@ class ArchiveHeader extends Component {
     }
 
     render() {
-        const { children, params } = this.props;
-        const {id} = params;
+        const { children } = this.props;
         return (
             <div>
                 <div className="archeader-box" onClick={this.clickHandler.bind(this)} >

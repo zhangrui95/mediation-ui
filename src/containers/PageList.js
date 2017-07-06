@@ -11,7 +11,7 @@ import * as syncActions from '../actions/syncAction';
 const baseOption = {
     title:'',
     titleBtn:undefined,
-    titleBtnHandler:undefined,
+    titleBtnUrl:undefined,
     limit:10,
     current:0,
     start:0,
@@ -103,20 +103,33 @@ class PageList extends Component {
         return false;
     }
 
+    titleBtnHandler(){
+        const option = this.option;
+        if(option===null || option === undefined){
+            return null;
+        }
+        const routeUrl = option.titleBtnUrl;
+        if(routeUrl===null || routeUrl === undefined || routeUrl === ''){
+            return null;
+        }
+        const	{router}	=	this.context;
+        router.push(routeUrl);
+    }
+
     render(){
         const response = this.props.lists.response||{};
         const data = response.data||[];
         const extra = response.extra||{};
         const option = this.option;
-        if(option==null){
+        if(option===null || option === undefined){
             return null;
         }
         const title = option.title + (option.displayTotalInHead ? ('('+option.count+')'):'');
         const titleBtn = option.titleBtn;
-        const titleBtnHandler = option.titleBtnHandler;
+        const titleBtnUrl = option.titleBtnUrl;
         let titleBtnDiv;
-        if(titleBtn !== null && titleBtn !== undefined && titleBtn !== '' && titleBtnHandler !== null && titleBtnHandler !== undefined){
-            titleBtnDiv = <div className="list-right"  onClick={titleBtnHandler.bind(this)}>{titleBtn}</div>
+        if(titleBtn !== null && titleBtn !== undefined && titleBtn !== '' && titleBtnUrl !== null && titleBtnUrl !== undefined){
+            titleBtnDiv = <div className="list-right"  onClick={this.titleBtnHandler.bind(this)}>{titleBtn}</div>
         }
         return (
             <div className="rightpagebox">
@@ -138,6 +151,10 @@ PageList.propTypes = {
     lists: PropTypes.object.isRequired,
     actions: PropTypes.object.isRequired,
     id: PropTypes.string
+};
+
+PageList.contextTypes = {
+    router: PropTypes.object
 };
 
 function	mapStateToProps(state)	{

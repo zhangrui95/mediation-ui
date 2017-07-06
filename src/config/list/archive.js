@@ -3,10 +3,7 @@ const option = {
     // init:false,
     title:'全部卷宗',
     titleBtn:'创建新案件',
-    titleBtnHandler: () => {
-        console.log('创建新案件',this)
-        window.location.href = '/archive';
-    },
+    titleBtnUrl: '/archive',
     limit:15,
     displayTotalInHead:true,
     columns:[
