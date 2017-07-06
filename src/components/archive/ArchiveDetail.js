@@ -4,7 +4,8 @@ import { Input } from 'antd';
 class ArchiveDetail extends Component {
 
     render() {
-        const { children } = this.props;
+        const { params } = this.props;
+        console.log('ArchiveDetail id = ',params.id);
         return (
             <div>
                     <div className="title-form-name">人民调解登记表</div>

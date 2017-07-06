@@ -7,8 +7,7 @@ class Archive extends Component {
         const { children } = this.props;
         return (
             <div id="mainright">
-                卷宗面板
-                <ArchiveHeader/>
+                <ArchiveHeader {...this.props}/>
                 { children }
             </div>
         )

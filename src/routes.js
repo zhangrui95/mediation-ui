@@ -11,6 +11,7 @@ import InvestigationList from './components/archive/InvestigationList'
 import Investigation from './components/archive/Investigation'
 import Protocol from './components/archive/Protocol'
 import CheckVisit from './components/archive/CheckVisit'
+import ArchiveFinish from './components/archive/ArchiveFinish'
 import Login from './components/login/Login'
 import Main from './components/Main'
 import Form from './containers/SearchForm'
@@ -62,6 +63,7 @@ export default function routes(store){
                     <Route path=':id/protocol' component={Protocol}/>
                     <Route path=':id/checkVisit' component={CheckVisit}/>
                     <Route path=':id/applyFor' component={ApplyFor}/>
+                    <Route path=':id/finish' component={ArchiveFinish}/>
                 </Route>
             </Route>
         </Route>
