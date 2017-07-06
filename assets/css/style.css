@@ -1290,3 +1290,12 @@ to {
 	float:left;
 	text-align: right;
 }
+.table-list-evidence{
+	width: 90%;
+}
+.table-name{
+	font-size: 20px;
+}
+.gray-border{
+	border: 1px solid #ddd;
+}
