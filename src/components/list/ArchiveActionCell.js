@@ -20,27 +20,22 @@ class ArchiveActionCell extends Component {
         }
     }
 
-    handClick(e){
-        const id = e.nativeEvent.target.parentNode.id;
+    handClick(){
         if(confirm("确定中止该卷宗？")){
-            const	{syncActions}	=	this.props;
-            syncActions.request(SUSPEND_WORK,null,id,0);
+            const	{syncActions,data}	=	this.props;
+            syncActions.request(SUSPEND_WORK,null,data.id,0);
         }
     }
     render(){
-        const {width,classes,data,dataKey,maxLength} = this.props;
+        const {width,classes,data,dataKey} = this.props;
         const value = getPathVal(data,dataKey);
-        let text = value;
         let linkName = '';
-        if(maxLength!=null && text.length>maxLength){
-            text = text.substring(0,maxLength)+'...';
-        }
-        if(text == 0){
-            linkName = '中止';
+        if(value == 0){
+            linkName = <a onClick={this.handClick.bind(this)}>中止</a>;
         }
         return (
-            <td width={width} id={data.id} className={classes}  onClick={this.handClick.bind(this)}>
-                <a>{linkName}</a>
+            <td width={width} id={data.id} className={classes}>
+                {linkName}
             </td>
         )
     }
