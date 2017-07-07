@@ -1,8 +1,24 @@
 import React, { Component, PropTypes } from 'react'
 import { Input } from 'antd';
+import Pop from '../pop/Pop';
+import PopMediator from './PopMediator'
+import AddPartyinput from './AddPartyinput'
 
 class ArchiveDetail extends Component {
-
+    constructor(props, context) {
+        super(props, context);
+        this.state = {addBox:false,passConfirm:false,goOutConfirm:false};
+    };
+    upAddClick(){
+        this.setState({addBox:true});
+    }
+    saveButtonClick(){
+        const addBox = this.refs.addBox;
+        if(!addBox.check()){
+            return false;
+        }
+        return false;
+    }
     render() {
         const { params } = this.props;
         console.log('ArchiveDetail id = ',params.id);
@@ -23,45 +39,7 @@ class ArchiveDetail extends Component {
                     </div>
                     <div className="border-box">
                         <div className="formArch">当事人</div>
-                        <div className="formArch">
-                            <div className="margin-form">姓名：<Input className="text-input" placeholder="" /></div>
-                            <div className="margin-form">性别：
-                                <select defaultValue="男" style={{ width: 70 }}>
-                                    <option value="男">男</option>
-                                    <option value="女">女</option>
-                                </select>
-                            </div>
-                            <div className="margin-form">民族：
-                                <select defaultValue="汉族" style={{ width: 70 }}>
-                                    <option value="汉族">汉族</option>
-                                    <option value="满族">满族</option>
-                                </select>
-                            </div>
-                            <div className="margin-form">年龄：<Input className="text-input" placeholder="" style={{ width: 70 }} /></div>
-                            <div className="margin-form">身份证号码：<Input className="text-input" placeholder="" /></div>
-                            <div className="margin-form">单位/住址：<Input className="text-input" style={{ width: 400 }} placeholder="" /></div>
-                            <div className="margin-form">联系方式：<Input className="text-input" placeholder="" /></div>
-                        </div>
-                        <div className="formArch">
-                            <div className="margin-form">姓名：<Input className="text-input" placeholder="" /></div>
-                            <div className="margin-form">性别：
-                                <select defaultValue="男" style={{ width: 70 }}>
-                                    <option value="男">男</option>
-                                    <option value="女">女</option>
-                                </select>
-                            </div>
-                            <div className="margin-form">民族民族：
-                                <select defaultValue="汉族" style={{ width: 70 }}>
-                                    <option value="汉族">汉族</option>
-                                    <option value="满族">满族</option>
-                                </select>
-                            </div>
-                            <div className="margin-form">年龄：<Input className="text-input" placeholder="" style={{ width: 70 }} /></div>
-                            <div className="margin-form">身份证号码：<Input className="text-input" placeholder="" /></div>
-                            <div className="margin-form">单位/住址：<Input className="text-input" style={{ width: 400 }} placeholder="" /></div>
-                            <div className="margin-form">联系方式：<Input className="text-input" placeholder="" /></div>
-                        </div>
-                        <div className="formArch" style={{ height:40 }}><input type="button" value="添加当事人" className="addPerson"/></div>
+                        <AddPartyinput/>
                     </div>
                     <div className="border-box">
                         <div className="formArch">纠纷简要情况</div>
@@ -78,7 +56,7 @@ class ArchiveDetail extends Component {
                             </div>
                         </div>
                         <div className="formArch">
-                            <div className="margin-form">第二调解员：<input type="button" value="选择"/></div>
+                            <div className="margin-form">第二调解员：<input onClick={this.upAddClick.bind(this)} type="button" value="选择"/></div>
                         </div>
                     </div>
                     <div className="formArch">立卷人：<span>马冬梅</span></div>
@@ -94,6 +72,9 @@ class ArchiveDetail extends Component {
                     <div className="formArch">登记日期：<span></span></div>
                     <div className="formArch" style={{ height:40 }}><input type="button" value="保存" className="addPerson"/></div>
                 </div>
+                <Pop title="添加调解员" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
+                   <PopMediator/>
+                </Pop>
                 </div>
         )
     }
