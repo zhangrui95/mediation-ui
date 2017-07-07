@@ -4,7 +4,6 @@
 import React, { Component, PropTypes } from 'react'
 import PartyInput from './PartyInput'
 
-var count = 0;
 class AddPartyinput extends Component {
     constructor(props) {
         super(props);
