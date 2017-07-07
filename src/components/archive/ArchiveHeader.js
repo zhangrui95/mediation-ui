@@ -1,8 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
 class ArchiveHeader extends Component {
-
-
     clickHandler(e){
         const { params } = this.props;
         const {id} = params;
@@ -18,7 +16,7 @@ class ArchiveHeader extends Component {
         const {id} = params;
         if(id !==null && id !== undefined && id!== ''){
             const	{router}	=	this.context;
-            router.push('/signIn');
+            router.push('/list/archive');
         }
     }
     render() {
