@@ -11,13 +11,9 @@ class ArchiveHeader extends Component {
             router.push('archive/'+id+routeUrl);
         }
     }
-    goBack(e){
-        const { params } = this.props;
-        const {id} = params;
-        if(id !==null && id !== undefined && id!== ''){
-            const	{router}	=	this.context;
-            router.push('/list/archive');
-        }
+    goBack(){
+        const	{router}	=	this.context;
+        router.push('/list/archive');
     }
     render() {
         return (
