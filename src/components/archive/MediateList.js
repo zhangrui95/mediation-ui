@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import  SurveyList from './SurveyList'
 
 class MediateList extends Component {
 
@@ -6,7 +7,11 @@ class MediateList extends Component {
         const { children } = this.props;
         return (
             <div>
-                调解列表
+                <div className="title-form-name">人民调解记录</div>
+                <div className="formArch">
+                    <dic className="list-right">新建</dic>
+                </div>
+                < SurveyList/>
             </div>
         )
     }

@@ -1299,3 +1299,7 @@ to {
 .gray-border{
 	border: 1px solid #ddd;
 }
+.margin-form-party{
+	float: left;
+	margin: 5px 20px;
+}

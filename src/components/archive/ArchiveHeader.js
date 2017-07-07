@@ -15,7 +15,6 @@ class ArchiveHeader extends Component {
     }
 
     render() {
-        const { children } = this.props;
         return (
             <div>
                 <div className="archeader-box" onClick={this.clickHandler.bind(this)} >
@@ -28,7 +27,6 @@ class ArchiveHeader extends Component {
                     <div data-route="/checkVisit" className="header-top">回访记录</div>
                     <div data-route="/finish" className="header-top">完结</div>
                 </div>
-                { children }
             </div>
         )
     }
