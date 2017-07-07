@@ -17,7 +17,11 @@ class PopMediator extends Component {
                 <div className="formArch"><Checkbox onChange={this.onChange.bind(this)}>张三</Checkbox></div>
                 <div className="formArch"><Checkbox onChange={this.onChange.bind(this)}>张三</Checkbox></div>
                 <div className="formArch"><Checkbox onChange={this.onChange.bind(this)}>张三</Checkbox></div>
-                <div className="formArch" style={{ height:40 }}><input type="button" value="确定" className="addPerson"/></div>
+                <div className="pop-submit">
+                    <input type="button" name="button" data-close="save" value="保存"  className="btn-pop"/>
+                    <input type="button" name="button" value="取消"  className="btn-reset" data-close="pop_cross"/>
+                </div>
+                <div className="error-height"></div>
             </div>
         )
     }
