@@ -30,7 +30,14 @@ fetchMock.post(DEV_REQ_HOST+'api/user/list.json',function(){
     return {total:3,data:[
         {id:'1',name:'管理员'},
         {id:'2',name:'调解员1'},
-        {id:'3',name:'调解员2'},
+        {id:'3',name:'调解员2'}
+    ]}
+});
+
+fetchMock.post(DEV_REQ_HOST+'api/user/listByRole.json',function(){
+    return {total:3,data:[
+        {id:'2',name:'调解员1'},
+        {id:'3',name:'调解员2'}
     ]}
 });
 
@@ -44,3 +51,10 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
     ]}
 });
 fetchMock.mock(DEV_REQ_HOST+'api/archive/suspend.json',{state:0});
+
+fetchMock.post(DEV_REQ_HOST+'api/archiveWorker/workers.json',function(){
+    return {total:3,data:[
+        {id:'2',name:'调解员1'},
+        {id:'3',name:'调解员2'}
+    ]}
+});
