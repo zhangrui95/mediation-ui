@@ -1,41 +1,18 @@
-import React, { Component, PropTypes } from 'react'
-import {getPathVal} from '../../utils/data'
+import React, {Component, PropTypes} from "react";
+import {getPathVal} from "../../utils/data";
+import {getDateTime} from "../../utils/date";
 
 class DateCell extends Component {
 
     render(){
         const {width,classes,data,dataKey,type} = this.props;
         const value = getPathVal(data,dataKey);
-        const text = DateCell.getDateTime(value,type);
+        const text = getDateTime(value,type);
         return (
             <td width={width} className={classes} title={text}>
                 {text}
             </td>
         )
-    }
-
-    static formatDataUnit(unit) {
-        return unit < 10 ? '0' + unit : unit;
-    }
-
-    static getDateTime(ms, type) {
-        if (ms == null) {
-            return '';
-        }
-        const date = new Date(ms);
-        const dateStr = date.getFullYear() + '-'
-            + DateCell.formatDataUnit(date.getMonth() + 1) + '-'
-            + DateCell.formatDataUnit(date.getDate());
-        if (type == 'date') {
-            return dateStr;
-        }
-        const timeStr = DateCell.formatDataUnit(date.getHours()) + ':'
-            + DateCell.formatDataUnit(date.getMinutes()) + ':'
-            + DateCell.formatDataUnit(date.getSeconds());
-        if (type == 'time') {
-            return timeStr;
-        }
-        return dateStr + ' ' + timeStr;
     }
 }
 

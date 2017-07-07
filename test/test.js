@@ -35,7 +35,7 @@ fetchMock.post(DEV_REQ_HOST+'api/user/list.json',function(){
     ]}
 });
 
-fetchMock.post(DEV_REQ_HOST+'api/user/listByRole.json',function(){
+fetchMock.mock('^'+DEV_REQ_HOST+'api/user/listByRole.json',function(){
     return [
         {id:'2',name:'调解员1'},
         {id:'3',name:'调解员2'}
@@ -53,8 +53,9 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
 });
 fetchMock.post(DEV_REQ_HOST+'api/archive/detail.json',function(){
     return {state:0,
-        data:{id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,canPause:0,
+        data:{id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,keepTime:1509240237246,canPause:0,content:'xxxxxasdasd',
             manager:{id:'2',name:'w1'},
+            creater:{id:'2',name:'w1'},
             litigants:[
                 {id:'1',name:'p1'},
                 {id:'1',name:'p2'},
@@ -64,7 +65,8 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/detail.json',function(){
                 {id:'4',name:'w3'},
             ]
         },
-        protocol:{id:'1',remark:'xxx',result:1,content:'xxx',createTime:1499240237246,creater:{},archive:{}}
+        protocol:{id:'1',remark:'xxx',result:1,content:'xxx',createTime:1499240237246,creater:{},archive:{}},
+        check:{id:'1',visitTime:1499240237246,content:'xxx',createTime:1499240237246,creater:{},archive:{}}
     }
 });
 fetchMock.mock(DEV_REQ_HOST+'api/archive/suspend.json',{state:0});
@@ -77,7 +79,7 @@ fetchMock.mock(DEV_REQ_HOST+'api/litigant/save.json',{state:0, data:{id:'1'}});
 
 fetchMock.mock(DEV_REQ_HOST+'api/litigant/update.json',{state:0});
 
-fetchMock.post(DEV_REQ_HOST+'api/archiveWorker/workers.json',function(){
+fetchMock.post('^'+DEV_REQ_HOST+'api/archiveWorker/workers.json',function(){
     return {data:[
         {id:'2',name:'调解员1'},
         {id:'3',name:'调解员2'}
