@@ -1,4 +1,5 @@
 import fetchMock from 'fetch-mock'
+// import fs from 'fs'
 import {DEV_REQ_HOST} from '../src/constants/ActionTypes'
 
 fetchMock.mock(DEV_REQ_HOST+'api/user/menu.json',{navList:[
@@ -35,10 +36,10 @@ fetchMock.post(DEV_REQ_HOST+'api/user/list.json',function(){
 });
 
 fetchMock.post(DEV_REQ_HOST+'api/user/listByRole.json',function(){
-    return {total:3,data:[
+    return [
         {id:'2',name:'调解员1'},
         {id:'3',name:'调解员2'}
-    ]}
+    ]
 });
 
 fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
@@ -49,6 +50,12 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
         {id:'4',name:'卷宗4',type:{id:'2',name:'权属纠纷'},state:-1,createTime:1499240237246,canPause:0},
         {id:'5',name:'卷宗5',type:{id:'2',name:'权属纠纷'},state:0,createTime:1499240237246,canPause:-1},
     ]}
+});
+fetchMock.post(DEV_REQ_HOST+'api/archive/detail.json',function(){
+    return {state:0,
+        data:{id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,canPause:0},
+        protocol:{id:'1',remark:'xxx',result:1,content:'xxx',createTime:1499240237246,creater:{},archive:{}}
+    }
 });
 fetchMock.mock(DEV_REQ_HOST+'api/archive/suspend.json',{state:0});
 
@@ -61,19 +68,28 @@ fetchMock.mock(DEV_REQ_HOST+'api/litigant/save.json',{state:0, data:{id:'1'}});
 fetchMock.mock(DEV_REQ_HOST+'api/litigant/update.json',{state:0});
 
 fetchMock.post(DEV_REQ_HOST+'api/archiveWorker/workers.json',function(){
-    return {total:3,data:[
+    return {data:[
         {id:'2',name:'调解员1'},
         {id:'3',name:'调解员2'}
     ]}
 });
 
-fetchMock.mock(DEV_REQ_HOST+'api/investigation/listByArchive.json',[
+fetchMock.mock(DEV_REQ_HOST+'api/investigation/listByArchive.json',{data:[
     {id:'1',investTime:1499240237246,address:'xxx1',otherPerson:'xxx1',targetPerson:'xxx1',content:'xxx1',createTime:1499240237246,creater:{},archive:{}},
     {id:'2',investTime:1499240238246,address:'xxx2',otherPerson:'xxx2',targetPerson:'xxx2',content:'xxx2',createTime:1499240238246,creater:{},archive:{}}
-]);
+]});
 fetchMock.mock(DEV_REQ_HOST+'api/investigation/detail.json',{id:'1',investTime:1499240237246,address:'xxx',otherPerson:'xxx',targetPerson:'xxx',content:'xxx',createTime:1499240237246,creater:{},archive:{}});
 fetchMock.mock(DEV_REQ_HOST+'api/investigation/save.json',{state:0, data:{id:'1'}});
 fetchMock.mock(DEV_REQ_HOST+'api/investigation/update.json',{state:0});
+
+fetchMock.mock(DEV_REQ_HOST+'api/mediate/listByArchive.json',{data:[
+    {id:'1',mediateTime:1499240237246,address:'xxx1',content:'xxx1',createTime:1499240237246,creater:{},archive:{},workers:[]},
+    {id:'2',mediateTime:1499240238246,address:'xxx2',content:'xxx2',createTime:1499240238246,creater:{},archive:{},workers:[]}
+]});
+fetchMock.mock(DEV_REQ_HOST+'api/mediate/detail.json',{id:'1',mediateTime:1499240237246,address:'xxx1',content:'xxx1',createTime:1499240237246,creater:{},archive:{},workers:[]});
+fetchMock.mock(DEV_REQ_HOST+'api/mediate/save.json',{state:0, data:{id:'1'}});
+fetchMock.mock(DEV_REQ_HOST+'api/mediate/update.json',{state:0});
+
 
 fetchMock.mock(DEV_REQ_HOST+'api/protocol/detailByArchive.json',{id:'1',remark:'xxx',result:1,content:'xxx',createTime:1499240237246,creater:{},archive:{}});
 fetchMock.mock(DEV_REQ_HOST+'api/protocol/save.json',{state:0, data:{id:'1'}});
@@ -82,3 +98,18 @@ fetchMock.mock(DEV_REQ_HOST+'api/protocol/update.json',{state:0});
 fetchMock.mock(DEV_REQ_HOST+'api/checkVisit/detailByArchive.json',{id:'1',visitTime:1499240237246,content:'xxx',createTime:1499240237246,creater:{},archive:{}});
 fetchMock.mock(DEV_REQ_HOST+'api/checkVisit/save.json',{state:0, data:{id:'1'}});
 fetchMock.mock(DEV_REQ_HOST+'api/checkVisit/update.json',{state:0});
+
+fetchMock.mock(DEV_REQ_HOST+'api/evidence/listByArchive.json',{data:[
+    {id:'1',name:'x1',type:0,size:12,createTime:1499240237246,creater:{},archive:{}},
+    {id:'2',name:'x2',type:1,size:12,createTime:1499240237246,creater:{},archive:{}}
+]});
+fetchMock.mock(DEV_REQ_HOST+'api/evidence/save.json',{state:0, data:{id:'1'}});
+// fetchMock.mock(DEV_REQ_HOST+'api/evidence/download.json',function(req,res){
+//     res.setHeader('Content-Type','application/octet-stream');
+//     res.setHeader('Content-Disposition','attachment; filename="' + encodeURI('下载测试文件') + '"');
+//     res.end(fs.readFileSync(__dirname+'/resources/test.txt'));
+// });
+// fetchMock.mock(DEV_REQ_HOST+'api/evidence/photo.json',function(req,res){
+//     res.setHeader('Content-Type','image/png');
+//     res.end(fs.readFileSync(__dirname+'/resources/img.jpg'));
+// });
