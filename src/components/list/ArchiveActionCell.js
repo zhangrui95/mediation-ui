@@ -4,13 +4,13 @@ import { connect } from 'react-redux'
 import {getPathVal} from '../../utils/data'
 import {SUSPEND_WORK} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
-import * as arhciveActions from '../../actions/arhcive'
+import * as arhciveSuspendActions from '../../actions/arhciveSuspend'
 
 class ArchiveActionCell extends Component {
 
     componentDidUpdate() {
-        const {actions,reload,archive} = this.props;
-        const {response} = archive||{};
+        const {actions,reload,archiveSuspend} = this.props;
+        const {response} = archiveSuspend||{};
         const {state} = response||{};
         if(state === 0){
             actions.reset();
@@ -54,14 +54,14 @@ ArchiveActionCell.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        archive:state.archive
+        archiveSuspend:state.archiveSuspend
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         syncActions: bindActionCreators(syncActions, dispatch),
-        actions: bindActionCreators(arhciveActions, dispatch)
+        actions: bindActionCreators(arhciveSuspendActions, dispatch)
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(ArchiveActionCell);

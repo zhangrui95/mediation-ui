@@ -1,5 +1,5 @@
-import  {SUSPEND_WORK_RESET} from '../constants/ActionTypes'
+import  {ARCHIVE_DETAIL_RESET} from '../constants/ActionTypes'
 
 export function reset() {
-    return {type:SUSPEND_WORK_RESET}
+    return {type:ARCHIVE_DETAIL_RESET}
 }

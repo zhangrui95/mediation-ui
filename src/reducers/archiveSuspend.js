@@ -1,11 +1,11 @@
-import  {ARCHIVE_DETAIL_RESET,ARCHIVE_DETAIL} from '../constants/ActionTypes'
+import  {SUSPEND_WORK,SUSPEND_WORK_RESET} from '../constants/ActionTypes'
 import syncReducer from './syncReducer'
 
 export default syncReducer({
-    [ARCHIVE_DETAIL]:{ }
+    [SUSPEND_WORK]:{ }
 },(state,action) => {
     switch (action.type) {
-        case ARCHIVE_DETAIL_RESET:
+        case SUSPEND_WORK_RESET:
             return {};
         default:
             return state;

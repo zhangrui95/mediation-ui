@@ -1,4 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+import * as syncActions from '../../actions/syncAction';
 import { Input } from 'antd';
 import Pop from '../pop/Pop';
 import PopMediator from './PopMediator'
@@ -20,15 +23,22 @@ class ArchiveDetail extends Component {
         return false;
     }
     render() {
-        const { params } = this.props;
-        console.log('ArchiveDetail id = ',params.id);
+        const { archive } = this.props;
+        const {response} = archive;
+        const {state,data,protocol} = response||{};
+        let name
+        if(state === 0){
+            name = data.name
+        }else{
+            name = <Input className="text-input" style={{ width: 350 }} placeholder="" />
+        }
         return (
             <div>
                     <div className="title-form-name">人民调解登记表</div>
                     <div className="formBorder">
                     <div className="border-box">
                         <div className="formArch">
-                            <div className="margin-form">卷宗名称：<Input className="text-input" style={{ width: 350 }} placeholder="" /></div>
+                            <div className="margin-form">卷宗名称：{name}</div>
                             <div className="margin-form">卷宗类别：
                                 <select defaultValue="请选择" style={{ width: 200 }}>
                                     <option value="男">邻里纠纷</option>
@@ -84,4 +94,15 @@ ArchiveDetail.propTypes = {
     children: PropTypes.node
 };
 
-export default ArchiveDetail
+function	select(state)	{
+    return	{
+        archive:state.archive
+    };
+}
+
+function actions(dispatch) {
+    return {
+        actions: bindActionCreators(syncActions, dispatch)
+    }
+}
+export  default connect(select,actions)(ArchiveDetail);

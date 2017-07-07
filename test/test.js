@@ -53,7 +53,17 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
 });
 fetchMock.post(DEV_REQ_HOST+'api/archive/detail.json',function(){
     return {state:0,
-        data:{id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,canPause:0},
+        data:{id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,canPause:0,
+            manager:{id:'2',name:'w1'},
+            litigants:[
+                {id:'1',name:'p1'},
+                {id:'1',name:'p2'},
+            ],
+            workers:[
+                {id:'3',name:'w2'},
+                {id:'4',name:'w3'},
+            ]
+        },
         protocol:{id:'1',remark:'xxx',result:1,content:'xxx',createTime:1499240237246,creater:{},archive:{}}
     }
 });
