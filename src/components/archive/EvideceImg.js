@@ -1,9 +1,3 @@
-/**
- * Created by Administrator on 2017/7/6 0006.
- */
-/**
- * Created by Administrator on 2017/7/6 0006.
- */
 import React, { Component, PropTypes } from 'react'
 
 class EvidenceImg extends Component {

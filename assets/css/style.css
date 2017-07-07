@@ -1303,3 +1303,24 @@ to {
 	float: left;
 	margin: 5px 20px;
 }
+.upload-list-inline{
+	width: 100%;
+	height: auto;
+	overflow: hidden;
+	float: left;
+}
+.ant-upload-list-item-thumbnail img{
+	width: 100px;
+	height: 100px;
+	float: left;
+}
+.ant-upload-list-item-name{
+	float: left;
+	height: 100px;
+	line-height: 100px;
+}
+.anticon-cross{
+	float: left;
+	height: 100px;
+	line-height: 100px;
+}
