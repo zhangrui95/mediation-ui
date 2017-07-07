@@ -68,9 +68,13 @@ fetchMock.post(DEV_REQ_HOST+'api/archiveWorker/workers.json',function(){
 });
 
 fetchMock.mock(DEV_REQ_HOST+'api/investigation/listByArchive.json',[
-    {id:'1',investTime:1499240237246,address:'xxx1',otherPerson:'xxx1',targetPerson:'xxx1',content:'xxx1',createTime:'xxx1',creater:{},archive:{}},
-    {id:'2',investTime:1499240238246,address:'xxx2',otherPerson:'xxx2',targetPerson:'xxx2',content:'xxx2',createTime:'xxx2',creater:{},archive:{}}
+    {id:'1',investTime:1499240237246,address:'xxx1',otherPerson:'xxx1',targetPerson:'xxx1',content:'xxx1',createTime:1499240237246,creater:{},archive:{}},
+    {id:'2',investTime:1499240238246,address:'xxx2',otherPerson:'xxx2',targetPerson:'xxx2',content:'xxx2',createTime:1499240238246,creater:{},archive:{}}
 ]);
-fetchMock.mock(DEV_REQ_HOST+'api/investigation/detail.json',{id:'1',investTime:1499240237246,address:'xxx',otherPerson:'xxx',targetPerson:'xxx',content:'xxx',createTime:'xxx',creater:{},archive:{}});
+fetchMock.mock(DEV_REQ_HOST+'api/investigation/detail.json',{id:'1',investTime:1499240237246,address:'xxx',otherPerson:'xxx',targetPerson:'xxx',content:'xxx',createTime:1499240237246,creater:{},archive:{}});
 fetchMock.mock(DEV_REQ_HOST+'api/investigation/save.json',{state:0, data:{id:'1'}});
 fetchMock.mock(DEV_REQ_HOST+'api/investigation/update.json',{state:0});
+
+fetchMock.mock(DEV_REQ_HOST+'api/protocol/detailByArchive.json',{id:'1',remark:'xxx',result:1,content:'xxx',createTime:1499240237246,creater:{},archive:{}});
+fetchMock.mock(DEV_REQ_HOST+'api/protocol/save.json',{state:0, data:{id:'1'}});
+fetchMock.mock(DEV_REQ_HOST+'api/protocol/update.json',{state:0});
