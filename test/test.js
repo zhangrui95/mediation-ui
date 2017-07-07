@@ -52,6 +52,14 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
 });
 fetchMock.mock(DEV_REQ_HOST+'api/archive/suspend.json',{state:0});
 
+fetchMock.mock(DEV_REQ_HOST+'api/archive/save.json',{state:0, data:{id:'1'}});
+
+fetchMock.mock(DEV_REQ_HOST+'api/archive/update.json',{state:0});
+
+fetchMock.mock(DEV_REQ_HOST+'api/litigant/save.json',{state:0, data:{id:'1'}});
+
+fetchMock.mock(DEV_REQ_HOST+'api/litigant/update.json',{state:0});
+
 fetchMock.post(DEV_REQ_HOST+'api/archiveWorker/workers.json',function(){
     return {total:3,data:[
         {id:'2',name:'调解员1'},
