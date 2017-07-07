@@ -10,7 +10,6 @@ class PopMediator extends Component {
      }
     render() {
         const { children, params} = this.props;
-        console.log(params)
         return (
             <div>
                 <div className="formArch"><Checkbox onChange={this.onChange.bind(this)}>张三</Checkbox></div>
