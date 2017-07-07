@@ -13,10 +13,18 @@ class ArchiveHeader extends Component {
             router.push('archive/'+id+routeUrl);
         }
     }
-
+    goBack(e){
+        const { params } = this.props;
+        const {id} = params;
+        if(id !==null && id !== undefined && id!== ''){
+            const	{router}	=	this.context;
+            router.push('/signIn');
+        }
+    }
     render() {
         return (
             <div>
+                <a className="go-first" onClick={this.goBack.bind(this)}>&lt;&lt;返回首页</a>
                 <div className="archeader-box" onClick={this.clickHandler.bind(this)} >
                     <div data-route="" className="header-top">登记表</div>
                     <div data-route="/evidence" className="header-top">调查取证</div>
