@@ -1,3 +1,4 @@
+import {NAV_LIST,BANNER,ENT_BIND,LOAD_USER,UPDATE_PASS,VALIDATE_PASS,SELECT_DATA,LIST_ENT,LIST_ENT_RELOAD,LIST_ENT_QUERY,SIGN_IN_USER,SIGN_OUT_USER,SUSPEND_WORK,ARCHIVE_DETAIL,LIST_BY_ARCHIVE,INVESTIGATION_LIST,MEDIATE_LIST,PROTOCOL_DETAIL,INVESTIGATION_SAVE,MEDIATE_SAVE,PROTOCOL_SAVE} from '../../constants/ActionTypes'
 import {NAV_LIST,BANNER,ENT_BIND,LOAD_USER,UPDATE_PASS,VALIDATE_PASS,SELECT_DATA,LIST_ENT,LIST_ENT_RELOAD,LIST_ENT_QUERY,SIGN_IN_USER,SIGN_OUT_USER,SUSPEND_WORK,ARCHIVE_DETAIL,ARCHIVE_ADD,ARCHIVE_UPDATE,LIST_BY_ARCHIVE,INVESTIGATION_LIST} from '../../constants/ActionTypes'
 import {SIGN_IN_URL} from '../../constants/Constant'
 import {formData2Param} from '../../utils/param'
@@ -79,6 +80,26 @@ const option = {
         }}},
     [ARCHIVE_UPDATE]:(actionMsg,formData) => {return{endpoint: 'api/archive/update.json',
         option:{ method: 'POST', body: formData2Param(formData),
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [MEDIATE_LIST]:actionMsg => {return {endpoint: 'api/mediate/listByArchive.json',
+        option:{ method: 'POST', body: "id="+actionMsg.id,
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [PROTOCOL_DETAIL]:actionMsg => {return {endpoint: 'api/protocol/detailByArchive.json',
+        option:{ method: 'POST', body: "id="+actionMsg.id,
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [INVESTIGATION_SAVE]:actionMsg => {return {endpoint: 'api/investigation/save.json',
+        option:{ method: 'POST', body: "id="+actionMsg.id,
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [MEDIATE_SAVE]:actionMsg => {return {endpoint: 'api/mediate/save.json',
+        option:{ method: 'POST', body: "id="+actionMsg.id,
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [PROTOCOL_SAVE]:(actionMsg,result,content,remark) => {return {endpoint: 'api/protocol/save.json',
+        option:{ method: 'POST', body: 'id='+actionMsg.id+'& result='+ result+'& remark='+ remark+'content='+ content,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
 };
