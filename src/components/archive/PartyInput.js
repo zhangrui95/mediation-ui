@@ -5,9 +5,6 @@ import Select from '../Select'
 class PartyInput extends Component {
     render() {
         const {item,model} = this.props;
-        if(!item){
-            return null;
-        }
         const itemStyle = model === 1 ? 'margin-form-party': 'margin-form';
         let name;
         let sex;
@@ -18,13 +15,16 @@ class PartyInput extends Component {
         let contact;
         if(model === 0){
             name = <Input className="text-input" placeholder="" />
-            sex = <Select domain="type.id" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择"  />
+            sex = <Select domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择"  />
             nation = <Input className="text-input" placeholder="" style={{ width: 70 }}/>
             age = <Input className="text-input" placeholder="" style={{ width: 70 }} />
             card = <Input className="text-input" placeholder="" />
             address = <Input className="text-input" style={{ width: 400 }} placeholder="" />
             contact = <Input className="text-input" placeholder="" />
         } else if(model === 1){
+            if(!item){
+                return null;
+            }
             name = <span>{item.name}</span>
             sex = <span>{item.sex === 1 ? '男':'女'}</span>
             nation = <span>{item.nation}</span>
@@ -33,6 +33,9 @@ class PartyInput extends Component {
             address = <span>{item.address}</span>
             contact = <span>{item.contact}</span>
         } else{
+            if(!item){
+                return null;
+            }
             name = <Input className="text-input" placeholder="" value={item.name}/>
             sex = <Select domain="type.id" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择" value={item.sex} />
             nation = <Input className="text-input" placeholder="" style={{ width: 70 }} value={item.nation}/>

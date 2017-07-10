@@ -26,6 +26,11 @@ class ArchiveDetail extends Component {
         }
         return false;
     }
+
+    addNewArchive(){
+        console.log('addNewArchive')
+    }
+
     render() {
         const { archive,header } = this.props;
         const model = this.state.model;
@@ -55,7 +60,7 @@ class ArchiveDetail extends Component {
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择"  />
             workers = <input onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
             litigants = <AddPartyinput model={model}/>
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" className="addPerson"/></div>
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.addNewArchive.bind(this)} className=""/></div>
         }else if(model === 1){
             if(state !== 0){
                 return null;
@@ -105,7 +110,7 @@ class ArchiveDetail extends Component {
                 checkText = check.content
             }
             litigantsName = data.litigants.map((i)=>i.name).join(',');
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" className="addPerson"/></div>
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" className=""/></div>
         }
         return (
             <div>

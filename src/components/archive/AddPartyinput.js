@@ -14,12 +14,21 @@ class AddPartyinput extends Component {
     }
     render() {
         const {data,model} = this.props;
-        if(!data){
-            return null;
+        let tables;
+        if(model===0){
+            tables = [];
+            const count = this.state.count;
+            for(let i = 0;i < count;i++){
+                tables.push(<PartyInput key={i} model={model}/>)
+            }
+        }else{
+            if(!data){
+                return null;
+            }
+            tables = data.map(function (it,i) {
+                return <PartyInput key={i} model={model} item={it}/>
+            });
         }
-        const tables = data.map(function (it,i) {
-            return <PartyInput key={i} model={model} item={it}/>
-        });
         let submitBtn;
         if(model !== 1){
             submitBtn = <div className="formArch" style={{ height:40 }}><input type="button" onClick={this.getAdd.bind(this)} value="添加当事人" className="addPerson"/></div>
