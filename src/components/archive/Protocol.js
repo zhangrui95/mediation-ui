@@ -25,7 +25,7 @@ class Protocol extends Component {
     remarkChange(e){
         remark = e.target.value;
     }
-    onSave(){
+    onSave(result,content,remark){
         const {actions,params} = this.props;
         const {id} = params;
         actions.request(PROTOCOL_SAVE,{id},result,content,remark);
@@ -72,6 +72,7 @@ Protocol.propTypes = {
 function	select(state)	{
     return	{
         protocol:state.protocol,
+        protocolSave:state.protocolSave
     };
 }
 
