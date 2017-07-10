@@ -10,6 +10,9 @@ import * as syncActions from '../../actions/syncAction'
 let result = '';
 let remark = '';
 let content = '';
+let resulttext = '';
+let remarktext = '';
+let contenttext = '';
 class Protocol extends Component {
     componentWillMount(){
         const {actions,params} = this.props;
@@ -33,11 +36,32 @@ class Protocol extends Component {
     render() {
         const { children,params,protocol} = this.props;
         const {response} = protocol;
-        const {remark} = response||{};
+        const {remark,result,content} = response||{};
+        if(remark == null){
+            remarktext = <Input className="text-input" style={{ width: 400 }} placeholder="" onKeyUp={this.remarkChange.bind(this)}/>
+        }else{
+            remarktext = remark;
+        }
+        if(content == null){
+            contenttext = <Input type="textarea" rows={4} onKeyUp={this.textChange.bind(this)}/>
+        }else{
+            contenttext = content;
+        }
+        if(result == 0){
+            resulttext = "调解成功";
+        }else if(result == -1){
+            resulttext = "调解失败";
+        }else{
+            resulttext = <select defaultValue="请选择" style={{ width: 70 }} onChange={this.handleChange.bind(this)}>
+                                <option>请选择</option>
+                                <option value="0">调解成功</option>
+                                <option value="-1">调解失败</option>
+                           </select>
+        }
         return (
             <div>
                 <div className="title-form-name" id={params.mid}>人民调解协议书</div>
-                <div className="formArch">文号：<span>{remark}</span></div>
+                <div className="formArch">文号：<span>XXXXXXXXXXXXXXXXXXXX</span></div>
                 <div className="formBorder">
                     <div className="border-box">
                         <div className="formArch">当事人</div>
@@ -45,17 +69,13 @@ class Protocol extends Component {
                     </div>
                     <div className="formArch">
                         <div className="margin-form">调解结果：
-                            <select defaultValue="请选择" style={{ width: 70 }} onChange={this.handleChange.bind(this)}>
-                                <option>请选择</option>
-                                <option value="0">调解成功</option>
-                                <option value="-1">调解失败</option>
-                            </select>
+                            {resulttext}
                         </div>
                     </div>
-                    <div className="formArch">调解协议：<Input type="textarea" rows={4} onKeyUp={this.textChange.bind(this)}/></div>
+                    <div className="formArch">调解协议：{contenttext}</div>
                     <div className="formArch">
                         <div className="margin-form">
-                            履行方式、时限：<Input className="text-input" style={{ width: 400 }} placeholder="" onKeyUp={this.remarkChange.bind(this)}/>
+                            履行方式、时限：{remarktext}
                         </div>
                     </div>
                     <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>

@@ -114,7 +114,7 @@ fetchMock.mock(DEV_REQ_HOST+'api/mediate/save.json',{state:0, data:{id:'1'}});
 fetchMock.mock(DEV_REQ_HOST+'api/mediate/update.json',{state:0});
 
 
-fetchMock.mock(DEV_REQ_HOST+'api/protocol/detailByArchive.json',{id:'1',remark:'xxx',result:1,content:'xxx',createTime:1499240237246,creater:{},archive:{}});
+fetchMock.mock(DEV_REQ_HOST+'api/protocol/detailByArchive.json',{id:'1',remark:'xxx',result:0,content:'xxx',createTime:1499240237246,creater:{},archive:{}});
 fetchMock.mock(DEV_REQ_HOST+'api/protocol/save.json',{state:0, data:{id:'1'}});
 fetchMock.mock(DEV_REQ_HOST+'api/protocol/update.json',{state:0});
 
