@@ -11,19 +11,23 @@ import {getDateTime} from '../../utils/date';
 let input = '';
 let content = '';
 let time = '';
+let date = '';
 class CheckVisit extends Component {
     inputChange(e){
         input = e.target.value;
-    }
-    onSave(input){
-        const {actions,params} = this.props;
-        const {id} = params;
-        actions.request(CHECKVISIT_SAVE,{id},input);
     }
     componentWillMount(){
         const {actions,params} = this.props;
         const {id} = params;
         actions.request(CHECKVISIT_DETAIL,{id});
+    }
+    timeChange(date){
+        date = date.name1;
+    }
+    onSave(input,date){
+        const {actions,params} = this.props;
+        const {id} = params;
+        actions.request(CHECKVISIT_SAVE,{id},input,date);
     }
     render() {
         let litigantsName = '';
@@ -40,8 +44,8 @@ class CheckVisit extends Component {
         }else{
             content = text.content;
         }
-        if(text.visitTime == ''){
-            time = <TimeChoice />;
+        if(text.visitTime == null){
+            time = <TimeChoice name="name1" onChange={this.timeChange.bind(this)}/>;
         }else{
             time = getDateTime(text.visitTime);
         }

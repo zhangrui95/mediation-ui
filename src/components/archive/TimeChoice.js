@@ -10,9 +10,8 @@ class TimeChoice extends Component{
         this.handleChange('startValue', date, dateString);
     }
     handleChange(field, value, dateString) {
-        const {option,onChange} = this.props;
-        onChange({[field=='startValue'?option.name1:option.name2]:dateString});
-        this.setState({[field]: value});
+        const {name,onChange} = this.props;
+        onChange({[name]:dateString});
     }
     
     render() {

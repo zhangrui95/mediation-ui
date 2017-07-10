@@ -118,7 +118,7 @@ fetchMock.mock(DEV_REQ_HOST+'api/protocol/detailByArchive.json',{id:'1',remark:'
 fetchMock.mock(DEV_REQ_HOST+'api/protocol/save.json',{state:0, data:{id:'1'}});
 fetchMock.mock(DEV_REQ_HOST+'api/protocol/update.json',{state:0});
 
-fetchMock.mock(DEV_REQ_HOST+'api/checkVisit/detailByArchive.json',{id:'1',visitTime:1499240237246,content:'xxx',createTime:1499240237246,creater:{},archive:{}});
+fetchMock.mock(DEV_REQ_HOST+'api/checkVisit/detailByArchive.json',{id:'1',visitTime:null,content:'',createTime:1499240237246,creater:{},archive:{}});
 fetchMock.mock(DEV_REQ_HOST+'api/checkVisit/save.json',{state:0, data:{id:'1'}});
 fetchMock.mock(DEV_REQ_HOST+'api/checkVisit/update.json',{state:0});
 
