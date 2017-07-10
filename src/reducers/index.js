@@ -9,8 +9,9 @@ import enterprise from './enterprise'
 import archive from './archive'
 import archiveSuspend from './archiveSuspend'
 import evidence from './evidence'
+import investigation from './investigation'
 
-const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence};
+const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence,investigation};
 
 const rootReducer = combineReducers(Object.assign({},reducers,{routing}));
 

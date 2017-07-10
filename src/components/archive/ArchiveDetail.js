@@ -80,7 +80,7 @@ class ArchiveDetail extends Component {
                 checkText = check.content
             }
             litigantsName = data.litigants.map((i)=>i.name).join(',');
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑" className="addPerson"/><input type="button" value="打印" className="addPerson"/></div>
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑" /><input type="button" value="打印" /></div>
         }else{
             if(state !== 0){
                 return null;

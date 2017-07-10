@@ -1,7 +1,16 @@
 import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import  SurveyList from './SurveyList'
+import {INVESTIGATION_LIST} from '../../constants/ActionTypes'
+import * as syncActions from '../../actions/syncAction'
 
 class InvestigationList extends Component {
+    componentWillMount(){
+        const {actions,params} = this.props;
+        const {id} = params;
+        actions.request(INVESTIGATION_LIST,{id});
+    }
     clickHandler(e){
         const { params } = this.props;
         const {id} = params;
@@ -14,13 +23,20 @@ class InvestigationList extends Component {
     }
     render() {
         const { children } = this.props;
+        const { investigation } = this.props;
+        const {response} = investigation;
+        const {data} = response||{};
+        if(data == null){
+            return null;
+        }
+        console.log(data)
         return (
             <div>
                 <div className="title-form-name">人民调解调查表</div>
                 <div className="formArch">
                     <dic className="list-right" onClick={this.clickHandler.bind(this)}>新建</dic>
                 </div>
-                < SurveyList/>
+                < SurveyList data={data}/>
             </div>
         )
     }
@@ -34,5 +50,17 @@ InvestigationList.contextTypes = {
     router: PropTypes.object
 };
 
+function	select(state)	{
+    return	{
+        investigation:state.investigation
+    };
+}
 
-export default InvestigationList
+function actions(dispatch) {
+    return {
+        actions: bindActionCreators(syncActions, dispatch)
+    }
+}
+
+export  default connect(select,actions)(InvestigationList);
+

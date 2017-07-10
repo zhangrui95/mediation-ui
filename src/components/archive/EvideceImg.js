@@ -5,19 +5,22 @@
  * Created by Administrator on 2017/7/6 0006.
  */
 import React, { Component, PropTypes } from 'react'
+import {getDateTime} from '../../utils/date';
 
 class EvidenceImg extends Component {
     render() {
         const {data} = this.props;
-        let name = ''
-        let size = ''
-        let type = ''
+        let name = '';
+        let size = '';
+        let type = '';
+        let time = '';
         let arr = [];
         let j = 0;
         for(let i = 0; i < data.length; i++){
             name = data[i].name;
             size = data[i].size;
             type = data[i].type;
+            time = getDateTime(data[i].createTime);
             if(type == 1){
                 j++;
                 arr.push(
@@ -30,7 +33,7 @@ class EvidenceImg extends Component {
                         <img src="assets/images/index-logo.png"/>
                         </td>
                         <td>{size}</td>
-                        <td>2017-07-03 14:56:03</td>
+                        <td>{time}</td>
                     <td>李四</td>
                     <td><a>下载</a><span> | </span><a>删除</a><span> | </span><a>打印</a></td>
                     </tr>

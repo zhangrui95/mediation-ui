@@ -1330,3 +1330,16 @@ to {
 	line-height: 40px;
 	margin-left: 30px;
 }
+.time-right{
+	width: 90%;
+	text-align: right;
+}
+.font-weight-word{
+	font-size: 18px;
+	line-height: 30px;
+	font-weight: 900;
+}
+.apply-name{
+	height: 60px;
+	line-height: 60px;
+}
