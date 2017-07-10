@@ -29,7 +29,6 @@ class InvestigationList extends Component {
         if(data == null){
             return null;
         }
-        console.log(data)
         return (
             <div>
                 <div className="title-form-name">人民调解调查表</div>

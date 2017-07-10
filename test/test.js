@@ -53,7 +53,7 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
 });
 fetchMock.post(DEV_REQ_HOST+'api/archive/detail.json',function(){
     return {state:0,
-        data:{id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,keepTime:1509240237246,applyTime:1409240238246,canPause:0,content:'xxxxxasdasd',
+        data:{id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,keepTime:1509240237246,applyTime:'',canPause:0,content:'xxxxxasdasd',
             manager:{id:'2',name:'w1'},
             creater:{id:'2',name:'w1'},
             litigants:[
@@ -95,8 +95,8 @@ fetchMock.mock(DEV_REQ_HOST+'api/investigation/save.json',{state:0, data:{id:'1'
 fetchMock.mock(DEV_REQ_HOST+'api/investigation/update.json',{state:0});
 
 fetchMock.mock(DEV_REQ_HOST+'api/mediate/listByArchive.json',{data:[
-    {id:'1',mediateTime:1499240237246,address:'xxx1',content:'xxx1',createTime:1499240237246,creater:{},archive:{},workers:[]},
-    {id:'2',mediateTime:1499240238246,address:'xxx2',content:'xxx2',createTime:1499240238246,creater:{},archive:{},workers:[]}
+    {id:'1',mediateTime:1499240237246,address:'xx01',content:'x001',createTime:1499240237246,creater:{},archive:{},workers:[]},
+    {id:'2',mediateTime:1499240238246,address:'xx02',content:'x002',createTime:1499240238246,creater:{},archive:{},workers:[]}
 ]});
 fetchMock.mock(DEV_REQ_HOST+'api/mediate/detail.json',{id:'1',mediateTime:1499240237246,address:'xxx1',content:'xxx1',createTime:1499240237246,creater:{},archive:{},workers:[]});
 fetchMock.mock(DEV_REQ_HOST+'api/mediate/save.json',{state:0, data:{id:'1'}});

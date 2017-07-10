@@ -1,19 +1,29 @@
 import React, { Component, PropTypes } from 'react'
 import  PartyCell from './PartyCell'
 import { Input } from 'antd';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import {PROTOCOL_DETAIL} from '../../constants/ActionTypes'
+import * as syncActions from '../../actions/syncAction'
 
 class Protocol extends Component {
+    componentWillMount(){
+        const {actions,params} = this.props;
+        const {id} = params;
+        actions.request(PROTOCOL_DETAIL,{id});
+    }
 
     render() {
-        const { children, params} = this.props;
+        const { children,params,protocol} = this.props;
+        const {response} = protocol;
+        const {remark} = response||{};
         return (
             <div>
                 <div className="title-form-name" id={params.mid}>人民调解协议书</div>
-                <div className="formArch">文号：<span>XXXXXXXXXXXXXXXXXXXXXXXX</span></div>
+                <div className="formArch">文号：<span>{remark}</span></div>
                 <div className="formBorder">
                     <div className="border-box">
                         <div className="formArch">当事人</div>
-                        <PartyCell/>
                         <PartyCell/>
                     </div>
                     <div className="formArch">
@@ -41,4 +51,16 @@ Protocol.propTypes = {
     children: PropTypes.node
 };
 
-export default Protocol
+function	select(state)	{
+    return	{
+        protocol:state.protocol,
+    };
+}
+
+function actions(dispatch) {
+    return {
+        actions: bindActionCreators(syncActions, dispatch)
+    }
+}
+export  default connect(select,actions)(Protocol);
+
