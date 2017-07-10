@@ -67,11 +67,11 @@ const option = {
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [LIST_BY_ARCHIVE]:actionMsg => {return {endpoint: 'api/evidence/listByArchive.json',
-        option:{ method: 'POST', body: "id="+actionMsg.id,
+        option:{ method: 'POST', body: "aid="+actionMsg.id,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [INVESTIGATION_LIST]:actionMsg => {return {endpoint: 'api/investigation/listByArchive.json',
-        option:{ method: 'POST', body: "id="+actionMsg.id,
+        option:{ method: 'POST', body: "aid="+actionMsg.id,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [ARCHIVE_ADD]:(actionMsg,formData) => {return{endpoint: 'api/archive/save.json',
@@ -83,11 +83,11 @@ const option = {
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [MEDIATE_LIST]:actionMsg => {return {endpoint: 'api/mediate/listByArchive.json',
-        option:{ method: 'POST', body: "id="+actionMsg.id,
+        option:{ method: 'POST', body: "aid="+actionMsg.id,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [PROTOCOL_DETAIL]:actionMsg => {return {endpoint: 'api/protocol/detailByArchive.json',
-        option:{ method: 'POST', body: "id="+actionMsg.id,
+        option:{ method: 'POST', body: "aid="+actionMsg.id,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [INVESTIGATION_SAVE]:actionMsg => {return {endpoint: 'api/investigation/save.json',
@@ -107,7 +107,7 @@ const option = {
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [CHECKVISIT_DETAIL]:(actionMsg,content,visitTime) => {return {endpoint: 'api/checkVisit/detailByArchive.json',
-        option:{ method: 'POST', body: 'id='+actionMsg.id+'& content='+ content+'& visitTime='+ visitTime,
+        option:{ method: 'POST', body: 'aid='+actionMsg.id+'&content='+ content+'&visitTime='+ visitTime,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
 };
