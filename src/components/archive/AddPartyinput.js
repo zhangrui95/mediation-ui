@@ -7,19 +7,22 @@ import PartyInput from './PartyInput'
 class AddPartyinput extends Component {
     constructor(props) {
         super(props);
+        const {onChange} = props;
+        this.onChange = onChange;
         this.state = {count: 2,datas:[]};
     }
     getAdd() {
         this.setState({count: this.state.count + 1});
     }
 
-    onChange(i){
+    onChangeHandler(i){
         return (data) =>{
             const datas = this.state.datas;
             datas[i] = data;
             this.setState({datas:datas})
-            console.log('AddPartyinput '+i,data)
-            console.log('AddPartyinput '+i,datas)
+            if(this.onChange){
+                this.onChange(this.state.datas);
+            }
         }
     }
 
@@ -31,14 +34,14 @@ class AddPartyinput extends Component {
             tables = [];
             const count = this.state.count;
             for(let i = 0;i < count;i++){
-                tables.push(<PartyInput key={i} model={model} onChange={this.onChange(i).bind(this)}/>)
+                tables.push(<PartyInput key={i} model={model} onChange={this.onChangeHandler(i).bind(this)}/>)
             }
         }else{
             if(!data){
                 return null;
             }
             tables = data.map((it,i) =>{
-                return <PartyInput key={i} model={model} item={it} onChange={this.onChange(i).bind(this)}/>
+                return <PartyInput key={i} model={model} item={it} onChange={this.onChangeHandler(i).bind(this)}/>
             });
         }
         let submitBtn;
@@ -57,7 +60,7 @@ class AddPartyinput extends Component {
 AddPartyinput.propTypes = {
     model: PropTypes.number,
     data: PropTypes.array,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func
 };
 
 

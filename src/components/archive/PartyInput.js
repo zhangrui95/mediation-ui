@@ -76,7 +76,8 @@ class PartyInput extends Component {
 }
 PartyInput.propTypes = {
     model: PropTypes.number,
-    item: PropTypes.object
+    item: PropTypes.object,
+    onChange: PropTypes.func
 };
 
 export default PartyInput

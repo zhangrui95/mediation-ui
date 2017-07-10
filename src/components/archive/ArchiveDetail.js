@@ -72,6 +72,11 @@ class ArchiveDetail extends Component {
         this.setState({data: Object.assign(this.state.data,{workerIds:value.join(',')})});
     }
 
+    handleLitigantChange(datas){
+        this.setState({data: Object.assign(this.state.data,{litigants:datas})});
+        console.log('handleLitigantChange',this.state.data)
+    }
+
     render() {
         const { archive,header } = this.props;
         const model = this.state.model;
@@ -100,7 +105,7 @@ class ArchiveDetail extends Component {
             creater = header.user.response.user.name;
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" onChangeHandler={this.handleChange('manager.id').bind(this)} value={this.state.data['manager.id']}/>
             workers = <input onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
-            litigants = <AddPartyinput model={model}/>
+            litigants = <AddPartyinput model={model} onChange={this.handleLitigantChange.bind(this)}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.addNewArchive.bind(this)} className=""/></div>
         }else if(model === 1){
             if(state !== 0){
@@ -137,7 +142,7 @@ class ArchiveDetail extends Component {
             creater = data.creater.name;
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={data.manager.id}  />
             workers = <input onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
-            litigants = <AddPartyinput model={model}/>
+            litigants = <AddPartyinput model={model} onChange={this.handleLitigantChange.bind(this)}/>
             createTime = getDateTime(data.createTime);
             keepTime = getDateTime(data.keepTime);
             if(data.state === -1){
