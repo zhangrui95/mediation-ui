@@ -12,15 +12,13 @@ let input = '';
 let content = '';
 let time = '';
 class CheckVisit extends Component {
-    handleChange(val){
-        this.setState({email: val});
-        console.log(val);
-    }
     inputChange(e){
         input = e.target.value;
     }
-    onSave(){
-        alert(input);
+    onSave(input){
+        const {actions,params} = this.props;
+        const {id} = params;
+        actions.request(CHECKVISIT_SAVE,{id},input);
     }
     componentWillMount(){
         const {actions,params} = this.props;
@@ -37,13 +35,13 @@ class CheckVisit extends Component {
         if(text == null){
             return null;
         }
-        if(text.content == null){
+        if(text.content == ''){
             content = <Input type="textarea" rows={4} onKeyUp={this.inputChange.bind(this)}/>;
         }else{
             content = text.content;
         }
-        if(text.visitTime == null){
-            time = <TimeChoice handleChange={this.handleChange.bind(this)}/>;
+        if(text.visitTime == ''){
+            time = <TimeChoice />;
         }else{
             time = getDateTime(text.visitTime);
         }

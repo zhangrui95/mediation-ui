@@ -37,12 +37,12 @@ class Protocol extends Component {
         const { children,params,protocol} = this.props;
         const {response} = protocol;
         const {remark,result,content} = response||{};
-        if(remark == null){
+        if(remark == ''){
             remarktext = <Input className="text-input" style={{ width: 400 }} placeholder="" onKeyUp={this.remarkChange.bind(this)}/>
         }else{
             remarktext = remark;
         }
-        if(content == null){
+        if(content == ''){
             contenttext = <Input type="textarea" rows={4} onKeyUp={this.textChange.bind(this)}/>
         }else{
             contenttext = content;
