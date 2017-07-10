@@ -32,7 +32,7 @@ class ApplyFor extends Component {
         const {syncActions,params} = this.props;
         const {id} = params;
         if(id !== null && id !== undefined && id !== ''){
-            syncActions.request(ARCHIVE_UPDATE,{id,applyTime:this.state.applyTime});
+            syncActions.request(ARCHIVE_UPDATE,null,{id,applyTime:this.state.applyTime});
         }
     }
 
