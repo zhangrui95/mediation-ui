@@ -1,7 +1,42 @@
+/**
+ * Created by Administrator on 2017/7/6 0006.
+ */
+/**
+ * Created by Administrator on 2017/7/6 0006.
+ */
 import React, { Component, PropTypes } from 'react'
 
 class EvidenceImg extends Component {
     render() {
+        const {data} = this.props;
+        let name = ''
+        let size = ''
+        let type = ''
+        let arr = [];
+        let j = 0;
+        for(let i = 0; i < data.length; i++){
+            name = data[i].name;
+            size = data[i].size;
+            type = data[i].type;
+            if(type == 1){
+                j++;
+                arr.push(
+                    <tr className="odd" key={i}>
+                        <td width="40">{j}</td>
+                        <td width="180">
+                        <a className="view-cell" href="javascript:;">{name}</a>
+                        </td>
+                        <td>
+                        <img src="assets/images/index-logo.png"/>
+                        </td>
+                        <td>{size}</td>
+                        <td>2017-07-03 14:56:03</td>
+                    <td>李四</td>
+                    <td><a>下载</a><span> | </span><a>删除</a><span> | </span><a>打印</a></td>
+                    </tr>
+                )
+            }
+        }
         return (
             <table cellPadding="0" cellSpacing="0" className="table-list table-list-evidence">
                 <thead>
@@ -16,32 +51,7 @@ class EvidenceImg extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="odd">
-                    <td width="40">1</td>
-                    <td width="180">
-                        <a class="view-cell" href="javascript:;">图片1.png</a>
-                    </td>
-                    <td>
-                        <img src="assets/images/index-logo.png"/>
-                    </td>
-                    <td>17.5</td>
-                    <td>2017-07-03 14:56:03</td>
-                    <td>李四</td>
-                    <td><a>下载</a><span> | </span><a>删除</a><span> | </span><a>打印</a></td>
-                </tr>
-                <tr class="even">
-                    <td width="40">2</td>
-                    <td width="180">
-                        <a class="view-cell" href="javascript:;">图片2.jpg</a>
-                    </td>
-                    <td>
-                        <img src="assets/images/index-logo.png"/>
-                    </td>
-                    <td>8.2</td>
-                    <td>2017-07-05 17:22:31</td>
-                    <td>张三</td>
-                    <td><a>下载</a><span> | </span><a>打印</a></td>
-                </tr>
+                {arr}
                 </tbody>
             </table>
         )

@@ -18,20 +18,20 @@ class EvidenceRecord extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="odd">
+                <tr className="odd">
                     <td width="40">1</td>
                     <td width="230">
-                        <a class="view-cell" href="javascript:;">录音1.mp3</a>
+                        <a className="view-cell" href="javascript:;">录音1.mp3</a>
                     </td>
                     <td>17.5</td>
                     <td>2017-07-03 14:56:03</td>
                     <td>李四</td>
                     <td><a>下载</a><span> | </span><a>删除</a></td>
                 </tr>
-                <tr class="even">
+                <tr className="even">
                     <td width="40">2</td>
                     <td width="230">
-                        <a class="view-cell" href="javascript:;">录音2.mp3</a>
+                        <a className="view-cell" href="javascript:;">录音2.mp3</a>
                     </td>
                     <td>8.2</td>
                     <td>2017-07-05 17:22:31</td>
