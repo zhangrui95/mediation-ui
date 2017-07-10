@@ -43,13 +43,19 @@ class ArchiveDetail extends Component {
         let checkText = '';
         let failTime = '';
         let litigantsName = '';
+        let workers = '';
+        let litigants = '';
         let manager = '';
+        let btns;
         if(model === 0){
             name = <Input name="name" className="text-input"  style={{ width: 350 }} placeholder="" />
             type = <Select domain="type.id" url="api/archiveType/options.json" head="请选择"  />
             content = <Input name="content" type="textarea" rows={4} />
             creater = header.user.response.user.name;
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择"  />
+            workers = <input onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
+            litigants = <AddPartyinput model={model}/>
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" className="addPerson"/></div>
         }else if(model === 1){
             if(state !== 0){
                 return null;
@@ -59,6 +65,8 @@ class ArchiveDetail extends Component {
             content = data.content;
             creater = data.creater.name;
             manager = data.manager.name;
+            workers = data.workers.map((i)=>i.worker.name).join(',');
+            litigants = <AddPartyinput model={model} data={data.litigants}/>
             createTime = getDateTime(data.createTime);
             keepTime = getDateTime(data.keepTime);
             if(data.state === -1){
@@ -72,6 +80,7 @@ class ArchiveDetail extends Component {
                 checkText = check.content
             }
             litigantsName = data.litigants.map((i)=>i.name).join(',');
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑" className="addPerson"/><input type="button" value="打印" className="addPerson"/></div>
         }else{
             if(state !== 0){
                 return null;
@@ -81,6 +90,8 @@ class ArchiveDetail extends Component {
             content = <Input name="content" type="textarea" rows={4} value={data.content} />
             creater = data.creater.name;
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={data.manager.id}  />
+            workers = <input onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
+            litigants = <AddPartyinput model={model}/>
             createTime = getDateTime(data.createTime);
             keepTime = getDateTime(data.keepTime);
             if(data.state === -1){
@@ -94,6 +105,7 @@ class ArchiveDetail extends Component {
                 checkText = check.content
             }
             litigantsName = data.litigants.map((i)=>i.name).join(',');
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" className="addPerson"/></div>
         }
         return (
             <div>
@@ -107,7 +119,7 @@ class ArchiveDetail extends Component {
                     </div>
                     <div className="border-box">
                         <div className="formArch">当事人</div>
-                        <AddPartyinput/>
+                        {litigants}
                     </div>
                     <div className="border-box">
                         <div className="formArch">纠纷简要情况</div>
@@ -119,7 +131,7 @@ class ArchiveDetail extends Component {
                             <div className="margin-form">第一调解员：{manager}</div>
                         </div>
                         <div className="formArch">
-                            <div className="margin-form">第二调解员：<input onClick={this.upAddClick.bind(this)} type="button" value="选择"/></div>
+                            <div className="margin-form">第二调解员：{workers}</div>
                         </div>
                     </div>
                     <div className="formArch">立卷人：<span>{creater}</span></div>
@@ -133,7 +145,7 @@ class ArchiveDetail extends Component {
                     <div className="formArch">当事人姓名：<span>{litigantsName}</span></div>
                     <div className="formArch">登记人：<span>{creater}</span></div>
                     <div className="formArch">登记日期：<span>{createTime}</span></div>
-                    <div className="formArch" style={{ height:40 }}><input type="button" value="保存" className="addPerson"/></div>
+                    {btns}
                 </div>
                 <Pop title="添加调解员" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
                    <PopMediator/>
