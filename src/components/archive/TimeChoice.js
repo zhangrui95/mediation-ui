@@ -15,13 +15,13 @@ class TimeChoice extends Component{
     }
     
     render() {
-        const { archive } = this.props;
+        const { archive, name } = this.props;
         const {response} = archive;
         const {data} = response||{};
-        let applyTime = data.applyTime;
+        let applyTime = data[name];
         let html = '';
         let time = getDateTime(applyTime);
-        if(applyTime==''){
+        if(applyTime==null){
             html = <div><div className="margin-form"><DatePicker onChange={this.onChange.bind(this)} format="YYYY-MM-DD HH:mm:ss"/></div></div>;
         }else{
             html = <div><div className="apply-name">申请人签字：</div><div className="time-right">{time}</div></div>;

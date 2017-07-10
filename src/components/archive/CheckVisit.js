@@ -45,7 +45,7 @@ class CheckVisit extends Component {
             content = text.content;
         }
         if(text.visitTime == null){
-            time = <TimeChoice name="name1" onChange={this.timeChange.bind(this)}/>;
+            time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)}/>;
         }else{
             time = getDateTime(text.visitTime);
         }
