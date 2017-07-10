@@ -20,9 +20,9 @@ class SurveyList extends Component {
                         <a className="view-cell" href="javascript:;">{time}</a>
                     </td>
                     <td>{address}</td>
-                    <td>张三</td>
-                    <td>李四</td>
-                    <td>张三</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td><a>编辑</a><span> | </span><a>打印</a></td>
                 </tr>
             )

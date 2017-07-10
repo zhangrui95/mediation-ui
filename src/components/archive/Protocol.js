@@ -4,15 +4,32 @@ import { Input } from 'antd';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {PROTOCOL_DETAIL} from '../../constants/ActionTypes'
+import {PROTOCOL_SAVE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 
+let result = '';
+let remark = '';
+let content = '';
 class Protocol extends Component {
     componentWillMount(){
         const {actions,params} = this.props;
         const {id} = params;
         actions.request(PROTOCOL_DETAIL,{id});
     }
-
+    handleChange(e){
+        result = e.target.value;
+    }
+    textChange(e){
+        content = e.target.value;
+    }
+    remarkChange(e){
+        remark = e.target.value;
+    }
+    onSave(){
+        const {actions,params} = this.props;
+        const {id} = params;
+        actions.request(PROTOCOL_SAVE,{id},result,content,remark);
+    }
     render() {
         const { children,params,protocol} = this.props;
         const {response} = protocol;
@@ -28,19 +45,20 @@ class Protocol extends Component {
                     </div>
                     <div className="formArch">
                         <div className="margin-form">调解结果：
-                            <select defaultValue="请选择" style={{ width: 70 }}>
+                            <select defaultValue="请选择" style={{ width: 70 }} onChange={this.handleChange.bind(this)}>
+                                <option>请选择</option>
                                 <option value="0">调解成功</option>
                                 <option value="-1">调解失败</option>
                             </select>
                         </div>
                     </div>
-                    <div className="formArch">调解协议：<Input type="textarea" rows={4} /></div>
+                    <div className="formArch">调解协议：<Input type="textarea" rows={4} onKeyUp={this.textChange.bind(this)}/></div>
                     <div className="formArch">
                         <div className="margin-form">
-                            履行方式、时限：<Input className="text-input" style={{ width: 400 }} placeholder="" />
+                            履行方式、时限：<Input className="text-input" style={{ width: 400 }} placeholder="" onKeyUp={this.remarkChange.bind(this)}/>
                         </div>
                     </div>
-                    <div className="formArch" style={{ height:40 }}><input type="button" value="保存" className="addPerson"/></div>
+                    <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
                 </div>
             </div>
         )
