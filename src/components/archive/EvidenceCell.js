@@ -27,7 +27,7 @@ class EvidenceCell extends Component {
                         <div className="margin-form table-name">录音</div>
                         <dic className="list-right">上传录音</dic>
                     </div>
-                    <EvidenceRecord/>
+                    <EvidenceRecord data={data}/>
                     <div className="formArch">(以上格式为：MP3,WMA,FLAC,MMF,AMR,M4A,M4R,MP2，WAV,单个文件大小不得大于2M,全部大小不得大于10M。)</div>
                 </div>
         )

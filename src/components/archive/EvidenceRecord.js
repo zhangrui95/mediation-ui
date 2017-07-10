@@ -2,9 +2,38 @@
  * Created by Administrator on 2017/7/6 0006.
  */
 import React, { Component, PropTypes } from 'react'
+import {getDateTime} from '../../utils/date';
 
 class EvidenceRecord extends Component {
     render() {
+        const {data} = this.props;
+        let name = '';
+        let size = '';
+        let type = '';
+        let arr = [];
+        let j = 0;
+        let time = '';
+        for(let i = 0; i < data.length; i++){
+            name = data[i].name;
+            size = data[i].size;
+            type = data[i].type;
+            time = getDateTime(data[i].createTime);
+            if(type == 2){
+                j++;
+                arr.push(
+                    <tr className="odd" key={i}>
+                        <td width="40">{j}</td>
+                        <td width="230">
+                            <a className="view-cell" href="javascript:;">{name}</a>
+                        </td>
+                        <td>{size}</td>
+                        <td>{time}</td>
+                        <td>李四</td>
+                        <td><a>下载</a><span> | </span><a>删除</a></td>
+                    </tr>
+                )
+            }
+        }
         return (
             <table cellPadding="0" cellSpacing="0" className="table-list table-list-evidence">
                 <thead>
@@ -18,27 +47,7 @@ class EvidenceRecord extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                <tr className="odd">
-                    <td width="40">1</td>
-                    <td width="230">
-                        <a className="view-cell" href="javascript:;">录音1.mp3</a>
-                    </td>
-                    <td>17.5</td>
-                    <td>2017-07-03 14:56:03</td>
-                    <td>李四</td>
-                    <td><a>下载</a><span> | </span><a>删除</a></td>
-                </tr>
-                <tr className="even">
-                    <td width="40">2</td>
-                    <td width="230">
-                        <a className="view-cell" href="javascript:;">录音2.mp3</a>
-                    </td>
-                    <td>8.2</td>
-                    <td>2017-07-05 17:22:31</td>
-                    <td>张三</td>
-                    <td id="2"><a>下载</a>
-                    </td>
-                </tr>
+                {arr}
                 </tbody>
             </table>
         )

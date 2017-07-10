@@ -71,7 +71,18 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/detail.json',function(){
 });
 fetchMock.mock(DEV_REQ_HOST+'api/archive/suspend.json',{state:0});
 
-fetchMock.mock(DEV_REQ_HOST+'api/archive/save.json',{state:0, data:{id:'1'}});
+fetchMock.mock(DEV_REQ_HOST+'api/archive/save.json',{state:0, data:{id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,keepTime:1509240237246,applyTime:1409240238246,canPause:0,content:'xxxxxasdasd',
+    manager:{id:'2',name:'w1'},
+    creater:{id:'2',name:'w1'},
+    litigants:[
+        {id:'1',name:'p1',card:'230132199602200369',sex:1,nation:'汉',age:12,address:'地址1',contact:'13012345678',createTime:1499240237246,archive:{}},
+        {id:'2',name:'p2',card:'230132199602200360',sex:1,nation:'汉',age:12,address:'地址2',contact:'13012345679',createTime:1499240237246,archive:{}},
+    ],
+    workers:[
+        {id:'3',worker:{name:'w2'},createTime:1499240237246,archive:{}},
+        {id:'4',worker:{name:'w3'},createTime:1499240237246,archive:{}},
+    ]
+}});
 
 fetchMock.mock(DEV_REQ_HOST+'api/archive/update.json',{state:0});
 

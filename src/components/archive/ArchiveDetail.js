@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
+import {ARCHIVE_ADD,ARCHIVE_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction';
+import * as arhciveActions from '../../actions/arhcive';
 import {getDateTime} from '../../utils/date';
 import { Input } from 'antd';
 import Select from '../Select'
@@ -14,21 +16,60 @@ class ArchiveDetail extends Component {
         super(props, context);
         const { params} = props;
         const {id} = params;
-        this.state = {addBox:false,passConfirm:false,goOutConfirm:false, model: id !== null && id !== undefined && id !== '' ? 1 : 0};
-    };
+        this.state = {addBox:false,passConfirm:false,goOutConfirm:false, model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:{}};
+    }
+
+    componentWillReceiveProps(next) {
+        const {actions} = this.props;
+        const {archive} = next;
+        const {response,action,actionResponse} = archive;
+        if(action === 'add' && response) {
+            const {state, data} = response || {};
+            if (state === 0) {
+                const	{router}	=	this.context;
+                router.replace('/archive/'+data.id);
+                this.setState({model:1});
+            }
+            actions.resetAction();
+        }else if(action === 'update' && actionResponse){
+            const {state} = actionResponse || {};
+            if (state === 0) {
+                this.setState({model:1});
+            }
+            actions.resetAction();
+        }
+    }
+
     upAddClick(){
         this.setState({addBox:true});
     }
+
     saveButtonClick(){
-        const addBox = this.refs.addBox;
-        if(!addBox.check()){
-            return false;
-        }
-        return false;
+        return true;
     }
 
     addNewArchive(){
-        console.log('addNewArchive')
+        const {syncActions} = this.props;
+        syncActions.request(ARCHIVE_ADD,null,this.state.data);
+    }
+
+    updateArchive(){
+        const {syncActions} = this.props;
+        syncActions.request(ARCHIVE_UPDATE,null,{name:'123'});
+    }
+
+    updateModel(){
+        this.setState({model:2});
+    }
+
+    handleChange(name){
+        return (e) =>{
+            this.setState({data: Object.assign(this.state.data,{[name]:e.target.value})});
+        }
+    }
+
+    handleWorkersChange(e,value){
+        this.setState({data: Object.assign(this.state.data,{'workers.id':value})});
     }
 
     render() {
@@ -53,11 +94,11 @@ class ArchiveDetail extends Component {
         let manager = '';
         let btns;
         if(model === 0){
-            name = <Input name="name" className="text-input"  style={{ width: 350 }} placeholder="" />
-            type = <Select domain="type.id" url="api/archiveType/options.json" head="请选择"  />
-            content = <Input name="content" type="textarea" rows={4} />
+            name = <Input name="name" className="text-input"  style={{ width: 350 }} placeholder="" onChange={this.handleChange('name').bind(this)}/>
+            type = <Select name="type" domain="type.id" url="api/archiveType/options.json" head="请选择"  onChangeHandler={this.handleChange('type.id').bind(this)} value={this.state.data['type.id']}/>
+            content = <Input name="content" type="textarea" rows={4} onChange={this.handleChange('content').bind(this)}/>
             creater = header.user.response.user.name;
-            manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择"  />
+            manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" onChangeHandler={this.handleChange('manager.id').bind(this)} value={this.state.data['manager.id']}/>
             workers = <input onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
             litigants = <AddPartyinput model={model}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.addNewArchive.bind(this)} className=""/></div>
@@ -85,7 +126,7 @@ class ArchiveDetail extends Component {
                 checkText = check.content
             }
             litigantsName = data.litigants.map((i)=>i.name).join(',');
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑" /><input type="button" value="打印" /></div>
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑" onClick={this.updateModel.bind(this)} /><input type="button" value="打印" /></div>
         }else{
             if(state !== 0){
                 return null;
@@ -110,7 +151,7 @@ class ArchiveDetail extends Component {
                 checkText = check.content
             }
             litigantsName = data.litigants.map((i)=>i.name).join(',');
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" className=""/></div>
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className=""/></div>
         }
         return (
             <div>
@@ -136,7 +177,11 @@ class ArchiveDetail extends Component {
                             <div className="margin-form">第一调解员：{manager}</div>
                         </div>
                         <div className="formArch">
-                            <div className="margin-form">第二调解员：{workers}</div>
+                            <div className="margin-form">第二调解员：{workers}
+                                <Pop title="添加调解员" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
+                                    <PopMediator domain="manager.id" url="api/user/listByRole.json?role=2" name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={this.state.data['workers.id']}/>
+                                </Pop>
+                            </div>
                         </div>
                     </div>
                     <div className="formArch">立卷人：<span>{creater}</span></div>
@@ -152,9 +197,7 @@ class ArchiveDetail extends Component {
                     <div className="formArch">登记日期：<span>{createTime}</span></div>
                     {btns}
                 </div>
-                <Pop title="添加调解员" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
-                   <PopMediator/>
-                </Pop>
+
             </div>
         )
     }
@@ -162,6 +205,10 @@ class ArchiveDetail extends Component {
 
 ArchiveDetail.propTypes = {
     children: PropTypes.node
+};
+
+ArchiveDetail.contextTypes = {
+    router: PropTypes.object
 };
 
 function	select(state)	{
@@ -173,7 +220,8 @@ function	select(state)	{
 
 function actions(dispatch) {
     return {
-        actions: bindActionCreators(syncActions, dispatch)
+        syncActions: bindActionCreators(syncActions, dispatch),
+        actions: bindActionCreators(arhciveActions, dispatch),
     }
 }
 export  default connect(select,actions)(ArchiveDetail);
