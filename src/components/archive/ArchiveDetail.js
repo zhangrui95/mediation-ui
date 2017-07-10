@@ -74,7 +74,6 @@ class ArchiveDetail extends Component {
 
     handleLitigantChange(datas){
         this.setState({data: Object.assign(this.state.data,{litigants:datas})});
-        console.log('handleLitigantChange',this.state.data)
     }
 
     render() {
