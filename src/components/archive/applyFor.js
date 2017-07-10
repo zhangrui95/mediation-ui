@@ -21,7 +21,7 @@ class ApplyFor extends Component {
                         </div>
                         <div className="formArch font-weight-word">人民调解委员会已将申请人民调解的相关规定告诉我，现自愿申请人民调解委员会进行调解。</div>
                         <div className="formArch">
-                            <TimeChoice/>
+                            <div className="margin-form">申请时间</div><TimeChoice/>
                         </div>
                         <div className="formArch" style={{ height:40 }}><input type="button" value="保存" className="addPerson"/></div>
                     </div>

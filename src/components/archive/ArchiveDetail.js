@@ -69,7 +69,7 @@ class ArchiveDetail extends Component {
     }
 
     handleWorkersChange(e,value){
-        this.setState({data: Object.assign(this.state.data,{'workers.id':value})});
+        this.setState({data: Object.assign(this.state.data,{workerIds:value.join(',')})});
     }
 
     render() {
@@ -153,6 +153,7 @@ class ArchiveDetail extends Component {
             litigantsName = data.litigants.map((i)=>i.name).join(',');
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className=""/></div>
         }
+        let workerValue = (this.state.data.workerIds||'').split(',');
         return (
             <div>
                 <div className="title-form-name">人民调解登记表</div>
@@ -179,7 +180,7 @@ class ArchiveDetail extends Component {
                         <div className="formArch">
                             <div className="margin-form">第二调解员：{workers}
                                 <Pop title="添加调解员" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
-                                    <PopMediator domain="manager.id" url="api/user/listByRole.json?role=2" name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={this.state.data['workers.id']}/>
+                                    <PopMediator domain="manager.id" url="api/user/listByRole.json?role=2" name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
                                 </Pop>
                             </div>
                         </div>
