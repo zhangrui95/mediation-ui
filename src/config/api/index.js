@@ -99,15 +99,15 @@ const option = {
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [PROTOCOL_SAVE]:(actionMsg,result,content,remark) => {return {endpoint: 'api/protocol/save.json',
-        option:{ method: 'POST', body: 'id='+actionMsg.id+'& result='+ result+'& remark='+ remark+'& content='+ content,
+        option:{ method: 'POST', body: 'id='+actionMsg.id+'&result='+ result+'&remark='+ remark+'&content='+ content,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
-    [CHECKVISIT_SAVE]:(actionMsg) => {return {endpoint: 'api/checkVisit/save.json',
-        option:{ method: 'POST', body: 'id='+actionMsg.id,
+    [CHECKVISIT_SAVE]:(actionMsg,content,visitTime) => {return {endpoint: 'api/checkVisit/save.json',
+        option:{ method: 'POST', body: 'id='+actionMsg.id+'&content='+ content+'&visitTime='+ visitTime,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
-    [CHECKVISIT_DETAIL]:(actionMsg,content,visitTime) => {return {endpoint: 'api/checkVisit/detailByArchive.json',
-        option:{ method: 'POST', body: 'aid='+actionMsg.id+'&content='+ content+'&visitTime='+ visitTime,
+    [CHECKVISIT_DETAIL]:actionMsg => {return {endpoint: 'api/checkVisit/detailByArchive.json',
+        option:{ method: 'POST', body: 'aid='+actionMsg.id,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
 };

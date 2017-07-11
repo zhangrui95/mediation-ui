@@ -22,7 +22,7 @@ class CheckVisit extends Component {
         actions.request(CHECKVISIT_DETAIL,{id});
     }
     timeChange(date){
-        date = date.name1;
+        date = date.visitTime;
     }
     onSave(input,date){
         const {actions,params} = this.props;
