@@ -55,7 +55,8 @@ class EvidenceRow extends Component {
 EvidenceRow.propTypes = {
     data: PropTypes.object.isRequired,
     type: PropTypes.number.isRequired,
-    idx: PropTypes.number.isRequired
+    idx: PropTypes.number.isRequired,
+    reload: PropTypes.func
 };
 
 export default EvidenceRow;

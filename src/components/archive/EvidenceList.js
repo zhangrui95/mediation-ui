@@ -7,10 +7,15 @@ import * as syncActions from '../../actions/syncAction'
 
 class EvidenceList extends Component {
     componentWillMount(){
+        this.load();
+    }
+
+    load(){
         const {actions,params} = this.props;
         const {id} = params;
         actions.request(LIST_BY_ARCHIVE,{id});
     }
+
     render() {
         const { evidence } = this.props;
         const {response} = evidence;
@@ -21,7 +26,7 @@ class EvidenceList extends Component {
         return (
             <div>
                 <div className="title-form-name">调查取证</div>
-                <EvidenceCell data={data}/>
+                <EvidenceCell data={data} reload={this.load.bind(this)}/>
             </div>
         )
     }

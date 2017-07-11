@@ -4,14 +4,14 @@ import EvidenceRow from "./EvidenceRow";
 class EvidenceView extends Component {
 
     render() {
-        const {data,type} = this.props;
+        const {data,type,reload} = this.props;
         const name = type===0?'视频':(type===1?'照片':'录音');
         let previewHead;
         if(type===1){
             previewHead = <td>照片浏览</td>;
         }
         const rows = data.filter(i => i.type === type).map(function(it,i){
-            return <EvidenceRow data={it} idx={i} type={type}/>
+            return <EvidenceRow data={it} idx={i} type={type} reload={reload}/>
         });
         return (
             <table cellPadding="0" cellSpacing="0" className="table-list table-list-evidence">
@@ -36,7 +36,8 @@ class EvidenceView extends Component {
 
 EvidenceView.propTypes = {
     data: PropTypes.array.isRequired,
-    type: PropTypes.number.isRequired
+    type: PropTypes.number.isRequired,
+    reload: PropTypes.func
 };
 
 export default EvidenceView
