@@ -17,10 +17,12 @@ import checkvisitSave from './checkvisitSave'
 import checkvisit from './checkvisit'
 import investigationDetail from './investigationDetail'
 import mediateDetail from './mediateDetail'
+import evidenceDelete from './evidenceDelete'
 
 
 
-const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence,investigation,mediate,protocol,protocolSave,checkvisitSave,checkvisit,investigationDetail,mediateDetail};
+const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence,investigation,mediate,protocol,protocolSave,checkvisitSave,checkvisit,investigationDetail,mediateDetail,
+    evidenceDelete};
 
 const rootReducer = combineReducers(Object.assign({},reducers,{routing}));
 

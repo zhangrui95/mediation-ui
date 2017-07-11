@@ -1,4 +1,8 @@
 import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux';
+import {EVIDENCE_DELETE} from '../../constants/ActionTypes'
+import * as syncActions from '../../actions/syncAction';
 import {getDateTime} from '../../utils/date';
 
 class EvidenceRow extends Component {
@@ -13,13 +17,26 @@ class EvidenceRow extends Component {
         return Math.round(size/1024/1024) +' M'
     }
 
-    download(id){
+    componentWillReceiveProps(next) {
+        const {evidenceDelete} = next;
+        const {response} = evidenceDelete;
+        const {state,} = response || {};
+        if (state === 0) {
+            const {reload} = this.props;
+            if(reload){
+                reload();
+            }
+        }
+    }
+
+    download(){
         const {data} = this.props;
         window.open('/api/evidence/download.json?id='+data.id)
     }
 
-    deleteEvidence(id){
-
+    deleteEvidence(){
+        const {syncActions,data} = this.props;
+        syncActions.request(EVIDENCE_DELETE,{id:data.id});
     }
 
     printImg(id){
@@ -59,4 +76,15 @@ EvidenceRow.propTypes = {
     reload: PropTypes.func
 };
 
-export default EvidenceRow;
+function	select(state)	{
+    return	{
+        evidenceDelete:state.evidenceDelete
+    };
+}
+
+function actions(dispatch) {
+    return {
+        syncActions: bindActionCreators(syncActions, dispatch)
+    }
+}
+export  default connect(select,actions)(EvidenceRow);
