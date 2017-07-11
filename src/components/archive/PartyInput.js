@@ -7,8 +7,9 @@ class PartyInput extends Component {
 
     constructor(props, context) {
         super(props, context);
-        const {onChange,item} = props;
+        const {onChange,onRemove ,item} = props;
         this.onChange = onChange;
+        this.onRemove = onRemove;
         this.state = {data:merge({},item||{})};
     }
 
@@ -18,6 +19,12 @@ class PartyInput extends Component {
             if(this.onChange){
                 this.onChange(this.state.data);
             }
+        }
+    }
+
+    handleRemove(){
+        if(this.onRemove){
+            this.onRemove();
         }
     }
 
@@ -42,6 +49,7 @@ class PartyInput extends Component {
         let card;
         let address;
         let contact;
+        let remove;
         if(model === 0){
             name = <Input className="text-input" placeholder="" onChange={this.handleChange('name').bind(this)}/>
             sex = <Select domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择"  onChangeHandler={this.handleChange('sex').bind(this)} value={item.sex}/>
@@ -50,6 +58,7 @@ class PartyInput extends Component {
             card = <Input className="text-input" placeholder="" onChange={this.handleChange('card').bind(this)}/>
             address = <Input className="text-input" style={{ width: 400 }} placeholder="" onChange={this.handleChange('address').bind(this)}/>
             contact = <Input className="text-input" placeholder="" onChange={this.handleChange('contact').bind(this)}/>
+            remove = <div className={itemStyle}><a href="javascript:;" onClick={this.handleRemove.bind(this)}>删除</a></div>
         } else if(model === 1){
             if(!item){
                 return null;
@@ -72,6 +81,7 @@ class PartyInput extends Component {
             card = <Input className="text-input" placeholder="" value={item.card} onChange={this.handleChange('card').bind(this)}/>
             address = <Input className="text-input" style={{ width: 400 }} placeholder="" value={item.address} onChange={this.handleChange('address').bind(this)}/>
             contact = <Input className="text-input" placeholder="" value={item.contact} onChange={this.handleChange('contact').bind(this)}/>
+            remove = <div className={itemStyle}><a href="javascript:;" onClick={this.handleRemove.bind(this)}>删除</a></div>
         }
         return (
             <div className="formArch">
@@ -82,6 +92,7 @@ class PartyInput extends Component {
                 <div className={itemStyle}>身份证号码：{card}</div>
                 <div className={itemStyle}>单位/住址：{address}</div>
                 <div className={itemStyle}>联系方式：{contact}</div>
+                {remove}
             </div>
         )
     }
@@ -89,7 +100,8 @@ class PartyInput extends Component {
 PartyInput.propTypes = {
     model: PropTypes.number,
     item: PropTypes.object,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    onRemove: PropTypes.func
 };
 
 export default PartyInput
