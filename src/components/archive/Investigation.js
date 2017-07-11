@@ -8,15 +8,16 @@ import {getDateTime} from '../../utils/date';
 class Investigation extends Component {
     componentWillMount(){
         const {actions,params} = this.props;
-        const {id} = params;
-        actions.request(INVESTIGATION_DETAIL,{id});
+        const {mid} = params;
+        actions.request(INVESTIGATION_DETAIL,{mid});
     }
-
+    
     render() {
         const { params,investigationDetail} = this.props;
         const {response} = investigationDetail;
-        const {investTime,address,otherPerson,targetPerson,content} = response||{};
-        if(response == null){
+        const {data} =  response||{};
+        const {investTime,address,otherPerson,targetPerson,content} = data||{};
+        if(data == null){
             return null;
         }
 

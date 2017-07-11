@@ -8,13 +8,9 @@ import {CHECKVISIT_DETAIL} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 import {getDateTime} from '../../utils/date';
 
-let input = '';
-let content = '';
-let time = '';
-let date = '';
 class CheckVisit extends Component {
     inputChange(e){
-        input = e.target.value;
+        let input = e.target.value;
     }
     componentWillMount(){
         const {actions,params} = this.props;
@@ -31,25 +27,24 @@ class CheckVisit extends Component {
     }
     render() {
         let litigantsName = '';
+        let time = '';
+        let content = '';
         const { archive ,checkvisit} = this.props;
-        const {response} = archive;
-        const {data} = response||{};
-        const {litigants} = data||{}
-        const text = checkvisit.response;
-        if(text == null){
+        const {response} = checkvisit;
+        const {data,state} = response||{};
+        console.log(data); 
+        if(response == null){
             return null;
         }
-        if(text.content == ''){
+
+        if(state == 0){
+            content = data.content;
+            time = getDateTime(data.visitTime);
+        }else {
             content = <Input type="textarea" rows={4} onKeyUp={this.inputChange.bind(this)}/>;
-        }else{
-            content = text.content;
-        }
-        if(text.visitTime == null){
             time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)}/>;
-        }else{
-            time = getDateTime(text.visitTime);
         }
-        litigantsName = data.litigants.map((i)=>i.name).join(',');
+
         return (
             <div>
                 <div className="title-form-name">人民调解回访记录</div>

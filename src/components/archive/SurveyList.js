@@ -5,6 +5,15 @@ import React, { Component, PropTypes } from 'react'
 import {getDateTime} from '../../utils/date';
 
 class SurveyList extends Component {
+    clickHandler(e){
+        const { params } = this.props;
+        const {id} = params;
+        if(id !==null && id !== undefined && id!== ''){
+            const div = e.target;
+            const	{router}	=	this.context;
+            router.push('archive/'+id+'/investigation/'+params.mid);
+        }
+    }
     render() {
         const {data} = this.props;
         let arr = [];
@@ -23,7 +32,7 @@ class SurveyList extends Component {
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><a>编辑</a><span> | </span><a>打印</a></td>
+                    <td><a onClick={this.clickHandler.bind(this)} >编辑</a><span> | </span><a>打印</a></td>
                 </tr>
             )
         }

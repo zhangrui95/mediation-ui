@@ -16,9 +16,11 @@ import protocolSave from './protocolSave'
 import checkvisitSave from './checkvisitSave'
 import checkvisit from './checkvisit'
 import investigationDetail from './investigationDetail'
+import mediateDetail from './mediateDetail'
 
 
-const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence,investigation,mediate,protocol,protocolSave,checkvisitSave,checkvisit,investigationDetail};
+
+const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence,investigation,mediate,protocol,protocolSave,checkvisitSave,checkvisit,investigationDetail,mediateDetail};
 
 const rootReducer = combineReducers(Object.assign({},reducers,{routing}));
 

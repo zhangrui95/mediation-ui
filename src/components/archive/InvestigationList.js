@@ -16,14 +16,12 @@ class InvestigationList extends Component {
         const {id} = params;
         if(id !==null && id !== undefined && id!== ''){
             const div = e.target;
-            const routeUrl = div.getAttribute('data-route')||'';
             const	{router}	=	this.context;
-            router.push('archive/'+id+routeUrl+'/'+params.id);
+            router.push('archive/'+id+'/investigation');
         }
     }
     render() {
-        const { children } = this.props;
-        const { investigation } = this.props;
+        const { investigation,params } = this.props;
         const {response} = investigation;
         const {data} = response||{};
         if(data == null){
@@ -35,7 +33,7 @@ class InvestigationList extends Component {
                 <div className="formArch">
                     <dic className="list-right" onClick={this.clickHandler.bind(this)}>新建</dic>
                 </div>
-                < SurveyList data={data}/>
+                < SurveyList params={params} data={data}/>
             </div>
         )
     }
