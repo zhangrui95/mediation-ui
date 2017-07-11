@@ -5,58 +5,93 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {PROTOCOL_DETAIL} from '../../constants/ActionTypes'
 import {PROTOCOL_SAVE} from '../../constants/ActionTypes'
+import {PROTOCOL_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 
 let result = '';
 let remark = '';
 let content = '';
-let resulttext = '';
-let remarktext = '';
-let contenttext = '';
 class Protocol extends Component {
+    constructor(props, context) {
+        super(props, context);
+        const { params} = props;
+        const {id} = params;
+        this.state = {model: id !== null && id !== undefined && id !== '' ? 1 : 0,result:'',content:''};
+    }
+    componentWillReceiveProps(next) {
+        const { protocol} = this.props;
+        const {response} = protocol;
+        const {state,data} = response||{};
+        if(state == 0){
+            this.setState({model:1,result:data.result,content:data.content});
+        }
+    }
+    updateModel(){
+    this.setState({model:2});
+}
+
+    updateArchive(){
+        this.setState({model:1});
+        const {actions} = this.props;
+        actions.request(PROTOCOL_UPDATE,null,{id:'',result:''});
+    }
+
     componentWillMount(){
         const {actions,params} = this.props;
         const {id} = params;
         actions.request(PROTOCOL_DETAIL,{id});
     }
     handleChange(e){
-        result = e.target.value;
+        this.setState({result:e.target.value});
     }
     textChange(e){
-        content = e.target.value;
+        this.setState({content:e.target.value});
     }
     remarkChange(e){
-        remark = e.target.value;
+        this.setState({remark:e.target.value});
     }
-    onSave(result,content,remark){
+    onSave(){
         const {actions,params} = this.props;
         const {id} = params;
-        actions.request(PROTOCOL_SAVE,{id},result,content,remark);
+        actions.request(PROTOCOL_SAVE,{id},this.state.result,this.state.content,this.state.remark);
     }
     render() {
-        const { children,params,protocol} = this.props;
+        const model = this.state.model;
+        let resulttext = '';
+        let remarktext = '';
+        let contenttext = '';
+        let btns = '';
+        const { params,protocol} = this.props;
         const {response} = protocol;
-        const {remark,result,content} = response||{};
-        if(remark == ''){
+        const {data,state} = response||{};
+        const {remark,result,content} = data||{};
+        if(model === 0){
             remarktext = <Input className="text-input" style={{ width: 400 }} placeholder="" onKeyUp={this.remarkChange.bind(this)}/>
-        }else{
-            remarktext = remark;
-        }
-        if(content == ''){
-            contenttext = <Input type="textarea" rows={4} onKeyUp={this.textChange.bind(this)}/>
-        }else{
-            contenttext = content;
-        }
-        if(result == 0){
-            resulttext = "调解成功";
-        }else if(result == -1){
-            resulttext = "调解失败";
-        }else{
+            contenttext = <Input type="textarea" rows={4} onKeyUp={this.textChange.bind(this)} />
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
             resulttext = <select defaultValue="请选择" style={{ width: 70 }} onChange={this.handleChange.bind(this)}>
-                                <option>请选择</option>
-                                <option value="0">调解成功</option>
-                                <option value="-1">调解失败</option>
-                           </select>
+                    <option>请选择</option>
+                    <option value="0">调解成功</option>
+                    <option value="-1">调解失败</option>
+                </select>
+        }else if(model === 1){
+            remarktext = remark;
+            contenttext = content;
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" value="打印" /></div>
+            if(result === 0){
+                resulttext = "调解成功";
+            }else if(result === -1){
+                resulttext = "调解失败";
+            }
+        }else{
+            remarktext = <Input className="text-input" style={{ width: 400 }} placeholder="" onKeyUp={this.remarkChange.bind(this)}/>
+            contenttext = <Input type="textarea" rows={4} onKeyUp={this.textChange.bind(this)} value={this.state.content}/>
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
+            resulttext = <select defaultValue="请选择" style={{ width: 70 }} onChange={this.handleChange.bind(this)}>
+                <option>请选择</option>
+                <option value="0">调解成功</option>
+                <option value="-1">调解失败</option>
+            </select>
         }
         return (
             <div>
@@ -78,7 +113,7 @@ class Protocol extends Component {
                             履行方式、时限：{remarktext}
                         </div>
                     </div>
-                    <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
+                    {btns}
                 </div>
             </div>
         )
@@ -92,7 +127,8 @@ Protocol.propTypes = {
 function	select(state)	{
     return	{
         protocol:state.protocol,
-        protocolSave:state.protocolSave
+        protocolSave:state.protocolSave,
+        protocolUpdate:state.protocolUpdate
     };
 }
 

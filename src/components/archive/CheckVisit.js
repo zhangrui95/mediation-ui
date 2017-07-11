@@ -9,8 +9,31 @@ import * as syncActions from '../../actions/syncAction'
 import {getDateTime} from '../../utils/date';
 
 class CheckVisit extends Component {
+    constructor(props, context) {
+        super(props, context);
+        const { params} = props;
+        const {id} = params;
+        this.state = {model: id !== null && id !== undefined && id !== '' ? 1 : 0};
+    }
+    componentWillReceiveProps(next) {
+        const {checkvisit} = this.props;
+        const {response} = checkvisit;
+        const {state} = response||{};
+        if(state == 0){
+            this.setState({model:1});
+        }
+    }
+    updateModel(){
+        this.setState({model:2});
+    }
+
+    updateArchive(){
+        this.setState({model:1});
+        const {actions} = this.props;
+        actions.request(PROTOCOL_UPDATE);
+    }
     inputChange(e){
-        let input = e.target.value;
+        this.setState({input: e.target.value});
     }
     componentWillMount(){
         const {actions,params} = this.props;
@@ -18,21 +41,26 @@ class CheckVisit extends Component {
         actions.request(CHECKVISIT_DETAIL,{id});
     }
     timeChange(date){
-        date = date.visitTime;
+        this.setState({date: date.visitTime});
     }
-    onSave(input,date){
+    onSave(){
         const {actions,params} = this.props;
         const {id} = params;
-        actions.request(CHECKVISIT_SAVE,{id},input,date);
+        actions.request(CHECKVISIT_SAVE,{id},this.state.input,this.state.date);
+    }
+
+    getLiname(archive){
+        const {response} = archive;
+        return
     }
     render() {
-        let litigantsName = '';
         let time = '';
         let content = '';
         const { archive ,checkvisit} = this.props;
         const {response} = checkvisit;
         const {data,state} = response||{};
-        console.log(data); 
+        // const litigantsName = archive.response.data.litigants.map((i)=>i.name).join(',');
+        const litigantsName = this.getLiname(archive);
         if(response == null){
             return null;
         }
