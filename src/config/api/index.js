@@ -1,4 +1,4 @@
-import {NAV_LIST,BANNER,ENT_BIND,LOAD_USER,UPDATE_PASS,VALIDATE_PASS,SELECT_DATA,LIST_ENT,LIST_ENT_RELOAD,LIST_ENT_QUERY,SIGN_IN_USER,ARCHIVE_ADD,ARCHIVE_UPDATE,SIGN_OUT_USER,SUSPEND_WORK,ARCHIVE_DETAIL,LIST_BY_ARCHIVE,INVESTIGATION_LIST,MEDIATE_LIST,PROTOCOL_DETAIL,INVESTIGATION_SAVE,MEDIATE_SAVE,PROTOCOL_SAVE,CHECKVISIT_SAVE,CHECKVISIT_DETAIL} from '../../constants/ActionTypes'
+import {NAV_LIST,BANNER,ENT_BIND,LOAD_USER,UPDATE_PASS,VALIDATE_PASS,SELECT_DATA,LIST_ENT,LIST_ENT_RELOAD,LIST_ENT_QUERY,SIGN_IN_USER,ARCHIVE_ADD,ARCHIVE_UPDATE,SIGN_OUT_USER,SUSPEND_WORK,ARCHIVE_DETAIL,LIST_BY_ARCHIVE,INVESTIGATION_LIST,MEDIATE_LIST,PROTOCOL_DETAIL,INVESTIGATION_SAVE,MEDIATE_SAVE,PROTOCOL_SAVE,CHECKVISIT_SAVE,CHECKVISIT_DETAIL,INVESTIGATION_DETAIL} from '../../constants/ActionTypes'
 import {} from '../../constants/ActionTypes'
 import {SIGN_IN_URL} from '../../constants/Constant'
 import {formData2Param} from '../../utils/param'
@@ -99,15 +99,19 @@ const option = {
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [PROTOCOL_SAVE]:(actionMsg,result,content,remark) => {return {endpoint: 'api/protocol/save.json',
-        option:{ method: 'POST', body: 'id='+actionMsg.id+'& result='+ result+'& remark='+ remark+'& content='+ content,
+        option:{ method: 'POST', body: 'id='+actionMsg.id+'&result='+ result+'&remark='+ remark+'&content='+ content,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
-    [CHECKVISIT_SAVE]:(actionMsg) => {return {endpoint: 'api/checkVisit/save.json',
-        option:{ method: 'POST', body: 'id='+actionMsg.id,
+    [CHECKVISIT_SAVE]:(actionMsg,content,visitTime) => {return {endpoint: 'api/checkVisit/save.json',
+        option:{ method: 'POST', body: 'id='+actionMsg.id+'&content='+ content+'&visitTime='+ visitTime,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
-    [CHECKVISIT_DETAIL]:(actionMsg,content,visitTime) => {return {endpoint: 'api/checkVisit/detailByArchive.json',
-        option:{ method: 'POST', body: 'aid='+actionMsg.id+'&content='+ content+'&visitTime='+ visitTime,
+    [CHECKVISIT_DETAIL]:actionMsg => {return {endpoint: 'api/checkVisit/detailByArchive.json',
+        option:{ method: 'POST', body: 'aid='+actionMsg.id,
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [INVESTIGATION_DETAIL]:actionMsg => {return {endpoint: 'api/investigation/detail.json',
+        option:{ method: 'POST', body: "id="+actionMsg.id,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
 };
