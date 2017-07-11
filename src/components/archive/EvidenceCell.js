@@ -1,18 +1,7 @@
-/**
- * Created by Administrator on 2017/7/7 0007.
- */
 import React, {Component, PropTypes} from "react";
 import EvidenceView from "./EvidenceView";
 
 class EvidenceCell extends Component {
-
-    download(id){
-
-    }
-
-    deleteEvidence(id){
-
-    }
 
     render() {
         const {data} = this.props;
