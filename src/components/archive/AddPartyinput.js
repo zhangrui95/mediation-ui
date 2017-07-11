@@ -1,15 +1,13 @@
-/**
- * Created by Administrator on 2017/7/7 0007.
- */
 import React, { Component, PropTypes } from 'react'
 import PartyInput from './PartyInput'
+import merge from 'lodash/merge'
 
 class AddPartyinput extends Component {
     constructor(props) {
         super(props);
-        const {onChange} = props;
+        const {onChange,data} = props;
         this.onChange = onChange;
-        this.state = {count: 2,datas:[]};
+        this.state = {count: data?data.length:2,datas:merge([],data||[])};
     }
     getAdd() {
         this.setState({count: this.state.count + 1});
@@ -19,7 +17,7 @@ class AddPartyinput extends Component {
         return (data) =>{
             const datas = this.state.datas;
             datas[i] = data;
-            this.setState({datas:datas})
+            this.setState({datas:datas});
             if(this.onChange){
                 this.onChange(this.state.datas);
             }

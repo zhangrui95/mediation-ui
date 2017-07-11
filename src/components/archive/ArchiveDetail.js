@@ -10,6 +10,7 @@ import Select from '../Select'
 import Pop from '../pop/Pop';
 import PopMediator from './PopMediator'
 import AddPartyinput from './AddPartyinput'
+import merge from 'lodash/merge'
 
 class ArchiveDetail extends Component {
     constructor(props, context) {
@@ -18,7 +19,7 @@ class ArchiveDetail extends Component {
         const {response} = archive;
         const {data} = response || {};
         const {id} = params;
-        this.state = {addBox:false,passConfirm:false,goOutConfirm:false, model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:data||{}};
+        this.state = {addBox:false,passConfirm:false,goOutConfirm:false, model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},data||{})};
     }
 
     componentWillReceiveProps(next) {
@@ -30,19 +31,19 @@ class ArchiveDetail extends Component {
             if (state === 0) {
                 const	{router}	=	this.context;
                 router.replace('/archive/'+data.id);
-                this.setState({model:1,data});
+                this.setState({model:1,data:merge({},data||{})});
             }
             actions.resetAction();
         }else if(action === 'update' && actionResponse){
             const {data} = response || {};
             const {state} = actionResponse || {};
             if (state === 0) {
-                this.setState({model:1,data});
+                this.setState({model:1,data:merge({},data||{})});
             }
             actions.resetAction();
         }else if(response){
             const {data} = response || {};
-            this.setState({data});
+            this.setState({data:merge({},data||{})});
         }
     }
 
@@ -61,6 +62,7 @@ class ArchiveDetail extends Component {
 
     updateArchive(){
         const {syncActions} = this.props;
+        console.log('updateArchive',this.state.data)
         syncActions.request(ARCHIVE_UPDATE,null,this.state.data);
     }
 
@@ -77,21 +79,22 @@ class ArchiveDetail extends Component {
             }else{
                 newData = {[name]:e.target.value};
             }
-            this.setState({data: Object.assign(this.state.data,newData)});
+            this.setState({data: merge(this.state.data,newData)});
         }
     }
 
     handleWorkersChange(e,value){
-        this.setState({data: Object.assign(this.state.data,{workerIds:value.join(',')})});
+        this.setState({data: merge(this.state.data,{workerIds:value.join(',')})});
     }
 
     handleLitigantChange(datas){
-        this.setState({data: Object.assign(this.state.data,{litigants:datas})});
+        console.log('handleWorkersChange',datas);
+        this.setState({data: merge(this.state.data,{litigants:datas})});
     }
 
-    render() {
+    renderByData(data) {
         const { archive,header } = this.props;
-        const {model,data} = this.state;
+        const {model} = this.state;
         const {response} = archive;
         const {state,protocol,check} = response||{};
 
@@ -113,13 +116,15 @@ class ArchiveDetail extends Component {
         let btns;
         if(model === 0){
             name = <Input name="name" className="text-input"  style={{ width: 350 }} placeholder="" onChange={this.handleChange('name').bind(this)}/>
-            type = <Select name="type" domain="type.id" url="api/archiveType/options.json" head="请选择"  onChangeHandler={this.handleChange('type.id').bind(this)} value={data.type.id}/>
+            type = <Select name="type" domain="type.id" url="api/archiveType/options.json" head="请选择"  onChangeHandler={this.handleChange('type.id').bind(this)} value={(data.type||{}).id}/>
             content = <Input name="content" type="textarea" rows={4} onChange={this.handleChange('content').bind(this)}/>
             creater = header.user.response.user.name;
-            manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" onChangeHandler={this.handleChange('manager.id').bind(this)} value={data.manager.id}/>
-            workersName = data.workers.map((i)=>i.worker.name).join(',');
+            manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" onChangeHandler={this.handleChange('manager.id').bind(this)} value={(data.manager||{}).id}/>
+            if(data.workers){
+                workersName = data.workers.map((i)=>i.worker.name).join(',');
+            }
             workers = <input onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
-            litigants = <AddPartyinput model={model} onChange={this.handleLitigantChange.bind(this)}/>
+            litigants = <AddPartyinput data={data.litigants} model={model} onChange={this.handleLitigantChange.bind(this)}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.addNewArchive.bind(this)} className=""/></div>
         }else if(model === 1){
             if(state !== 0){
@@ -130,8 +135,10 @@ class ArchiveDetail extends Component {
             content = data.content;
             creater = data.creater.name;
             manager = data.manager.name;
-            workers = data.workers.map((i)=>i.worker.name).join(',');
-            litigants = <AddPartyinput model={model} data={data.litigants}/>
+            if(data.workers){
+                workers = data.workers.map((i)=>i.worker.name).join(',');
+            }
+            litigants = <AddPartyinput model={model} data={data.litigants} onChange={this.handleLitigantChange.bind(this)}/>
             createTime = getDateTime(data.createTime);
             keepTime = getDateTime(data.keepTime);
             if(data.state === -1){
@@ -155,9 +162,11 @@ class ArchiveDetail extends Component {
             content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
             creater = data.creater.name;
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={data.manager.id} onChangeHandler={this.handleChange('manager.id').bind(this)}/>
-            workersName = data.workers.map((i)=>i.worker.name).join(',');
+            if(data.workers){
+                workersName = data.workers.map((i)=>i.worker.name).join(',');
+            }
             workers = <input onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
-            litigants = <AddPartyinput model={model} onChange={this.handleLitigantChange.bind(this)}/>
+            litigants = <AddPartyinput model={model} onChange={this.handleLitigantChange.bind(this)} data={data.litigants}/>
             createTime = getDateTime(data.createTime);
             keepTime = getDateTime(data.keepTime);
             if(data.state === -1){
@@ -176,7 +185,7 @@ class ArchiveDetail extends Component {
         let workerValue;
         if(data.workerIds){
             workerValue = data.workerIds.split(',');
-        }else{
+        }else if(data.workers){
             workerValue = data.workers.map(i=>i.worker.id);
         }
         return (
@@ -223,9 +232,21 @@ class ArchiveDetail extends Component {
                     <div className="formArch">登记日期：<span>{createTime}</span></div>
                     {btns}
                 </div>
-
             </div>
         )
+    }
+
+    render() {
+        const { archive } = this.props;
+        const {model} = this.state;
+        let data;
+        if(model === 1){
+            const {response} = archive;
+            data = (response||{}).data;
+        }else{
+            data = this.state.data;
+        }
+        return this.renderByData(data)
     }
 }
 

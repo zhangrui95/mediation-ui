@@ -1,14 +1,15 @@
 import React, { Component, PropTypes } from 'react'
 import { Input } from 'antd';
 import Select from '../Select'
+import merge from 'lodash/merge'
 
 class PartyInput extends Component {
 
     constructor(props, context) {
         super(props, context);
-        const {onChange} = props;
+        const {onChange,item} = props;
         this.onChange = onChange;
-        this.state = {data:{}};
+        this.state = {data:merge({},item||{})};
     }
 
     handleChange(name){
@@ -21,7 +22,18 @@ class PartyInput extends Component {
     }
 
     render() {
-        const {item,model} = this.props;
+        const {model} = this.props;
+        let item;
+        if(model === 1){
+            item = this.props.item;
+        }else{
+            item = this.state.data;
+        }
+        return this.renderByItem(item)
+    }
+
+    renderByItem(item) {
+        const {model} = this.props;
         const itemStyle = model === 1 ? 'margin-form-party': 'margin-form';
         let name;
         let sex;
@@ -32,7 +44,7 @@ class PartyInput extends Component {
         let contact;
         if(model === 0){
             name = <Input className="text-input" placeholder="" onChange={this.handleChange('name').bind(this)}/>
-            sex = <Select domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择"  onChangeHandler={this.handleChange('sex').bind(this)} value={this.state.data.sex}/>
+            sex = <Select domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择"  onChangeHandler={this.handleChange('sex').bind(this)} value={item.sex}/>
             nation = <Input className="text-input" placeholder="" style={{ width: 70 }} onChange={this.handleChange('nation').bind(this)}/>
             age = <Input className="text-input" placeholder="" style={{ width: 70 }} onChange={this.handleChange('age').bind(this)}/>
             card = <Input className="text-input" placeholder="" onChange={this.handleChange('card').bind(this)}/>
@@ -54,7 +66,7 @@ class PartyInput extends Component {
                 return null;
             }
             name = <Input className="text-input" placeholder="" value={item.name} onChange={this.handleChange('name').bind(this)}/>
-            sex = <Select domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择" value={item.sex} onChangeHandler={this.handleChange('sex').bind(this)}/>
+            sex = <Select domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择" value={item.sex+''} onChangeHandler={this.handleChange('sex').bind(this)}/>
             nation = <Input className="text-input" placeholder="" style={{ width: 70 }} value={item.nation} onChange={this.handleChange('nation').bind(this)}/>
             age = <Input className="text-input" placeholder="" style={{ width: 70 }} value={item.age}onChange={this.handleChange('age').bind(this)} />
             card = <Input className="text-input" placeholder="" value={item.card} onChange={this.handleChange('card').bind(this)}/>
