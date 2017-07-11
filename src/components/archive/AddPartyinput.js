@@ -7,10 +7,15 @@ class AddPartyinput extends Component {
         super(props);
         const {onChange,data} = props;
         this.onChange = onChange;
-        this.state = {count: data?data.length:2,datas:merge([],data||[])};
+        this.state = {datas:merge([],data||[{},{}])};
     }
     getAdd() {
-        this.setState({count: this.state.count + 1});
+        const datas = this.state.datas;
+        datas.push({});
+        this.setState({datas:merge([],datas)});
+        if(this.onChange){
+            this.onChange(this.state.datas);
+        }
     }
 
     onChangeHandler(i){
@@ -26,22 +31,11 @@ class AddPartyinput extends Component {
 
 
     render() {
-        const {data,model} = this.props;
-        let tables;
-        if(model===0){
-            tables = [];
-            const count = this.state.count;
-            for(let i = 0;i < count;i++){
-                tables.push(<PartyInput key={i} model={model} onChange={this.onChangeHandler(i).bind(this)}/>)
-            }
-        }else{
-            if(!data){
-                return null;
-            }
-            tables = data.map((it,i) =>{
-                return <PartyInput key={i} model={model} item={it} onChange={this.onChangeHandler(i).bind(this)}/>
-            });
-        }
+        const {model} = this.props;
+        const {datas} = this.state;
+        const tables = datas.map((it,i) =>{
+            return <PartyInput key={i} model={model} item={it} onChange={this.onChangeHandler(i).bind(this)}/>
+        });
         let submitBtn;
         if(model !== 1){
             submitBtn = <div className="formArch" style={{ height:40 }}><input type="button" onClick={this.getAdd.bind(this)} value="添加当事人" className="addPerson"/></div>

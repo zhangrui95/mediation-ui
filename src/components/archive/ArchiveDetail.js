@@ -15,11 +15,9 @@ import merge from 'lodash/merge'
 class ArchiveDetail extends Component {
     constructor(props, context) {
         super(props, context);
-        const { params,archive} = props;
-        const {response} = archive;
-        const {data} = response || {};
+        const { params} = props;
         const {id} = params;
-        this.state = {addBox:false,passConfirm:false,goOutConfirm:false, model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},data||{})};
+        this.state = {addBox:false,passConfirm:false,goOutConfirm:false, model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:{}};
     }
 
     componentWillReceiveProps(next) {
@@ -62,7 +60,6 @@ class ArchiveDetail extends Component {
 
     updateArchive(){
         const {syncActions} = this.props;
-        console.log('updateArchive',this.state.data)
         syncActions.request(ARCHIVE_UPDATE,null,this.state.data);
     }
 
@@ -88,7 +85,6 @@ class ArchiveDetail extends Component {
     }
 
     handleLitigantChange(datas){
-        console.log('handleWorkersChange',datas);
         this.setState({data: merge(this.state.data,{litigants:datas})});
     }
 
