@@ -8,32 +8,33 @@ import {PROTOCOL_SAVE} from '../../constants/ActionTypes'
 import {PROTOCOL_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 
-let result = '';
-let remark = '';
-let content = '';
 class Protocol extends Component {
     constructor(props, context) {
         super(props, context);
         const { params} = props;
         const {id} = params;
-        this.state = {model: id !== null && id !== undefined && id !== '' ? 1 : 0,result:'',content:''};
+        this.state = {model: id !== null && id !== undefined && id !== '' ? 1 : 0,result:'',content:'',remark:'',result:''};
     }
     componentWillReceiveProps(next) {
         const { protocol} = this.props;
         const {response} = protocol;
         const {state,data} = response||{};
         if(state == 0){
-            this.setState({model:1,result:data.result,content:data.content});
+            this.setState({model:1,result:data.result,content:data.content,remark:data.remark,result:data.result});
         }
     }
     updateModel(){
-    this.setState({model:2});
-}
+        const { protocol} = this.props;
+        const {response} = protocol;
+        const {data} = response||{};
+        this.setState({model:2,result:data.result,content:data.content,remark:data.remark,result:data.result});
+    }
 
     updateArchive(){
         this.setState({model:1});
-        const {actions} = this.props;
-        actions.request(PROTOCOL_UPDATE,null,{id:'',result:''});
+        const {actions,params} = this.props;
+        const {id} = params;
+        actions.request(PROTOCOL_UPDATE,null,{id:id,result:this.state.result,content:this.state.content,remark:this.state.remark});
     }
 
     componentWillMount(){
@@ -63,13 +64,13 @@ class Protocol extends Component {
         let btns = '';
         const { params,protocol} = this.props;
         const {response} = protocol;
-        const {data,state} = response||{};
+        const {data} = response||{};
         const {remark,result,content} = data||{};
         if(model === 0){
             remarktext = <Input className="text-input" style={{ width: 400 }} placeholder="" onKeyUp={this.remarkChange.bind(this)}/>
             contenttext = <Input type="textarea" rows={4} onKeyUp={this.textChange.bind(this)} />
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
-            resulttext = <select defaultValue="请选择" style={{ width: 70 }} onChange={this.handleChange.bind(this)}>
+            resulttext = <select defaultValue="请选择" style={{ width: 110 }} onChange={this.handleChange.bind(this)}>
                     <option>请选择</option>
                     <option value="0">调解成功</option>
                     <option value="-1">调解失败</option>
@@ -84,10 +85,10 @@ class Protocol extends Component {
                 resulttext = "调解失败";
             }
         }else{
-            remarktext = <Input className="text-input" style={{ width: 400 }} placeholder="" onKeyUp={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" rows={4} onKeyUp={this.textChange.bind(this)} value={this.state.content}/>
+            remarktext = <Input className="text-input" style={{ width: 400 }} placeholder="" defaultValue={this.state.remark} onKeyUp={this.remarkChange.bind(this)}/>
+            contenttext = <Input type="textarea" rows={4} onKeyUp={this.textChange.bind(this)} defaultValue={this.state.content}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
-            resulttext = <select defaultValue="请选择" style={{ width: 70 }} onChange={this.handleChange.bind(this)}>
+            resulttext = <select style={{ width: 110 }} onChange={this.handleChange.bind(this) } defaultValue={this.state.result}>
                 <option>请选择</option>
                 <option value="0">调解成功</option>
                 <option value="-1">调解失败</option>

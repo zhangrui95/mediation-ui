@@ -14,10 +14,10 @@ class InvestigationList extends Component {
     clickHandler(e){
         const { params } = this.props;
         const {id} = params;
+
         if(id !==null && id !== undefined && id!== ''){
-            const div = e.target;
             const	{router}	=	this.context;
-            router.push('archive/'+id+'/investigation');
+            router.push('/archive/'+id+'/investigation/create');
         }
     }
     render() {

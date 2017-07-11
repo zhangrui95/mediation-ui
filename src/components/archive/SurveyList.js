@@ -9,9 +9,8 @@ class SurveyList extends Component {
         const { params } = this.props;
         const {id} = params;
         if(id !==null && id !== undefined && id!== ''){
-            const div = e.target;
             const	{router}	=	this.context;
-            router.push('archive/'+id+'/investigation/'+params.mid);
+            router.push('/archive/'+id+'/investigation/'+params.mid);
         }
     }
     render() {

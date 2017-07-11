@@ -13,7 +13,8 @@ class Mediate extends Component {
     }
 
     render() {
-        const { params,mediateDetail} = this.props;
+        const { params,mediateDetail,archive} = this.props;
+        const litigantsName = archive.response.data.litigants.map((i)=>i.name).join(',');
         const {response} = mediateDetail;
         const {data} =  response||{};
         const {mediateTime,address,content} = data||{};
@@ -27,7 +28,7 @@ class Mediate extends Component {
                 <div className="formBorder">
                     <div className="formArch">调查时间：<span>{time}</span></div>
                     <div className="formArch">调查地点：<span>{address}</span></div>
-                    <div className="formArch">当事人：<span></span></div>
+                    <div className="formArch">当事人：<span>{litigantsName}</span></div>
                     <div className="formArch">调解人：<span></span></div>
                     <div className="formArch">调查记录：<span>{content}</span></div>
                     <div className="formArch">当事人签字：</div>
