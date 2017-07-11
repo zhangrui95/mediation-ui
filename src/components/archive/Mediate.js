@@ -11,13 +11,19 @@ class Mediate extends Component {
         const {mid} = params;
         actions.request(MEDIATE_DETAIL,{mid});
     }
-
+    getLitigants(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        const {litigants}= data||{};
+        const litigantsName = litigants.map((i)=>i.name).join(',');
+        return litigantsName;
+    }
     render() {
         const { params,mediateDetail,archive} = this.props;
-        const litigantsName = archive.response.data.litigants.map((i)=>i.name).join(',');
         const {response} = mediateDetail;
         const {data} =  response||{};
         const {mediateTime,address,content} = data||{};
+        const litigantsName = this.getLitigants(archive);
         if(data == null){
             return null;
         }
