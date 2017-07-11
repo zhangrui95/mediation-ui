@@ -127,6 +127,7 @@ fetchMock.mock(DEV_REQ_HOST+'api/evidence/listByArchive.json',{data:[
     {id:'2',name:'x2',type:1,size:12,createTime:1499240237246,creater:{},archive:{}}
 ]});
 fetchMock.mock(DEV_REQ_HOST+'api/evidence/save.json',{state:0, data:{id:'1'}});
+fetchMock.mock(DEV_REQ_HOST+'api/evidence/delete.json',{state:0});
 // fetchMock.mock(DEV_REQ_HOST+'api/evidence/download.json',function(req,res){
 //     res.setHeader('Content-Type','application/octet-stream');
 //     res.setHeader('Content-Disposition','attachment; filename="' + encodeURI('下载测试文件') + '"');
