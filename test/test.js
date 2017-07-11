@@ -61,8 +61,8 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/detail.json',function(){
                 {id:'2',name:'p2',card:'230132199602200360',sex:1,nation:'汉',age:12,address:'地址2',contact:'13012345679',createTime:1499240237246,archive:{}},
             ],
             workers:[
-                {id:'3',worker:{name:'w2'},createTime:1499240237246,archive:{}},
-                {id:'4',worker:{name:'w3'},createTime:1499240237246,archive:{}},
+                {id:'3',worker:{id:'2',name:'w2'},createTime:1499240237246,archive:{}},
+                {id:'4',worker:{id:'3',name:'w3'},createTime:1499240237246,archive:{}},
             ]
         },
         protocol:{id:'1',remark:'xxx',result:1,content:'xxx',createTime:1499240237246,creater:{},archive:{}},
@@ -79,8 +79,8 @@ fetchMock.mock(DEV_REQ_HOST+'api/archive/save.json',{state:0, data:{id:'1',name:
         {id:'2',name:'p2',card:'230132199602200360',sex:1,nation:'汉',age:12,address:'地址2',contact:'13012345679',createTime:1499240237246,archive:{}},
     ],
     workers:[
-        {id:'3',worker:{name:'w2'},createTime:1499240237246,archive:{}},
-        {id:'4',worker:{name:'w3'},createTime:1499240237246,archive:{}},
+        {id:'3',worker:{id:'2',name:'w2'},createTime:1499240237246,archive:{}},
+        {id:'4',worker:{id:'3',name:'w3'},createTime:1499240237246,archive:{}},
     ]
 }});
 

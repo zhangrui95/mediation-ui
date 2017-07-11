@@ -65,7 +65,10 @@ class PopMediator extends Component {
         let options;
         if(domainData!==null && domainData !== undefined){
             options = domainData.map((value,index)=>{
-                return <div key={id+'_select_cell_'+index} className="formArch"><Checkbox  onChange={this.handleChange.bind(this)} name={name+'['+index+'].id'} value={value[valueKey]}>{value[textKey]}</Checkbox></div>
+                return <div key={id+'_select_cell_'+index} className="formArch"><Checkbox
+                    onChange={this.handleChange.bind(this)} name={name+'['+index+'].id'}
+                    defaultChecked={this.state.value.indexOf(value[valueKey]) !== -1}
+                    value={value[valueKey]}>{value[textKey]}</Checkbox></div>
             })
         }
         return options;
