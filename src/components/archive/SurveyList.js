@@ -18,9 +18,15 @@ class SurveyList extends Component {
         let arr = [];
         let address = '';
         let time = '';
+        let otherPerson = '';
+        let targetPerson = '';
+        let content = '';
         for(let i = 0; i < data.length; i++){
             address = data[i].address;
             time = getDateTime(data[i].investTime);
+            otherPerson = data[i].otherPerson;
+            targetPerson = data[i].targetPerson;
+            content = data[i].content;
             arr.push(
                 <tr className="odd" key={i}>
                     <td width="40">{i+1}</td>
@@ -28,9 +34,9 @@ class SurveyList extends Component {
                         <a className="view-cell" href="javascript:;">{time}</a>
                     </td>
                     <td>{address}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{otherPerson}</td>
+                    <td>{targetPerson}</td>
+                    <td>{content}</td>
                     <td><a onClick={this.clickHandler.bind(this)} >编辑</a><span> | </span><a>打印</a></td>
                 </tr>
             )
