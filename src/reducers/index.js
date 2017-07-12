@@ -23,8 +23,8 @@ import checkvisitUpdate from './checkvisitUpdate'
 
 
 
-const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence,investigation,mediate,protocol,protocolSave,checkvisitSave,checkvisit,investigationDetail,mediateDetail,protocolUpdate,checkvisitUpdate};
 const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence,investigation,mediate,protocol,protocolSave,checkvisitSave,checkvisit,investigationDetail,mediateDetail,
+    protocolUpdate,checkvisitUpdate,
     evidenceDelete};
 
 const rootReducer = combineReducers(Object.assign({},reducers,{routing}));
