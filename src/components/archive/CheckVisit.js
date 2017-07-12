@@ -3,9 +3,7 @@ import TimeChoice from './TimeChoice'
 import { Input } from 'antd';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {CHECKVISIT_SAVE} from '../../constants/ActionTypes'
-import {CHECKVISIT_DETAIL} from '../../constants/ActionTypes'
-import {CHECKVISIT_UPDATE} from '../../constants/ActionTypes'
+import {CHECKVISIT_SAVE,CHECKVISIT_DETAIL,CHECKVISIT_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 import {getDateTime} from '../../utils/date';
 

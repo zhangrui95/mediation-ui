@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {MEDIATE_DETAIL} from '../../constants/ActionTypes'
-import {MEDIATE_SAVE} from '../../constants/ActionTypes'
-import {MEDIATE_UPDATE} from '../../constants/ActionTypes'
+import {MEDIATE_DETAIL,MEDIATE_SAVE,MEDIATE_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 import {getDateTime} from '../../utils/date';
 import { Input } from 'antd';
+import merge from 'lodash/merge'
 
 class Mediate extends Component {
     constructor(props, context) {
@@ -15,13 +14,27 @@ class Mediate extends Component {
         const {mid} = params;
         this.state = {model: mid !== 'create'||null && mid !== undefined && mid !== '' ? 1 : 0,time:'',content:'',data:{}};
     }
-    componentWillReceiveProps(next) {
-        const {mediateDetail} = this.props;
-        const {response} = mediateDetail;
-        const {state,data} = response||{};
-        const {mediateTime,content} = data||{};
-        if(state == 0){
-            this.setState({model:1,time:mediateTime,content:content});
+    componentWillReceiveProps(next){
+        const {actions} = this.props;
+        const {mediateDetail} = next;
+        const {response,action,actionResponse} = mediateDetail;
+        if(action === 'add' && response) {
+            const {state, data} = response || {};
+            const {mediateTime,content} = data||{};
+            if(state == 0){
+                this.setState({model:1,time:mediateTime,content:content});
+            }
+            actions.resetAction();
+        }else if(action === 'update' && actionResponse){
+            const {state,data} = actionResponse || {};
+            const {mediateTime,content} = data||{};
+            if (state === 0) {
+                this.setState({model:1,time:mediateTime,content:content});
+            }
+            actions.resetAction();
+        }else if(response){
+            const {data} = response || {};
+            this.setState({data:merge({},data||{})});
         }
     }
     updateModel(){
@@ -49,6 +62,7 @@ class Mediate extends Component {
         this.setState({content:e.target.value});
     }
     onSave(){
+        this.setState({model:1});
         const {actions,params} = this.props;
         const {mid} = params;
         actions.request(MEDIATE_SAVE,null,{mid:mid,mediateTime:this.state.time,content:this.state.content});
