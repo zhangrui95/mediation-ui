@@ -93,8 +93,8 @@ const option = {
         option:{ method: 'POST', body: "aid="+actionMsg.id,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
-    [INVESTIGATION_SAVE]:actionMsg => {return {endpoint: 'api/investigation/save.json',
-        option:{ method: 'POST', body: "id="+actionMsg.id,
+    [INVESTIGATION_SAVE]:(actionMsg,formData) => {return {endpoint: 'api/investigation/save.json',
+        option:{ method: 'POST', body: formData2Param(formData),
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [MEDIATE_SAVE]:actionMsg => {return {endpoint: 'api/mediate/save.json',
