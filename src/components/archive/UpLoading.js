@@ -21,7 +21,7 @@ class UpLoading extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {state:0,show:0,text:''};
+        this.state = {state:0,show:0,text:'',count:0};
     }
 
     beforeUpload(file) {
@@ -47,7 +47,7 @@ class UpLoading extends Component {
             console.log('info',info);
         }
         if (info.event) {
-            this.setState({show:0,text:'上传'+info.event.percent+'%'});
+            this.setState({show:0,text:'上传'+Math.round(info.event.percent*100)/100+'%'});
         }
         if (info.file.status === 'done') {
             console.log(`${info.file.name} file uploaded successfully`);
@@ -55,7 +55,7 @@ class UpLoading extends Component {
             const {state,data} = info.file.response;
             if(state === 0){
                 actions.resetAction(data);
-                this.setState({show:1,text:'上传成功'});
+                this.setState({show:1,text:'上传成功',count:this.state.count+1});
             }else{
                 this.setState({show:0,text:'上传失败'});
             }
@@ -65,18 +65,25 @@ class UpLoading extends Component {
     }
 
     render() {
-        const { dataId} = this.props;
-        let img;
-        if(this.state.show === 1){
-            img = <img src={"api/archive/protocolPhoto.json?id="+dataId}/>
+        const { dataId,archive} = this.props;
+        const { response} = archive;
+        const { data} = response||{};
+        const { protocolPath,finishState} = data||{};
+        let img,upload;
+        if(this.state.show === 1 || protocolPath){
+            img = <img src={'api/archive/protocolPhoto.json?id='+dataId+'&rn='+this.state.count}/>
+        }
+        if(finishState === 0){
+            upload = (<Upload {...props} data={{id:dataId}} onChange={this.onChangeHandler.bind(this)} beforeUpload={this.beforeUpload.bind(this)}>
+                <Button>
+                    <Icon type="upload" /> 上传
+                </Button>
+            </Upload>)
         }
         return (
             <div>
-                <Upload {...props} data={{id:dataId}} onChange={this.onChangeHandler.bind(this)} beforeUpload={this.beforeUpload.bind(this)}>
-                    <Button>
-                        <Icon type="upload" /> 上传
-                    </Button>
-                </Upload><span>{this.state.text}</span>
+                {upload}
+                <span>{this.state.text}</span>
                 {img}
             </div>
         )
