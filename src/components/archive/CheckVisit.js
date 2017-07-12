@@ -12,27 +12,29 @@ class CheckVisit extends Component {
         super(props, context);
         const { params} = props;
         const {id} = params;
-        this.state = {model: id !== null && id !== undefined && id !== '' ? 1 : 0,input:'',date:''};
+        this.state = {model: id !== null && id !== undefined && id !== '' ? 1 : 0,input:'',date:'',defaultTime:getDateTime(new Date().getTime())};
     }
     componentWillReceiveProps(next) {
         const {checkvisit} = this.props;
         const {response} = checkvisit;
         const {state,data} = response||{};
-        if(state == 0){
-            this.setState({model:1,input:data.content,date:data.visitTime});
+        if(state === 0){
+            this.setState({model:1,input:data.content,date:getDateTime(data.visitTime)});
         }
     }
     updateModel(){
         const { checkvisit} = this.props;
         const {response} = checkvisit;
         const {data} = response||{};
-        this.setState({model:2,input:data.content,date:data.visitTime});
+        this.setState({model:2,input:data.content,date:getDateTime(data.visitTime)});
     }
     updateArchive(){
         this.setState({model:1});
-        const {actions,params} = this.props;
+        const {actions,params,checkvisit} = this.props;
         const {id} = params;
-        actions.request(CHECKVISIT_UPDATE,null,{id:id,content:this.state.input,visitTime:this.state.date});
+        const {response} = checkvisit;
+        const {data} = response||{};
+        actions.request(CHECKVISIT_UPDATE,null,{id:data.id,content:this.state.input,visitTime:this.state.date,archive:{id}});
     }
 
     inputChange(e){
@@ -74,7 +76,7 @@ class CheckVisit extends Component {
 
         if(model === 0){
             content = <Input type="textarea" rows={4} onKeyUp={this.inputChange.bind(this)}/>;
-            time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)}/>;
+            time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
         }else if(model === 1){
             content = data.content;
@@ -82,7 +84,7 @@ class CheckVisit extends Component {
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" value="打印" /></div>
         }else{
             content = <Input type="textarea" rows={4} onKeyUp={this.inputChange.bind(this)} defaultValue={this.state.input}/>;
-            time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} visittime={this.state.date}/>;
+            time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
         }
 

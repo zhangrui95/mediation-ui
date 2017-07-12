@@ -23,9 +23,13 @@ class ApplyFor extends Component {
     componentWillReceiveProps(next) {
         const {actions} = this.props;
         const {archive} = next;
-        const {action,actionResponse} = archive;
+        const {action,actionResponse,response} = archive;
         if(action === 'update' && actionResponse){
             actions.resetAction(actionResponse.data);
+        }else if(response){
+            const {data} = response||{};
+            const {applyTime} = data||{};
+            this.setState({applyTime:getDateTime(applyTime)});
         }
     }
 
@@ -57,7 +61,7 @@ class ApplyFor extends Component {
                         </div>
                         <div className="formArch font-weight-word">人民调解委员会已将申请人民调解的相关规定告诉我，现自愿申请人民调解委员会进行调解。</div>
                         <div className="formArch">
-                            <div className="margin-form">申请时间</div><TimeChoice name="applyTime" onChange={this.onChangeHandler.bind(this)} defaultValue={this.state.defaultTime}/>
+                            <div className="margin-form">申请时间</div><TimeChoice name="applyTime" onChange={this.onChangeHandler.bind(this)} value={this.state.applyTime} defaultValue={this.state.defaultTime}/>
                         </div>
                         <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.saveApply.bind(this)} className="addPerson"/></div>
                     </div>
