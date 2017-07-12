@@ -30,7 +30,7 @@ class PartyInput extends Component {
     handleRemove(){
         if(this.onRemove){
             const {item} = this.props;
-            this.onRemove(item.key);
+            this.onRemove(item);
         }
     }
 

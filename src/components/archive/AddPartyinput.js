@@ -29,14 +29,15 @@ class AddPartyinput extends Component {
         }
     }
 
-    remove(key) {
+    remove(item) {
+        const {key,id} = item;
         const datas = this.state.datas.map((e, idx) => {
             return this.refs['sub'+idx].data();
         });
         const newData = datas.filter(i => i.key !== key)
         this.setState({datas:newData});
         if(this.onChange){
-            this.onChange(newData);
+            this.onChange(newData,id);
         }
     }
 

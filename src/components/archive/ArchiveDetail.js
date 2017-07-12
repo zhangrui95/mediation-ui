@@ -41,8 +41,10 @@ class ArchiveDetail extends Component {
             }
             actions.resetAction(data);
         }else if(response){
-            const {data} = response || {};
-            this.setState({data:merge({},data||{})});
+            if(!this.state.data.id){
+                const {data} = response || {};
+                this.setState({data:merge({},data||{})});
+            }
         }
     }
 
@@ -56,7 +58,21 @@ class ArchiveDetail extends Component {
 
     getData(){
         this.state.data.litigants = [];
-        return merge(this.state.data,{litigants:this.refs.litigants.datas()})
+        const data = merge({},this.state.data,{litigants:this.refs.litigants.datas()});
+        data.createTime = null;
+        data.updateTime = null;
+        data.keepTime = null;
+        data.applyTime = null;
+        data.creater = null;
+        data.updater = null;
+        data.workers = null;
+        data.manager = {id:data.manager.id};
+        data.type = {id:data.type.id};
+        data.litigants = data.litigants.map(function (i) {
+            i.createTime = null;
+            return i;
+        });
+        return data
     }
 
     addNewArchive(){
@@ -90,9 +106,13 @@ class ArchiveDetail extends Component {
         this.setState({data: merge(this.state.data,{workerIds:value.join(',')})});
     }
 
-    handleLitigantChange(datas){
+    handleLitigantChange(datas,delId){
         this.state.data.litigants = [];
-        this.setState({data: merge(this.state.data,{litigants:datas})});
+        let litigantsDel = this.state.data.litigantsDel||'';
+        if(delId && delId !== ''){
+            litigantsDel += delId+',';
+        }
+        this.setState({data: merge(this.state.data,{litigants:datas,litigantsDel})});
     }
 
     renderByData(data) {
