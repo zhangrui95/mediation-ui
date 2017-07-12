@@ -1,6 +1,8 @@
 import {NAV_LIST,BANNER,ENT_BIND,LOAD_USER,UPDATE_PASS,VALIDATE_PASS,SELECT_DATA,LIST_ENT,LIST_ENT_RELOAD,LIST_ENT_QUERY,SIGN_IN_USER,
     ARCHIVE_ADD,ARCHIVE_UPDATE,SIGN_OUT_USER,SUSPEND_WORK,ARCHIVE_DETAIL,LIST_BY_ARCHIVE,INVESTIGATION_LIST,MEDIATE_LIST,PROTOCOL_DETAIL,
     INVESTIGATION_SAVE,MEDIATE_SAVE,PROTOCOL_SAVE,CHECKVISIT_SAVE,CHECKVISIT_DETAIL,INVESTIGATION_DETAIL,
+    MEDIATE_DETAIL,PROTOCOL_UPDATE,CHECKVISIT_UPDATE,INVESTIGATION_UPDATE,MEDIATE_UPDATE,
+    EVIDENCE_DELETE} from '../../constants/ActionTypes'
     MEDIATE_DETAIL,PROTOCOL_UPDATE,CHECKVISIT_UPDATE,INVESTIGATION_UPDATE,
     EVIDENCE_DELETE,ARCHIVE_FINISH} from '../../constants/ActionTypes'
 import {SIGN_IN_URL} from '../../constants/Constant'
@@ -93,8 +95,8 @@ const option = {
         option:{ method: 'POST', body: "aid="+actionMsg.id,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
-    [INVESTIGATION_SAVE]:actionMsg => {return {endpoint: 'api/investigation/save.json',
-        option:{ method: 'POST', body: "id="+actionMsg.id,
+    [INVESTIGATION_SAVE]:(actionMsg,formData) => {return {endpoint: 'api/investigation/save.json',
+        option:{ method: 'POST', body: formData2Param(formData),
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [MEDIATE_SAVE]:actionMsg => {return {endpoint: 'api/mediate/save.json',
@@ -139,6 +141,10 @@ const option = {
         }}},
     [ARCHIVE_FINISH]:actionMsg => {return {endpoint: 'api/archive/finish.json',
         option:{ method: 'POST', body: "id="+actionMsg.id,
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [MEDIATE_UPDATE]:(actionMsg,formData) => {return {endpoint: 'api/mediate/update.json',
+        option:{ method: 'POST', body: formData2Param(formData),
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
 };
