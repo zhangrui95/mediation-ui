@@ -4,6 +4,6 @@ export function reset() {
     return {type:ARCHIVE_DETAIL_RESET}
 }
 
-export function resetAction() {
-    return {type:ARCHIVE_ACTION_RESET}
+export function resetAction(data) {
+    return {type:ARCHIVE_ACTION_RESET,data}
 }

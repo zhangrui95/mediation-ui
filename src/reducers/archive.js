@@ -1,5 +1,6 @@
-import  {ARCHIVE_DETAIL_RESET,ARCHIVE_DETAIL,ARCHIVE_ADD,ARCHIVE_ACTION_RESET,ARCHIVE_UPDATE} from '../constants/ActionTypes'
+import  {ARCHIVE_DETAIL_RESET,ARCHIVE_DETAIL,ARCHIVE_ADD,ARCHIVE_ACTION_RESET,ARCHIVE_UPDATE,ARCHIVE_FINISH} from '../constants/ActionTypes'
 import syncReducer from './syncReducer'
+import merge from 'lodash/merge'
 
 export default syncReducer({
     [ARCHIVE_DETAIL]:{ },
@@ -9,13 +10,21 @@ export default syncReducer({
     [ARCHIVE_UPDATE]:{
         request: (state) => Object.assign({},state,{action:'update'}),
         done: (state, action) => Object.assign({},state,{actionResponse:action.response})
+    },
+    [ARCHIVE_FINISH]:{
+        request: (state) => Object.assign({},state,{action:'update'}),
+        done: (state, action) => Object.assign({},state,{actionResponse:action.response})
     }
 },(state,action) => {
     switch (action.type) {
         case ARCHIVE_DETAIL_RESET:
             return {};
         case ARCHIVE_ACTION_RESET:
-            return Object.assign({},state,{action:'',actionResponse:null});
+            const ret = {action:'',actionResponse:null};
+            if(action.data){
+                ret.response = {data:action.data}
+            }
+            return merge({},state,ret);
         default:
             return state;
     }

@@ -33,12 +33,11 @@ class ArchiveDetail extends Component {
             }
             actions.resetAction();
         }else if(action === 'update' && actionResponse){
-            const {data} = response || {};
-            const {state} = actionResponse || {};
+            const {state,data} = actionResponse || {};
             if (state === 0) {
                 this.setState({model:1,data:merge({},data||{})});
             }
-            actions.resetAction();
+            actions.resetAction(data);
         }else if(response){
             const {data} = response || {};
             this.setState({data:merge({},data||{})});

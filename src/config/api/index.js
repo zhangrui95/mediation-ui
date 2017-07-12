@@ -2,7 +2,7 @@ import {NAV_LIST,BANNER,ENT_BIND,LOAD_USER,UPDATE_PASS,VALIDATE_PASS,SELECT_DATA
     ARCHIVE_ADD,ARCHIVE_UPDATE,SIGN_OUT_USER,SUSPEND_WORK,ARCHIVE_DETAIL,LIST_BY_ARCHIVE,INVESTIGATION_LIST,MEDIATE_LIST,PROTOCOL_DETAIL,
     INVESTIGATION_SAVE,MEDIATE_SAVE,PROTOCOL_SAVE,CHECKVISIT_SAVE,CHECKVISIT_DETAIL,INVESTIGATION_DETAIL,
     MEDIATE_DETAIL,PROTOCOL_UPDATE,CHECKVISIT_UPDATE,INVESTIGATION_UPDATE,
-    EVIDENCE_DELETE} from '../../constants/ActionTypes'
+    EVIDENCE_DELETE,ARCHIVE_FINISH} from '../../constants/ActionTypes'
 import {SIGN_IN_URL} from '../../constants/Constant'
 import {formData2Param} from '../../utils/param'
 
@@ -135,6 +135,10 @@ const option = {
         }}},
     [INVESTIGATION_UPDATE]:(actionMsg,formData) => {return {endpoint: 'api/investigation/update.json',
         option:{ method: 'POST', body: formData2Param(formData),
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [ARCHIVE_FINISH]:actionMsg => {return {endpoint: 'api/archive/finish.json',
+        option:{ method: 'POST', body: "id="+actionMsg.id,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
 };

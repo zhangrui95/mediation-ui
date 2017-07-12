@@ -51,27 +51,8 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
         {id:'5',name:'卷宗5',type:{id:'2',name:'权属纠纷'},state:0,createTime:1499240237246,canPause:-1},
     ]}
 });
-fetchMock.post(DEV_REQ_HOST+'api/archive/detail.json',function(){
-    return {state:0,
-        data:{id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,keepTime:1509240237246,applyTime:null,canPause:0,content:'xxxxxasdasd',
-            manager:{id:'2',name:'w1'},
-            creater:{id:'2',name:'w1'},
-            litigants:[
-                {id:'1',name:'p1',card:'230132199602200369',sex:1,nation:'汉',age:12,address:'地址1',contact:'13012345678',createTime:1499240237246,archive:{}},
-                {id:'2',name:'p2',card:'230132199602200360',sex:1,nation:'汉',age:12,address:'地址2',contact:'13012345679',createTime:1499240237246,archive:{}},
-            ],
-            workers:[
-                {id:'3',worker:{id:'2',name:'w2'},createTime:1499240237246,archive:{}},
-                {id:'4',worker:{id:'3',name:'w3'},createTime:1499240237246,archive:{}},
-            ]
-        },
-        protocol:{id:'1',remark:'xxx',result:1,content:'xxx',createTime:1499240237246,creater:{},archive:{}},
-        check:{id:'1',visitTime:1499240237246,content:'xxx',createTime:1499240237246,creater:{},archive:{}}
-    }
-});
-fetchMock.mock(DEV_REQ_HOST+'api/archive/suspend.json',{state:0});
 
-fetchMock.mock(DEV_REQ_HOST+'api/archive/save.json',{state:0, data:{id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,keepTime:1509240237246,applyTime:1409240238246,canPause:0,content:'xxxxxasdasd',
+const archiveData = {id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,keepTime:1509240237246,applyTime:null,canPause:0,content:'xxxxxasdasd',
     manager:{id:'2',name:'w1'},
     creater:{id:'2',name:'w1'},
     litigants:[
@@ -82,11 +63,24 @@ fetchMock.mock(DEV_REQ_HOST+'api/archive/save.json',{state:0, data:{id:'1',name:
         {id:'3',worker:{id:'2',name:'w2'},createTime:1499240237246,archive:{}},
         {id:'4',worker:{id:'3',name:'w3'},createTime:1499240237246,archive:{}},
     ]
-}});
+};
 
-fetchMock.mock(DEV_REQ_HOST+'api/archive/update.json',{state:0});
+fetchMock.post(DEV_REQ_HOST+'api/archive/detail.json',function(){
+    return {state:0,
+        data:archiveData,
+        protocol:{id:'1',remark:'xxx',result:1,content:'xxx',createTime:1499240237246,creater:{},archive:{}},
+        check:{id:'1',visitTime:1499240237246,content:'xxx',createTime:1499240237246,creater:{},archive:{}}
+    }
+});
+fetchMock.mock(DEV_REQ_HOST+'api/archive/suspend.json',{state:0});
 
-fetchMock.mock(DEV_REQ_HOST+'api/archive/finish.json',{state:0});
+fetchMock.mock(DEV_REQ_HOST+'api/archive/save.json',{state:0, data:Object.assign({},archiveData,{applyTime:1409240238246})});
+
+fetchMock.mock(DEV_REQ_HOST+'api/archive/update.json',{state:0,data:archiveData});
+
+fetchMock.mock(DEV_REQ_HOST+'api/archive/uploadProtocol.json',{state:0,data:archiveData});
+
+fetchMock.mock(DEV_REQ_HOST+'api/archive/finish.json',{state:0,data:archiveData});
 
 fetchMock.mock(DEV_REQ_HOST+'api/litigant/save.json',{state:0, data:{id:'1'}});
 
@@ -137,6 +131,10 @@ fetchMock.mock(DEV_REQ_HOST+'api/evidence/delete.json',{state:0});
 //     res.end(fs.readFileSync(__dirname+'/resources/test.txt'));
 // });
 // fetchMock.mock(DEV_REQ_HOST+'api/evidence/photo.json',function(req,res){
+//     res.setHeader('Content-Type','image/png');
+//     res.end(fs.readFileSync(__dirname+'/resources/img.jpg'));
+// });
+// fetchMock.mock(DEV_REQ_HOST+'api/archive/protocolPhoto.json',function(req,res){
 //     res.setHeader('Content-Type','image/png');
 //     res.end(fs.readFileSync(__dirname+'/resources/img.jpg'));
 // });
