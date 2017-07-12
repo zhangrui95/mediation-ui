@@ -58,8 +58,7 @@ class CheckVisit extends Component {
         const {response} = archive;
         const {data} = response||{};
         const {litigants}= data||{};
-        const litigantsName = litigants.map((i)=>i.name).join(',');
-        return litigantsName;
+        return (litigants||[]).map((i)=>i.name).join(',');
     }
     render() {
         let time = '';
@@ -69,10 +68,10 @@ class CheckVisit extends Component {
         const { archive ,checkvisit} = this.props;
         const {response} = checkvisit;
         const {data} = response||{};
-        const litigantsName = this.getLitigants(archive);
         if(data == null){
             return null;
         }
+        const litigantsName = this.getLitigants(archive);
 
         if(model === 0){
             content = <Input type="textarea" rows={4} onKeyUp={this.inputChange.bind(this)}/>;
