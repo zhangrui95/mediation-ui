@@ -21,8 +21,7 @@ class MediateList extends Component {
         }
     }
     render() {
-        const { children } = this.props;
-        const { mediate } = this.props;
+        const { mediate,params  } = this.props;
         const {response} = mediate;
         const {data} = response||{};
         if(data == null){
@@ -34,7 +33,7 @@ class MediateList extends Component {
                 <div className="formArch">
                     <dic className="list-right" onClick={this.clickHandler.bind(this)}>新建</dic>
                 </div>
-                <MediateCell data={data}/>
+                <MediateCell params={params} data={data}/>
             </div>
         )
     }
