@@ -3,9 +3,7 @@ import  PartyCell from './PartyCell'
 import { Input } from 'antd';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {PROTOCOL_DETAIL} from '../../constants/ActionTypes'
-import {PROTOCOL_SAVE} from '../../constants/ActionTypes'
-import {PROTOCOL_UPDATE} from '../../constants/ActionTypes'
+import {PROTOCOL_DETAIL,PROTOCOL_SAVE,PROTOCOL_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 
 class Protocol extends Component {
