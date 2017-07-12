@@ -11,8 +11,9 @@ class DisputeCase extends Component {
         const { archive } = this.props;
         const {response} = archive;
         const {data} = response||{};
+        const {content} = data||{};
         return (
-            <div className="formArch">{data.content}</div>
+            <div className="formArch">{content}</div>
         )
     }
 }

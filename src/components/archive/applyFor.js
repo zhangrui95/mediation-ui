@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import {ARCHIVE_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction';
 import * as arhciveActions from '../../actions/arhcive';
+import {getDateTime} from '../../utils/date';
 import PartyCell from './PartyCell'
 import TimeChoice from './TimeChoice'
 import DisputeCase from './DisputeCase'
@@ -12,7 +13,11 @@ class ApplyFor extends Component {
 
     constructor(props, context) {
         super(props, context);
-        this.state = {applyTime:''};
+        const { archive} = props;
+        const {response} = archive;
+        const {data} = response||{};
+        const {applyTime} = data||{};
+        this.state = {applyTime:getDateTime(applyTime),defaultTime:getDateTime(new Date().getTime())};
     }
 
     componentWillReceiveProps(next) {
@@ -20,7 +25,7 @@ class ApplyFor extends Component {
         const {archive} = next;
         const {action,actionResponse} = archive;
         if(action === 'update' && actionResponse){
-            actions.resetAction();
+            actions.resetAction(actionResponse.data);
         }
     }
 
@@ -32,12 +37,12 @@ class ApplyFor extends Component {
         const {syncActions,params} = this.props;
         const {id} = params;
         if(id !== null && id !== undefined && id !== ''){
-            syncActions.request(ARCHIVE_UPDATE,null,{id,applyTime:this.state.applyTime});
+            const applyTime = this.state.applyTime;
+            syncActions.request(ARCHIVE_UPDATE,null,{id,applyTime:applyTime===''?this.state.defaultTime:applyTime});
         }
     }
 
     render() {
-        const { archive } = this.props;
         return (
             <div>
                 <div className="title-form-name">人民调解申请书</div>
@@ -52,7 +57,7 @@ class ApplyFor extends Component {
                         </div>
                         <div className="formArch font-weight-word">人民调解委员会已将申请人民调解的相关规定告诉我，现自愿申请人民调解委员会进行调解。</div>
                         <div className="formArch">
-                            <div className="margin-form">申请时间</div><TimeChoice name="applyTime" onChange={this.onChangeHandler.bind(this)}/>
+                            <div className="margin-form">申请时间</div><TimeChoice name="applyTime" onChange={this.onChangeHandler.bind(this)} defaultValue={this.state.defaultTime}/>
                         </div>
                         <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.saveApply.bind(this)} className="addPerson"/></div>
                     </div>

@@ -16,22 +16,21 @@ class TimeChoice extends Component{
     }
     
     render() {
-        const { archive, name ,visittime} = this.props;
+        const { archive, name, defaultValue} = this.props;
         const {response} = archive;
         const {data} = response||{};
-        let applyTime = data[name];
+        let applyTime = (data||{})[name];
         let html = '';
         let time = getDateTime(applyTime);
-        let visitTime =  '';
-        if(visittime != undefined||visittime != null){
-             visitTime = getDateTime(visittime);
-        }else{
-            visitTime =  getDateTime((new Date()).valueOf());
+        if(time === ''){
+            time =  defaultValue;
         }
-        if(applyTime==null){
-            html = <div><div className="margin-form"><DatePicker onChange={this.onChange.bind(this)} defaultValue={moment(visitTime,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss"/></div></div>;
+        if(applyTime===null || applyTime===undefined){
+            html = <div><div className="margin-form"><DatePicker showTime={true} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss"/></div></div>;
         }else{
-            html = <div><div className="apply-name">申请人签字：</div><div className="time-right">{time}</div></div>;
+            html = <div><div className="apply-name">申请人签字：</div><div className="time-right">
+                <DatePicker showTime={true} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss"/>
+            </div></div>;
         }
 
         return (
