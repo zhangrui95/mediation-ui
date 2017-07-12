@@ -19,8 +19,7 @@ function beforeUpload(file) {
 }
 
 const props = {
-    data:{aid:'xc'},
-    action: '//jsonplaceholder.typicode.com/posts/',
+    action: 'api/archive/finish.json',
     listType: 'picture',
     defaultFileList: [...fileList],
     className: 'upload-list-inline',
@@ -40,9 +39,10 @@ const props = {
 
 class UpLoading extends Component {
     render() {
+        const { dataId} = this.props;
         return (
             <div>
-                <Upload {...props}>
+                <Upload {...props} data={{aid:dataId}}>
                     <Button>
                         <Icon type="upload" /> 上传
                     </Button>
@@ -52,4 +52,9 @@ class UpLoading extends Component {
     }
 
 }
+
+UpLoading.propTypes = {
+    dataId: PropTypes.string.isRequired
+};
+
 export default UpLoading
