@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux';
-import {ARCHIVE_FINISH} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction';
 import * as arhciveActions from '../../actions/arhcive';
 import { Upload, Button, Icon } from 'antd';
@@ -31,7 +30,6 @@ class UpLoading extends Component {
         //     console.log('You can only upload JPG file!');
         // }
         console.log('upload type',file.type);
-        console.log('upload size',file.size);
         const isLt2M = file.size / 1024 / 1024 < 2;
         let text = '开始上传...';
         if (!isLt2M) {
@@ -42,15 +40,13 @@ class UpLoading extends Component {
     }
 
     onChangeHandler(info){
-        console.log('onChangeHandler',info);
-        if (info.file.status !== 'uploading') {
-            console.log('info',info);
-        }
+        // if (info.file.status !== 'uploading') {
+        //     console.log('info',info);
+        // }
         if (info.event) {
             this.setState({show:0,text:'上传'+Math.round(info.event.percent*100)/100+'%'});
         }
         if (info.file.status === 'done') {
-            console.log(`${info.file.name} file uploaded successfully`);
             const {actions} = this.props;
             const {state,data} = info.file.response;
             if(state === 0){
