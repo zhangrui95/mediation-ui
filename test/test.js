@@ -116,8 +116,8 @@ fetchMock.mock(DEV_REQ_HOST+'api/protocol/save.json',{state:0, data:{id:'1'}});
 fetchMock.mock(DEV_REQ_HOST+'api/protocol/update.json',{state:0});
 
 fetchMock.mock(DEV_REQ_HOST+'api/checkVisit/detailByArchive.json',{state:0,data:{id:'1',visitTime:1499240237246,content:'xxxxxse',createTime:1499240237246,creater:{},archive:{}}});
-fetchMock.mock(DEV_REQ_HOST+'api/checkVisit/save.json',{state:0, data:{id:'1'}});
-fetchMock.mock(DEV_REQ_HOST+'api/checkVisit/update.json',{state:0});
+fetchMock.mock(DEV_REQ_HOST+'api/checkVisit/save.json',{state:0,data:{id:'1',visitTime:1499240237246,content:'xxxxxse',createTime:1499240237246,creater:{},archive:{}}});
+fetchMock.mock(DEV_REQ_HOST+'api/checkVisit/update.json',{state:0,data:{id:'1',visitTime:1499240237246,content:'xxxxxse',createTime:1499240237246,creater:{},archive:{}}});
 
 fetchMock.mock(DEV_REQ_HOST+'api/evidence/listByArchive.json',{data:[
     {id:'1',name:'x1',type:0,size:12,createTime:1499240237246,creater:{name:'rw'},archive:{}},

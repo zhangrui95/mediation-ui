@@ -5,23 +5,41 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {CHECKVISIT_SAVE,CHECKVISIT_DETAIL,CHECKVISIT_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
+import * as checkvisitActions from '../../actions/checkvisit'
 import {getDateTime} from '../../utils/date';
+import merge from 'lodash/merge'
 
 class CheckVisit extends Component {
     constructor(props, context) {
         super(props, context);
-        const { params} = props;
-        const {id} = params;
-        this.state = {model: id !== null && id !== undefined && id !== '' ? 1 : 0,input:'',date:'',defaultTime:getDateTime(new Date().getTime())};
+        this.state = {model: 0,input:'',date:'',defaultTime:getDateTime(new Date().getTime())};
     }
     componentWillReceiveProps(next) {
-        const {checkvisit} = this.props;
-        const {response} = checkvisit;
-        const {state,data} = response||{};
-        if(state === 0){
-            this.setState({model:1,input:data.content,date:getDateTime(data.visitTime)});
+        const {actions} = this.props;
+        const {checkvisit} = next;
+        const {response,action,actionResponse} = checkvisit||{};
+        if(action === 'add' && response) {
+            const {state, data} = response || {};
+            if (state === 0) {
+                this.setState({model:1,data:merge({},data||{})});
+            }
+            actions.resetAction();
+        }else if(action === 'update' && actionResponse){
+            const {state,data} = actionResponse || {};
+            if (state === 0) {
+                this.setState({model:1,input:data.content,date:getDateTime(data.visitTime)});
+            }
+            actions.resetAction(data);
+        }else if(response){
+            const {state,data} = response||{};
+            if(state === 0){
+                this.setState({model:1,input:data.content,date:getDateTime(data.visitTime)});
+            }else{
+                this.setState({model:0,input:'',date:''});
+            }
         }
     }
+
     updateModel(){
         const { checkvisit} = this.props;
         const {response} = checkvisit;
@@ -29,29 +47,30 @@ class CheckVisit extends Component {
         this.setState({model:2,input:data.content,date:getDateTime(data.visitTime)});
     }
     updateArchive(){
-        this.setState({model:1});
-        const {actions,params,checkvisit} = this.props;
+        const {syncActions,params,checkvisit} = this.props;
         const {id} = params;
         const {response} = checkvisit;
         const {data} = response||{};
-        actions.request(CHECKVISIT_UPDATE,null,{id:data.id,content:this.state.input,visitTime:this.state.date,archive:{id}});
+        const applyTime = this.state.date;
+        syncActions.request(CHECKVISIT_UPDATE,null,{id:data.id,content:this.state.input,visitTime:applyTime===''?this.state.defaultTime:applyTime,archive:{id}});
     }
 
     inputChange(e){
         this.setState({input: e.target.value});
     }
     componentWillMount(){
-        const {actions,params} = this.props;
+        const {syncActions,params} = this.props;
         const {id} = params;
-        actions.request(CHECKVISIT_DETAIL,{id});
+        syncActions.request(CHECKVISIT_DETAIL,{id});
     }
     timeChange(date){
         this.setState({date: date.visitTime});
     }
     onSave(){
-        const {actions,params} = this.props;
+        const {syncActions,params} = this.props;
         const {id} = params;
-        actions.request(CHECKVISIT_SAVE,{id},this.state.input,this.state.date);
+        const applyTime = this.state.date;
+        syncActions.request(CHECKVISIT_SAVE,null,{content:this.state.input,visitTime:applyTime===''?this.state.defaultTime:applyTime,archive:{id}});
     }
 
     getLitigants(archive){
@@ -68,9 +87,7 @@ class CheckVisit extends Component {
         const { archive ,checkvisit} = this.props;
         const {response} = checkvisit;
         const {data} = response||{};
-        if(data == null){
-            return null;
-        }
+
         const litigantsName = this.getLitigants(archive);
 
         if(model === 0){
@@ -78,10 +95,16 @@ class CheckVisit extends Component {
             time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
         }else if(model === 1){
+            if(data === null || data === undefined){
+                return null;
+            }
             content = data.content;
             time = getDateTime(data.visitTime);
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" value="打印" /></div>
         }else{
+            if(data === null || data === undefined){
+                return null;
+            }
             content = <Input type="textarea" rows={4} onKeyUp={this.inputChange.bind(this)} defaultValue={this.state.input}/>;
             time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
@@ -108,15 +131,14 @@ CheckVisit.propTypes = {
 function	select(state)	{
     return	{
         archive:state.archive,
-        checkvisitSave:state.checkvisitSave,
-        checkvisit:state.checkvisit,
-        checkvisitUpdate:state.checkvisitUpdate
+        checkvisit:state.checkvisit
     };
 }
 
 function actions(dispatch) {
     return {
-        actions: bindActionCreators(syncActions, dispatch)
+        syncActions: bindActionCreators(syncActions, dispatch),
+        actions: bindActionCreators(checkvisitActions, dispatch)
     }
 }
 

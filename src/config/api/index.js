@@ -105,8 +105,8 @@ const option = {
         option:{ method: 'POST', body: 'id='+actionMsg.id+'&result='+ result+'&remark='+ remark+'&content='+ content,
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
-    [CHECKVISIT_SAVE]:(actionMsg,content,visitTime) => {return {endpoint: 'api/checkVisit/save.json',
-        option:{ method: 'POST', body: 'archive.id='+actionMsg.id+'&content='+ content+'&visitTime='+ visitTime,
+    [CHECKVISIT_SAVE]:(actionMsg,formData) => {return {endpoint: 'api/checkVisit/save.json',
+        option:{ method: 'POST', body: formData2Param(formData),
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [CHECKVISIT_DETAIL]:actionMsg => {return {endpoint: 'api/checkVisit/detailByArchive.json',
