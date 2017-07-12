@@ -10,54 +10,65 @@ class AddPartyinput extends Component {
         this.state = {datas:merge([],data||[{},{}])};
         this.count = 0;
     }
+
+    datas(){
+        return this.state.datas.map((e, i) => {
+            return this.refs['sub'+i].data();
+        });
+    }
+
     getAdd() {
-        const datas = this.state.datas;
+        const datas = this.state.datas.map((e, i) => {
+            return this.refs['sub'+i].data();
+        });
         datas.push({});
+        const newData = merge([],datas)
+        this.setState({datas:newData});
+        if(this.onChange){
+            this.onChange(newData);
+        }
+    }
+
+    remove(key) {
+        const datas = this.state.datas.map((e, idx) => {
+            return this.refs['sub'+idx].data();
+        });
+        const newData = datas.filter(i => i.key !== key)
+        this.setState({datas:newData});
+        if(this.onChange){
+            this.onChange(newData);
+        }
+    }
+
+    update(){
+        const datas = this.state.datas.map((e, idx) => {
+            return this.refs['sub'+idx].data();
+        });
         this.setState({datas:merge([],datas)});
         if(this.onChange){
             this.onChange(this.state.datas);
         }
     }
 
-    remove(i) {
-        return () =>{
-            const datas = this.state.datas;
-            datas.splice(i,1);
-            this.setState({datas:merge([],datas)});
-            if(this.onChange){
-                this.onChange(this.state.datas);
-            }
-        }
-    }
-
-    onChangeHandler(i){
-        return (data) =>{
-            const datas = this.state.datas;
-            datas[i] = data;
-            this.setState({datas:datas});
-            if(this.onChange){
-                this.onChange(this.state.datas);
-            }
-        }
-    }
-
-
     render() {
         const {model} = this.props;
         const {datas} = this.state;
         const tables = datas.map((it,i) =>{
-            let key = it.id;
-            if(!key){
-                key = this.count++;
+            if(!it.key){
+                let key = it.id;
+                if(!key){
+                    key = 'new_'+ (this.count++);
+                }
+                it.key = key
             }
-            return <PartyInput key={key} model={model} item={it} onChange={this.onChangeHandler(i).bind(this)} onRemove={this.remove(i).bind(this)}/>
+            return <PartyInput ref={'sub'+i} key={it.key} model={model} item={it} onRemove={this.remove.bind(this)}/>
         });
         let submitBtn;
         if(model !== 1){
             submitBtn = <div className="formArch" style={{ height:40 }}><input type="button" onClick={this.getAdd.bind(this)} value="添加当事人" className="addPerson"/></div>
         }
         return (
-            <div>
+            <div onBlur={this.update.bind(this)}>
                 {tables}
                 {submitBtn}
             </div>

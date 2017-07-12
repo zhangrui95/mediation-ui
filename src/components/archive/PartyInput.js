@@ -7,24 +7,30 @@ class PartyInput extends Component {
 
     constructor(props, context) {
         super(props, context);
-        const {onChange,onRemove ,item} = props;
-        this.onChange = onChange;
+        const {onRemove ,item} = props;
         this.onRemove = onRemove;
         this.state = {data:merge({},item||{})};
+    }
+
+    componentWillReceiveProps(next) {
+        const {item} = next;
+        this.setState({data:merge({},item||{})});
     }
 
     handleChange(name){
         return (e) =>{
             this.setState({data: Object.assign(this.state.data,{[name]:e.target.value})});
-            if(this.onChange){
-                this.onChange(this.state.data);
-            }
         }
+    }
+
+    data(){
+        return this.state.data;
     }
 
     handleRemove(){
         if(this.onRemove){
-            this.onRemove();
+            const {item} = this.props;
+            this.onRemove(item.key);
         }
     }
 
@@ -50,16 +56,7 @@ class PartyInput extends Component {
         let address;
         let contact;
         let remove;
-        if(model === 0){
-            name = <Input className="text-input" placeholder="" onChange={this.handleChange('name').bind(this)}/>
-            sex = <Select domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择"  onChangeHandler={this.handleChange('sex').bind(this)} value={item.sex}/>
-            nation = <Input className="text-input" placeholder="" style={{ width: 70 }} onChange={this.handleChange('nation').bind(this)}/>
-            age = <Input className="text-input" placeholder="" style={{ width: 70 }} onChange={this.handleChange('age').bind(this)}/>
-            card = <Input className="text-input" placeholder="" onChange={this.handleChange('card').bind(this)}/>
-            address = <Input className="text-input" style={{ width: 400 }} placeholder="" onChange={this.handleChange('address').bind(this)}/>
-            contact = <Input className="text-input" placeholder="" onChange={this.handleChange('contact').bind(this)}/>
-            remove = <div className={itemStyle}><a href="javascript:;" onClick={this.handleRemove.bind(this)}>删除</a></div>
-        } else if(model === 1){
+        if(model === 1){
             if(!item){
                 return null;
             }
@@ -100,7 +97,6 @@ class PartyInput extends Component {
 PartyInput.propTypes = {
     model: PropTypes.number,
     item: PropTypes.object,
-    onChange: PropTypes.func,
     onRemove: PropTypes.func
 };
 
