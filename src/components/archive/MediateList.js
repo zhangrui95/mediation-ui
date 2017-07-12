@@ -11,7 +11,15 @@ class MediateList extends Component {
         const {id} = params;
         actions.request(MEDIATE_LIST,{id});
     }
+    clickHandler(e){
+        const { params } = this.props;
+        const {id} = params;
 
+        if(id !==null && id !== undefined && id!== ''){
+            const	{router}	=	this.context;
+            router.push('/archive/'+id+'/mediate/create');
+        }
+    }
     render() {
         const { children } = this.props;
         const { mediate } = this.props;
@@ -24,7 +32,7 @@ class MediateList extends Component {
             <div>
                 <div className="title-form-name">人民调解记录</div>
                 <div className="formArch">
-                    <dic className="list-right">新建</dic>
+                    <dic className="list-right" onClick={this.clickHandler.bind(this)}>新建</dic>
                 </div>
                 <MediateCell data={data}/>
             </div>

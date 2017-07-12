@@ -11,12 +11,19 @@ class Mediate extends Component {
         const {mid} = params;
         actions.request(MEDIATE_DETAIL,{mid});
     }
-
+    getLitigants(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        const {litigants}= data||{};
+        const litigantsName = litigants.map((i)=>i.name).join(',');
+        return litigantsName;
+    }
     render() {
-        const { params,mediateDetail} = this.props;
+        const { params,mediateDetail,archive} = this.props;
         const {response} = mediateDetail;
         const {data} =  response||{};
         const {mediateTime,address,content} = data||{};
+        const litigantsName = this.getLitigants(archive);
         if(data == null){
             return null;
         }
@@ -27,7 +34,7 @@ class Mediate extends Component {
                 <div className="formBorder">
                     <div className="formArch">调查时间：<span>{time}</span></div>
                     <div className="formArch">调查地点：<span>{address}</span></div>
-                    <div className="formArch">当事人：<span></span></div>
+                    <div className="formArch">当事人：<span>{litigantsName}</span></div>
                     <div className="formArch">调解人：<span></span></div>
                     <div className="formArch">调查记录：<span>{content}</span></div>
                     <div className="formArch">当事人签字：</div>

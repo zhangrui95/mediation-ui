@@ -18,9 +18,12 @@ import checkvisit from './checkvisit'
 import investigationDetail from './investigationDetail'
 import mediateDetail from './mediateDetail'
 import evidenceDelete from './evidenceDelete'
+import protocolUpdate from './protocolUpdate'
+import checkvisitUpdate from './checkvisitUpdate'
 
 
 
+const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence,investigation,mediate,protocol,protocolSave,checkvisitSave,checkvisit,investigationDetail,mediateDetail,protocolUpdate,checkvisitUpdate};
 const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence,investigation,mediate,protocol,protocolSave,checkvisitSave,checkvisit,investigationDetail,mediateDetail,
     evidenceDelete};
 

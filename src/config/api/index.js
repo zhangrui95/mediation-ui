@@ -1,3 +1,4 @@
+import {NAV_LIST,BANNER,ENT_BIND,LOAD_USER,UPDATE_PASS,VALIDATE_PASS,SELECT_DATA,LIST_ENT,LIST_ENT_RELOAD,LIST_ENT_QUERY,SIGN_IN_USER,ARCHIVE_ADD,ARCHIVE_UPDATE,SIGN_OUT_USER,SUSPEND_WORK,ARCHIVE_DETAIL,LIST_BY_ARCHIVE,INVESTIGATION_LIST,MEDIATE_LIST,PROTOCOL_DETAIL,INVESTIGATION_SAVE,MEDIATE_SAVE,PROTOCOL_SAVE,CHECKVISIT_SAVE,CHECKVISIT_DETAIL,INVESTIGATION_DETAIL,MEDIATE_DETAIL,PROTOCOL_UPDATE,CHECKVISIT_UPDATE} from '../../constants/ActionTypes'
 import {NAV_LIST,BANNER,ENT_BIND,LOAD_USER,UPDATE_PASS,VALIDATE_PASS,SELECT_DATA,LIST_ENT,LIST_ENT_RELOAD,LIST_ENT_QUERY,SIGN_IN_USER,ARCHIVE_ADD,ARCHIVE_UPDATE,SIGN_OUT_USER,SUSPEND_WORK,ARCHIVE_DETAIL,LIST_BY_ARCHIVE,INVESTIGATION_LIST,MEDIATE_LIST,PROTOCOL_DETAIL,INVESTIGATION_SAVE,MEDIATE_SAVE,PROTOCOL_SAVE,CHECKVISIT_SAVE,CHECKVISIT_DETAIL,INVESTIGATION_DETAIL,MEDIATE_DETAIL} from '../../constants/ActionTypes'
 import {EVIDENCE_DELETE} from '../../constants/ActionTypes'
 import {} from '../../constants/ActionTypes'
@@ -121,6 +122,14 @@ const option = {
         }}},
     [EVIDENCE_DELETE]:actionMsg => {return {endpoint: 'api/evidence/delete.json',
         option:{ method: 'POST', body: "id="+actionMsg.id,
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [PROTOCOL_UPDATE]:(actionMsg,formData) => {return {endpoint: 'api/protocol/update.json',
+        option:{ method: 'POST', body: formData2Param(formData),
+            headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
+        }}},
+    [CHECKVISIT_UPDATE]:(actionMsg,formData) => {return {endpoint: 'api/checkVisit/update.json',
+        option:{ method: 'POST', body: formData2Param(formData),
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
 };
