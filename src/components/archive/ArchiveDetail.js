@@ -98,12 +98,12 @@ class ArchiveDetail extends Component {
             }else{
                 newData = {[name]:e.target.value};
             }
-            this.setState({data: merge(this.state.data,newData)});
+            this.setState({data: merge({},this.state.data,newData)});
         }
     }
 
     handleWorkersChange(e,value){
-        this.setState({data: merge(this.state.data,{workerIds:value.join(',')})});
+        this.setState({data: merge({},this.state.data,{workerIds:value.join(',')})});
     }
 
     handleLitigantChange(datas,delId){
@@ -112,7 +112,7 @@ class ArchiveDetail extends Component {
         if(delId && delId !== ''){
             litigantsDel += delId+',';
         }
-        this.setState({data: merge(this.state.data,{litigants:datas,litigantsDel})});
+        this.setState({data: merge({},this.state.data,{litigants:datas,litigantsDel})});
     }
 
     renderByData(data) {

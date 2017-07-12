@@ -47,15 +47,19 @@ class PopMediator extends Component {
             if(value.indexOf(e.target.value) === -1){
                 value.push(e.target.value);
                 this.setState({value});
+                if(this.onChangeHandler){
+                    this.onChangeHandler(e, value);
+                }
             }
         }else{
             const value =  this.state.value;
             if(value.indexOf(e.target.value) !== -1){
-                this.setState({value:value.filter((i)=>i !== e.target.value)});
+                const value2 = value.filter((i)=>i !== e.target.value);
+                this.setState({value: value2});
+                if(this.onChangeHandler){
+                    this.onChangeHandler(e, value2);
+                }
             }
-        }
-        if(this.onChangeHandler){
-            this.onChangeHandler(e, this.state.value);
         }
     }
 
