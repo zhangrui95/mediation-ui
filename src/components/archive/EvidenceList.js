@@ -17,7 +17,8 @@ class EvidenceList extends Component {
     }
 
     render() {
-        const { evidence } = this.props;
+        const { evidence ,params} = this.props;
+        const {id} = params;
         const {response} = evidence;
         const {data} = response||{};
         if(data == null){
@@ -26,7 +27,7 @@ class EvidenceList extends Component {
         return (
             <div>
                 <div className="title-form-name">调查取证</div>
-                <EvidenceCell data={data} reload={this.load.bind(this)}/>
+                <EvidenceCell data={data} dataId={id} reload={this.load.bind(this)}/>
             </div>
         )
     }

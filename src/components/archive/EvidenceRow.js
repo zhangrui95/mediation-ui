@@ -31,7 +31,7 @@ class EvidenceRow extends Component {
 
     download(){
         const {data} = this.props;
-        window.open('/api/evidence/download.json?id='+data.id)
+        window.open('api/evidence/download.json?id='+data.id)
     }
 
     deleteEvidence(){
@@ -49,10 +49,10 @@ class EvidenceRow extends Component {
         let printImgPre;
         let printImgAction;
         let previewPreWidth = 230;
-        if(type===1){
+        if(type===0){
             previewPreWidth = 180;
             previewCell = <td>
-                <img src={"/api/evidence/photo.json?id="+data.id}/>
+                <img src={'api/evidence/photo.json?id='+data.id}/>
             </td>;
             printImgPre = <span> | </span>
             printImgAction = <a onClick={this.printImg.bind(this)}>打印</a>

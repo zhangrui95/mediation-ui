@@ -5,9 +5,9 @@ class EvidenceView extends Component {
 
     render() {
         const {data,type,reload} = this.props;
-        const name = type===0?'视频':(type===1?'照片':'录音');
+        const name = type===0?'照片':(type===1?'录音':'视频');
         let previewHead;
-        if(type===1){
+        if(type===0){
             previewHead = <td>照片浏览</td>;
         }
         const rows = data.filter(i => i.type === type).map(function(it,i){
