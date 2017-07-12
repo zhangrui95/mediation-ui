@@ -42,7 +42,7 @@ class UpLoading extends Component {
         const { dataId} = this.props;
         return (
             <div>
-                <Upload {...props} data={{aid:dataId}}>
+                <Upload {...props} data={{id:dataId}}>
                     <Button>
                         <Icon type="upload" /> 上传
                     </Button>
