@@ -126,13 +126,13 @@ class Investigation extends Component {
                     </div>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" value="打印" /></div>
         }else{
-            times = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={getDateTime(this.state.time)} placeholder="" />
-            addresss = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={this.state.address} placeholder="" />
-            otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={this.state.otherPerson} placeholder="" />
-            targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={this.state.targetPerson} placeholder="" />
+            times = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={getDateTime(this.state.time)} placeholder="" onKeyUp={this.timeChange.bind(this)}/>
+            addresss = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={this.state.address} placeholder="" onKeyUp={this.addressChange.bind(this)}/>
+            otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={this.state.otherPerson} placeholder="" onKeyUp={this.otherPersonChange.bind(this)}/>
+            targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={this.state.targetPerson} placeholder="" onKeyUp={this.targetPersonChange.bind(this)}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
             creatPerson = <div className="formArch">调查人：<input type="button" value="选择" onClick={this.upAddClick.bind(this)}/> </div>
-            contents =  <Input type="textarea" rows={4} defaultValue={this.state.content}/>;
+            contents =  <Input type="textarea" rows={4} defaultValue={this.state.content} onKeyUp={this.contentChange.bind(this)}/>;
             sign = '';
         }
         return (
