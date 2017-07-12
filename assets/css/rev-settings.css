@@ -5,19 +5,24 @@ html {
 	margin: 0px !important;
 }
 .bg-img {
-	background: url(../images/login-bg.jpg) no-repeat;
-	height: 750px;
+	/*background: url(../images/login-bg.jpg) no-repeat;*/
+	height: 920px;
 	width: 100%;
+}
+.img-bg{
+	width: 100%;
+	position: absolute;
+	max-height: 920px;
 }
 .fullwidthbanner-container {
 	width: 100% !important;
 	position: relative;
 	padding: 0;
 	overflow: hidden;
-	background: #666;
+	background: #fff;
 }
 .revolution-slider {
-	max-height: 700px !important;
+	max-height: 900px !important;
 	display: block;
 	position: relative;
 }
