@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {INVESTIGATION_DETAIL} from '../../constants/ActionTypes'
-import {INVESTIGATION_UPDATE} from '../../constants/ActionTypes'
-import {INVESTIGATION_SAVE} from '../../constants/ActionTypes'
+import {INVESTIGATION_DETAIL,INVESTIGATION_UPDATE,INVESTIGATION_SAVE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 import {getDateTime} from '../../utils/date';
 import Pop from '../pop/Pop';
@@ -18,13 +16,27 @@ class Investigation extends Component {
         const {mid} = params;
         this.state = {addBox:false,model: mid !== 'create'||null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',data:{}};
     }
-    componentWillReceiveProps(next) {
-        const {investigationDetail} = this.props;
-        const {response} = investigationDetail;
-        const {state,data} = response||{};
-        const {investTime,address,otherPerson,targetPerson,content} = data||{};
-        if(state == 0){
-            this.setState({model:1,time:investTime,address:address,otherPerson:otherPerson,targetPerson:targetPerson,content:content});
+    componentWillReceiveProps(next){
+        const {actions} = this.props;
+        const {investigationDetail} = next;
+        const {response,action,actionResponse} = investigationDetail;
+        if(action === 'add' && response) {
+            const {state, data} = response || {};
+            const {investTime,address,otherPerson,targetPerson,content} = data||{};
+            if(state == 0){
+                this.setState({model:1,time:investTime,address:address,otherPerson:otherPerson,targetPerson:targetPerson,content:content});
+            }
+            actions.resetAction();
+        }else if(action === 'update' && actionResponse){
+            const {state,data} = actionResponse || {};
+            const {investTime,address,otherPerson,targetPerson,content} = data||{};
+            if (state === 0) {
+                this.setState({model:1,time:investTime,address:address,otherPerson:otherPerson,targetPerson:targetPerson,content:content});
+            }
+            actions.resetAction();
+        }else if(response){
+            const {data} = response || {};
+            this.setState({data:merge({},data||{})});
         }
     }
     upAddClick(){
@@ -71,6 +83,7 @@ class Investigation extends Component {
         this.setState({content:e.target.value});
     }
     onSave(){
+        this.setState({model:1});
         const {actions,params} = this.props;
         const {mid} = params;
         actions.request(INVESTIGATION_SAVE,null,{mid:mid,investTime:this.state.time,address:this.state.address,otherPerson:this.state.otherPerson,targetPerson:this.state.targetPerson,content:this.state.content});

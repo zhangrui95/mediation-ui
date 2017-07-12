@@ -31,13 +31,13 @@ class SurveyList extends Component {
                 <tr className="odd" key={i}>
                     <td width="40">{i+1}</td>
                     <td width="230">
-                        <a className="view-cell" href="javascript:;">{time}</a>
+                        <a className="view-cell" href="javascript:;" onClick={this.clickHandler.bind(this)}>{time}</a>
                     </td>
                     <td>{address}</td>
                     <td>{otherPerson}</td>
                     <td>{targetPerson}</td>
                     <td>{content}</td>
-                    <td><a onClick={this.clickHandler.bind(this)} >编辑</a><span> | </span><a>打印</a></td>
+                    <td><a onClick={this.clickHandler.bind(this)}>编辑</a><span> | </span><a>打印</a></td>
                 </tr>
             )
         }

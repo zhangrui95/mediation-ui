@@ -75,8 +75,8 @@ class Mediate extends Component {
             return null;
         }
         if(model === 0){
-            time = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={getDateTime(this.state.time)} onKeyUp={this.timeChange.bind(this)} placeholder="" />
-            contents =  <Input type="textarea" rows={4} defaultValue={this.state.content} onKeyUp={this.contentChange.bind(this)}/>;
+            time = <Input name="name" className="text-input"  style={{ width: 300 }} onKeyUp={this.timeChange.bind(this)} placeholder="" />
+            contents =  <Input type="textarea" rows={4}  onKeyUp={this.contentChange.bind(this)}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
         }else if(model === 1){
             time = getDateTime(mediateTime);
