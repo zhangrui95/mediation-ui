@@ -70,7 +70,7 @@ class CheckVisit extends Component {
         const {response} = checkvisit;
         const {data} = response||{};
         const litigantsName = this.getLitigants(archive);
-        if(response == null){
+        if(data == null){
             return null;
         }
 
