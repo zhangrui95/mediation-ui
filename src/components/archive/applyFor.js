@@ -46,6 +46,14 @@ class ApplyFor extends Component {
         }
     }
 
+    getLitigants(){
+        const { archive } = this.props;
+        const {response} = archive;
+        const {data} = response||{};
+        const {litigants} = data||{};
+        return litigants||[];
+    }
+
     render() {
         return (
             <div>
@@ -53,7 +61,7 @@ class ApplyFor extends Component {
                 <div className="formBorder">
                         <div className="border-box">
                             <div className="formArch">当事人</div>
-                            <PartyCell/>
+                            <PartyCell litigants={this.getLitigants()}/>
                         </div>
                         <div className="border-box">
                             <div className="formArch">纠纷简要情况</div>

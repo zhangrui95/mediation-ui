@@ -7,7 +7,6 @@ import {CHECKVISIT_SAVE,CHECKVISIT_DETAIL,CHECKVISIT_UPDATE} from '../../constan
 import * as syncActions from '../../actions/syncAction'
 import * as checkvisitActions from '../../actions/checkvisit'
 import {getDateTime} from '../../utils/date';
-import merge from 'lodash/merge'
 
 class CheckVisit extends Component {
     constructor(props, context) {
@@ -21,7 +20,7 @@ class CheckVisit extends Component {
         if(action === 'add' && response) {
             const {state, data} = response || {};
             if (state === 0) {
-                this.setState({model:1,data:merge({},data||{})});
+                this.setState({model:1,input:data.content,date:getDateTime(data.visitTime)});
             }
             actions.resetAction();
         }else if(action === 'update' && actionResponse){
@@ -47,12 +46,11 @@ class CheckVisit extends Component {
         this.setState({model:2,input:data.content,date:getDateTime(data.visitTime)});
     }
     updateArchive(){
-        const {syncActions,params,checkvisit} = this.props;
-        const {id} = params;
+        const {syncActions,checkvisit} = this.props;
         const {response} = checkvisit;
         const {data} = response||{};
         const applyTime = this.state.date;
-        syncActions.request(CHECKVISIT_UPDATE,null,{id:data.id,content:this.state.input,visitTime:applyTime===''?this.state.defaultTime:applyTime,archive:{id}});
+        syncActions.request(CHECKVISIT_UPDATE,null,{id:data.id,content:this.state.input,visitTime:applyTime===''?this.state.defaultTime:applyTime});
     }
 
     inputChange(e){
