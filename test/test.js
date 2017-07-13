@@ -87,7 +87,7 @@ fetchMock.mock(DEV_REQ_HOST+'api/litigant/save.json',{state:0, data:{id:'1'}});
 
 fetchMock.mock(DEV_REQ_HOST+'api/litigant/update.json',{state:0});
 
-fetchMock.post('^'+DEV_REQ_HOST+'api/archiveWorker/workers.json',function(){
+fetchMock.mock('^'+DEV_REQ_HOST+'api/archiveWorker/workers.json',function(){
     return [
         {id:'2',name:'调解员1'},
         {id:'3',name:'调解员2'}
