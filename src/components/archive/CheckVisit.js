@@ -8,11 +8,12 @@ import * as syncActions from '../../actions/syncAction'
 import * as checkvisitActions from '../../actions/checkvisit'
 import * as arhciveActions from '../../actions/arhcive'
 import {getDateTime} from '../../utils/date';
+import PopAlert from '../pop/PopAlert';
 
 class CheckVisit extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {model: 0,input:'',date:'',defaultTime:getDateTime(new Date().getTime())};
+        this.state = {model: 0,input:'',date:'',defaultTime:getDateTime(new Date().getTime()),msg:''};
     }
     componentWillReceiveProps(next) {
         const {actions,arhciveActions} = this.props;
@@ -49,6 +50,9 @@ class CheckVisit extends Component {
         this.setState({model:2,input:data.content,date:getDateTime(data.visitTime)});
     }
     updateArchive(){
+        if(!this.validate()){
+            return
+        }
         const {syncActions,checkvisit} = this.props;
         const {response} = checkvisit;
         const {data} = response||{};
@@ -68,10 +72,26 @@ class CheckVisit extends Component {
         this.setState({date: date.visitTime});
     }
     onSave(){
+        if(!this.validate()){
+            return
+        }
         const {syncActions,params} = this.props;
         const {id} = params;
         const applyTime = this.state.date;
         syncActions.request(CHECKVISIT_SAVE,null,{content:this.state.input,visitTime:applyTime===''?this.state.defaultTime:applyTime,archive:{id}});
+    }
+
+    validate(){
+        console.log('this.state',this.state)
+        if(this.state.date === ''){
+            this.setState({msg:'回访时间不能为空'});
+            return false;
+        }
+        if(this.state.input === ''){
+            this.setState({msg:'回访情况不能为空'});
+            return false;
+        }
+        return true;
     }
 
     getLitigants(archive){
@@ -120,6 +140,7 @@ class CheckVisit extends Component {
                     <div className="formArch"><div className="margin-form">回访情况：</div>{content}</div>
                     {btns}
                 </div>
+                <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
     }
