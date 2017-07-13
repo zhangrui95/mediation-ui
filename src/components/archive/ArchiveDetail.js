@@ -11,6 +11,7 @@ import Pop from '../pop/Pop';
 import PopMediator from './PopMediator'
 import AddPartyinput from './AddPartyinput'
 import merge from 'lodash/merge'
+import PopAlert from '../pop/PopAlert';
 
 class ArchiveDetail extends Component {
     constructor(props, context) {
@@ -19,7 +20,7 @@ class ArchiveDetail extends Component {
         const {id} = params;
         const {response} = archive;
         const {data} = response || {};
-        this.state = {addBox:false,passConfirm:false,goOutConfirm:false, model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},data||{})};
+        this.state = {addBox:false,passConfirm:false,goOutConfirm:false, model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},data||{}),msg:''};
     }
 
     componentWillReceiveProps(next) {
@@ -76,11 +77,17 @@ class ArchiveDetail extends Component {
     }
 
     addNewArchive(){
+        if(!this.validate()){
+            return
+        }
         const {syncActions} = this.props;
         syncActions.request(ARCHIVE_ADD,null,this.getData());
     }
 
     updateArchive(){
+        if(!this.validate()){
+            return
+        }
         const {syncActions} = this.props;
         syncActions.request(ARCHIVE_UPDATE,null,this.getData());
     }
@@ -113,6 +120,28 @@ class ArchiveDetail extends Component {
             litigantsDel += delId+',';
         }
         this.setState({data: merge({},this.state.data,{litigants:datas,litigantsDel})});
+    }
+
+    validate(){
+       // let litigants = this.state.data.litigants.map((i)=>i.name);
+       //  console.log(litigants);
+        if(this.state.data.name === ''){
+            this.setState({msg:'卷宗名称不能为空'});
+            return false;
+        }
+        if(this.state.data.type.id === ''){
+            this.setState({msg:'请选择卷宗类别'});
+            return false;
+        }
+        if(this.state.data.content === ''){
+            this.setState({msg:'纠纷简要情况不能为空'});
+            return false;
+        }
+        if(this.state.data.manager.id === ''){
+            this.setState({msg:'请选择调解员'});
+            return false;
+        }
+        return true;
     }
 
     renderByData(data) {
@@ -254,6 +283,7 @@ class ArchiveDetail extends Component {
                     <div className="formArch"><span className="word-title">登记日期：</span><span>{createTime}</span></div>
                     {btns}
                 </div>
+                <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
     }

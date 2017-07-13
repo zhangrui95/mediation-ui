@@ -1,6 +1,53 @@
 import React, { Component, PropTypes } from 'react'
+import HeaderTop from "./HeaderTop";
+var msg=[
+    {
+        'route':'',
+        'name':'登记表',
+        'index': 0,
+    },
+    {
+        'route':'/evidence',
+        'name':'调查取证',
+        'index': 1,
+    },
+    {
+        'route':'/applyFor',
+        'name':'申请书',
+        'index': 2,
+    },
+    {
+        'route':'/investigation',
+        'name':'调查表',
+        'index': 3,
+    },
+    {
+        'route':'/mediate',
+        'name':'调解记录',
+        'index': 4,
+    },
+    {
+        'route':'/protocol',
+        'name':'协议书',
+        'index': 5,
+    },
+    {
+        'route':'/checkVisit',
+        'name':'回访记录',
+        'index': 6,
+    },
+    {
+        'route':'/finish',
+        'name':'完结',
+        'index': 7,
+    },
 
+];
 class ArchiveHeader extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {index:''};
+    }
     clickHandler(e){
         const { params } = this.props;
         const {id} = params;
@@ -16,18 +63,14 @@ class ArchiveHeader extends Component {
         router.push('/list/archive');
     }
     render() {
+        const list = msg.map(function(data,i){
+            return <HeaderTop key={i} data={data}/>
+        });
         return (
             <div>
                 <a className="go-first" onClick={this.goBack.bind(this)}>&lt;&lt;返回首页</a>
                 <div className="archeader-box" onClick={this.clickHandler.bind(this)} >
-                    <div data-route="" className="header-top">登记表</div>
-                    <div data-route="/evidence" className="header-top">调查取证</div>
-                    <div data-route="/applyFor" className="header-top">申请书</div>
-                    <div data-route="/investigation" className="header-top">调查表</div>
-                    <div data-route="/mediate" className="header-top">调解记录</div>
-                    <div data-route="/protocol" className="header-top">协议书</div>
-                    <div data-route="/checkVisit" className="header-top">回访记录</div>
-                    <div data-route="/finish" className="header-top">完结</div>
+                    {list}
                 </div>
             </div>
         )
