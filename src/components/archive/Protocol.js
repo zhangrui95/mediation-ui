@@ -51,6 +51,9 @@ class Protocol extends Component {
     }
 
     updateArchive(){
+        if(!this.validate()){
+            return
+        }
         this.setState({model:1});
         const {syncActions,protocol} = this.props;
         const {response} = protocol;
@@ -74,6 +77,9 @@ class Protocol extends Component {
         this.setState({remark:e.target.value});
     }
     onSave(){
+        if(!this.validate()){
+            return
+        }
         const {syncActions,params} = this.props;
         const {id} = params;
         syncActions.request(PROTOCOL_SAVE,null,{result:this.state.result,content:this.state.content,remark:this.state.remark,archive:{id}});
@@ -95,12 +101,16 @@ class Protocol extends Component {
     }
 
     validate(){
-        if(this.state.date === ''){
-            this.setState({msg:'回访时间不能为空'});
+        if(this.state.result === ''){
+            this.setState({msg:'请选择调解结果'});
             return false;
         }
-        if(this.state.input === ''){
-            this.setState({msg:'回访情况不能为空'});
+        if(this.state.content === ''){
+            this.setState({msg:'调解协议不能为空'});
+            return false;
+        }
+        if(this.state.remark === ''){
+            this.setState({msg:'履行方式、时限不能为空'});
             return false;
         }
         return true;

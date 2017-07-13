@@ -1,13 +1,14 @@
-import React, { Component, PropTypes } from 'react'
-import { bindActionCreators } from 'redux'
+import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {ARCHIVE_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction';
 import * as arhciveActions from '../../actions/arhcive';
 import {getDateTime} from '../../utils/date';
-import PartyCell from './PartyCell'
-import TimeChoice from './TimeChoice'
-import DisputeCase from './DisputeCase'
+import PartyCell from './PartyCell';
+import TimeChoice from './TimeChoice';
+import DisputeCase from './DisputeCase';
+import PopAlert from '../pop/PopAlert';
 
 class ApplyFor extends Component {
 
@@ -17,7 +18,7 @@ class ApplyFor extends Component {
         const {response} = archive;
         const {data} = response||{};
         const {applyTime} = data||{};
-        this.state = {applyTime:getDateTime(applyTime),defaultTime:getDateTime(new Date().getTime())};
+        this.state = {applyTime:getDateTime(applyTime),defaultTime:getDateTime(new Date().getTime()),msg:''};
     }
 
     componentWillReceiveProps(next) {
@@ -38,6 +39,9 @@ class ApplyFor extends Component {
     }
 
     saveApply(){
+        if(!this.validate()){
+            return
+        }
         const {syncActions,params} = this.props;
         const {id} = params;
         if(id !== null && id !== undefined && id !== ''){
@@ -52,6 +56,14 @@ class ApplyFor extends Component {
         const {data} = response||{};
         const {litigants} = data||{};
         return litigants||[];
+    }
+
+    validate(){
+        if(this.state.applyTime === ''){
+            this.setState({msg:'申请时间不能为空'});
+            return false;
+        }
+        return true;
     }
 
     render() {
@@ -73,6 +85,7 @@ class ApplyFor extends Component {
                         </div>
                         <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.saveApply.bind(this)} className="addPerson"/></div>
                     </div>
+                <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
     }
