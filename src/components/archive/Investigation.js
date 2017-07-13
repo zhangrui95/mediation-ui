@@ -51,6 +51,7 @@ class Investigation extends Component {
         return true;
     }
     handleWorkersChange(e,value){
+        console.log('invest value',value)
         this.setState({workerIds:value.join(',')});
     }
     updateModel(){
@@ -96,12 +97,10 @@ class Investigation extends Component {
         const applyTime = this.state.time;
         syncActions.request(INVESTIGATION_SAVE,null,{investTime:applyTime===''?this.state.defaultTime:applyTime,address:this.state.address,otherPerson:this.state.otherPerson,targetPerson:this.state.targetPerson,content:this.state.content,workerIds:this.state.workerIds,archive:{id}});
     }
-    getWorkers(investigationDetail){
-        const {response} = investigationDetail;
-        const {data} = response||{};
+    getWorkers(){
         let workerValue = [];
-        if(data && data.workers){
-            workerValue = (data.workers||[]).map(i=>(i.worker||{}).id||'');
+        if(this.state.workerIds && this.state.workerIds!==''){
+            workerValue = this.state.workerIds.split(',');
         }
         return workerValue;
     }
@@ -132,10 +131,11 @@ class Investigation extends Component {
         let btns = '';
         const model = this.state.model;
         const { params,investigationDetail} = this.props;
+        const {id} = params;
         const {response} = investigationDetail;
         const {data} =  response||{};
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
-        const workerValue = this.getWorkers(investigationDetail);
+        const workerValue = this.getWorkers();
         const workerNames = this.getWorkersName(investigationDetail);
 
         if(model === 0){
@@ -183,7 +183,7 @@ class Investigation extends Component {
                     <div className="formArch">被调查人：<span>{targetPersons}</span></div>
                     {creatPerson}
                     <Pop title="选择调查人" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
-                        <PopMediator domain="workers" url="api/archiveWorker/workers.json" name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
+                        <PopMediator domain="workers" url={'api/archiveWorker/workers.json?aid='+id} name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
                     </Pop>
                     <div className="formArch">调查记录：<span>{contents}</span></div>
                     {sign}

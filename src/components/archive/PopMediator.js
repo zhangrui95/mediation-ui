@@ -27,14 +27,11 @@ class PopMediator extends Component {
     }
 
     loadSelect(){
-        const	{actions,selectItemData,url,domain}=this.props;
+        const	{actions,url,domain}=this.props;
         if(url===null||url===undefined||url===''||domain===null||domain===undefined||domain===''){
             return;
         }
-        const domainData =(selectItemData||{})[domain];
-        if(domainData===null||domainData===undefined){
-            actions.request(SELECT_DATA,{domain},url);
-        }
+        actions.request(SELECT_DATA,{domain},url);
     }
 
     value(){
@@ -44,9 +41,9 @@ class PopMediator extends Component {
     handleChange(e){
         if(e.target.checked){
             const value =  this.state.value;
-            if(value.indexOf(e.target.value) === -1){
+            if(value.indexOf(e.target.value) === -1 || value.length === 0){
                 value.push(e.target.value);
-                this.setState({value});
+                this.setState({value:Object.assign([],value)});
                 if(this.onChangeHandler){
                     this.onChangeHandler(e, value);
                 }
@@ -55,7 +52,7 @@ class PopMediator extends Component {
             const value =  this.state.value;
             if(value.indexOf(e.target.value) !== -1){
                 const value2 = value.filter((i)=>i !== e.target.value);
-                this.setState({value: value2});
+                this.setState({value: Object.assign([],value2)});
                 if(this.onChangeHandler){
                     this.onChangeHandler(e, value2);
                 }

@@ -19,6 +19,9 @@ class ArchiveDetail extends Component {
         const {id} = params;
         const {response} = archive;
         const {data} = response || {};
+        if(data){
+            data.workerIds = this.getWorkersValue(data)
+        }
         this.state = {addBox:false,passConfirm:false,goOutConfirm:false, model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},data||{})};
     }
 
@@ -31,18 +34,23 @@ class ArchiveDetail extends Component {
             if (state === 0) {
                 const	{router}	=	this.context;
                 router.replace('/archive/'+data.id);
+                data.workerIds = this.getWorkersValue(data)
                 this.setState({model:1,data:merge({},data||{})});
             }
             actions.resetAction();
         }else if(action === 'update' && actionResponse){
             const {state,data} = actionResponse || {};
             if (state === 0) {
+                data.workerIds = this.getWorkersValue(data)
                 this.setState({model:1,data:merge({},data||{})});
             }
             actions.resetAction(data);
         }else if(response){
             if(!this.state.data.id){
                 const {data} = response || {};
+                if(data){
+                    data.workerIds = this.getWorkersValue(data)
+                }
                 this.setState({data:merge({},data||{})});
             }
         }
@@ -103,6 +111,7 @@ class ArchiveDetail extends Component {
     }
 
     handleWorkersChange(e,value){
+        console.log('detail value',value)
         this.setState({data: merge({},this.state.data,{workerIds:value.join(',')})});
     }
 
@@ -113,6 +122,14 @@ class ArchiveDetail extends Component {
             litigantsDel += delId+',';
         }
         this.setState({data: merge({},this.state.data,{litigants:datas,litigantsDel})});
+    }
+
+    getWorkersValue(data){
+        let workerValue = '';
+        if(data && data.workers){
+            workerValue = (data.workers||[]).map(i=>(i.worker||{}).id||'').join(',');
+        }
+        return workerValue;
     }
 
     renderByData(data) {
@@ -204,11 +221,9 @@ class ArchiveDetail extends Component {
             creater = data.creater.name;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
         }
-        let workerValue;
+        let workerValue = [];
         if(data.workerIds){
             workerValue = data.workerIds.split(',');
-        }else if(data.workers){
-            workerValue = data.workers.map(i=>i.worker.id);
         }
         return (
             <div>
