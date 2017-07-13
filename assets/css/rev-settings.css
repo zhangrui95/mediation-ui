@@ -6,13 +6,58 @@ html {
 }
 .bg-img {
 	/*background: url(../images/login-bg.jpg) no-repeat;*/
-	height: 920px;
+	height: 940px;
+	max-height:940px;
 	width: 100%;
+}
+@media screen and (min-width:640px) and (max-width:1024px) {
+	.bg-img {
+		height: 560px;
+		max-height:560px;
+	}
+}
+@media screen and (min-width:1024px) and (max-width:1360px) {
+	.bg-img{
+		height: 700px;
+		max-height:700px;
+	}
+}
+@media screen and (min-width:1360px) and (max-width:1680px) {
+	.bg-img{
+		height: 860px;
+		max-height:860px;
+	}
+}
+@media screen and (min-width:1680px) and (max-width:1920px) {
+	.bg-img{
+		height: 940px;
+		max-height:940px;
+	}
 }
 .img-bg{
 	width: 100%;
 	position: absolute;
-	max-height: 920px;
+	max-height: 940px;
+}
+@media screen and (min-width:640px) and (max-width:1024px) {
+	.img-bg {
+		max-height: 560px;
+	}
+}
+@media screen and (min-width:1024px) and (max-width:1360px) {
+	.img-bg{
+		max-height: 700px;
+	}
+}
+@media screen and (min-width:1360px) and (max-width:1680px) {
+	.img-bg{
+		max-height: 860px;
+	}
+}
+@media screen and (min-width:1680px) and (max-width:1920px) {
+	.img-bg{
+		max-height: 940px;
+	}
 }
 .fullwidthbanner-container {
 	width: 100% !important;
@@ -22,9 +67,29 @@ html {
 	background: #fff;
 }
 .revolution-slider {
-	max-height: 900px !important;
+	max-height: 940px !important;
 	display: block;
 	position: relative;
+}
+@media screen and (min-width:640px) and (max-width:1024px) {
+	.revolution-slider {
+		max-height: 560px;
+	}
+}
+@media screen and (min-width:1024px) and (max-width:1360px) {
+	.revolution-slider{
+		max-height: 700px;
+	}
+}
+@media screen and (min-width:1360px) and (max-width:1680px) {
+	.revolution-slider{
+		max-height: 860px;
+	}
+}
+@media screen and (min-width:1680px) and (max-width:1920px) {
+	.revolution-slider{
+		max-height: 940px;
+	}
 }
 .med-white {    /*med size*/
 	color: #fff;

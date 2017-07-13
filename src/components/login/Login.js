@@ -111,7 +111,6 @@ class Login extends Component {
             <div className="revolution-slider">
                 <ul><li className="bg-img" >
                     <img src="assets/images/login-bg.png" className="img-bg"/>
-                    <div className="logo-top"></div>
                     <div className="login-main">
                         <Tips/>
                         <div className="login-right" onChange={this.handlerChange.bind(this)}>
@@ -134,7 +133,7 @@ class Login extends Component {
     }
 
 }
-// {APP_TITLE_NAME}
+// <div className="logo-top">{APP_TITLE_NAME}</div>
 Login.propTypes = {
     header: PropTypes.object.isRequired
 };

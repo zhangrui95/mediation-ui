@@ -9,7 +9,7 @@ export const CHANGE_PASS_FAIL = '1';
 export const CHANGE_PASS_OLD_ERROR = '-1';
 
 // export const APP_TITLE_NAME = '哈尔滨市安全生产综合监督管理平台';
-export const APP_TITLE_NAME = '哈尔滨市清滨人民调解平台';
+export const APP_TITLE_NAME = '哈尔滨市人民调解平台——清滨调解中心';
 export const SESSION_TIMEOUT_MSG = '用户登录已超时';
 
 export const CAPTCHA_URL = process.env.NODE_ENV === 'production' ? 'captcha.jpg':'assets/images/captcha-photo.jpg';
