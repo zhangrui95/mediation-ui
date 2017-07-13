@@ -7,24 +7,44 @@ import * as syncActions from '../../actions/syncAction'
 
 class MediateList extends Component {
     componentWillMount(){
+        this.load();
+    }
+
+    load(){
         const {actions,params} = this.props;
         const {id} = params;
         actions.request(MEDIATE_LIST,{id});
     }
+
     clickHandler(e){
         const { params } = this.props;
         const {id} = params;
-
         if(id !==null && id !== undefined && id!== ''){
             const	{router}	=	this.context;
             router.push('/archive/'+id+'/mediate/create');
         }
     }
+    getLitigants(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        const {litigants}= data||{};
+        return (litigants||[]).map((i)=>i.name).join(',');
+    }
+    getWorkers(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        const {workers,manager}= data||{};
+        let wnames = (workers||[]).map((i)=>i.worker.name).join(',');
+        if(wnames !== ''){
+            wnames = ','+wnames;
+        }
+        return manager.name+wnames;
+    }
     render() {
-        const { mediate,params  } = this.props;
+        const { mediate,params,archive} = this.props;
         const {response} = mediate;
         const {data} = response||{};
-        if(data == null){
+        if(data === null||data === undefined){
             return null;
         }
         return (
@@ -33,7 +53,7 @@ class MediateList extends Component {
                 <div className="formArch">
                     <dic className="list-right" onClick={this.clickHandler.bind(this)}>新建</dic>
                 </div>
-                <MediateCell params={params} data={data}/>
+                <MediateCell params={params} data={data} litigants={this.getLitigants(archive)} workers={this.getWorkers(archive)}/>
             </div>
         )
     }
@@ -49,7 +69,8 @@ MediateList.contextTypes = {
 
 function	select(state)	{
     return	{
-        mediate:state.mediate
+        mediate:state.mediate,
+        archive:state.archive
     };
 }
 
