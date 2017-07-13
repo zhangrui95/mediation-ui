@@ -8,14 +8,14 @@ import {getDateTime} from '../../utils/date';
 import Pop from '../pop/Pop';
 import PopMediator from './PopMediator'
 import { Input } from 'antd';
-import merge from 'lodash/merge'
+import TimeChoice from './TimeChoice'
 
 class Investigation extends Component {
     constructor(props, context) {
         super(props, context);
         const { params} = props;
         const {mid} = params;
-        this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',defaultTime:getDateTime(new Date().getTime())};
+        this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',defaultTime:getDateTime(new Date().getTime())};
     }
     componentWillReceiveProps(next){
         const {actions,params} = this.props;
@@ -26,21 +26,21 @@ class Investigation extends Component {
             if (state === 0) {
                 const	{router}	=	this.context;
                 router.replace('/archive/'+params.id+'/investigation/'+data.id);
-                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content});
+                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:this.getWorkersValue(data)});
             }
             actions.resetAction(actionResponse);
         }else if(action === 'update' && actionResponse){
             const {state,data} = actionResponse || {};
             if (state === 0) {
-                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content});
+                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:this.getWorkersValue(data)});
             }
             actions.resetAction(actionResponse);
         }else if(response){
             const {state,data} = response||{};
             if(state === 0){
-                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content});
+                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:this.getWorkersValue(data)});
             }else{
-                this.setState({model:0,time:'',address:'',otherPerson:'',targetPerson:'',content:''});
+                this.setState({model:0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:''});
             }
         }
     }
@@ -51,21 +51,21 @@ class Investigation extends Component {
         return true;
     }
     handleWorkersChange(e,value){
-        this.setState({data: merge(this.state.data,{workerIds:value.join(',')})});
+        this.setState({workerIds:value.join(',')});
     }
     updateModel(){
         const { investigationDetail} = this.props;
         const {response} = investigationDetail;
         const {data} = response||{};
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
-        this.setState({model:2,time:getDateTime(investTime),address:address,otherPerson:otherPerson,targetPerson:targetPerson,content:content});
+        this.setState({model:2,time:getDateTime(investTime),address:address,otherPerson:otherPerson,targetPerson:targetPerson,content:content,workerIds:this.getWorkersValue(data)});
     }
     updateArchive(){
-        const {syncActions,mediateDetail} = this.props;
-        const {response} = mediateDetail;
+        const {syncActions,investigationDetail} = this.props;
+        const {response} = investigationDetail;
         const {data} = response||{};
         const applyTime = this.state.time;
-        syncActions.request(INVESTIGATION_UPDATE,null,{id:data.id,investTime:applyTime===''?this.state.defaultTime:applyTime,address:this.state.address,otherPerson:this.state.otherPerson,targetPerson:this.state.targetPerson,content:this.state.content});
+        syncActions.request(INVESTIGATION_UPDATE,null,{id:data.id,investTime:applyTime===''?this.state.defaultTime:applyTime,address:this.state.address,otherPerson:this.state.otherPerson,targetPerson:this.state.targetPerson,content:this.state.content,workerIds:this.state.workerIds});
     }
 
     componentWillMount(){
@@ -94,16 +94,30 @@ class Investigation extends Component {
         const {syncActions,params} = this.props;
         const {id} = params;
         const applyTime = this.state.time;
-        syncActions.request(INVESTIGATION_SAVE,null,{investTime:applyTime===''?this.state.defaultTime:applyTime,address:this.state.address,otherPerson:this.state.otherPerson,targetPerson:this.state.targetPerson,content:this.state.content,archive:{id}});
+        syncActions.request(INVESTIGATION_SAVE,null,{investTime:applyTime===''?this.state.defaultTime:applyTime,address:this.state.address,otherPerson:this.state.otherPerson,targetPerson:this.state.targetPerson,content:this.state.content,workerIds:this.state.workerIds,archive:{id}});
     }
-    getWorkers(archive){
-        const {response} = archive;
+    getWorkers(investigationDetail){
+        const {response} = investigationDetail;
         const {data} = response||{};
-        let workerValue;
-        if(data.workerIds){
-            workerValue = data.workerIds.split(',');
-        }else if(data.workers){
-            workerValue = data.workers.map(i=>i.worker.id);
+        let workerValue = [];
+        if(data && data.workers){
+            workerValue = (data.workers||[]).map(i=>(i.worker||{}).id||'');
+        }
+        return workerValue;
+    }
+    getWorkersValue(data){
+        let workerValue = '';
+        if(data && data.workers){
+            workerValue = (data.workers||[]).map(i=>(i.worker||{}).id||'').join(',');
+        }
+        return workerValue;
+    }
+    getWorkersName(investigationDetail){
+        const {response} = investigationDetail;
+        const {data} = response||{};
+        let workerValue = '';
+        if(data && data.workers){
+            workerValue = (data.workers||[]).map(i=>(i.worker||{}).name||'').join(',');
         }
         return workerValue;
     }
@@ -117,20 +131,20 @@ class Investigation extends Component {
         let sign = '';
         let btns = '';
         const model = this.state.model;
-        const { archive , params,investigationDetail} = this.props;
+        const { params,investigationDetail} = this.props;
         const {response} = investigationDetail;
-        const {data,state} =  response||{};
+        const {data} =  response||{};
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
-        const workerValue = this.getWorkers(archive);
-
+        const workerValue = this.getWorkers(investigationDetail);
+        const workerNames = this.getWorkersName(investigationDetail);
 
         if(model === 0){
-            times = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" onKeyUp={this.timeChange.bind(this)} />
-            addresss = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder=""  onKeyUp={this.addressChange.bind(this)}/>
-            otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" onKeyUp={this.otherPersonChange.bind(this)}/>
-            targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" onKeyUp={this.targetPersonChange.bind(this)}/>
-            creatPerson = <div className="formArch">调查人：<input type="button" value="选择" /> </div>
-            contents =  <Input type="textarea" rows={4} onKeyUp={this.contentChange.bind(this)}/>;
+            times = <TimeChoice name="investTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
+            addresss = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.address} placeholder=""  onChange={this.addressChange.bind(this)}/>
+            otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" value={this.state.otherPerson} onChange={this.otherPersonChange.bind(this)}/>
+            targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" value={this.state.targetPerson} onChange={this.targetPersonChange.bind(this)}/>
+            creatPerson = <div className="formArch">调查人：<input type="button" value="选择" onClick={this.upAddClick.bind(this)}/> {workerNames}</div>
+            contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
         }else if(model === 1){
             if(data === null || data === undefined){
@@ -141,7 +155,6 @@ class Investigation extends Component {
             otherPersons =  otherPerson;
             targetPersons =  targetPerson;
             contents =  content;
-            creatPerson = ''
             sign = <div>
                         <div className="formArch">被调查人签字：</div>
                         <div className="formArch">调查人签字：</div>
@@ -151,13 +164,13 @@ class Investigation extends Component {
             if(data === null || data === undefined){
                 return null;
             }
-            times = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={getDateTime(this.state.time)} placeholder="" onKeyUp={this.timeChange.bind(this)}/>
-            addresss = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={this.state.address} placeholder="" onKeyUp={this.addressChange.bind(this)}/>
-            otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={this.state.otherPerson} placeholder="" onKeyUp={this.otherPersonChange.bind(this)}/>
-            targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={this.state.targetPerson} placeholder="" onKeyUp={this.targetPersonChange.bind(this)}/>
+            times = <TimeChoice name="investTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
+            addresss = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.address} placeholder="" onChange={this.addressChange.bind(this)}/>
+            otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.otherPerson} placeholder="" onChange={this.otherPersonChange.bind(this)}/>
+            targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.targetPerson} placeholder="" onChange={this.targetPersonChange.bind(this)}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
-            creatPerson = <div className="formArch">调查人：<input type="button" value="选择" onClick={this.upAddClick.bind(this)}/> </div>
-            contents =  <Input type="textarea" rows={4} defaultValue={this.state.content} onKeyUp={this.contentChange.bind(this)}/>;
+            creatPerson = <div className="formArch">调查人：<input type="button" value="选择" onClick={this.upAddClick.bind(this)}/>{workerNames} </div>
+            contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
             sign = '';
         }
         return (
@@ -170,7 +183,7 @@ class Investigation extends Component {
                     <div className="formArch">被调查人：<span>{targetPersons}</span></div>
                     {creatPerson}
                     <Pop title="选择调查人" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
-                        <PopMediator domain="manager.id" url="api/user/listByRole.json?role=2" name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
+                        <PopMediator domain="workers" url="api/archiveWorker/workers.json" name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
                     </Pop>
                     <div className="formArch">调查记录：<span>{contents}</span></div>
                     {sign}
@@ -185,9 +198,12 @@ Investigation.propTypes = {
     children: PropTypes.node
 };
 
+Investigation.contextTypes = {
+    router: PropTypes.object
+};
+
 function	select(state)	{
     return	{
-        archive:state.archive,
         investigationDetail:state.investigationDetail
     };
 }
