@@ -108,11 +108,17 @@ class Protocol extends Component {
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
             resulttext = <Select domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} head="请选择" onChangeHandler={this.handleChange.bind(this)} value={this.state.result} />
         }else if(model === 1){
+            if(!data){
+                return null;
+            }
             remarktext = data.remark;
             contenttext = data.content;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" className="change-btn" value="打印" /></div>
             resulttext = data.result === 0 ? '调解成功':'调解失败';
         }else{
+            if(!data){
+                return null;
+            }
             remarktext = <Input className="text-input" disabled={this.state.result === '-1'}  style={{ width: 400 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
             contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} onChange={this.textChange.bind(this)} value={this.state.content}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>

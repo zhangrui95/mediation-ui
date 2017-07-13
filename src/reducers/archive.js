@@ -27,7 +27,8 @@ export default syncReducer({
             }
             return merge({},state,ret);
         case ARCHIVE_SET_PROTOCOL:
-            return merge({},state,{response:{protocol:action.data}});
+            const pstate = action.data.result === 0 ? 1:-1;
+            return merge({},state,{response:{data:{state:pstate},protocol:action.data}});
         case ARCHIVE_SET_CHECK:
             return merge({},state,{response:{check:action.data}});
         default:
