@@ -21,12 +21,14 @@ class CheckVisit extends Component {
             const {state, data} = response || {};
             if (state === 0) {
                 this.setState({model:1,input:data.content,date:getDateTime(data.visitTime)});
+                this.setCheck(data);
             }
             actions.resetAction();
         }else if(action === 'update' && actionResponse){
             const {state,data} = actionResponse || {};
             if (state === 0) {
                 this.setState({model:1,input:data.content,date:getDateTime(data.visitTime)});
+                this.setCheck(data);
             }
             actions.resetAction(data);
         }else if(response){
@@ -36,6 +38,14 @@ class CheckVisit extends Component {
             }else{
                 this.setState({model:0,input:'',date:''});
             }
+        }
+    }
+
+    setCheck(data){
+        const { archive } = this.props;
+        const {response} = archive;
+        if(response){
+            response.check = data;
         }
     }
 

@@ -21,12 +21,14 @@ class Protocol extends Component {
             const {state, data} = response || {};
             if (state === 0) {
                 this.setState({model:1,result:data.result,content:data.content,remark:data.remark});
+                this.setProtocol(data);
             }
             actions.resetAction();
         }else if(action === 'update' && actionResponse){
             const {state,data} = actionResponse || {};
             if (state === 0) {
                 this.setState({model:1,result:data.result,content:data.content,remark:data.remark});
+                this.setProtocol(data);
             }
             actions.resetAction(data);
         }else if(response){
@@ -38,6 +40,15 @@ class Protocol extends Component {
             }
         }
     }
+
+    setProtocol(data){
+        const { archive } = this.props;
+        const {response} = archive;
+        if(response){
+            response.protocol = data;
+        }
+    }
+
     updateModel(){
         const { protocol} = this.props;
         const {response} = protocol;
@@ -82,8 +93,8 @@ class Protocol extends Component {
     }
 
     getCode(){
-        const { archive } = this.props;
-        const {response} = archive;
+        const { protocol } = this.props;
+        const {response} = protocol;
         const {data} = response||{};
         const {code} = data||{};
         return code||'';
