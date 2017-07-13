@@ -1389,5 +1389,10 @@ to {
 	margin-right:15px;
 	color: #fff;
 }
+.hint{
+	text-align: right;
+	width: 86%;
+	color: #ff0000;
+}
 
 
