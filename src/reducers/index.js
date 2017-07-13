@@ -16,13 +16,10 @@ import checkvisit from './checkvisit'
 import investigationDetail from './investigationDetail'
 import mediateDetail from './mediateDetail'
 import evidenceDelete from './evidenceDelete'
-import investigationUpdate from './investigationUpdate'
-import investigationSave from './investigationSave'
 
 
 
 const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence,investigation,mediate,protocol,checkvisit,investigationDetail,mediateDetail,
-    investigationUpdate,investigationSave,
     evidenceDelete};
 
 const rootReducer = combineReducers(Object.assign({},reducers,{routing}));
