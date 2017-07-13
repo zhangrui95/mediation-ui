@@ -46,7 +46,7 @@ var msg=[
 class ArchiveHeader extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {index:''};
+        this.state = {index:0};
     }
     clickHandler(e){
         const { params } = this.props;
@@ -54,6 +54,8 @@ class ArchiveHeader extends Component {
         if(id !==null && id !== undefined && id!== ''){
             const div = e.target;
             const routeUrl = div.getAttribute('data-route')||'';
+            const index = div.getAttribute('data-index')*1;
+            this.setState({index});
             const	{router}	=	this.context;
             router.push('/archive/'+id+routeUrl);
         }
@@ -63,8 +65,8 @@ class ArchiveHeader extends Component {
         router.push('/list/archive');
     }
     render() {
-        const list = msg.map(function(data,i){
-            return <HeaderTop key={i} data={data}/>
+        const list = msg.map((data,i)=>{
+            return <HeaderTop key={i} isActive={i===this.state.index} data={data}/>
         });
         return (
             <div>
