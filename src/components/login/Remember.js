@@ -7,7 +7,7 @@ class Remember extends Component {
         const tip = errorTip != null && errorTip != '' ? <div className="error-login">{errorTip}</div> : null;
         return (
             <div className="login-infor">
-
+                {tip}
             </div>
         )
     }
@@ -16,7 +16,6 @@ class Remember extends Component {
 // <div className="password-remember">
 //     <input type="checkbox" name={name} checked={form[name]} />
 //     记住用户</div>
-// {tip}
 Remember.propTypes = {
     errorTip: PropTypes.string,
     name: PropTypes.string,
