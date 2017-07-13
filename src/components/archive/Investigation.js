@@ -51,7 +51,6 @@ class Investigation extends Component {
         return true;
     }
     handleWorkersChange(e,value){
-        console.log('invest value',value)
         this.setState({workerIds:value.join(',')});
     }
     updateModel(){
