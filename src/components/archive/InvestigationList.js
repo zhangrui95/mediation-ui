@@ -7,14 +7,18 @@ import * as syncActions from '../../actions/syncAction'
 
 class InvestigationList extends Component {
     componentWillMount(){
+        this.load();
+    }
+
+    load(){
         const {actions,params} = this.props;
         const {id} = params;
         actions.request(INVESTIGATION_LIST,{id});
     }
+
     clickHandler(e){
         const { params } = this.props;
         const {id} = params;
-
         if(id !==null && id !== undefined && id!== ''){
             const	{router}	=	this.context;
             router.push('/archive/'+id+'/investigation/create');
@@ -22,9 +26,10 @@ class InvestigationList extends Component {
     }
     render() {
         const { investigation,params } = this.props;
+        const {id} = params;
         const {response} = investigation;
         const {data} = response||{};
-        if(data == null){
+        if(data === null||data === undefined){
             return null;
         }
         return (
@@ -33,7 +38,7 @@ class InvestigationList extends Component {
                 <div className="formArch">
                     <dic className="list-right" onClick={this.clickHandler.bind(this)}>新建</dic>
                 </div>
-                < SurveyList params={params} data={data}/>
+                <SurveyList dataId={id}  data={data}/>
             </div>
         )
     }

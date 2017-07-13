@@ -1,46 +1,13 @@
-/**
- * Created by Administrator on 2017/7/6 0006.
- */
 import React, { Component, PropTypes } from 'react'
-import {getDateTime} from '../../utils/date';
+import SurveyRow from './SurveyRow';
 
 class SurveyList extends Component {
-    clickHandler(e){
-        const { params } = this.props;
-        const {id} = params;
-        if(id !==null && id !== undefined && id!== ''){
-            const	{router}	=	this.context;
-            router.push('/archive/'+id+'/investigation/'+params.mid);
-        }
-    }
+
     render() {
-        const {data} = this.props;
-        let arr = [];
-        let address = '';
-        let time = '';
-        let otherPerson = '';
-        let targetPerson = '';
-        let content = '';
-        for(let i = 0; i < data.length; i++){
-            address = data[i].address;
-            time = getDateTime(data[i].investTime);
-            otherPerson = data[i].otherPerson;
-            targetPerson = data[i].targetPerson;
-            content = data[i].content;
-            arr.push(
-                <tr className="odd" key={i}>
-                    <td width="40">{i+1}</td>
-                    <td width="230">
-                        <a className="view-cell" href="javascript:;" onClick={this.clickHandler.bind(this)}>{time}</a>
-                    </td>
-                    <td>{address}</td>
-                    <td>{otherPerson}</td>
-                    <td>{targetPerson}</td>
-                    <td>{content}</td>
-                    <td><a onClick={this.clickHandler.bind(this)}>编辑</a><span> | </span><a>打印</a></td>
-                </tr>
-            )
-        }
+        const {data, dataId} = this.props;
+        const arr = data.map((e,i) => {
+            return <SurveyRow key={i} dataId={dataId} idx={i} item={e}/>;
+        });
         return (
             <table cellPadding="0" cellSpacing="0" className="table-list table-list-evidence">
                 <thead>
@@ -53,18 +20,13 @@ class SurveyList extends Component {
                     <td>调查人</td>
                     <td>操作</td>
                 </tr>
-                {arr}
                 </thead>
                 <tbody>
-
+                {arr}
                 </tbody>
             </table>
         )
     }
 }
-
-SurveyList.contextTypes = {
-    router: PropTypes.object
-};
 
 export default SurveyList

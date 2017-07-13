@@ -1,29 +1,31 @@
 import React, { Component, PropTypes } from 'react'
 import {getDateTime} from '../../utils/date';
 
-class MediateRow extends Component {
+class SurveyRow extends Component {
+
     clickHandler(e){
         const { dataId,item} = this.props;
         const	{router}	=	this.context;
-        router.push('/archive/'+dataId+'/mediate/'+item.id);
+        router.push('/archive/'+dataId+'/investigation/'+item.id);
     }
     render() {
-        const {idx,item,litigants,workers} = this.props;
+        const {idx,item} = this.props;
         return (<tr className="odd">
             <td width="40">{idx+1}</td>
             <td width="230">
-                <a className="view-cell" href="javascript:;" onClick={this.clickHandler.bind(this)}>{getDateTime(item.mediateTime)}</a>
+                <a className="view-cell" href="javascript:;" onClick={this.clickHandler.bind(this)}>{getDateTime(item.investTime)}</a>
             </td>
             <td>{item.address}</td>
-            <td>{litigants}</td>
-            <td>{workers}</td>
+            <td>{item.otherPerson}</td>
+            <td>{item.targetPerson}</td>
+            <td>{(item.workers||[]).map(i=>(i.worker||{}).name||'').join(',')}</td>
             <td><a onClick={this.clickHandler.bind(this)}>编辑</a><span> | </span><a>打印</a></td>
         </tr>)
     }
 }
 
-MediateRow.contextTypes = {
+SurveyRow.contextTypes = {
     router: PropTypes.object
 };
 
-export default MediateRow
+export default SurveyRow
