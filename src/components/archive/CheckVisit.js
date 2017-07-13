@@ -120,7 +120,7 @@ class CheckVisit extends Component {
             }
             content = data.content;
             time = getDateTime(data.visitTime);
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
+            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
         }else{
             if(data === null || data === undefined){
                 return null;
@@ -134,9 +134,9 @@ class CheckVisit extends Component {
             <div>
                 <div className="title-form-name">人民调解回访记录</div>
                 <div className="formBorder">
-                    <div className="formArch"><div className="margin-form">回访时间：</div>{time}</div>
-                    <div className="formArch">被回访人：{litigantsName}</div>
-                    <div className="formArch"><div className="margin-form">回访情况：</div>{content}</div>
+                    <div className="formArch"><div className="margin-form word-title">回访时间：</div>{time}</div>
+                    <div className="formArch"><div className="margin-form word-title">被回访人：</div>{litigantsName}</div>
+                    <div className="formArch"><div className="margin-form word-title">回访情况：</div>{content}</div>
                     {btns}
                 </div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>

@@ -144,7 +144,7 @@ class ArchiveDetail extends Component {
             if(data.workers){
                 workersName = data.workers.map((i)=>i.worker.name).join(',');
             }
-            workers = <input onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
+            workers = <input className="btn-pop" onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
             litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants}  onChange={this.handleLitigantChange.bind(this)}/>
             creater = header.user.response.user.name;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.addNewArchive.bind(this)} className="addPerson"/></div>
@@ -174,7 +174,7 @@ class ArchiveDetail extends Component {
             }
             litigantsName = data.litigants.map((i)=>i.name).join(',');
             creater = data.creater.name;
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} /><input type="button" className="change-btn" value="打印" /></div>
+            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} /><input type="button" className="change-btn" value="打印" /></div>
         }else{
             if(state !== 0){
                 return null;
@@ -186,7 +186,7 @@ class ArchiveDetail extends Component {
             if(data.workers){
                 workersName = data.workers.map((i)=>i.worker.name).join(',');
             }
-            workers = <input onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
+            workers = <input className="btn-pop" onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
             litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants} onChange={this.handleLitigantChange.bind(this)}/>
             createTime = getDateTime(data.createTime);
             keepTime = getDateTime(data.keepTime);
@@ -221,15 +221,15 @@ class ArchiveDetail extends Component {
                         </div>
                     </div>
                     <div className="border-box">
-                        <div className="formArch">当事人</div>
+                        <div className="formArch word-title">当事人</div>
                         {litigants}
                     </div>
                     <div className="border-box">
-                        <div className="formArch">纠纷简要情况</div>
+                        <div className="formArch word-title">纠纷简要情况</div>
                         <div className="formArch">{content}</div>
                     </div>
                     <div className="border-box">
-                        <div className="formArch">调解员</div>
+                        <div className="formArch word-title">调解员</div>
                         <div className="formArch">
                             <div className="margin-form">第一调解员：{manager}</div>
                         </div>
@@ -241,17 +241,17 @@ class ArchiveDetail extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="formArch">立卷人：<span>{creater}</span></div>
-                    <div className="formArch">立卷时间：<span>{createTime}</span></div>
-                    <div className="formArch">调解日期：<span>{protoTime}</span></div>
-                    <div className="formArch">保管期限：<span>{keepTime}</span></div>
-                    <div className="formArch">达成协议时间：<span>{protoTime}</span></div>
-                    <div className="formArch">调解协议：<span>{protoText}</span></div>
-                    <div className="formArch">协议履行情况：<span>{checkText}</span></div>
-                    <div className="formArch">调解失败时间：<span>{failTime}</span></div>
-                    <div className="formArch">当事人姓名：<span>{litigantsName}</span></div>
-                    <div className="formArch">登记人：<span>{creater}</span></div>
-                    <div className="formArch">登记日期：<span>{createTime}</span></div>
+                    <div className="formArch"><span className="word-title">立卷人：</span><span>{creater}</span></div>
+                    <div className="formArch"><span className="word-title">立卷时间：</span><span>{createTime}</span></div>
+                    <div className="formArch"><span className="word-title">调解日期：</span><span>{protoTime}</span></div>
+                    <div className="formArch"><span className="word-title">保管期限：</span><span>{keepTime}</span></div>
+                    <div className="formArch"><span className="word-title">达成协议时间：</span><span>{protoTime}</span></div>
+                    <div className="formArch"><span className="word-title">调解协议：</span><span>{protoText}</span></div>
+                    <div className="formArch"><span className="word-title">协议履行情况：</span><span>{checkText}</span></div>
+                    <div className="formArch"><span className="word-title">调解失败时间：</span><span>{failTime}</span></div>
+                    <div className="formArch"><span className="word-title">当事人姓名：</span><span>{litigantsName}</span></div>
+                    <div className="formArch"><span className="word-title">登记人：</span><span>{creater}</span></div>
+                    <div className="formArch"><span className="word-title">登记日期：</span><span>{createTime}</span></div>
                     {btns}
                 </div>
             </div>
