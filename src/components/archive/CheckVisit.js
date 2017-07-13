@@ -82,7 +82,6 @@ class CheckVisit extends Component {
     }
 
     validate(){
-        console.log('this.state',this.state)
         if(this.state.date === ''){
             this.setState({msg:'回访时间不能为空'});
             return false;
