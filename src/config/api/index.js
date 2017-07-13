@@ -97,8 +97,8 @@ const option = {
         option:{ method: 'POST', body: formData2Param(formData),
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
-    [MEDIATE_SAVE]:actionMsg => {return {endpoint: 'api/mediate/save.json',
-        option:{ method: 'POST', body: "id="+actionMsg.id,
+    [MEDIATE_SAVE]:(actionMsg,formData) => {return {endpoint: 'api/mediate/save.json',
+        option:{ method: 'POST', body: formData2Param(formData),
             headers:{'Content-Type':'application/x-www-form-urlencoded;charset=utf-8'}
         }}},
     [PROTOCOL_SAVE]:(actionMsg,formData) => {return {endpoint: 'api/protocol/save.json',
