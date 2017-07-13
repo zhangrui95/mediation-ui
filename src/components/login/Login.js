@@ -10,7 +10,7 @@ import LoginItem from './LoginItem'
 import LoginButton from './LoginButton'
 import Remember from './Remember'
 import Captcha from './Captcha'
-import {SIGN_IN_SUCCESS,CAPTCHA_URL,APP_TITLE_NAME} from '../../constants/Constant'
+import {SIGN_IN_SUCCESS,CAPTCHA_URL,IMG_LOGIN_BG_URL} from '../../constants/Constant'
 
 class Login extends Component {
 
@@ -107,10 +107,9 @@ class Login extends Component {
 
     render(){
         return (
-
             <div className="revolution-slider">
                 <ul><li className="bg-img" >
-                    <img src="assets/images/login-bg.png" className="img-bg"/>
+                    <img src={IMG_LOGIN_BG_URL} className="img-bg"/>
                     <div className="login-main">
                         <Tips/>
                         <div className="login-right" onChange={this.handlerChange.bind(this)}>

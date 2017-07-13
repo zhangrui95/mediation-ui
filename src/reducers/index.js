@@ -12,19 +12,17 @@ import evidence from './evidence'
 import investigation from './investigation'
 import mediate from './mediate'
 import protocol from './protocol'
-import protocolSave from './protocolSave'
 import checkvisit from './checkvisit'
 import investigationDetail from './investigationDetail'
 import mediateDetail from './mediateDetail'
 import evidenceDelete from './evidenceDelete'
-import protocolUpdate from './protocolUpdate'
 import investigationUpdate from './investigationUpdate'
 import investigationSave from './investigationSave'
 
 
 
-const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence,investigation,mediate,protocol,protocolSave,checkvisit,investigationDetail,mediateDetail,
-    protocolUpdate,investigationUpdate,investigationSave,
+const reducers = {banners,selectItemData,lists,navs,header,enterprise,archive,archiveSuspend,evidence,investigation,mediate,protocol,checkvisit,investigationDetail,mediateDetail,
+    investigationUpdate,investigationSave,
     evidenceDelete};
 
 const rootReducer = combineReducers(Object.assign({},reducers,{routing}));
