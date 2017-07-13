@@ -106,7 +106,7 @@ class Protocol extends Component {
         }else if(model === 1){
             remarktext = data.remark;
             contenttext = data.content;
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" value="打印" /></div>
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" className="change-btn" value="打印" /></div>
             resulttext = data.result === 0 ? '调解成功':'调解失败';
         }else{
             remarktext = <Input className="text-input" disabled={this.state.result === '-1'}  style={{ width: 400 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
