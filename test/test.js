@@ -99,8 +99,8 @@ fetchMock.mock(DEV_REQ_HOST+'api/investigation/listByArchive.json',{data:[
     {id:'2',investTime:1499240238246,address:'xxx2',otherPerson:'xxx2',targetPerson:'xxx2',content:'xxx2',createTime:1499240238246,creater:{},archive:{}}
 ]});
 fetchMock.mock(DEV_REQ_HOST+'api/investigation/detail.json',{state:0,data:{id:'1',investTime:1499240237246,address:'xxx',otherPerson:'xxx',targetPerson:'xxx',content:'xxx',createTime:1499240237246,creater:{},archive:{}}});
-fetchMock.mock(DEV_REQ_HOST+'api/investigation/save.json',{state:0, data:{id:'1'}});
-fetchMock.mock(DEV_REQ_HOST+'api/investigation/update.json',{state:0});
+fetchMock.mock(DEV_REQ_HOST+'api/investigation/save.json',{state:0,data:{id:'1',investTime:1499240237246,address:'xxx',otherPerson:'xxx',targetPerson:'xxx',content:'xxx',createTime:1499240237246,creater:{},archive:{}}});
+fetchMock.mock(DEV_REQ_HOST+'api/investigation/update.json',{state:0,data:{id:'1',investTime:1499240237246,address:'xxx',otherPerson:'xxx',targetPerson:'xxx',content:'xxx',createTime:1499240237246,creater:{},archive:{}}});
 
 fetchMock.mock(DEV_REQ_HOST+'api/mediate/listByArchive.json',{data:[
     {id:'1',mediateTime:1499240237246,address:'xx01',content:'x001',createTime:1499240237246,creater:{},archive:{},workers:[]},
