@@ -95,7 +95,7 @@ class Mediate extends Component {
         }else if(model === 1){
             time = getDateTime(mediateTime);
             contents =  content;
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑" className="change-btn"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
+            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="编辑" className="change-btn"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
             sign = <div>
                         <div className="formArch">当事人签字：</div>
                         <div className="formArch">调解人签字：</div>

@@ -137,7 +137,7 @@ class Investigation extends Component {
                         <div className="formArch">被调查人签字：</div>
                         <div className="formArch">调查人签字：</div>
                     </div>
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑" className="change-btn"  onClick={this.updateModel.bind(this)}/><input type="button" className="change-btn" value="打印" /></div>
+            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="编辑" className="change-btn"  onClick={this.updateModel.bind(this)}/><input type="button" className="change-btn" value="打印" /></div>
         }else{
             times = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={getDateTime(this.state.time)} placeholder="" onKeyUp={this.timeChange.bind(this)}/>
             addresss = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={this.state.address} placeholder="" onKeyUp={this.addressChange.bind(this)}/>

@@ -8,11 +8,12 @@ import * as syncActions from '../../actions/syncAction'
 import * as arhciveActions from '../../actions/arhcive'
 import * as protocolActions from '../../actions/protocol'
 import Select from '../Select'
+import PopAlert from '../pop/PopAlert';
 
 class Protocol extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {model: 0,result:'',content:'',remark:''};
+        this.state = {model: 0,result:'',content:'',remark:'',msg:''};
     }
     componentWillReceiveProps(next) {
         const {actions,arhciveActions} = this.props;
@@ -93,6 +94,18 @@ class Protocol extends Component {
         return code||'';
     }
 
+    validate(){
+        if(this.state.date === ''){
+            this.setState({msg:'回访时间不能为空'});
+            return false;
+        }
+        if(this.state.input === ''){
+            this.setState({msg:'回访情况不能为空'});
+            return false;
+        }
+        return true;
+    }
+
     render() {
         const model = this.state.model;
         const { protocol} = this.props;
@@ -104,7 +117,7 @@ class Protocol extends Component {
         let btns = '';
         if(model === 0){
             remarktext = <Input className="text-input" disabled={this.state.result === '-1'}  style={{ width: 400 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} onChange={this.textChange.bind(this)} value={this.state.content} />
+            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} style={{ width: 700 }} onChange={this.textChange.bind(this)} value={this.state.content} />
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
             resulttext = <Select domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} head="请选择" onChangeHandler={this.handleChange.bind(this)} value={this.state.result} />
         }else if(model === 1){
@@ -113,39 +126,44 @@ class Protocol extends Component {
             }
             remarktext = data.remark;
             contenttext = data.content;
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" className="change-btn" value="打印" /></div>
+            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" className="change-btn" value="打印" /></div>
             resulttext = data.result === 0 ? '调解成功':'调解失败';
         }else{
             if(!data){
                 return null;
             }
             remarktext = <Input className="text-input" disabled={this.state.result === '-1'}  style={{ width: 400 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} onChange={this.textChange.bind(this)} value={this.state.content}/>
+            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} style={{ width: 700 }} onChange={this.textChange.bind(this)} value={this.state.content}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
             resulttext = <Select domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} value={this.state.result} head="请选择" onChangeHandler={this.handleChange.bind(this)}/>
         }
         return (
             <div>
                 <div className="title-form-name">人民调解协议书</div>
-                <div className="formArch">文号：<span>{this.getCode()}</span></div>
+                <div className="formArch word-title">文号：<span>{this.getCode()}</span></div>
                 <div className="formBorder">
                     <div className="border-box">
-                        <div className="formArch">当事人</div>
+                        <div className="formArch word-title">当事人</div>
                         <PartyCell litigants={this.getLitigants()}/>
                     </div>
-                    <div className="formArch">
-                        <div className="margin-form">调解结果：
-                            {resulttext}
+                        <div className="formArch">
+                            <div className="margin-form"><span className="word-title">调解结果：</span>
+                                {resulttext}
+                            </div>
                         </div>
-                    </div>
-                    <div className="formArch">调解协议：{contenttext}</div>
-                    <div className="formArch">
-                        <div className="margin-form">
-                            履行方式、时限：{remarktext}
+                        <div className="formArch">
+                            <div className="margin-form">
+                                <span className="word-title">调解协议：</span>{contenttext}
+                            </div>
+                         </div>
+                        <div className="formArch">
+                            <div className="margin-form">
+                                <span className="word-title">履行方式、时限：</span>{remarktext}
+                            </div>
                         </div>
-                    </div>
-                    {btns}
-                </div>
+                        {btns}
+                 </div>
+                <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
     }
