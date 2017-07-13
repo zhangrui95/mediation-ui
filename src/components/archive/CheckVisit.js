@@ -111,7 +111,7 @@ class CheckVisit extends Component {
         const litigantsName = this.getLitigants(archive);
 
         if(model === 0){
-            content = <Input type="textarea" rows={4} onKeyUp={this.inputChange.bind(this)}/>;
+            content = <Input type="textarea" rows={4} onChange={this.inputChange.bind(this)} value={this.state.input}/>;
             time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
         }else if(model === 1){
@@ -125,7 +125,7 @@ class CheckVisit extends Component {
             if(data === null || data === undefined){
                 return null;
             }
-            content = <Input type="textarea" rows={4} onKeyUp={this.inputChange.bind(this)} defaultValue={this.state.input}/>;
+            content = <Input type="textarea" rows={4} onChange={this.inputChange.bind(this)} value={this.state.input}/>;
             time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
         }

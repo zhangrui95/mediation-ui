@@ -3,96 +3,111 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {MEDIATE_DETAIL,MEDIATE_SAVE,MEDIATE_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
+import * as mediateDetailActions from '../../actions/mediateDetail'
 import {getDateTime} from '../../utils/date';
 import { Input } from 'antd';
-import merge from 'lodash/merge'
+import TimeChoice from './TimeChoice'
 
 class Mediate extends Component {
     constructor(props, context) {
         super(props, context);
         const { params} = props;
         const {mid} = params;
-        this.state = {model: mid !== 'create'||null && mid !== undefined && mid !== '' ? 1 : 0,time:'',content:'',data:{}};
+        this.state = {model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',content:'',defaultTime:getDateTime(new Date().getTime())};
     }
     componentWillReceiveProps(next){
-        const {actions} = this.props;
+        const {actions,params} = this.props;
         const {mediateDetail} = next;
-        const {response,action,actionResponse} = mediateDetail;
-        if(action === 'add' && response) {
-            const {state, data} = response || {};
-            const {mediateTime,content} = data||{};
-            if(state == 0){
-                this.setState({model:1,time:mediateTime,content:content});
+        const {response,action,actionResponse} = mediateDetail||{};
+        if(action === 'add' && actionResponse) {
+            const {state, data} = actionResponse || {};
+            if (state === 0) {
+                const	{router}	=	this.context;
+                router.replace('/archive/'+params.id+'/mediate/'+data.id);
+                this.setState({model:1,content:data.content,time:getDateTime(data.mediateTime)});
             }
-            actions.resetAction();
+            actions.resetAction(actionResponse);
         }else if(action === 'update' && actionResponse){
             const {state,data} = actionResponse || {};
-            const {mediateTime,content} = data||{};
             if (state === 0) {
-                this.setState({model:1,time:mediateTime,content:content});
+                this.setState({model:1,content:data.content,time:getDateTime(data.mediateTime)});
             }
-            actions.resetAction();
+            actions.resetAction(actionResponse);
         }else if(response){
-            const {data} = response || {};
-            this.setState({data:merge({},data||{})});
+            const {state,data} = response||{};
+            if(state === 0){
+                this.setState({model:1,content:data.content,time:getDateTime(data.mediateTime)});
+            }else{
+                this.setState({model:0,content:'',time:''});
+            }
         }
     }
     updateModel(){
         const { mediateDetail} = this.props;
         const {response} = mediateDetail;
         const {data} = response||{};
-        const {mediateTime,content} = data||{};
-        this.setState({model:2,time:mediateTime,content:content});
+        this.setState({model:2,content:data.content,time:getDateTime(data.mediateTime)});
     }
     updateArchive(){
-        this.setState({model:1});
-        const {actions,params} = this.props;
-        const {mid} = params;
-        actions.request(MEDIATE_UPDATE,null,{mid:mid,mediateTime:this.state.time,content:this.state.content});
+        const {syncActions,mediateDetail} = this.props;
+        const {response} = mediateDetail;
+        const {data} = response||{};
+        const applyTime = this.state.time;
+        syncActions.request(MEDIATE_UPDATE,null,{id:data.id,content:this.state.content,mediateTime:applyTime===''?this.state.defaultTime:applyTime});
     }
     componentWillMount(){
-        const {actions,params} = this.props;
+        const {syncActions,params} = this.props;
         const {mid} = params;
-        actions.request(MEDIATE_DETAIL,{mid});
+        if(mid !== 'create'&& mid !== null && mid !== undefined && mid !== ''){
+            syncActions.request(MEDIATE_DETAIL,{id:mid});
+        }
     }
-    timeChange(e){
-        this.setState({time:e.target.value});
+    timeChange(date){
+        this.setState({date: date.mediateTime});
     }
     contentChange(e){
         this.setState({content:e.target.value});
     }
     onSave(){
-        this.setState({model:1});
-        const {actions,params} = this.props;
-        const {mid} = params;
-        actions.request(MEDIATE_SAVE,null,{mid:mid,mediateTime:this.state.time,content:this.state.content});
+        const {syncActions,params} = this.props;
+        const {id} = params;
+        const applyTime = this.state.time;
+        syncActions.request(MEDIATE_SAVE,null,{content:this.state.content,mediateTime:applyTime===''?this.state.defaultTime:applyTime,archive:{id}});
     }
     getLitigants(archive){
         const {response} = archive;
         const {data} = response||{};
         const {litigants}= data||{};
-        const litigantsName = litigants.map((i)=>i.name).join(',');
-        return litigantsName;
+        return (litigants||[]).map((i)=>i.name).join(',');
+    }
+    getWorkers(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        const {workers,manager}= data||{};
+        let wnames = (workers||[]).map((i)=>i.worker.name).join(',');
+        if(wnames !== ''){
+            wnames = ','+wnames;
+        }
+        return manager.name+wnames;
     }
     render() {
         const { params,mediateDetail,archive} = this.props;
         const {response} = mediateDetail;
         const {data} =  response||{};
         const {mediateTime,address,content} = data||{};
-        const litigantsName = this.getLitigants(archive);
         const model = this.state.model;
         let time = '';
         let contents = '';
         let btns = '';
         let sign = '';
-        if(data == null){
-            return null;
-        }
         if(model === 0){
-            time = <Input name="name" className="text-input"  style={{ width: 300 }} onKeyUp={this.timeChange.bind(this)} placeholder="" />
-            contents =  <Input type="textarea" rows={4}  onKeyUp={this.contentChange.bind(this)}/>;
+            time = <TimeChoice name="mediateTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
+            contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
         }else if(model === 1){
+            if(data === null || data === undefined){
+                return null;
+            }
             time = getDateTime(mediateTime);
             contents =  content;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑" className="change-btn"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
@@ -102,8 +117,11 @@ class Mediate extends Component {
                         <div className="formArch">记录人签字：</div>
                     </div>
         }else{
-            time = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={getDateTime(this.state.time)} onKeyUp={this.timeChange.bind(this)} placeholder="" />
-            contents =  <Input type="textarea" rows={4} defaultValue={this.state.content} onKeyUp={this.contentChange.bind(this)}/>;
+            if(data === null || data === undefined){
+                return null;
+            }
+            time = <TimeChoice name="mediateTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
+            contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
         }
         return (
@@ -112,8 +130,8 @@ class Mediate extends Component {
                 <div className="formBorder">
                     <div className="formArch">调查时间：<span>{time}</span></div>
                     <div className="formArch">调查地点：<span>{address}</span></div>
-                    <div className="formArch">当事人：<span>{litigantsName}</span></div>
-                    <div className="formArch">调解人：<span></span></div>
+                    <div className="formArch">当事人：<span>{this.getLitigants(archive)}</span></div>
+                    <div className="formArch">调解人：<span>{this.getWorkers(archive)}</span></div>
                     <div className="formArch">调查记录：<span>{contents}</span></div>
                     {sign}
                     {btns}
@@ -123,9 +141,10 @@ class Mediate extends Component {
     }
 }
 
-Mediate.propTypes = {
-    children: PropTypes.node
+Mediate.contextTypes = {
+    router: PropTypes.object
 };
+
 
 function	select(state)	{
     return	{
@@ -136,7 +155,8 @@ function	select(state)	{
 
 function actions(dispatch) {
     return {
-        actions: bindActionCreators(syncActions, dispatch)
+        syncActions: bindActionCreators(syncActions, dispatch),
+        actions: bindActionCreators(mediateDetailActions, dispatch)
     }
 }
 
