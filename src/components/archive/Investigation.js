@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {INVESTIGATION_DETAIL,INVESTIGATION_UPDATE,INVESTIGATION_SAVE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
+import * as investDetailActions from '../../actions/investDetail'
 import {getDateTime} from '../../utils/date';
 import Pop from '../pop/Pop';
 import PopMediator from './PopMediator'
@@ -14,29 +15,33 @@ class Investigation extends Component {
         super(props, context);
         const { params} = props;
         const {mid} = params;
-        this.state = {addBox:false,model: mid !== 'create'||null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',data:{}};
+        this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',defaultTime:getDateTime(new Date().getTime())};
     }
     componentWillReceiveProps(next){
-        const {actions} = this.props;
+        const {actions,params} = this.props;
         const {investigationDetail} = next;
-        const {response,action,actionResponse} = investigationDetail;
-        if(action === 'add' && response) {
-            const {state, data} = response || {};
-            const {investTime,address,otherPerson,targetPerson,content} = data||{};
-            if(state == 0){
-                this.setState({model:1,time:investTime,address:address,otherPerson:otherPerson,targetPerson:targetPerson,content:content});
+        const {response,action,actionResponse} = investigationDetail||{};
+        if(action === 'add' && actionResponse) {
+            const {state, data} = actionResponse || {};
+            if (state === 0) {
+                const	{router}	=	this.context;
+                router.replace('/archive/'+params.id+'/investigation/'+data.id);
+                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content});
             }
-            actions.resetAction();
+            actions.resetAction(actionResponse);
         }else if(action === 'update' && actionResponse){
             const {state,data} = actionResponse || {};
-            const {investTime,address,otherPerson,targetPerson,content} = data||{};
             if (state === 0) {
-                this.setState({model:1,time:investTime,address:address,otherPerson:otherPerson,targetPerson:targetPerson,content:content});
+                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content});
             }
-            actions.resetAction();
+            actions.resetAction(actionResponse);
         }else if(response){
-            const {data} = response || {};
-            this.setState({data:merge({},data||{})});
+            const {state,data} = response||{};
+            if(state === 0){
+                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content});
+            }else{
+                this.setState({model:0,time:'',address:'',otherPerson:'',targetPerson:'',content:''});
+            }
         }
     }
     upAddClick(){
@@ -53,22 +58,25 @@ class Investigation extends Component {
         const {response} = investigationDetail;
         const {data} = response||{};
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
-        this.setState({model:2,time:investTime,address:address,otherPerson:otherPerson,targetPerson:targetPerson,content:content});
+        this.setState({model:2,time:getDateTime(investTime),address:address,otherPerson:otherPerson,targetPerson:targetPerson,content:content});
     }
     updateArchive(){
-        this.setState({model:1});
-        const {actions,params} = this.props;
-        const {mid} = params;
-        actions.request(INVESTIGATION_UPDATE,null,{mid:mid,investTime:this.state.time,address:this.state.address,otherPerson:this.state.otherPerson,targetPerson:this.state.targetPerson,content:this.state.content});
+        const {syncActions,mediateDetail} = this.props;
+        const {response} = mediateDetail;
+        const {data} = response||{};
+        const applyTime = this.state.time;
+        syncActions.request(INVESTIGATION_UPDATE,null,{id:data.id,investTime:applyTime===''?this.state.defaultTime:applyTime,address:this.state.address,otherPerson:this.state.otherPerson,targetPerson:this.state.targetPerson,content:this.state.content});
     }
 
     componentWillMount(){
-        const {actions,params} = this.props;
+        const {syncActions,params} = this.props;
         const {mid} = params;
-        actions.request(INVESTIGATION_DETAIL,{mid});
+        if(mid !== 'create'&& mid !== null && mid !== undefined && mid !== ''){
+            syncActions.request(INVESTIGATION_DETAIL,{id:mid});
+        }
     }
-    timeChange(e){
-        this.setState({time:e.target.value});
+    timeChange(date){
+        this.setState({time: date.investTime});
     }
     addressChange(e){
         this.setState({address:e.target.value});
@@ -83,10 +91,10 @@ class Investigation extends Component {
         this.setState({content:e.target.value});
     }
     onSave(){
-        this.setState({model:1});
-        const {actions,params} = this.props;
-        const {mid} = params;
-        actions.request(INVESTIGATION_SAVE,null,{mid:mid,investTime:this.state.time,address:this.state.address,otherPerson:this.state.otherPerson,targetPerson:this.state.targetPerson,content:this.state.content});
+        const {syncActions,params} = this.props;
+        const {id} = params;
+        const applyTime = this.state.time;
+        syncActions.request(INVESTIGATION_SAVE,null,{investTime:applyTime===''?this.state.defaultTime:applyTime,address:this.state.address,otherPerson:this.state.otherPerson,targetPerson:this.state.targetPerson,content:this.state.content,archive:{id}});
     }
     getWorkers(archive){
         const {response} = archive;
@@ -114,9 +122,7 @@ class Investigation extends Component {
         const {data,state} =  response||{};
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
         const workerValue = this.getWorkers(archive);
-        if(data == null){
-            return null;
-        }
+
 
         if(model === 0){
             times = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" onKeyUp={this.timeChange.bind(this)} />
@@ -127,6 +133,9 @@ class Investigation extends Component {
             contents =  <Input type="textarea" rows={4} onKeyUp={this.contentChange.bind(this)}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
         }else if(model === 1){
+            if(data === null || data === undefined){
+                return null;
+            }
             times = getDateTime(investTime);
             addresss =  address;
             otherPersons =  otherPerson;
@@ -139,6 +148,9 @@ class Investigation extends Component {
                     </div>
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="编辑" className="change-btn"  onClick={this.updateModel.bind(this)}/><input type="button" className="change-btn" value="打印" /></div>
         }else{
+            if(data === null || data === undefined){
+                return null;
+            }
             times = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={getDateTime(this.state.time)} placeholder="" onKeyUp={this.timeChange.bind(this)}/>
             addresss = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={this.state.address} placeholder="" onKeyUp={this.addressChange.bind(this)}/>
             otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} defaultValue={this.state.otherPerson} placeholder="" onKeyUp={this.otherPersonChange.bind(this)}/>
@@ -176,15 +188,14 @@ Investigation.propTypes = {
 function	select(state)	{
     return	{
         archive:state.archive,
-        investigationDetail:state.investigationDetail,
-        investigationSave:state.investigationSave,
-        investigationUpdate:state.investigationUpdate
+        investigationDetail:state.investigationDetail
     };
 }
 
 function actions(dispatch) {
     return {
-        actions: bindActionCreators(syncActions, dispatch)
+        syncActions: bindActionCreators(syncActions, dispatch),
+        actions: bindActionCreators(investDetailActions, dispatch),
     }
 }
 
