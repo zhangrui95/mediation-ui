@@ -100,7 +100,7 @@ class CheckVisit extends Component {
             }
             content = data.content;
             time = getDateTime(data.visitTime);
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" value="打印" /></div>
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
         }else{
             if(data === null || data === undefined){
                 return null;

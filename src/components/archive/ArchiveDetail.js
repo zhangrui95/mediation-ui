@@ -148,7 +148,7 @@ class ArchiveDetail extends Component {
             workers = <input onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
             litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants}  onChange={this.handleLitigantChange.bind(this)}/>
             creater = header.user.response.user.name;
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.addNewArchive.bind(this)} className=""/></div>
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.addNewArchive.bind(this)} className="addPerson"/></div>
         }else if(model === 1){
             if(state !== 0){
                 return null;
@@ -175,7 +175,7 @@ class ArchiveDetail extends Component {
             }
             litigantsName = data.litigants.map((i)=>i.name).join(',');
             creater = data.creater.name;
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑" onClick={this.updateModel.bind(this)} /><input type="button" value="打印" /></div>
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} /><input type="button" className="change-btn" value="打印" /></div>
         }else{
             if(state !== 0){
                 return null;
@@ -203,7 +203,7 @@ class ArchiveDetail extends Component {
             }
             litigantsName = data.litigants.map((i)=>i.name).join(',');
             creater = data.creater.name;
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className=""/></div>
+            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
         }
         let workerValue;
         if(data.workerIds){
