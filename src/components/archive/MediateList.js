@@ -42,6 +42,7 @@ class MediateList extends Component {
     }
     render() {
         const { mediate,params,archive} = this.props;
+        const {id} = params;
         const {response} = mediate;
         const {data} = response||{};
         if(data === null||data === undefined){
@@ -53,7 +54,7 @@ class MediateList extends Component {
                 <div className="formArch">
                     <dic className="list-right" onClick={this.clickHandler.bind(this)}>新建</dic>
                 </div>
-                <MediateCell params={params} data={data} litigants={this.getLitigants(archive)} workers={this.getWorkers(archive)}/>
+                <MediateCell dataId={id} data={data} litigants={this.getLitigants(archive)} workers={this.getWorkers(archive)}/>
             </div>
         )
     }

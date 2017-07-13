@@ -1,28 +1,11 @@
 import React, { Component, PropTypes } from 'react'
-import {getDateTime} from '../../utils/date';
+import MediateRow from './MediateRow';
 
 class MediateCell extends Component {
-    clickHandler(e){
-        const { params } = this.props;
-        const {id} = params;
-        if(id !==null && id !== undefined && id!== ''){
-            const	{router}	=	this.context;
-            router.push('/archive/'+id+'/mediate/'+params.mid);
-        }
-    }
     render() {
-        const {data,litigants,workers} = this.props;
+        const {data,litigants,workers,dataId} = this.props;
         const arr = data.map((e,i) => {
-            return (<tr className="odd" key={i}>
-                <td width="40">{i+1}</td>
-                <td width="230">
-                    <a className="view-cell" href="javascript:;">{getDateTime(e.mediateTime)}</a>
-                </td>
-                <td>{e.address}</td>
-                <td>{litigants}</td>
-                <td>{workers}</td>
-                <td><a onClick={this.clickHandler.bind(this)}>编辑</a><span> | </span><a>打印</a></td>
-            </tr>);
+            return <MediateRow key={i} dataId={dataId} idx={i} item={e} litigants={litigants} workers={workers}/>;
         });
         return (
             <table cellPadding="0" cellSpacing="0" className="table-list table-list-evidence">
@@ -43,9 +26,5 @@ class MediateCell extends Component {
         )
     }
 }
-
-MediateCell.contextTypes = {
-    router: PropTypes.object
-};
 
 export default MediateCell
