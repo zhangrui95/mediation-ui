@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import {PROTOCOL_DETAIL,PROTOCOL_SAVE,PROTOCOL_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 import * as protocolActions from '../../actions/protocol'
+import Select from '../Select'
 
 class Protocol extends Component {
     constructor(props, context) {
@@ -58,7 +59,8 @@ class Protocol extends Component {
         syncActions.request(PROTOCOL_DETAIL,{id});
     }
     handleChange(e){
-        this.setState({result:e.target.value});
+        const result = e.target.value;
+        this.setState({result,content:result === '-1'?'未达成调解。':'',remark:''});
     }
     textChange(e){
         this.setState({content:e.target.value});
@@ -78,48 +80,44 @@ class Protocol extends Component {
         const {litigants} = data||{};
         return litigants||[];
     }
+
+    getCode(){
+        const { archive } = this.props;
+        const {response} = archive;
+        const {data} = response||{};
+        const {code} = data||{};
+        return code||'';
+    }
+
     render() {
         const model = this.state.model;
+        const { protocol} = this.props;
+        const {response} = protocol;
+        const {data} = response||{};
         let resulttext = '';
         let remarktext = '';
         let contenttext = '';
         let btns = '';
-        const { params,protocol} = this.props;
-        const {response} = protocol;
-        const {data} = response||{};
-        const {remark,result,content} = data||{};
         if(model === 0){
-            remarktext = <Input className="text-input" style={{ width: 400 }} placeholder="" onKeyUp={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" rows={4} onKeyUp={this.textChange.bind(this)} />
+            remarktext = <Input className="text-input" disabled={this.state.result === '-1'}  style={{ width: 400 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
+            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} onChange={this.textChange.bind(this)} value={this.state.content} />
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
-            resulttext = <select defaultValue="请选择" style={{ width: 110 }} onChange={this.handleChange.bind(this)}>
-                    <option>请选择</option>
-                    <option value="0">调解成功</option>
-                    <option value="-1">调解失败</option>
-                </select>
+            resulttext = <Select domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} head="请选择" onChangeHandler={this.handleChange.bind(this)} value={this.state.result} />
         }else if(model === 1){
-            remarktext = remark;
-            contenttext = content;
+            remarktext = data.remark;
+            contenttext = data.content;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" value="打印" /></div>
-            if(result === 0){
-                resulttext = "调解成功";
-            }else if(result === -1){
-                resulttext = "调解失败";
-            }
+            resulttext = data.result === 0 ? '调解成功':'调解失败';
         }else{
-            remarktext = <Input className="text-input" style={{ width: 400 }} placeholder="" defaultValue={this.state.remark} onKeyUp={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" rows={4} onKeyUp={this.textChange.bind(this)} defaultValue={this.state.content}/>
+            remarktext = <Input className="text-input" disabled={this.state.result === '-1'}  style={{ width: 400 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
+            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} onChange={this.textChange.bind(this)} value={this.state.content}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
-            resulttext = <select style={{ width: 110 }} onChange={this.handleChange.bind(this) } defaultValue={this.state.result}>
-                <option>请选择</option>
-                <option value="0">调解成功</option>
-                <option value="-1">调解失败</option>
-            </select>
+            resulttext = <Select domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} value={this.state.result} head="请选择" onChangeHandler={this.handleChange.bind(this)}/>
         }
         return (
             <div>
-                <div className="title-form-name" id={params.mid}>人民调解协议书</div>
-                <div className="formArch">文号：<span>XXXXXXXXXXXXXXXXXXXXx</span></div>
+                <div className="title-form-name">人民调解协议书</div>
+                <div className="formArch">文号：<span>{this.getCode()}</span></div>
                 <div className="formBorder">
                     <div className="border-box">
                         <div className="formArch">当事人</div>
