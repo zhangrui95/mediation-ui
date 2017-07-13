@@ -30,7 +30,7 @@ class UpLoading extends Component {
         //     console.log('You can only upload JPG file!');
         // }
         console.log('upload type',file.type);
-        const isLt2M = file.size / 1024 / 1024 < 2;
+        const isLt2M = file.size / 1024 / 1024 < 20;
         let text = '开始上传...';
         if (!isLt2M) {
             text = '文件大于2M';
