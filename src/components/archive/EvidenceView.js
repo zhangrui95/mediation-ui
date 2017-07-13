@@ -11,7 +11,7 @@ class EvidenceView extends Component {
             previewHead = <td>照片浏览</td>;
         }
         const rows = data.filter(i => i.type === type).map(function(it,i){
-            return <EvidenceRow key={i} data={it} idx={i} type={type} reload={reload}/>
+            return <EvidenceRow key={i} data={it} idx={i+1} type={type} reload={reload}/>
         });
         return (
             <table cellPadding="0" cellSpacing="0" className="table-list table-list-evidence">
