@@ -94,12 +94,6 @@ fetchMock.post('^'+DEV_REQ_HOST+'api/archiveWorker/workers.json',function(){
     ]}
 });
 
-fetchMock.mock(DEV_REQ_HOST+'api/investigation/listByArchive.json',{data:[
-    {id:'1',investTime:1499240237246,address:'xxx1',otherPerson:'xxx1',targetPerson:'xxx1',content:'xxx1',createTime:1499240237246,creater:{},archive:{}},
-    {id:'2',investTime:1499240238246,address:'xxx2',otherPerson:'xxx2',targetPerson:'xxx2',content:'xxx2',createTime:1499240238246,creater:{},archive:{}}
-]});
-
-
 const investData = {id:'1',investTime:1499240237246,address:'xxx',otherPerson:'xxx',targetPerson:'xxx',content:'xxx',createTime:1499240237246,
     workers:[
         {id:'3',worker:{id:'2',name:'w2'},createTime:1499240237246,investigation:{}},
@@ -108,6 +102,11 @@ const investData = {id:'1',investTime:1499240237246,address:'xxx',otherPerson:'x
     creater:{},
     archive:{}
 };
+
+fetchMock.mock(DEV_REQ_HOST+'api/investigation/listByArchive.json',{data:[
+    investData,
+    investData
+]});
 
 fetchMock.mock(DEV_REQ_HOST+'api/investigation/detail.json',{state:0,data:investData});
 fetchMock.mock(DEV_REQ_HOST+'api/investigation/save.json',{state:0,data:investData});
