@@ -12,8 +12,8 @@ class MediateCell extends Component {
                 <thead>
                 <tr>
                     <td>序号</td>
-                    <td>调查时间</td>
-                    <td>调查地点</td>
+                    <td>调解时间</td>
+                    <td>调解地点</td>
                     <td>当事人</td>
                     <td>调解人</td>
                     <td>操作</td>

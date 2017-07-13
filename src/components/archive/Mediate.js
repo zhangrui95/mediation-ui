@@ -63,7 +63,7 @@ class Mediate extends Component {
         }
     }
     timeChange(date){
-        this.setState({date: date.mediateTime});
+        this.setState({time: date.mediateTime});
     }
     contentChange(e){
         this.setState({content:e.target.value});
@@ -84,11 +84,11 @@ class Mediate extends Component {
         const {response} = archive;
         const {data} = response||{};
         const {workers,manager}= data||{};
-        let wnames = (workers||[]).map((i)=>i.worker.name).join(',');
+        let wnames = (workers||[]).map((i)=>(i.worker||{}).name||'').join(',');
         if(wnames !== ''){
             wnames = ','+wnames;
         }
-        return manager.name+wnames;
+        return ((manager||{}).name||'')+wnames;
     }
     render() {
         const { params,mediateDetail,archive} = this.props;
@@ -128,8 +128,8 @@ class Mediate extends Component {
             <div>
                 <div className="title-form-name" id={params.mid}>调解详情</div>
                 <div className="formBorder">
-                    <div className="formArch">调查时间：<span>{time}</span></div>
-                    <div className="formArch">调查地点：<span>{address}</span></div>
+                    <div className="formArch">调解时间：<span>{time}</span></div>
+                    <div className="formArch">调解地点：<span>{address}</span></div>
                     <div className="formArch">当事人：<span>{this.getLitigants(archive)}</span></div>
                     <div className="formArch">调解人：<span>{this.getWorkers(archive)}</span></div>
                     <div className="formArch">调查记录：<span>{contents}</span></div>

@@ -34,11 +34,11 @@ class MediateList extends Component {
         const {response} = archive;
         const {data} = response||{};
         const {workers,manager}= data||{};
-        let wnames = (workers||[]).map((i)=>i.worker.name).join(',');
+        let wnames = (workers||[]).map((i)=>(i.worker||{}).name||'').join(',');
         if(wnames !== ''){
             wnames = ','+wnames;
         }
-        return manager.name+wnames;
+        return ((manager||{}).name||'')+wnames;
     }
     render() {
         const { mediate,params,archive} = this.props;

@@ -12,7 +12,7 @@ class MediateRow extends Component {
         return (<tr className="odd">
             <td width="40">{idx+1}</td>
             <td width="230">
-                <a className="view-cell" href="javascript:;">{getDateTime(item.mediateTime)}</a>
+                <a className="view-cell" href="javascript:;" onClick={this.clickHandler.bind(this)}>{getDateTime(item.mediateTime)}</a>
             </td>
             <td>{item.address}</td>
             <td>{litigants}</td>
