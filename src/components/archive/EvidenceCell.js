@@ -61,9 +61,9 @@ class EvidenceCell extends Component {
         const {data,reload,dataId} = this.props;
         return (
                 <div className="formBorder gray-border">
+                    <div className="formArch hint">{this.state.text}</div>
                     <div className="formArch">
                         <div className="margin-form table-name">视频</div>
-                        <div>{this.state.text}</div>
                         <div className="list-right"><Upload {...videoProps} data={{'archive.id':dataId,type:2}} onChange={this.onChangeHandler.bind(this)} beforeUpload={this.beforeUpload.bind(this)}>上传视频</Upload></div>
                     </div>
                     <EvidenceView data={data} type={2} reload={reload}/>
