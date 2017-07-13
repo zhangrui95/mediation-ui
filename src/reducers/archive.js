@@ -1,4 +1,5 @@
-import  {ARCHIVE_DETAIL_RESET,ARCHIVE_DETAIL,ARCHIVE_ADD,ARCHIVE_ACTION_RESET,ARCHIVE_UPDATE,ARCHIVE_FINISH} from '../constants/ActionTypes'
+import  {ARCHIVE_DETAIL_RESET,ARCHIVE_DETAIL,ARCHIVE_ADD,ARCHIVE_ACTION_RESET,ARCHIVE_UPDATE,ARCHIVE_FINISH,
+    ARCHIVE_SET_PROTOCOL,ARCHIVE_SET_CHECK} from '../constants/ActionTypes'
 import syncReducer from './syncReducer'
 import merge from 'lodash/merge'
 
@@ -25,6 +26,10 @@ export default syncReducer({
                 ret.response = {data:action.data}
             }
             return merge({},state,ret);
+        case ARCHIVE_SET_PROTOCOL:
+            return merge({},state,{response:{protocol:action.data}});
+        case ARCHIVE_SET_CHECK:
+            return merge({},state,{response:{check:action.data}});
         default:
             return state;
     }

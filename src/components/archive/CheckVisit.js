@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import {CHECKVISIT_SAVE,CHECKVISIT_DETAIL,CHECKVISIT_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 import * as checkvisitActions from '../../actions/checkvisit'
+import * as arhciveActions from '../../actions/arhcive'
 import {getDateTime} from '../../utils/date';
 
 class CheckVisit extends Component {
@@ -14,23 +15,23 @@ class CheckVisit extends Component {
         this.state = {model: 0,input:'',date:'',defaultTime:getDateTime(new Date().getTime())};
     }
     componentWillReceiveProps(next) {
-        const {actions} = this.props;
+        const {actions,arhciveActions} = this.props;
         const {checkvisit} = next;
         const {response,action,actionResponse} = checkvisit||{};
-        if(action === 'add' && response) {
-            const {state, data} = response || {};
+        if(action === 'add' && actionResponse) {
+            const {state, data} = actionResponse || {};
             if (state === 0) {
                 this.setState({model:1,input:data.content,date:getDateTime(data.visitTime)});
-                this.setCheck(data);
+                arhciveActions.setCheck(data);
             }
-            actions.resetAction();
+            actions.resetAction(actionResponse);
         }else if(action === 'update' && actionResponse){
             const {state,data} = actionResponse || {};
             if (state === 0) {
                 this.setState({model:1,input:data.content,date:getDateTime(data.visitTime)});
-                this.setCheck(data);
+                arhciveActions.setCheck(data);
             }
-            actions.resetAction(data);
+            actions.resetAction(actionResponse);
         }else if(response){
             const {state,data} = response||{};
             if(state === 0){
@@ -38,14 +39,6 @@ class CheckVisit extends Component {
             }else{
                 this.setState({model:0,input:'',date:''});
             }
-        }
-    }
-
-    setCheck(data){
-        const { archive } = this.props;
-        const {response} = archive;
-        if(response){
-            response.check = data;
         }
     }
 
@@ -146,6 +139,7 @@ function	select(state)	{
 function actions(dispatch) {
     return {
         syncActions: bindActionCreators(syncActions, dispatch),
+        arhciveActions: bindActionCreators(arhciveActions, dispatch),
         actions: bindActionCreators(checkvisitActions, dispatch)
     }
 }

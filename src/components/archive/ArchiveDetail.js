@@ -120,7 +120,6 @@ class ArchiveDetail extends Component {
         const {model} = this.state;
         const {response} = archive;
         const {state,protocol,check} = response||{};
-
         let name;
         let type;
         let content;

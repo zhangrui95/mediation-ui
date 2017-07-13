@@ -8,7 +8,7 @@ class ArchiveHeader extends Component {
             const div = e.target;
             const routeUrl = div.getAttribute('data-route')||'';
             const	{router}	=	this.context;
-            router.push('archive/'+id+routeUrl);
+            router.push('/archive/'+id+routeUrl);
         }
     }
     goBack(){

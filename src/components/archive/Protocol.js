@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {PROTOCOL_DETAIL,PROTOCOL_SAVE,PROTOCOL_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
+import * as arhciveActions from '../../actions/arhcive'
 import * as protocolActions from '../../actions/protocol'
 import Select from '../Select'
 
@@ -14,38 +15,30 @@ class Protocol extends Component {
         this.state = {model: 0,result:'',content:'',remark:''};
     }
     componentWillReceiveProps(next) {
-        const {actions} = this.props;
+        const {actions,arhciveActions} = this.props;
         const {protocol} = next;
         const {response,action,actionResponse} = protocol||{};
-        if(action === 'add' && response) {
-            const {state, data} = response || {};
+        if(action === 'add' && actionResponse) {
+            const {state, data} = actionResponse || {};
             if (state === 0) {
-                this.setState({model:1,result:data.result,content:data.content,remark:data.remark});
-                this.setProtocol(data);
+                this.setState({model:1,result:data.result+'',content:data.content,remark:data.remark});
+                arhciveActions.setProtocol(data);
             }
-            actions.resetAction();
+            actions.resetAction(actionResponse);
         }else if(action === 'update' && actionResponse){
             const {state,data} = actionResponse || {};
             if (state === 0) {
-                this.setState({model:1,result:data.result,content:data.content,remark:data.remark});
-                this.setProtocol(data);
+                this.setState({model:1,result:data.result+'',content:data.content,remark:data.remark});
+                arhciveActions.setProtocol(data);
             }
-            actions.resetAction(data);
+            actions.resetAction(actionResponse);
         }else if(response){
             const {state,data} = response||{};
             if(state === 0){
-                this.setState({model:1,result:data.result,content:data.content,remark:data.remark});
+                this.setState({model:1,result:data.result+'',content:data.content,remark:data.remark});
             }else{
                 this.setState({model: 0,result:'',content:'',remark:''});
             }
-        }
-    }
-
-    setProtocol(data){
-        const { archive } = this.props;
-        const {response} = archive;
-        if(response){
-            response.protocol = data;
         }
     }
 
@@ -53,7 +46,7 @@ class Protocol extends Component {
         const { protocol} = this.props;
         const {response} = protocol;
         const {data} = response||{};
-        this.setState({model:2,result:data.result,content:data.content,remark:data.remark});
+        this.setState({model:2,result:data.result+'',content:data.content,remark:data.remark});
     }
 
     updateArchive(){
@@ -166,6 +159,7 @@ function	select(state)	{
 function actions(dispatch) {
     return {
         syncActions: bindActionCreators(syncActions, dispatch),
+        arhciveActions: bindActionCreators(arhciveActions, dispatch),
         actions: bindActionCreators(protocolActions, dispatch)
     }
 }
