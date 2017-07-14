@@ -197,7 +197,7 @@ class Investigation extends Component {
             otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.otherPerson} placeholder="" onChange={this.otherPersonChange.bind(this)}/>
             targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.targetPerson} placeholder="" onChange={this.targetPersonChange.bind(this)}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
-            creatPerson = <div className="formArch"><div className="margin-form word-title">调查人：</div><input type="button" value="选择" onClick={this.upAddClick.bind(this)}/>{workerNames} </div>
+            creatPerson = <div className="formArch"><div className="margin-form word-title">调查人：</div><input type="button" className="btn-pop" value="选择" onClick={this.upAddClick.bind(this)}/>{workerNames} </div>
             contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
         }
         return (

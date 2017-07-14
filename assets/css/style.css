@@ -1431,3 +1431,18 @@ to {
 	float: left;
 	margin-top: 7px;
 }
+.ant-btn{
+	background: #2780da;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	box-shadow: 0px 2px 0px #93bfec;
+	height: 28px;
+	color: #fff;
+	font-size: 12px;
+	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
+	border: 0;
+	line-height: 30px;
+	cursor: pointer;
+	padding: 0 15px;
+}
