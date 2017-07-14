@@ -30,7 +30,7 @@ class EvidenceCell extends Component {
         const isLt2M = file.size / 1024 / 1024 < 100;
         let text = '开始上传...';
         if (!isLt2M) {
-            text = '文件大于2M';
+            text = '文件大于100M';
         }
         this.setState({show:0,text});
         return isJPG && isLt2M;
@@ -67,19 +67,19 @@ class EvidenceCell extends Component {
                         <div className="list-right"><Upload {...videoProps} data={{'archive.id':dataId,type:2}} onChange={this.onChangeHandler.bind(this)} beforeUpload={this.beforeUpload.bind(this)}>上传视频</Upload></div>
                     </div>
                     <EvidenceView data={data} type={2} reload={reload}/>
-                    <div className="formArch">(以上格式为：AVI,MKV,MP4,WMV,FLV,MOW,3GP,单个文件大小不得大于20M,全部大小不得大于100M。)</div>
+                    <div className="formArch">(以上格式为：AVI,MKV,MP4,WMV,FLV,MOV,3GP,单个文件大小不得大于50M,全部大小不得大于200M。)</div>
                     <div className="formArch">
                         <div className="margin-form table-name">照片</div>
                         <dic className="list-right"><Upload {...videoProps} data={{'archive.id':dataId,type:0}} onChange={this.onChangeHandler.bind(this)} beforeUpload={this.beforeUpload.bind(this)} >上传照片</Upload></dic>
                     </div>
                     <EvidenceView data={data} type={0} reload={reload}/>
-                    <div className="formArch">(以上格式为：JPG,PNG,JPEG,单个文件大小不得大于2M,全部大小不得大于10M。)</div>
+                    <div className="formArch">(以上格式为：JPG,PNG,JPEG,单个文件大小不得大于5M,全部大小不得大于50M。)</div>
                     <div className="formArch">
                         <div className="margin-form table-name">录音</div>
                         <dic className="list-right"><Upload {...videoProps} data={{'archive.id':dataId,type:1}} onChange={this.onChangeHandler.bind(this)} beforeUpload={this.beforeUpload.bind(this)} >上传录音</Upload></dic>
                     </div>
                     <EvidenceView data={data} type={1} reload={reload}/>
-                    <div className="formArch">(以上格式为：MP3,WMA,ACC,WAV,M4A,单个文件大小不得大于2M,全部大小不得大于10M。)</div>
+                    <div className="formArch">(以上格式为：MP3,WMA,ACC,WAV,M4A,单个文件大小不得大于10M,全部大小不得大于50M。)</div>
                 </div>
         )
     }

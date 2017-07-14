@@ -33,7 +33,7 @@ class UpLoading extends Component {
         const isLt2M = file.size / 1024 / 1024 < 20;
         let text = '开始上传...';
         if (!isLt2M) {
-            text = '文件大于2M';
+            text = '文件大于20M';
         }
         this.setState({show:0,text});
         return isJPG && isLt2M;

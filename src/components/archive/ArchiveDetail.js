@@ -11,7 +11,7 @@ import Pop from '../pop/Pop';
 import PopMediator from './PopMediator'
 import AddPartyinput from './AddPartyinput'
 import merge from 'lodash/merge'
-import PopAlert from '../pop/PopAlert';
+import PopAlertHtml from '../pop/PopAlertHtml';
 
 class ArchiveDetail extends Component {
     constructor(props, context) {
@@ -20,11 +20,7 @@ class ArchiveDetail extends Component {
         const {id} = params;
         const {response} = archive;
         const {data} = response || {};
-        if(data){
-            data.workerIds = this.getWorkersValue(data)
-        }
-        this.state = {addBox:false,passConfirm:false,goOutConfirm:false, model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},data||{})};
-        this.state = {addBox:false,passConfirm:false,goOutConfirm:false, model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},data||{}),msg:''};
+        this.state = {addBox:false,model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},ArchiveDetail.data2state(data||{})),msg:'',workersName:ArchiveDetail.getWorkersName(data)};
     }
 
     componentWillReceiveProps(next) {
@@ -36,26 +32,27 @@ class ArchiveDetail extends Component {
             if (state === 0) {
                 const	{router}	=	this.context;
                 router.replace('/archive/'+data.id);
-                data.workerIds = this.getWorkersValue(data)
-                this.setState({model:1,data:merge({},data||{})});
+                this.setState({model:1,data:merge({},ArchiveDetail.data2state(data)),workersName:ArchiveDetail.getWorkersName(data)});
             }
             actions.resetAction();
         }else if(action === 'update' && actionResponse){
             const {state,data} = actionResponse || {};
             if (state === 0) {
-                data.workerIds = this.getWorkersValue(data)
-                this.setState({model:1,data:merge({},data||{})});
+                this.setState({model:1,data:merge({},ArchiveDetail.data2state(data)),workersName:ArchiveDetail.getWorkersName(data)});
             }
             actions.resetAction(data);
         }else if(response){
             if(!this.state.data.id){
                 const {data} = response || {};
-                if(data){
-                    data.workerIds = this.getWorkersValue(data)
-                }
-                this.setState({data:merge({},data||{})});
+                this.setState({data:merge({},ArchiveDetail.data2state(data||{})),workersName:ArchiveDetail.getWorkersName(data)});
             }
         }
+    }
+
+    static data2state(data){
+        return {id:data.id,name:data.name,type:{id:(data.type||{}).id},state:data.state,
+            manager:{id:(data.manager||{}).id},content:data.content,
+            workerIds:ArchiveDetail.getWorkersValue(data),litigants:ArchiveDetail.getLitigants(data),litigantsDel:''};
     }
 
     upAddClick(){
@@ -68,37 +65,25 @@ class ArchiveDetail extends Component {
 
     getData(){
         this.state.data.litigants = [];
-        const data = merge({},this.state.data,{litigants:this.refs.litigants.datas()});
-        data.createTime = null;
-        data.updateTime = null;
-        data.keepTime = null;
-        data.applyTime = null;
-        data.creater = null;
-        data.updater = null;
-        data.workers = null;
-        data.manager = {id:data.manager.id};
-        data.type = {id:data.type.id};
-        data.litigants = data.litigants.map(function (i) {
-            i.createTime = null;
-            return i;
-        });
-        return data
+        return merge({},this.state.data,{litigants:this.refs.litigants.datas()})
     }
 
     addNewArchive(){
-        if(!this.validate()){
+        const data = this.getData();
+        if(!this.validate(data)){
             return
         }
         const {syncActions} = this.props;
-        syncActions.request(ARCHIVE_ADD,null,this.getData());
+        syncActions.request(ARCHIVE_ADD,null,data);
     }
 
     updateArchive(){
-        if(!this.validate()){
+        const data = this.getData();
+        if(!this.validate(data)){
             return
         }
         const {syncActions} = this.props;
-        syncActions.request(ARCHIVE_UPDATE,null,this.getData());
+        syncActions.request(ARCHIVE_UPDATE,null,data);
     }
 
     updateModel(){
@@ -131,34 +116,87 @@ class ArchiveDetail extends Component {
         this.setState({data: merge({},this.state.data,{litigants:datas,litigantsDel})});
     }
 
-    validate(){
-       // let litigants = this.state.data.litigants.map((i)=>i.name);
-       //  console.log(litigants);
-        if(this.state.data.name === ''){
+    static validateLitigants(item, idx){
+        const errs = [];
+        if(!item.name || item.name === ''){
+            errs.push('姓名不能为空');
+        }
+        if(!item.card || item.card === ''){
+            errs.push('身份证号码不能为空');
+        }
+        if(!item.sex || item.sex === ''){
+            errs.push('性别不能为空');
+        }
+        if(!item.nation || item.nation === ''){
+            errs.push('民族不能为空');
+        }
+        if(!item.age || item.age === '' || item.age < 1){
+            errs.push('年龄不能为空或小于1');
+        }
+        if(!item.address || item.address === ''){
+            errs.push('单位/住址不能为空');
+        }
+        if(!item.contact || item.contact === ''){
+            errs.push('联系方式不能为空');
+        }
+        return errs.length === 0 ?'':('当事人'+(idx+1)+':有'+errs.length+'处错误');
+    }
+
+    validate(data){
+        if(!data.name || data.name === ''){
             this.setState({msg:'卷宗名称不能为空'});
             return false;
         }
-        if(this.state.data.type.id === ''){
+        if(!data.type || !data.type.id || data.type.id === ''){
             this.setState({msg:'请选择卷宗类别'});
             return false;
         }
-        if(this.state.data.content === ''){
+        if(!data.content || data.content === ''){
             this.setState({msg:'纠纷简要情况不能为空'});
             return false;
         }
-        if(this.state.data.manager.id === ''){
+        if(!data.manager || !data.manager.id || data.manager.id === ''){
             this.setState({msg:'请选择调解员'});
+            return false;
+        }
+        if(!data.litigants || data.litigants.length < 2){
+            this.setState({msg:'当事人不能小于2'});
+            return false;
+        }
+        const litigants = (data.litigants||[]).map((it,i)=> ArchiveDetail.validateLitigants(it,i)).filter(i=>i!=='').join('<br/>');
+        if(litigants !== ''){
+            this.setState({msg:litigants});
             return false;
         }
         return true;
     }
 
-    getWorkersValue(data){
+    static getWorkersValue(data){
         let workerValue = '';
         if(data && data.workers){
             workerValue = (data.workers||[]).map(i=>(i.worker||{}).id||'').join(',');
         }
         return workerValue;
+    }
+
+    static getWorkersName(data){
+        let workerValue = '';
+        if(data && data.workers){
+            workerValue = (data.workers||[]).map(i=>(i.worker||{}).name||'').join(',');
+        }
+        return workerValue;
+    }
+
+    static getLitigant(data){
+        return {id:data.id,name:data.name,card:data.card,sex:data.sex,nation:data.nation,age:data.age,address:data.address,contact:data.contact};
+    }
+
+    static getLitigants(data){
+        let litigants = [{},{}];
+        if(data && data.litigants){
+            litigants = (data.litigants||[]).map(i=>ArchiveDetail.getLitigant(i||{}));
+        }
+        return litigants;
     }
 
     renderByData(data) {
@@ -183,13 +221,11 @@ class ArchiveDetail extends Component {
         let manager = '';
         let btns;
         if(model === 0){
-            name = <Input name="name" className="text-input" style={{ width: 350 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)}/>
+            name = <Input name="name" className="text-input" style={{ width: 350 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
             type = <Select name="type" domain="type.id" url="api/archiveType/options.json" head="请选择" value={(data.type||{}).id} onChangeHandler={this.handleChange('type.id').bind(this)} />
             content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleChange('manager.id').bind(this)}/>
-            if(data.workers){
-                workersName = data.workers.map((i)=>i.worker.name).join(',');
-            }
+            workersName = data.workersName;
             workers = <input className="btn-pop" onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
             litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants}  onChange={this.handleLitigantChange.bind(this)}/>
             creater = header.user.response.user.name;
@@ -225,13 +261,11 @@ class ArchiveDetail extends Component {
             if(state !== 0){
                 return null;
             }
-            name = <Input name="name" className="text-input" style={{ width: 350 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)}/>
+            name = <Input name="name" className="text-input" style={{ width: 350 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
             type = <Select domain="type.id" url="api/archiveType/options.json" head="请选择" value={(data.type||{}).id} onChangeHandler={this.handleChange('type.id').bind(this)} />
             content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleChange('manager.id').bind(this)}/>
-            if(data.workers){
-                workersName = data.workers.map((i)=>i.worker.name).join(',');
-            }
+            workersName = data.workersName;
             workers = <input className="btn-pop" onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
             litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants} onChange={this.handleLitigantChange.bind(this)}/>
             createTime = getDateTime(data.createTime);
@@ -298,7 +332,7 @@ class ArchiveDetail extends Component {
                     <div className="formArch"><span className="word-title">登记日期：</span><span>{createTime}</span></div>
                     {btns}
                 </div>
-                <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                <PopAlertHtml visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
     }
