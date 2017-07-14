@@ -19,11 +19,11 @@ class TimeChoice extends Component{
         }
         let html;
         if(value === ''){
-            html = <div><div className="margin-form"><DatePicker showTime={true} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss"/></div></div>;
+            html = <div><div className="margin-form"><DatePicker showTime={true} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss" allowClear="false"/></div></div>;
         }else{
-            html = <div><div className="apply-name">申请人签字：</div><div className="time-right">
-                <DatePicker showTime={true} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss"/>
-            </div></div>;
+            html = <div>
+                <DatePicker showTime={true} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss" allowClear="false"/>
+            </div>;
         }
 
         return (
@@ -31,5 +31,5 @@ class TimeChoice extends Component{
         );
     }
 }
-
+//<div className="apply-name">申请人签字：</div>
 export  default TimeChoice;

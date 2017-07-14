@@ -53,13 +53,16 @@
   cursor: pointer;
   -webkit-transition: color 0.3s ease, opacity 0.15s ease;
   transition: color 0.3s ease, opacity 0.15s ease;
+  display: none;
 }
 .ant-calendar-picker-clear:hover {
   color: #999;
+  display: none;
 }
 .ant-calendar-picker:hover .ant-calendar-picker-clear {
   opacity: 1;
   z-index: 1;
+  display: none;
 }
 .ant-calendar-picker-icon {
   position: absolute;

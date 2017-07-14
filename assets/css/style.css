@@ -1410,4 +1410,7 @@ to {
 .tap-blue{
 	background: #2780da;
 }
-
+.min-img{
+	width:40px;
+	height: 40px;
+}

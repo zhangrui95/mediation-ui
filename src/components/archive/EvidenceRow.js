@@ -52,7 +52,7 @@ class EvidenceRow extends Component {
         if(type===0){
             previewPreWidth = 180;
             previewCell = <td>
-                <img src={'api/evidence/photo.json?id='+data.id}/>
+                <img className="min-img" src={'api/evidence/photo.json?id='+data.id}/>
             </td>;
             printImgPre = <span> | </span>
             printImgAction = <a onClick={this.printImg.bind(this)}>打印</a>

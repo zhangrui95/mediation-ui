@@ -39,9 +39,6 @@ class ApplyFor extends Component {
     }
 
     saveApply(){
-        if(!this.validate()){
-            return
-        }
         const {syncActions,params} = this.props;
         const {id} = params;
         if(id !== null && id !== undefined && id !== ''){
@@ -56,14 +53,6 @@ class ApplyFor extends Component {
         const {data} = response||{};
         const {litigants} = data||{};
         return litigants||[];
-    }
-
-    validate(){
-        if(this.state.applyTime === ''){
-            this.setState({msg:'申请时间不能为空'});
-            return false;
-        }
-        return true;
     }
 
     render() {
