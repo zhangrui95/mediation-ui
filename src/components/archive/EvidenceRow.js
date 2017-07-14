@@ -59,7 +59,7 @@ class EvidenceRow extends Component {
         }
         return (<tr className="odd">
             <td width="40">{idx}</td>
-            <td width={previewPreWidth}>{data.name}</td>
+            <td className="line" width={previewPreWidth}>{data.name}</td>
             {previewCell}
             <td>{EvidenceRow.getHumanSize(data.size)}</td>
             <td>{getDateTime(data.createTime)}</td>

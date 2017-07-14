@@ -26,7 +26,7 @@ class EvidenceList extends Component {
         }
         return (
             <div>
-                <div className="title-form-name">调查取证</div>
+                <div className="title-form-name">证据上传</div>
                 <EvidenceCell data={data} dataId={id} reload={this.load.bind(this)}/>
             </div>
         )

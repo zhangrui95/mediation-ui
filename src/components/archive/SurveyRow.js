@@ -12,13 +12,13 @@ class SurveyRow extends Component {
         const {idx,item} = this.props;
         return (<tr className="odd">
             <td width="40">{idx+1}</td>
-            <td width="230">
-                <a className="view-cell" href="javascript:;" onClick={this.clickHandler.bind(this)}>{getDateTime(item.investTime)}</a>
+            <td width="160">
+                <a className="ellipsis" href="javascript:;" onClick={this.clickHandler.bind(this)}>{getDateTime(item.investTime)}</a>
             </td>
-            <td>{item.address}</td>
-            <td>{item.otherPerson}</td>
-            <td>{item.targetPerson}</td>
-            <td>{(item.workers||[]).map(i=>(i.worker||{}).name||'').join(',')}</td>
+            <td className="ellipsis">{item.address}</td>
+            <td className="ellipsis">{item.otherPerson}</td>
+            <td className="ellipsis">{item.targetPerson}</td>
+            <td className="ellipsis">{(item.workers||[]).map(i=>(i.worker||{}).name||'').join(',')}</td>
             <td><a onClick={this.clickHandler.bind(this)}>编辑</a><span> | </span><a>打印</a></td>
         </tr>)
     }

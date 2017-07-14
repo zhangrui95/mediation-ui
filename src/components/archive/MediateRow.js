@@ -12,11 +12,11 @@ class MediateRow extends Component {
         return (<tr className="odd">
             <td width="40">{idx+1}</td>
             <td width="230">
-                <a className="view-cell" href="javascript:;" onClick={this.clickHandler.bind(this)}>{getDateTime(item.mediateTime)}</a>
+                <a className="ellipsis" href="javascript:;" onClick={this.clickHandler.bind(this)}>{getDateTime(item.mediateTime)}</a>
             </td>
-            <td>{item.address}</td>
-            <td>{litigants}</td>
-            <td>{workers}</td>
+            <td className="ellipsis">{item.address}</td>
+            <td className="ellipsis">{litigants}</td>
+            <td className="ellipsis">{workers}</td>
             <td><a onClick={this.clickHandler.bind(this)}>编辑</a><span> | </span><a>打印</a></td>
         </tr>)
     }
