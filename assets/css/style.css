@@ -1414,3 +1414,17 @@ to {
 	width:40px;
 	height: 40px;
 }
+.content{
+	width: 80%;
+}
+.ellipsis{
+	width: 135px;
+	text-align: center;
+	padding: 0 3px;
+}
+.table-list td.ellipsis{
+	line-height: 20px;
+}
+.table-list td.line{
+	line-height: 20px;
+}

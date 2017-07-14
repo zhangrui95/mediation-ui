@@ -34,7 +34,7 @@ class InvestigationList extends Component {
         }
         return (
             <div>
-                <div className="title-form-name">人民调解调查表</div>
+                <div className="title-form-name">人民调解调查记录</div>
                 <div className="formArch">
                     <dic className="list-right" onClick={this.clickHandler.bind(this)}>新建</dic>
                 </div>

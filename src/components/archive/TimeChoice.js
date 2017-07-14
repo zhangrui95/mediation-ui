@@ -18,7 +18,7 @@ class TimeChoice extends Component{
             time =  defaultValue;
         }
         let html;
-        if(hide == '0'){
+        if(hide === 0){
             html = <div><div className="margin-form"><DatePicker showTime={true} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD')} format="YYYY-MM-DD" allowClear="false"/></div></div>;
         }else{
             html = <div>

@@ -8,7 +8,7 @@ var msg=[
     },
     {
         'route':'/evidence',
-        'name':'调查取证',
+        'name':'证据上传',
         'index': 1,
     },
     {
@@ -18,7 +18,7 @@ var msg=[
     },
     {
         'route':'/investigation',
-        'name':'调查表',
+        'name':'调查记录',
         'index': 3,
     },
     {
@@ -38,7 +38,7 @@ var msg=[
     },
     {
         'route':'/finish',
-        'name':'完结',
+        'name':'结案',
         'index': 7,
     },
 
