@@ -23,7 +23,9 @@ export default syncReducer({
         case ARCHIVE_ACTION_RESET:
             const ret = {action:'',actionResponse:null};
             if(action.data){
-                ret.response = {data:action.data}
+                ret.response = {data:action.data};
+                ((state.response||{}).data||{}).litigants = null;
+                ((state.response||{}).data||{}).workers = null;
             }
             return merge({},state,ret);
         case ARCHIVE_SET_PROTOCOL:

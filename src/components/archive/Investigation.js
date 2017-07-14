@@ -164,7 +164,6 @@ class Investigation extends Component {
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
         const workerValue = this.getWorkers();
         const workerNames = this.state.workersName;
-
         if(model === 0){
             times = <TimeChoice name="investTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
             addresss = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.address} placeholder=""  onChange={this.addressChange.bind(this)}/>

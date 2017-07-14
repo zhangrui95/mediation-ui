@@ -86,13 +86,13 @@ class PopMediator extends Component {
                 {this.getOptions()}
                 <div className="pop-submit">
                     <input type="button" name="button" data-close="save" value="保存"  className="btn-pop"/>
-                    <input type="button" name="button" value="取消"  className="btn-reset" data-close="pop_cross"/>
                 </div>
                 <div className="error-height"></div>
             </div>
         )
     }
 }
+//<input type="button" name="button" value="取消"  className="btn-reset" data-close="pop_cross"/>
 
 PopMediator.propTypes = {
     value: PropTypes.array,

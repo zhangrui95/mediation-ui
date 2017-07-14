@@ -17,7 +17,8 @@ export default syncReducer({
         case INVESTIGATION_ACTION_RESET:
             const ret = {action:'',actionResponse:null};
             if(action.data){
-                ret.response = action.data
+                ret.response = action.data;
+                ((state.response||{}).data||{}).workers = null;
             }
             return merge({},state,ret);
         default:
