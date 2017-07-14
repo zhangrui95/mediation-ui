@@ -16,8 +16,7 @@ class Investigation extends Component {
         super(props, context);
         const { params} = props;
         const {mid} = params;
-        this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',workersName:'',defaultTime:getDateTime(new Date().getTime())};
-        this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',defaultTime:getDateTime(new Date().getTime()),msg:''};
+        this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',workersName:'',defaultTime:getDateTime(new Date().getTime()),msg:''};
     }
     componentWillReceiveProps(next){
         const {actions,params} = this.props;
