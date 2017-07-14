@@ -9,13 +9,14 @@ import Pop from '../pop/Pop';
 import PopMediator from './PopMediator'
 import { Input } from 'antd';
 import TimeChoice from './TimeChoice'
+import PopAlert from '../pop/PopAlert';
 
 class Investigation extends Component {
     constructor(props, context) {
         super(props, context);
         const { params} = props;
         const {mid} = params;
-        this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',defaultTime:getDateTime(new Date().getTime())};
+        this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',defaultTime:getDateTime(new Date().getTime()),msg:''};
     }
     componentWillReceiveProps(next){
         const {actions,params} = this.props;
@@ -61,6 +62,9 @@ class Investigation extends Component {
         this.setState({model:2,time:getDateTime(investTime),address:address,otherPerson:otherPerson,targetPerson:targetPerson,content:content,workerIds:this.getWorkersValue(data)});
     }
     updateArchive(){
+        if(!this.validate()){
+            return
+        }
         const {syncActions,investigationDetail} = this.props;
         const {response} = investigationDetail;
         const {data} = response||{};
@@ -91,6 +95,9 @@ class Investigation extends Component {
         this.setState({content:e.target.value});
     }
     onSave(){
+        if(!this.validate()){
+            return
+        }
         const {syncActions,params} = this.props;
         const {id} = params;
         const applyTime = this.state.time;
@@ -119,6 +126,29 @@ class Investigation extends Component {
         }
         return workerValue;
     }
+    validate(){
+        if(this.state.address === ''){
+            this.setState({msg:'调查地点不能为空'});
+            return false;
+        }
+        if(this.state.otherPerson === ''){
+            this.setState({msg:'参加人不能为空'});
+            return false;
+        }
+        if(this.state.otherPerson === ''){
+            this.setState({msg:'被调查人不能为空'});
+            return false;
+        }
+        if(this.state.workerIds === ''){
+            this.setState({msg:'调查人不能为空'});
+            return false;
+        }
+        if(this.state.content === ''){
+            this.setState({msg:'调查记录不能为空'});
+            return false;
+        }
+        return true;
+    }
     render() {
         let times =  '';
         let addresss =  '';
@@ -142,7 +172,7 @@ class Investigation extends Component {
             addresss = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.address} placeholder=""  onChange={this.addressChange.bind(this)}/>
             otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" value={this.state.otherPerson} onChange={this.otherPersonChange.bind(this)}/>
             targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" value={this.state.targetPerson} onChange={this.targetPersonChange.bind(this)}/>
-            creatPerson = <div className="formArch">调查人：<input type="button" value="选择" onClick={this.upAddClick.bind(this)}/> {workerNames}</div>
+            creatPerson = <div className="formArch"><div className="margin-form word-title">调查人：</div><input type="button" value="选择" onClick={this.upAddClick.bind(this)}/> {workerNames}</div>
             contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
         }else if(model === 1){
@@ -168,7 +198,7 @@ class Investigation extends Component {
             otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.otherPerson} placeholder="" onChange={this.otherPersonChange.bind(this)}/>
             targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.targetPerson} placeholder="" onChange={this.targetPersonChange.bind(this)}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
-            creatPerson = <div className="formArch">调查人：<input type="button" value="选择" onClick={this.upAddClick.bind(this)}/>{workerNames} </div>
+            creatPerson = <div className="formArch"><div className="margin-form word-title">调查人：</div><input type="button" value="选择" onClick={this.upAddClick.bind(this)}/>{workerNames} </div>
             contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
             sign = '';
         }
@@ -184,10 +214,11 @@ class Investigation extends Component {
                     <Pop title="选择调查人" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
                         <PopMediator domain="workers" url={'api/archiveWorker/workers.json?aid='+id} name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
                     </Pop>
-                    <div className="formArch">调查记录：<span>{contents}</span></div>
+                    <div className="formArch"><div className="margin-form word-title">调查记录：</div><span>{contents}</span></div>
                     {sign}
                     {btns}
                 </div>
+                <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
     }
