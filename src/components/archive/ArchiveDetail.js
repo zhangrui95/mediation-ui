@@ -199,7 +199,7 @@ class ArchiveDetail extends Component {
         return litigants;
     }
 
-    renderByData(data) {
+    renderByData(data,readData) {
         const { archive,header } = this.props;
         const {model} = this.state;
         const {response} = archive;
@@ -268,11 +268,11 @@ class ArchiveDetail extends Component {
             workersName = data.workersName;
             workers = <input className="btn-pop" onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
             litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants} onChange={this.handleLitigantChange.bind(this)}/>
-            createTime = getDateTime(data.createTime);
-            keepTime = getDateTime(data.keepTime);
+            createTime = getDateTime(readData.createTime);
+            keepTime = getDateTime(readData.keepTime);
             if(protocol){
                 protoTime = getDateTime(protocol.createTime);
-                if(data.state === -1){
+                if(readData.state === -1){
                     failTime = protoTime;
                 }
                 protoText = protocol.content;
@@ -281,7 +281,7 @@ class ArchiveDetail extends Component {
                 checkText = check.content
             }
             litigantsName = data.litigants.map((i)=>i.name).join(',');
-            creater = data.creater.name;
+            creater = readData.creater.name;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
         }
         let workerValue = [];
@@ -339,15 +339,16 @@ class ArchiveDetail extends Component {
 
     render() {
         const { archive } = this.props;
+        const {response} = archive;
+        const readData = (response||{}).data;
         const {model} = this.state;
         let data;
         if(model === 1){
-            const {response} = archive;
-            data = (response||{}).data;
+            data = readData;
         }else{
             data = this.state.data;
         }
-        return this.renderByData(data)
+        return this.renderByData(data,readData)
     }
 }
 
