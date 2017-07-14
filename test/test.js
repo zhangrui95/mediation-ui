@@ -54,15 +54,15 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
 
 const archiveData = {id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,keepTime:1509240237246,applyTime:null,canPause:0,content:'xxxxxasdasd',
     finishState:0,
-    manager:{id:'2',name:'w1'},
-    creater:{id:'2',name:'w1'},
+    manager:{id:'2',name:'调解员1'},
+    creater:{id:'2',name:'调解员1'},
     litigants:[
         {id:'1',name:'p1',card:'230132199602200369',sex:1,nation:'汉',age:12,address:'地址1',contact:'13012345678',createTime:1499240237246,archive:{}},
         {id:'2',name:'p2',card:'230132199602200360',sex:1,nation:'汉',age:12,address:'地址2',contact:'13012345679',createTime:1499240237246,archive:{}},
     ],
     workers:[
-        {id:'3',worker:{id:'2',name:'w2'},createTime:1499240237246,archive:{}},
-        {id:'4',worker:{id:'3',name:'w3'},createTime:1499240237246,archive:{}},
+        {id:'3',worker:{id:'2',name:'调解员1'},createTime:1499240237246,archive:{}},
+        {id:'4',worker:{id:'3',name:'调解员2'},createTime:1499240237246,archive:{}},
     ]
 };
 
@@ -96,8 +96,8 @@ fetchMock.mock('^'+DEV_REQ_HOST+'api/archiveWorker/workers.json',function(){
 
 const investData = {id:'1',investTime:1499240237246,address:'xxx',otherPerson:'xxx',targetPerson:'xxx',content:'xxx',createTime:1499240237246,
     workers:[
-        {id:'3',worker:{id:'2',name:'w2'},createTime:1499240237246,investigation:{}},
-        {id:'4',worker:{id:'3',name:'w3'},createTime:1499240237246,investigation:{}},
+        {id:'3',worker:{id:'2',name:'调解员1'},createTime:1499240237246,investigation:{}},
+        {id:'4',worker:{id:'3',name:'调解员2'},createTime:1499240237246,investigation:{}},
     ],
     creater:{},
     archive:{}

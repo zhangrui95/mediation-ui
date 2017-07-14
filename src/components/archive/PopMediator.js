@@ -38,6 +38,12 @@ class PopMediator extends Component {
         return this.state.value;
     }
 
+    name(value){
+        const {selectItemData,textKey,valueKey,domain,data} = this.props;
+        const domainData =(selectItemData||{})[domain]||data;
+        return (domainData||[]).map(i=>value.indexOf(i[valueKey]) === -1 ? '' : i[textKey]).filter(i=>i!=='');
+    }
+
     handleChange(e){
         if(e.target.checked){
             const value =  this.state.value;
@@ -45,7 +51,7 @@ class PopMediator extends Component {
                 value.push(e.target.value);
                 this.setState({value:Object.assign([],value)});
                 if(this.onChangeHandler){
-                    this.onChangeHandler(e, value);
+                    this.onChangeHandler(e, value,this.name(value));
                 }
             }
         }else{
@@ -54,7 +60,7 @@ class PopMediator extends Component {
                 const value2 = value.filter((i)=>i !== e.target.value);
                 this.setState({value: Object.assign([],value2)});
                 if(this.onChangeHandler){
-                    this.onChangeHandler(e, value2);
+                    this.onChangeHandler(e, value2,this.name(value2));
                 }
             }
         }
@@ -68,7 +74,7 @@ class PopMediator extends Component {
             options = domainData.map((value,index)=>{
                 return <div key={id+'_select_cell_'+index} className="formArch"><Checkbox
                     onChange={this.handleChange.bind(this)} name={name+'['+index+'].id'}
-                    defaultChecked={this.state.value.indexOf(value[valueKey]) !== -1}
+                    checked={this.state.value.indexOf(value[valueKey]) !== -1}
                     value={value[valueKey]}>{value[textKey]}</Checkbox></div>
             })
         }

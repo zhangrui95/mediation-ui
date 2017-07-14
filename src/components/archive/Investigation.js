@@ -15,7 +15,7 @@ class Investigation extends Component {
         super(props, context);
         const { params} = props;
         const {mid} = params;
-        this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',defaultTime:getDateTime(new Date().getTime())};
+        this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',workersName:'',defaultTime:getDateTime(new Date().getTime())};
     }
     componentWillReceiveProps(next){
         const {actions,params} = this.props;
@@ -26,21 +26,21 @@ class Investigation extends Component {
             if (state === 0) {
                 const	{router}	=	this.context;
                 router.replace('/archive/'+params.id+'/investigation/'+data.id);
-                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:this.getWorkersValue(data)});
+                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:Investigation.getWorkersValue(data),workersName:Investigation.getWorkersName(data)});
             }
             actions.resetAction(actionResponse);
         }else if(action === 'update' && actionResponse){
             const {state,data} = actionResponse || {};
             if (state === 0) {
-                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:this.getWorkersValue(data)});
+                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:Investigation.getWorkersValue(data),workersName:Investigation.getWorkersName(data)});
             }
             actions.resetAction(actionResponse);
         }else if(response){
             const {state,data} = response||{};
             if(state === 0){
-                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:this.getWorkersValue(data)});
+                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:Investigation.getWorkersValue(data),workersName:Investigation.getWorkersName(data)});
             }else{
-                this.setState({model:0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:''});
+                this.setState({model:0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',workersName:''});
             }
         }
     }
@@ -50,15 +50,15 @@ class Investigation extends Component {
     saveButtonClick(){
         return true;
     }
-    handleWorkersChange(e,value){
-        this.setState({workerIds:value.join(',')});
+    handleWorkersChange(e,value,name){
+        this.setState({workerIds:value.join(','),workersName:name.join(',')});
     }
     updateModel(){
         const { investigationDetail} = this.props;
         const {response} = investigationDetail;
         const {data} = response||{};
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
-        this.setState({model:2,time:getDateTime(investTime),address:address,otherPerson:otherPerson,targetPerson:targetPerson,content:content,workerIds:this.getWorkersValue(data)});
+        this.setState({model:2,time:getDateTime(investTime),address:address,otherPerson:otherPerson,targetPerson:targetPerson,content:content,workerIds:Investigation.getWorkersValue(data),workersName:Investigation.getWorkersName(data)});
     }
     updateArchive(){
         const {syncActions,investigationDetail} = this.props;
@@ -103,16 +103,14 @@ class Investigation extends Component {
         }
         return workerValue;
     }
-    getWorkersValue(data){
+    static getWorkersValue(data){
         let workerValue = '';
         if(data && data.workers){
             workerValue = (data.workers||[]).map(i=>(i.worker||{}).id||'').join(',');
         }
         return workerValue;
     }
-    getWorkersName(investigationDetail){
-        const {response} = investigationDetail;
-        const {data} = response||{};
+    static getWorkersName(data){
         let workerValue = '';
         if(data && data.workers){
             workerValue = (data.workers||[]).map(i=>(i.worker||{}).name||'').join(',');
@@ -135,7 +133,7 @@ class Investigation extends Component {
         const {data} =  response||{};
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
         const workerValue = this.getWorkers();
-        const workerNames = this.getWorkersName(investigationDetail);
+        const workerNames = this.state.workersName;
 
         if(model === 0){
             times = <TimeChoice name="investTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
@@ -154,10 +152,11 @@ class Investigation extends Component {
             otherPersons =  otherPerson;
             targetPersons =  targetPerson;
             contents =  content;
-            sign = <div>
-                        <div className="formArch">被调查人签字：</div>
-                        <div className="formArch">调查人签字：</div>
-                    </div>
+            creatPerson = <div className="formArch"><div className="margin-form word-title">调查人：</div>{workerNames} </div>
+            // sign = <div>
+            //             <div className="formArch">被调查人签字：</div>
+            //             <div className="formArch">调查人签字：</div>
+            //         </div>
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="编辑" className="change-btn"  onClick={this.updateModel.bind(this)}/><input type="button" className="change-btn" value="打印" /></div>
         }else{
             if(data === null || data === undefined){
@@ -170,7 +169,6 @@ class Investigation extends Component {
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
             creatPerson = <div className="formArch">调查人：<input type="button" value="选择" onClick={this.upAddClick.bind(this)}/>{workerNames} </div>
             contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
-            sign = '';
         }
         return (
             <div>

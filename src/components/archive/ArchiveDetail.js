@@ -103,8 +103,8 @@ class ArchiveDetail extends Component {
         }
     }
 
-    handleWorkersChange(e,value){
-        this.setState({data: merge({},this.state.data,{workerIds:value.join(',')})});
+    handleWorkersChange(e,value, name){
+        this.setState({data: merge({},this.state.data,{workerIds:value.join(',')}),workersName:name.join(',')});
     }
 
     handleLitigantChange(datas,delId){
@@ -225,7 +225,7 @@ class ArchiveDetail extends Component {
             type = <Select name="type" domain="type.id" url="api/archiveType/options.json" head="请选择" value={(data.type||{}).id} onChangeHandler={this.handleChange('type.id').bind(this)} />
             content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleChange('manager.id').bind(this)}/>
-            workersName = data.workersName;
+            workersName = this.state.workersName;
             workers = <input className="btn-pop" onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
             litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants}  onChange={this.handleLitigantChange.bind(this)}/>
             creater = header.user.response.user.name;
@@ -265,7 +265,7 @@ class ArchiveDetail extends Component {
             type = <Select domain="type.id" url="api/archiveType/options.json" head="请选择" value={(data.type||{}).id} onChangeHandler={this.handleChange('type.id').bind(this)} />
             content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleChange('manager.id').bind(this)}/>
-            workersName = data.workersName;
+            workersName = this.state.workersName;
             workers = <input className="btn-pop" onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
             litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants} onChange={this.handleLitigantChange.bind(this)}/>
             createTime = getDateTime(readData.createTime);
