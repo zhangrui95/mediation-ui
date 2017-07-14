@@ -177,12 +177,12 @@ class Investigation extends Component {
             if(data === null || data === undefined){
                 return null;
             }
-            times = getDateTime(investTime);
-            addresss =  address;
-            otherPersons =  otherPerson;
-            targetPersons =  targetPerson;
-            contents =  content;
-            creatPerson = <div className="formArch"><div className="margin-form word-title">调查人：</div>{workerNames} </div>
+            times = <div className="margin-word">{getDateTime(investTime)}</div>;
+            addresss =  <div className="margin-word">{address}</div>;
+            otherPersons =  <div className="margin-word">{otherPerson}</div>;
+            targetPersons =  <div className="margin-word">{targetPerson}</div>;
+            contents =  <div className="margin-word">{content}</div>;
+            creatPerson = <div className="formArch"><div className="margin-form word-title">调查人：</div><div className="margin-word">{workerNames}</div></div>
             // sign = <div>
             //             <div className="formArch">被调查人签字：</div>
             //             <div className="formArch">调查人签字：</div>

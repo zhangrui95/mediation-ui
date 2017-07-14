@@ -122,14 +122,14 @@ class Mediate extends Component {
             if(data === null || data === undefined){
                 return null;
             }
-            time = getDateTime(mediateTime);
-            contents =  content;
+            time = <div className="margin-word">{getDateTime(mediateTime)}</div>;
+            contents =  <div className="margin-word">{content}</div>;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="编辑" className="change-btn"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
-            sign = <div>
-                        <div className="formArch">当事人签字：</div>
-                        <div className="formArch">调解人签字：</div>
-                        <div className="formArch">记录人签字：</div>
-                    </div>
+            // sign = <div>
+            //             <div className="formArch">当事人签字：</div>
+            //             <div className="formArch">调解人签字：</div>
+            //             <div className="formArch">记录人签字：</div>
+            //         </div>
         }else{
             if(data === null || data === undefined){
                 return null;
@@ -143,9 +143,9 @@ class Mediate extends Component {
                 <div className="title-form-name" id={params.mid}>调解详情</div>
                 <div className="formBorder">
                     <div className="formArch"><div className="margin-form word-title">调解时间：</div>{time}</div>
-                    <div className="formArch"><div className="margin-form word-title">调解地点：</div>{address}</div>
-                    <div className="formArch"><div className="margin-form word-title">当事人：</div>{this.getLitigants(archive)}</div>
-                    <div className="formArch"><div className="margin-form word-title">调解人：</div>{this.getWorkers(archive)}</div>
+                    <div className="formArch"><div className="margin-form word-title">调解地点：</div><div className="margin-word">{address}</div></div>
+                    <div className="formArch"><div className="margin-form word-title">当事人：</div><div className="margin-word">{this.getLitigants(archive)}</div></div>
+                    <div className="formArch"><div className="margin-form word-title">调解人：</div><div className="margin-word">{this.getWorkers(archive)}</div></div>
                     <div className="formArch"><div className="margin-form word-title">调查记录：</div>{contents}</div>
                     {sign}
                     {btns}
