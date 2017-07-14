@@ -52,7 +52,7 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
     ]}
 });
 
-const archiveData = {id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,keepTime:1509240237246,applyTime:null,canPause:0,content:'xxxxxasdasd',protolcolPath:'',
+const archiveData = {id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,keepTime:1509240237246,applyTime:null,canPause:0,content:'xxxxxasdasd',protocolPath:'',
     finishState:0,
     manager:{id:'2',name:'调解员1'},
     creater:{id:'2',name:'调解员1'},
@@ -148,4 +148,9 @@ fetchMock.mock(DEV_REQ_HOST+'api/evidence/delete.json',{state:0});
 // fetchMock.mock(DEV_REQ_HOST+'api/archive/protocolPhoto.json',function(req,res){
 //     res.setHeader('Content-Type','image/png');
 //     res.end(fs.readFileSync(__dirname+'/resources/img.jpg'));
+// });
+// fetchMock.mock(DEV_REQ_HOST+'api/archive/protocolDownload.json',function(req,res){
+//     res.setHeader('Content-Type','application/octet-stream');
+//     res.setHeader('Content-Disposition','attachment; filename="' + encodeURI('下载测试文件') + '"');
+//     res.end(fs.readFileSync(__dirname+'/resources/test.txt'));
 // });

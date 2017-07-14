@@ -60,14 +60,20 @@ class UpLoading extends Component {
         }
     }
 
+    download(){
+        const { dataId} = this.props;
+        window.open('api/archive/protocolDownload.json?id='+dataId)
+    }
+
     render() {
         const { dataId,archive} = this.props;
         const { response} = archive;
         const { data} = response||{};
-        const { protocolPath,finishState} = data||{};
+        const { name,protocolPath,finishState} = data||{};
         let img,upload;
-        if(this.state.show === 1 || protocolPath){
-            img = <img src={'api/archive/protocolPhoto.json?id='+dataId+'&rn='+this.state.count}/>
+        if(this.state.show === 1 || (protocolPath && protocolPath !== '')){
+            // img = <img src={'api/archive/protocolPhoto.json?id='+dataId+'&rn='+this.state.count}/>
+            img = <a onClick={this.download.bind(this)}>{name}协议书扫描件下载</a>
         }
         if(finishState === 0){
             upload = (<Upload {...props} data={{id:dataId}} onChange={this.onChangeHandler.bind(this)} beforeUpload={this.beforeUpload.bind(this)}>
