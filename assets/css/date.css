@@ -1,3 +1,7 @@
+/*
+*= require_self
+*= encoding UTF-8
+*/
 .ant-calendar-picker-container {
   position: absolute;
   z-index: 1050;
