@@ -257,7 +257,7 @@ class ArchiveDetail extends Component {
             if(check){
                 checkText = check.content
             }
-            litigantsName = data.litigants.map((i)=>i.name).join(',');
+            litigantsName = (data.litigants||[]).map((i)=>i.name).join(',');
             creater = data.creater.name;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} /><input type="button" className="change-btn" value="打印" /></div>
         }else{
@@ -283,7 +283,7 @@ class ArchiveDetail extends Component {
             if(check){
                 checkText = check.content
             }
-            litigantsName = data.litigants.map((i)=>i.name).join(',');
+            litigantsName = (data.litigants||[]).map((i)=>i.name).join(',');
             creater = readData.creater.name;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
         }
