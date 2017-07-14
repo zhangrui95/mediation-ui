@@ -146,7 +146,7 @@ class Mediate extends Component {
                     <div className="formArch"><div className="margin-form word-title">调解地点：</div><div className="margin-word">清滨调解中心</div></div>
                     <div className="formArch"><div className="margin-form word-title">当事人：</div><div className="margin-word">{this.getLitigants(archive)}</div></div>
                     <div className="formArch"><div className="margin-form word-title">调解人：</div><div className="margin-word">{this.getWorkers(archive)}</div></div>
-                    <div className="formArch"><div className="margin-form word-title">调查记录：</div>{contents}</div>
+                    <div className="formArch"><div className="margin-form word-title">调解记录：</div>{contents}</div>
                     {sign}
                     {btns}
                 </div>

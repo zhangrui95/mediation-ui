@@ -28,7 +28,7 @@ class ArchiveFinish extends Component {
         const { response} = archive;
         const { data} = response||{};
         const { protocolPath} = data||{};
-        if(!protocolPath && protocolPath===''){
+        if(!protocolPath || protocolPath===''){
             this.setState({msg:'请上传协议书扫描件'});
             return false;
         }
