@@ -52,17 +52,16 @@ class EvidenceRow extends Component {
         let printImgAction;
         let previewPreWidth = 230;
         if(type===0){
-            previewPreWidth = 180;
-            previewCell = <td>
-                <img className="min-img" src={'api/evidence/photo.json?id='+data.id}/>
-            </td>;
+            // previewPreWidth = 180;
+            // previewCell = <td>
+            //     <img className="min-img" src={'api/evidence/photo.json?id='+data.id}/>
+            // </td>;
             printImgPre = <span> | </span>
             printImgAction = <a onClick={this.printImg.bind(this)}>打印</a>
         }
         return (<tr className="odd">
             <td width="40">{idx}</td>
             <td className="line" width={previewPreWidth}>{data.name}</td>
-            {previewCell}
             <td>{EvidenceRow.getHumanSize(data.size)}</td>
             <td>{getDateTime(data.createTime)}</td>
             <td>{data.creater.name}</td>
