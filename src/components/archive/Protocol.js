@@ -109,7 +109,7 @@ class Protocol extends Component {
             this.setState({msg:'调解协议不能为空'});
             return false;
         }
-        if(this.state.remark === ''){
+        if(this.state.result === '0' && this.state.remark === ''){
             this.setState({msg:'履行方式、时限不能为空'});
             return false;
         }
