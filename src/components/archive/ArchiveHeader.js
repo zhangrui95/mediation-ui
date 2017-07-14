@@ -60,6 +60,9 @@ class ArchiveHeader extends Component {
         if(id !==null && id !== undefined && id!== ''){
             const div = e.target;
             const routeUrl = div.getAttribute('data-route')||'';
+            if(routeUrl === null || routeUrl === undefined){
+                return
+            }
             const index = div.getAttribute('data-index')*1;
             this.setState({index});
             const	{router}	=	this.context;
@@ -72,10 +75,14 @@ class ArchiveHeader extends Component {
     }
     findIndex(props){
         const { params,location } = props;
-        const {id} = params;
-        const { pathname } = location;
+        const {id,mid} = params;
+        const { basename,pathname } = location;
         if(id !==null && id !== undefined && id!== ''){
-            const idx = msg.findIndex((i)=>pathname === ('archive/'+id+i.route))
+            const prefix = basename === '/' ? '':'/';
+            const midPath = mid && mid !== '' ? ('/'+mid):'';
+            const idx = msg.findIndex((i)=>{
+                return pathname === (prefix+'archive/'+id+i.route+midPath)
+            });
             return idx === -1 ? 0: idx;
         }
         return 0;
