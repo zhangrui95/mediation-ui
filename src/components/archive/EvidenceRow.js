@@ -35,8 +35,10 @@ class EvidenceRow extends Component {
     }
 
     deleteEvidence(){
-        const {syncActions,data} = this.props;
-        syncActions.request(EVIDENCE_DELETE,{id:data.id});
+        if(confirm("确定删除该条数据？")){
+            const {syncActions,data} = this.props;
+            syncActions.request(EVIDENCE_DELETE,{id:data.id});
+        }
     }
 
     printImg(id){

@@ -7,13 +7,14 @@ import * as mediateDetailActions from '../../actions/mediateDetail'
 import {getDateTime} from '../../utils/date';
 import { Input } from 'antd';
 import TimeChoice from './TimeChoice'
+import PopAlert from '../pop/PopAlert';
 
 class Mediate extends Component {
     constructor(props, context) {
         super(props, context);
         const { params} = props;
         const {mid} = params;
-        this.state = {model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',content:'',defaultTime:getDateTime(new Date().getTime())};
+        this.state = {model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',content:'',defaultTime:getDateTime(new Date().getTime()),msg:''};
     }
     componentWillReceiveProps(next){
         const {actions,params} = this.props;
@@ -49,6 +50,9 @@ class Mediate extends Component {
         this.setState({model:2,content:data.content,time:getDateTime(data.mediateTime)});
     }
     updateArchive(){
+        if(!this.validate()){
+            return
+        }
         const {syncActions,mediateDetail} = this.props;
         const {response} = mediateDetail;
         const {data} = response||{};
@@ -69,6 +73,9 @@ class Mediate extends Component {
         this.setState({content:e.target.value});
     }
     onSave(){
+        if(!this.validate()){
+            return
+        }
         const {syncActions,params} = this.props;
         const {id} = params;
         const applyTime = this.state.time;
@@ -89,6 +96,13 @@ class Mediate extends Component {
             wnames = ','+wnames;
         }
         return ((manager||{}).name||'')+wnames;
+    }
+    validate(){
+        if(this.state.content === ''){
+            this.setState({msg:'调查记录不能为空'});
+            return false;
+        }
+        return true;
     }
     render() {
         const { params,mediateDetail,archive} = this.props;
@@ -136,6 +150,7 @@ class Mediate extends Component {
                     {sign}
                     {btns}
                 </div>
+                <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
     }

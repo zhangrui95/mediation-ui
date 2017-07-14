@@ -4,10 +4,14 @@ import { connect } from 'react-redux';
 import {ARCHIVE_FINISH} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction';
 import * as arhciveActions from '../../actions/arhcive';
-import UpLoading from './UpLoading'
+import UpLoading from './UpLoading';
+import PopAlert from '../pop/PopAlert';
 
 class ArchiveFinish extends Component {
-
+    constructor(props, context) {
+        super(props, context);
+        this.state = {msg:''};
+    }
     componentWillReceiveProps(next) {
         const {actions} = this.props;
         const {archive} = next;
@@ -19,8 +23,15 @@ class ArchiveFinish extends Component {
     }
 
     finish(){
-        const { params} = this.props;
+        const { params,archive} = this.props;
         const { id} = params;
+        const { response} = archive;
+        const { data} = response||{};
+        const { protolcolPath} = data||{};
+        if(!protolcolPath && protolcolPath===''){
+            this.setState({msg:'请上传协议书扫描件'});
+            return false;
+        }
         const {syncActions} = this.props;
         syncActions.request(ARCHIVE_FINISH,{id});
     }
@@ -44,6 +55,7 @@ class ArchiveFinish extends Component {
                     <div className="formArch"><UpLoading className="btn-pop" dataId={id}/></div>
                     {btns}
                 </div>
+                <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
     }

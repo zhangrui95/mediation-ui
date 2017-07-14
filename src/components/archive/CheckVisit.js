@@ -82,10 +82,6 @@ class CheckVisit extends Component {
     }
 
     validate(){
-        if(this.state.date === ''){
-            this.setState({msg:'回访时间不能为空'});
-            return false;
-        }
         if(this.state.input === ''){
             this.setState({msg:'回访情况不能为空'});
             return false;
@@ -134,9 +130,9 @@ class CheckVisit extends Component {
             <div>
                 <div className="title-form-name">人民调解回访记录</div>
                 <div className="formBorder">
-                    <div className="formArch"><div className="margin-form word-title">回访时间：</div>{time}</div>
-                    <div className="formArch"><div className="margin-form word-title">被回访人：</div>{litigantsName}</div>
-                    <div className="formArch"><div className="margin-form word-title">回访情况：</div><div className="margin-form content">{content}</div></div>
+                    <div className="formArch"><span className="word-title">回访时间：</span>{time}</div>
+                    <div className="formArch"><span className="word-title">被回访人：</span>{litigantsName}</div>
+                    <div className="formArch"><span className="word-title">回访情况：</span>{content}</div>
                     {btns}
                 </div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
