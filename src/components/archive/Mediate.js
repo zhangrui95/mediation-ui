@@ -128,11 +128,11 @@ class Mediate extends Component {
             <div>
                 <div className="title-form-name" id={params.mid}>调解详情</div>
                 <div className="formBorder">
-                    <div className="formArch">调解时间：<span>{time}</span></div>
-                    <div className="formArch">调解地点：<span>{address}</span></div>
-                    <div className="formArch">当事人：<span>{this.getLitigants(archive)}</span></div>
-                    <div className="formArch">调解人：<span>{this.getWorkers(archive)}</span></div>
-                    <div className="formArch">调查记录：<span>{contents}</span></div>
+                    <div className="formArch"><div className="margin-form word-title">调解时间：</div>{time}</div>
+                    <div className="formArch"><div className="margin-form word-title">调解地点：</div>{address}</div>
+                    <div className="formArch"><div className="margin-form word-title">当事人：</div>{this.getLitigants(archive)}</div>
+                    <div className="formArch"><div className="margin-form word-title">调解人：</div>{this.getWorkers(archive)}</div>
+                    <div className="formArch"><div className="margin-form word-title">调查记录：</div>{contents}</div>
                     {sign}
                     {btns}
                 </div>

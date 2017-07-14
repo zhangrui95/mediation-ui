@@ -176,10 +176,10 @@ class Investigation extends Component {
             <div>
                 <div className="title-form-name" id={params.mid}>调解调查详情</div>
                 <div className="formBorder">
-                    <div className="formArch">调查时间：<span>{times}</span></div>
-                    <div className="formArch">调查地点：<span>{addresss}</span></div>
-                    <div className="formArch">参加人：<span>{otherPersons}</span></div>
-                    <div className="formArch">被调查人：<span>{targetPersons}</span></div>
+                    <div className="formArch"><div className="margin-form word-title">调查时间：</div>{times}</div>
+                    <div className="formArch"><div className="margin-form word-title">调查地点：</div>{addresss}</div>
+                    <div className="formArch"><div className="margin-form word-title">参加人：</div>{otherPersons}</div>
+                    <div className="formArch"><div className="margin-form word-title">被调查人：</div>{targetPersons}</div>
                     {creatPerson}
                     <Pop title="选择调查人" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
                         <PopMediator domain="workers" url={'api/archiveWorker/workers.json?aid='+id} name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
