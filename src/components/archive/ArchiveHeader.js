@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import HeaderTop from "./HeaderTop";
-var msg=[
+const msg=[
     {
         'route':'',
         'name':'登记表',
@@ -46,7 +46,13 @@ var msg=[
 class ArchiveHeader extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {index:0};
+        this.state = {index:this.findIndex(props)};
+    }
+    componentWillReceiveProps(next) {
+        const index = this.findIndex(next)
+        if(this.state.index !== index){
+            this.setState({index});
+        }
     }
     clickHandler(e){
         const { params } = this.props;
@@ -63,6 +69,16 @@ class ArchiveHeader extends Component {
     goBack(){
         const	{router}	=	this.context;
         router.push('/list/archive');
+    }
+    findIndex(props){
+        const { params,location } = props;
+        const {id} = params;
+        const { pathname } = location;
+        if(id !==null && id !== undefined && id!== ''){
+            const idx = msg.findIndex((i)=>pathname === ('archive/'+id+i.route))
+            return idx === -1 ? 0: idx;
+        }
+        return 0;
     }
     render() {
         const list = msg.map((data,i)=>{
