@@ -87,6 +87,7 @@ class ArchiveDetail extends Component {
     }
 
     updateModel(){
+        this.refs.litigants.updateDatas(this.state.data.litigants);
         this.setState({model:2});
     }
 

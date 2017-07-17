@@ -100,7 +100,7 @@ class PartyInput extends Component {
                 return null;
             }
             name = <span>{item.name}</span>
-            sex = <span>{item.sex === 1 ? '男':'女'}</span>
+            sex = <span>{(item.sex+'') === '1' ? '男':'女'}</span>
             nation = <span>{item.nation}</span>
             age = <span>{item.age}</span>
             card = <span>{item.card}</span>

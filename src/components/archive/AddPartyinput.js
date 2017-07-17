@@ -11,6 +11,10 @@ class AddPartyinput extends Component {
         this.count = 0;
     }
 
+    updateDatas(data) {
+        this.setState({datas:merge([],data||[{},{}])});
+    }
+
     datas(){
         return this.state.datas.map((e, i) => {
             return this.refs['sub'+i].data();
