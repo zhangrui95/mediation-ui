@@ -21,3 +21,17 @@ export function getDateTime(ms, type) {
     }
     return dateStr + ' ' + timeStr;
 }
+
+export function getDate(ms, type) {
+    if (ms === null || ms === undefined) {
+        return '';
+    }
+    const date = new Date(ms);
+    const dateStr = date.getFullYear() + '年' +
+        formatDataUnit(date.getMonth() + 1) + '月' +
+        formatDataUnit(date.getDate())+ '日';
+    if (type === 'date') {
+        return dateStr;
+    }
+    return dateStr;
+}
