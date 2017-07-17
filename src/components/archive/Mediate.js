@@ -144,7 +144,7 @@ class Mediate extends Component {
         return (
             <div>
                 <div className="title-form-name" id={params.mid}>调解详情</div>
-                <div className="formArch goback" onClick={this.goBack.bind(this)}>返回上一页</div>
+                <div className="formArch goback" onClick={this.goBack.bind(this)}>返回列表</div>
                 <div className="formBorder">
                     <div className="formArch"><div className="margin-form word-title">调解时间：</div>{time}</div>
                     <div className="formArch"><div className="margin-form word-title">调解地点：</div><div className="margin-word">清滨调解中心</div></div>

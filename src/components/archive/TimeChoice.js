@@ -10,7 +10,10 @@ class TimeChoice extends Component{
         const {name,onChange} = this.props;
         onChange({[name]:dateString});
     }
-    
+
+    disabledDate(current) {
+        return current && current.valueOf() > Date.now();
+    }
     render() {
         const { value, defaultValue,hide} = this.props;
         let time = value;
@@ -19,11 +22,11 @@ class TimeChoice extends Component{
         }
         let html;
         if(hide === 0){
-            html = <div><div className="margin-form"><DatePicker showTime={true} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD')} format="YYYY-MM-DD" allowClear="false"/></div></div>;
+            html = <div><div className="margin-form"><DatePicker disabledDate={this.disabledDate} showTime={true} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD')} format="YYYY-MM-DD" allowClear="false"/></div></div>;
         }else{
             html = <div>
                 <div className="margin-form">
-                    <DatePicker showTime={true} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss" allowClear="false"/>
+                    <DatePicker showTime={true} disabledDate={this.disabledDate} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss" allowClear="false"/>
                 </div>
             </div>;
         }

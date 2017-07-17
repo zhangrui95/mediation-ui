@@ -205,7 +205,7 @@ class Investigation extends Component {
         return (
             <div>
                 <div className="title-form-name" id={params.mid}>调解调查详情</div>
-                <div className="formArch goback" onClick={this.goBack.bind(this)}>返回上一页</div>
+                <div className="formArch goback" onClick={this.goBack.bind(this)}>返回列表</div>
                 <div className="formBorder">
                     <div className="formArch"><div className="margin-form word-title">调查时间：</div>{times}</div>
                     <div className="formArch"><div className="margin-form word-title">调查地点：</div>{addresss}</div>
