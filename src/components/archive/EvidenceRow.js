@@ -4,8 +4,13 @@ import { connect } from 'react-redux';
 import {EVIDENCE_DELETE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction';
 import {getDateTime} from '../../utils/date';
+import PopConfirm from '../pop/PopConfirm'
 
 class EvidenceRow extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {msg:''};
+    }
 
     static getHumanSize(size){
         if(size < 1024){
@@ -35,12 +40,13 @@ class EvidenceRow extends Component {
     }
 
     deleteEvidence(){
-        if(confirm("确定删除该条数据？")){
-            const {syncActions,data} = this.props;
-            syncActions.request(EVIDENCE_DELETE,{id:data.id});
-        }
+        this.setState({msg:'确定删除该条数据？'});
+        return false;
     }
-
+    confirmOperation(){
+        const {syncActions,data} = this.props;
+        syncActions.request(EVIDENCE_DELETE,{id:data.id});
+    }
     printImg(id){
 
     }
@@ -51,6 +57,7 @@ class EvidenceRow extends Component {
         let printImgPre;
         let printImgAction;
         let previewPreWidth = 230;
+        let pop = <PopConfirm visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} information={this.state.msg}  onOk={this.confirmOperation.bind(this)}  closeDoneHandler={()=>this.setState({msg:""})}/>;
         if(type===0){
             // previewPreWidth = 180;
             // previewCell = <td>
@@ -65,7 +72,7 @@ class EvidenceRow extends Component {
             <td>{EvidenceRow.getHumanSize(data.size)}</td>
             <td>{getDateTime(data.createTime)}</td>
             <td>{data.creater.name}</td>
-            <td><a onClick={this.download.bind(this)}>下载</a><span> | </span><a onClick={this.deleteEvidence.bind(this)}>删除</a>{printImgPre}{printImgAction}</td>
+            <td><a onClick={this.download.bind(this)}>下载</a><span> | </span><a onClick={this.deleteEvidence.bind(this)}>删除</a>{printImgPre}{printImgAction}{pop}</td>
         </tr>)
     }
 }

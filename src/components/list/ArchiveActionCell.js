@@ -5,9 +5,14 @@ import {getPathVal} from '../../utils/data'
 import {SUSPEND_WORK} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 import * as arhciveSuspendActions from '../../actions/arhciveSuspend'
+import PopConfirm from '../pop/PopConfirm'
 
 class ArchiveActionCell extends Component {
-
+    constructor(props, context) {
+        super(props, context);
+        this.state = {msg:''};
+    }
+    
     componentDidUpdate() {
         const {actions,reload,archiveSuspend} = this.props;
         const {response} = archiveSuspend||{};
@@ -21,21 +26,25 @@ class ArchiveActionCell extends Component {
     }
 
     handClick(){
-        if(confirm("确定中止该卷宗？")){
-            const	{syncActions,data}	=	this.props;
-            syncActions.request(SUSPEND_WORK,null,data.id,0);
-        }
+        this.setState({msg:'确定中止该卷宗？'});
+        return false;
+    }
+    confirmOperation(){
+        const	{syncActions,data}	=	this.props;
+        syncActions.request(SUSPEND_WORK,null,data.id,0);
     }
     render(){
         const {width,classes,data,dataKey} = this.props;
         const value = getPathVal(data,dataKey);
         let linkName = '';
+        let pop = <PopConfirm visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} information={this.state.msg}  onOk={this.confirmOperation.bind(this)}  closeDoneHandler={()=>this.setState({msg:""})}/>;
         if(value == 0){
-            linkName = <a href='javascript:;' onClick={this.handClick.bind(this)}>中止</a>;
+            linkName =<a href='javascript:;' onClick={this.handClick.bind(this)}>中止</a>;
         }
         return (
             <td width={width} id={data.id} className={classes}>
                 {linkName}
+                {pop}
             </td>
         )
     }
