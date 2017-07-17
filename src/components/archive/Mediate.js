@@ -104,6 +104,9 @@ class Mediate extends Component {
         }
         return true;
     }
+    goBack(){
+        history.back();
+    }
     render() {
         const { params,mediateDetail,archive} = this.props;
         const {response} = mediateDetail;
@@ -117,7 +120,7 @@ class Mediate extends Component {
         if(model === 0){
             time = <TimeChoice name="mediateTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
             contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
+            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="取消" onClick={this.goBack.bind(this)} className="change-btn"/><input type="button" value="保存" onClick={this.onSave.bind(this)} className="change-btn"/></div>
         }else if(model === 1){
             if(data === null || data === undefined){
                 return null;

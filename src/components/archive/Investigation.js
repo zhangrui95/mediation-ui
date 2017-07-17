@@ -124,6 +124,9 @@ class Investigation extends Component {
         }
         return workerValue;
     }
+    goBack(){
+        history.back();
+    }
     validate(){
         if(this.state.address === ''){
             this.setState({msg:'调查地点不能为空'});
@@ -169,9 +172,9 @@ class Investigation extends Component {
             addresss = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.address} placeholder=""  onChange={this.addressChange.bind(this)}/>
             otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" value={this.state.otherPerson} onChange={this.otherPersonChange.bind(this)}/>
             targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" value={this.state.targetPerson} onChange={this.targetPersonChange.bind(this)}/>
-            creatPerson = <div className="formArch"><div className="margin-form word-title">调查人：</div><input type="button" value="选择" onClick={this.upAddClick.bind(this)}/> {workerNames}</div>
+            creatPerson = <div className="formArch"><div className="margin-form word-title">调查人：</div><input className="btn-pop" type="button" value="选择" onClick={this.upAddClick.bind(this)}/> {workerNames}</div>
             contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
+            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="取消" onClick={this.goBack.bind(this)} className="change-btn"/><input type="button" value="保存" onClick={this.onSave.bind(this)} className="change-btn"/></div>
         }else if(model === 1){
             if(data === null || data === undefined){
                 return null;
