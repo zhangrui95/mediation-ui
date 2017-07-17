@@ -110,13 +110,13 @@ class PartyInput extends Component {
             if(!item){
                 return null;
             }
-            name = <Input className="text-input" placeholder="" value={item.name} onChange={this.handleChange('name').bind(this)} maxLength={10}/>
+            name = <Input className="text-input" placeholder="请输入当事人姓名" value={item.name} onChange={this.handleChange('name').bind(this)} maxLength={10}/>
             sex = <Select domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择" value={item.sex+''} onChangeHandler={this.handleChange('sex').bind(this)}/>
-            nation = <Input className="text-input" placeholder="" style={{ width: 60 }} value={item.nation} onChange={this.handleChange('nation').bind(this)} maxLength={20}/>
-            age = <Input className="text-input" type="number" placeholder="" style={{ width: 60 }} value={item.age} onChange={this.handleChange('age').bind(this)} />
-            card = <Input className="text-input" placeholder="" value={item.card} onChange={this.handleChange('card').bind(this)} onBlur={this.getCard.bind(this)} maxLength={18}/>
-            address = <Input className="text-input" style={{ width: 400 }} placeholder="" value={item.address} onChange={this.handleChange('address').bind(this)} maxLength={200}/>
-            contact = <Input className="text-input" placeholder="" value={item.contact} onChange={this.handleChange('contact').bind(this)} onBlur={this.getContact.bind(this)} maxLength={30}/>
+            nation = <Input className="text-input" placeholder="例:汉" style={{ width: 60 }} value={item.nation} onChange={this.handleChange('nation').bind(this)} maxLength={20}/>
+            age = <Input className="text-input" type="number" placeholder="例:30" style={{ width: 60 }} value={item.age} onChange={this.handleChange('age').bind(this)} />
+            card = <Input className="text-input" placeholder="请输入身份证号码" value={item.card} onChange={this.handleChange('card').bind(this)} onBlur={this.getCard.bind(this)} maxLength={18}/>
+            address = <Input className="text-input" style={{ width: 400 }} placeholder="请输入当事人单位/住址" value={item.address} onChange={this.handleChange('address').bind(this)} maxLength={200}/>
+            contact = <Input className="text-input" placeholder="请输入11位手机号码" value={item.contact} onChange={this.handleChange('contact').bind(this)} onBlur={this.getContact.bind(this)} maxLength={30}/>
             remove = <div className={itemStyle}><a href="javascript:;" onClick={this.handleRemove.bind(this)} className="del-btn">删除</a></div>
         }
         return (
