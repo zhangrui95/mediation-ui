@@ -1446,3 +1446,8 @@ to {
 	cursor: pointer;
 	padding: 0 15px;
 }
+.goback{
+	width: 86%;
+	color: #2db7f5;
+	cursor: pointer;
+}
