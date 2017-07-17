@@ -105,7 +105,12 @@ class Mediate extends Component {
         return true;
     }
     goBack(){
-        history.back();
+        const { params } = this.props;
+        const {id} = params;
+        if(id !==null && id !== undefined && id!== ''){
+            const	{router}	=	this.context;
+            router.push('/archive/'+id+'/mediate');
+        }
     }
     render() {
         const { params,mediateDetail,archive} = this.props;
