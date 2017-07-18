@@ -6,14 +6,19 @@ class SurveyRow extends Component {
     clickHandler(e){
         const { dataId,item} = this.props;
         const	{router}	=	this.context;
-        router.push('/archive/'+dataId+'/investigation/'+item.id);
+        router.push('/archive/'+dataId+'/investigation/'+item.id+'/update');
+    }
+    getDetail(e){
+        const { dataId,item} = this.props;
+        const	{router}	=	this.context;
+        router.push('/archive/'+dataId+'/investigation/'+item.id+'/detail');
     }
     render() {
         const {idx,item} = this.props;
         return (<tr className="odd">
             <td width="40">{idx+1}</td>
             <td width="160">
-                <a className="ellipsis" href="javascript:;" onClick={this.clickHandler.bind(this)}>{getDateTime(item.investTime)}</a>
+                <a className="ellipsis" href="javascript:;" onClick={this.getDetail.bind(this)}>{getDateTime(item.investTime)}</a>
             </td>
             <td className="ellipsis">{item.address}</td>
             <td className="ellipsis">{item.otherPerson}</td>

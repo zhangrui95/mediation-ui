@@ -26,13 +26,15 @@ class Investigation extends Component {
             const {state, data} = actionResponse || {};
             if (state === 0) {
                 const	{router}	=	this.context;
-                router.replace('/archive/'+params.id+'/investigation/'+data.id);
+                router.replace('/archive/'+params.id+'/investigation/'+data.id+'/detail');
                 this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:Investigation.getWorkersValue(data),workersName:Investigation.getWorkersName(data)});
             }
             actions.resetAction(actionResponse);
         }else if(action === 'update' && actionResponse){
             const {state,data} = actionResponse || {};
             if (state === 0) {
+                const	{router}	=	this.context;
+                router.replace('/archive/'+params.id+'/investigation/'+data.id+'/detail');
                 this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:Investigation.getWorkersValue(data),workersName:Investigation.getWorkersName(data)});
             }
             actions.resetAction(actionResponse);
@@ -164,14 +166,19 @@ class Investigation extends Component {
         let creatPerson = '';
         let sign = '';
         let btns = '';
-        const model = this.state.model;
+        let model = '';
         const { params,investigationDetail} = this.props;
-        const {id} = params;
+        const {id,detail} = params;
         const {response} = investigationDetail;
         const {data} =  response||{};
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
         const workerValue = this.getWorkers();
         const workerNames = this.state.workersName;
+        if(detail === 'update'){
+            model = 2;
+        }else{
+            model = this.state.model;
+        }
         if(model === 0){
             times = <TimeChoice name="investTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
             addresss = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.address} placeholder=""  onChange={this.addressChange.bind(this)}/>
