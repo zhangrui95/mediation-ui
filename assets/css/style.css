@@ -1452,3 +1452,7 @@ to {
 	color: #2db7f5;
 	cursor: pointer;
 }
+.content-text{
+	width: 80%;
+	margin: 8px 30px;
+}
