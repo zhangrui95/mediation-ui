@@ -539,6 +539,7 @@ body {
 	margin-top: 5px;
 	padding: 0 5px;
 	width: 139px;
+	float: left;
 }
 .text-input-pop {
 	border: 1px solid #98a2ad;
@@ -1409,9 +1410,15 @@ to {
 	font-weight: 700;
 }
 .del-btn{
-	color: #ff0000;
+	color: #fff;
 	display: block;
+	width: 45px;
 	margin-top: 7px;
+	height: 22px;
+	background: #f00;
+	line-height: 22px;
+	text-align: center;
+	border-radius: 5px;
 }
 .tap-blue{
 	background: #2780da;
@@ -1466,4 +1473,13 @@ to {
 }
 .title-font-size{
 	font-size: 16px;
+}
+.form-title-margin{
+	margin: 12px auto 0;
+}
+.news-width{
+	width: 80px;
+	text-align: right;
+	float: left;
+	margin-top: 7px;
 }

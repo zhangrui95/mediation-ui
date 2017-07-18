@@ -73,6 +73,7 @@ class PartyInput extends Component {
         let address;
         let contact;
         let remove;
+        let styleName = '';
         if(model === 1){
             if(!item){
                 return null;
@@ -84,28 +85,30 @@ class PartyInput extends Component {
             card = <span>{item.card}</span>
             address = <span>{item.address}</span>
             contact = <span>{item.contact}</span>
+            styleName = '';
         } else{
             if(!item){
                 return null;
             }
-            name = <Input className="text-input" placeholder="" value={item.name} onChange={this.handleChange('name').bind(this)} maxLength={10}/>
+            name = <Input style={{ width: 80 }} className="text-input" placeholder="" value={item.name} onChange={this.handleChange('name').bind(this)} maxLength={10}/>
             sex = <Select domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择" value={item.sex+''} onChangeHandler={this.handleChange('sex').bind(this)}/>
-            nation = <Input className="text-input" placeholder="" style={{ width: 60 }} value={item.nation} onChange={this.handleChange('nation').bind(this)} maxLength={20}/>
-            age = <Input className="text-input" type="number" placeholder="" style={{ width: 60 }} value={item.age} onChange={this.handleChange('age').bind(this)} />
+            nation = <Input className="text-input" placeholder="" style={{ width: 40 }} value={item.nation} onChange={this.handleChange('nation').bind(this)} maxLength={20}/>
+            age = <Input className="text-input" type="number" placeholder="" style={{ width: 40 }} value={item.age} onChange={this.handleChange('age').bind(this)} />
             card = <Input className="text-input" placeholder="" value={item.card} onChange={this.handleChange('card').bind(this)} onBlur={this.getCard.bind(this)} maxLength={18}/>
-            address = <Input className="text-input" style={{ width: 400 }} placeholder="" value={item.address} onChange={this.handleChange('address').bind(this)} maxLength={200}/>
+            address = <Input className="text-input" style={{ width: 395 }} placeholder="" value={item.address} onChange={this.handleChange('address').bind(this)} maxLength={200}/>
             contact = <Input className="text-input" placeholder="" value={item.contact} onChange={this.handleChange('contact').bind(this)} onBlur={this.getContact.bind(this)} maxLength={30}/>
             remove = <div className={itemStyle}><a href="javascript:;" onClick={this.handleRemove.bind(this)} className="del-btn">删除</a></div>
+            styleName = 'news-width';
         }
         return (
             <div className="formArch">
-                <div className={itemStyle}>当事人姓名：{name}</div>
-                <div className={itemStyle}>性别：{sex}</div>
-                <div className={itemStyle}>民族：{nation}</div>
-                <div className={itemStyle}>年龄：{age}</div>
-                <div className={itemStyle}>身份证号：{card}</div>
-                <div className={itemStyle}>单位/住址：{address}</div>
-                <div className={itemStyle}>联系方式：{contact}</div>
+                <div className={itemStyle}><span className={styleName}>当事人姓名：</span>{name}</div>
+                <div className={itemStyle}><span className={styleName} style={{width:40}}>性别：</span>{sex}</div>
+                <div className={itemStyle}><span className={styleName} style={{width:40}}>民族：</span>{nation}</div>
+                <div className={itemStyle}><span className={styleName} style={{width:40}}>年龄：</span>{age}</div>
+                <div className={itemStyle}><span className={styleName}>身份证号：</span>{card}</div>
+                <div className={itemStyle}><span className={styleName}>单位/住址：</span>{address}</div>
+                <div className={itemStyle}><span className={styleName}>联系方式：</span>{contact}</div>
                 {remove}
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>

@@ -536,9 +536,14 @@ textarea.ant-input {
   margin: 12px auto;
   height: auto;
   overflow: hidden;
+  position: relative;
 }
 .margin-form{
   float: left;
+  margin: 5px;
+}
+.margin-form-right{
+  float: right;
   margin: 5px;
 }
 .title-form-name{

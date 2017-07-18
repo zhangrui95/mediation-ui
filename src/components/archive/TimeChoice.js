@@ -26,7 +26,7 @@ class TimeChoice extends Component{
         }else{
             html = <div>
                 <div className="margin-form">
-                    <DatePicker showTime={true} disabledDate={this.disabledDate} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm')} format="YYYY-MM-DD HH:mm" allowClear="false"/>
+                    <DatePicker showTime={true} disabledDate={this.disabledDate} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss" allowClear="false"/>
                 </div>
             </div>;
         }

@@ -234,7 +234,7 @@ class ArchiveDetail extends Component {
             if(!header.user){
                 return null;
             }
-            name = <Input name="name" className="text-input" style={{ width: 350 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
+            name = <Input name="name" className="text-input" style={{ width: 453 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
             type = <Select name="type" domain="type.id" url="api/archiveType/options.json" head="请选择" value={(data.type||{}).id} onChangeHandler={this.handleChange('type.id').bind(this)} />
             content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleChange('manager.id').bind(this)}/>
@@ -274,7 +274,7 @@ class ArchiveDetail extends Component {
             if(state !== 0){
                 return null;
             }
-            name = <Input name="name" className="text-input" style={{ width: 350 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
+            name = <Input name="name" className="text-input" style={{ width: 453 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
             type = <Select domain="type.id" url="api/archiveType/options.json" head="请选择" value={(data.type||{}).id} onChangeHandler={this.handleChange('type.id').bind(this)} />
             content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleChange('manager.id').bind(this)}/>
@@ -307,8 +307,8 @@ class ArchiveDetail extends Component {
                 <div className="formBorder">
                     <div className="border-box">
                         <div className="formArch">
-                            <div className="margin-form">卷宗名称：{name}</div>
-                            <div className="margin-form">卷宗类别：{type}</div>
+                            <div className="margin-form"><span className="news-width">卷宗名称：</span>{name}</div>
+                            <div className="margin-form-right">卷宗类别：{type}</div>
                         </div>
                     </div>
                     <div className="border-box">

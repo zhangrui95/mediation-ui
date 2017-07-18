@@ -463,9 +463,9 @@ a {
   -webkit-transition: color .3s ease;
   transition: color .3s ease;
 }
-a:hover {
-  color: #57c5f7;
-}
+/*a:hover {*/
+  /*color: #fff;*/
+/*}*/
 a:active {
   color: #2baee9;
 }
