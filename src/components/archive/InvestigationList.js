@@ -21,7 +21,7 @@ class InvestigationList extends Component {
         const {id} = params;
         if(id !==null && id !== undefined && id!== ''){
             const	{router}	=	this.context;
-            router.push('/archive/'+id+'/investigation/create/add');
+            router.push('/archive/'+id+'/investigation/create');
         }
     }
     render() {

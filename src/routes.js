@@ -57,7 +57,7 @@ export default function routes(store){
                     <Route path=':id' component={ArchiveDetail}/>
                     <Route path=':id/evidence' component={EvidenceList}/>
                     <Route path=':id/investigation' component={InvestigationList}/>
-                    <Route path=':id/investigation/:mid/:detail' component={Investigation}/>
+                    <Route path=':id/investigation/:mid' component={Investigation}/>
                     <Route path=':id/mediate' component={MediateList}/>
                     <Route path=':id/mediate/:mid' component={Mediate}/>
                     <Route path=':id/protocol' component={Protocol}/>

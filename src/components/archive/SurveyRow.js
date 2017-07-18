@@ -6,12 +6,16 @@ class SurveyRow extends Component {
     clickHandler(e){
         const { dataId,item} = this.props;
         const	{router}	=	this.context;
-        router.push('/archive/'+dataId+'/investigation/'+item.id+'/update');
+        router.push({
+            pathname: '/archive/'+dataId+'/investigation/'+item.id,
+            query:{ edit: true }
+            // state: { fromDashboard: true }
+        });
     }
     getDetail(e){
         const { dataId,item} = this.props;
         const	{router}	=	this.context;
-        router.push('/archive/'+dataId+'/investigation/'+item.id+'/detail');
+        router.push('/archive/'+dataId+'/investigation/'+item.id);
     }
     render() {
         const {idx,item} = this.props;

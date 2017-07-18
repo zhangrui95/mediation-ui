@@ -12,9 +12,11 @@ import PopAlert from '../pop/PopAlert';
 class Mediate extends Component {
     constructor(props, context) {
         super(props, context);
-        const { params} = props;
+        const { params,location} = props;
         const {mid} = params;
-        this.state = {model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',content:'',defaultTime:getDateTime(new Date().getTime()),msg:''};
+        const {query} = location;
+        const {edit} = query||{};
+        this.state = {model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? (edit?2:1) : 0,time:'',content:'',defaultTime:getDateTime(new Date().getTime()),msg:''};
     }
     componentWillReceiveProps(next){
         const {actions,params} = this.props;
@@ -37,9 +39,9 @@ class Mediate extends Component {
         }else if(response){
             const {state,data} = response||{};
             if(state === 0){
-                this.setState({model:1,content:data.content,time:getDateTime(data.mediateTime)});
+                this.setState({content:data.content,time:getDateTime(data.mediateTime)});
             }else{
-                this.setState({model:0,content:'',time:''});
+                this.setState({content:'',time:''});
             }
         }
     }
@@ -149,7 +151,7 @@ class Mediate extends Component {
         return (
             <div>
                 <div className="title-form-name" id={params.mid}>调解详情</div>
-                <div className="formArch goback" onClick={this.goBack.bind(this)}>返回列表</div>
+                <div className="formArch"><sapn className="goback" onClick={this.goBack.bind(this)}>返回列表</sapn></div>
                 <div className="formBorder">
                     <div className="formArch"><div className="margin-form word-title">调解时间：</div>{time}</div>
                     <div className="formArch"><div className="margin-form word-title">调解地点：</div><div className="margin-word">清滨调解中心</div></div>

@@ -1360,6 +1360,7 @@ to {
 	height: 40px;
 	line-height: 40px;
 	margin-left: 30px;
+	width: 70px;
 }
 .time-right{
 	width: 90%;
@@ -1447,7 +1448,7 @@ to {
 	padding: 0 15px;
 }
 .goback{
-	width: 86%;
+	margin-left: 20px;
 	color: #2db7f5;
 	cursor: pointer;
 }

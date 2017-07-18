@@ -5,6 +5,15 @@ class MediateRow extends Component {
     clickHandler(e){
         const { dataId,item} = this.props;
         const	{router}	=	this.context;
+        router.push({
+            pathname: '/archive/'+dataId+'/mediate/'+item.id,
+            query:{ edit: true }
+            // state: { fromDashboard: true }
+        });
+    }
+    getDetail(e){
+        const { dataId,item} = this.props;
+        const	{router}	=	this.context;
         router.push('/archive/'+dataId+'/mediate/'+item.id);
     }
     render() {
@@ -12,7 +21,7 @@ class MediateRow extends Component {
         return (<tr className="odd">
             <td width="40">{idx+1}</td>
             <td width="230">
-                <a className="ellipsis" href="javascript:;" onClick={this.clickHandler.bind(this)}>{getDateTime(item.mediateTime)}</a>
+                <a className="ellipsis" href="javascript:;" onClick={this.getDetail.bind(this)}>{getDateTime(item.mediateTime)}</a>
             </td>
             <td className="ellipsis">{item.address}</td>
             <td className="ellipsis">{litigants}</td>
