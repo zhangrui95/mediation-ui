@@ -331,7 +331,7 @@ body {
 	float: left;
 	width: 175px;
 	background: url(../images/back-all.jpg) no-repeat;
-	min-height: 850px;
+	min-height: 800px;
 	position: relative;
 	z-index: 1;
 	display: none;
@@ -386,7 +386,6 @@ body {
 .rightpagebox {
 	margin: auto;
 	width: 950px;
-	min-height: 800px;
 }
 .list-top {
 	margin: 10px auto 0 auto;
@@ -1395,6 +1394,7 @@ to {
 	margin-right:15px;
 	color: #fff;
 	box-shadow: 0px 2px 0px #93bfec;
+	cursor: pointer;
 }
 .hint{
 	text-align: right;

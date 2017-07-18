@@ -560,6 +560,7 @@ textarea.ant-input {
   position: absolute;
   left: -75px;
   box-shadow: 0px 2px 0px #93bfec;
+  cursor: pointer;
 }
 .header-top{
   width: 100px;
