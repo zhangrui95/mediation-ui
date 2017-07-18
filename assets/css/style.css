@@ -298,7 +298,7 @@ body {
 .index-bg {
 	margin: auto;
 	padding: 0;
-	background: url(../images/index-bg.jpg) repeat-x top center;
+	background: url(../images/index-bg.jpg) #f0f4f7 repeat-x top center;
 }
 .main {
 	margin: 20px auto 0;
@@ -385,7 +385,8 @@ body {
 }
 .rightpagebox {
 	margin: auto;
-	width: 800px;
+	width: 950px;
+	min-height: 800px;
 }
 .list-top {
 	margin: 10px auto 0 auto;
@@ -411,6 +412,7 @@ body {
 	color: #fff;
 	font-size: 12px;
 	cursor: pointer;
+	box-shadow: 0px 2px 0px #93bfec;
 }
 .widget-table {
 	margin: 0 auto 5px auto;
@@ -448,9 +450,10 @@ body {
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	padding:0 3px;
+	color: #333;
 }
 .table-list td a:hover {
-	color: #1348a9;
+	color: #333;
 	text-decoration: underline;
 }
 .table-list-head {
@@ -504,8 +507,8 @@ body {
 	width: 400px;
 }
 .search-body {
-	margin: 15px auto;
-	width: 800px;
+	margin: 30px 46px;
+	width: 896px;
 	overflow: hidden;
 	height: auto;
 }
@@ -536,7 +539,7 @@ body {
 	line-height: 26px;
 	margin-top: 5px;
 	padding: 0 5px;
-	width: 150px;
+	width: 139px;
 }
 .text-input-pop {
 	border: 1px solid #98a2ad;
@@ -563,6 +566,7 @@ body {
 	padding: 0 5px;
 	width:85px;
 	text-align: left;
+	cursor: pointer;
 }
 .index-copyright {
 	margin: auto;
@@ -866,7 +870,7 @@ body {
 	padding: 0 15px;
 }
 .search-submit {
-	width:800px;
+	width:896px;
 	text-align: center;
 	height: 40px;
 }
@@ -1237,7 +1241,7 @@ to {
 	color:#999;
 }
 .new-search-data{
-	width:85px;
+	width:140px;
 }
 .search-checkbox{
 	width: 315px;
@@ -1390,6 +1394,7 @@ to {
 	border-radius: 5px;
 	margin-right:15px;
 	color: #fff;
+	box-shadow: 0px 2px 0px #93bfec;
 }
 .hint{
 	text-align: right;
@@ -1455,4 +1460,10 @@ to {
 .content-text{
 	width: 80%;
 	margin: 8px 30px;
+}
+.logo{
+	margin: 3px 0 3px 20px;
+}
+.title-font-size{
+	font-size: 16px;
 }

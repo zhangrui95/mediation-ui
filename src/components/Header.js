@@ -8,8 +8,8 @@ class Header extends Component {
         return (
             <div className="main-top">
                 <div className="index-logo">
-                    <img src={IMG_LOGO_URL} height="56" width="56" />
-                    <p className="logo-name">{APP_TITLE_NAME}</p>
+                    <img src={IMG_LOGO_URL} height="50" width="50" className="logo"/>
+                    <p className="logo-name">{APP_TITLE_NAME}<span className="title-font-size">——清滨调解中心</span></p>
                 </div>
                 <UserInfoBox/>
                 <div className="cls"></div>
