@@ -132,8 +132,9 @@ class Mediate extends Component {
             if(data === null || data === undefined){
                 return null;
             }
+            let cont = content.replace(/\n/g, "<br/>").replace(/["“”]/g,"");
             time = <div className="margin-word">{getDateTime(mediateTime)}</div>;
-            contents =  <div className="margin-word">{content}</div>;
+            contents =  <div className="content-text">{cont}</div>;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="编辑" className="change-btn"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
             // sign = <div>
             //             <div className="formArch">当事人签字：</div>
@@ -159,8 +160,8 @@ class Mediate extends Component {
                     <div className="formArch"><div className="margin-form word-title">调解人：</div><div className="margin-word">{this.getWorkers(archive)}</div></div>
                     <div className="formArch"><div className="margin-form word-title">调解记录：</div>{contents}</div>
                     {sign}
-                    {btns}
                 </div>
+                {btns}
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )

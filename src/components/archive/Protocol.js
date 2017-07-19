@@ -58,7 +58,7 @@ class Protocol extends Component {
         const {syncActions,protocol} = this.props;
         const {response} = protocol;
         const {data} = response||{};
-        syncActions.request(PROTOCOL_UPDATE,null,{id:data.id,result:this.state.result,content:this.state.content.replace(/\n/g, "<br/>"),remark:this.state.remark});
+        syncActions.request(PROTOCOL_UPDATE,null,{id:data.id,result:this.state.result,content:this.state.content,remark:this.state.remark});
     }
 
     componentWillMount(){
@@ -82,7 +82,7 @@ class Protocol extends Component {
         }
         const {syncActions,params} = this.props;
         const {id} = params;
-        syncActions.request(PROTOCOL_SAVE,null,{result:this.state.result,content:this.state.content.replace(/\n/g, "<br/>"),remark:this.state.remark,archive:{id}});
+        syncActions.request(PROTOCOL_SAVE,null,{result:this.state.result,content:this.state.content,remark:this.state.remark,archive:{id}});
     }
     getLitigants(){
         const { archive } = this.props;
@@ -134,8 +134,9 @@ class Protocol extends Component {
             if(!data){
                 return null;
             }
+            let contents = data.content.replace(/\n/g, "<br/>").replace(/["“”]/g,"");
             remarktext = <div className="content-text">{data.remark}</div>;
-            contenttext = <div className="content-text">{data.content}</div>;
+            contenttext = <div className="content-text">{contents}</div>;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" className="change-btn" value="打印" /></div>
             resulttext = data.result === 0 ? '调解成功':'调解失败';
         }else{
@@ -168,11 +169,11 @@ class Protocol extends Component {
                          </div>
                         <div className="formArch">
                             <div className="margin-form">
-                                <span className="word-title">履行方式、时限：</span>{remarktext}
+                                <span className="word-title pull-left">履行方式、时限：</span>{remarktext}
                             </div>
                         </div>
-                        {btns}
                  </div>
+                {btns}
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )

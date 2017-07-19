@@ -187,11 +187,12 @@ class Investigation extends Component {
             if(data === null || data === undefined){
                 return null;
             }
+            let cont = content.replace(/\n/g, "<br/>").replace(/["“”]/g,"");
             times = <div className="margin-word">{getDateTime(investTime)}</div>;
             addresss =  <div className="margin-word">{address}</div>;
             otherPersons =  <div className="margin-word">{otherPerson}</div>;
             targetPersons =  <div className="margin-word">{targetPerson}</div>;
-            contents =  <div className="margin-word">{content}</div>;
+            contents =  <div className="content-text">{cont}</div>;
             creatPerson = <div className="formArch"><div className="margin-form word-title">调查人：</div><div className="margin-word">{workerNames}</div></div>
             // sign = <div>
             //             <div className="formArch">被调查人签字：</div>
@@ -225,8 +226,8 @@ class Investigation extends Component {
                     </Pop>
                     <div className="formArch"><div className="margin-form word-title">调查记录：</div><span>{contents}</span></div>
                     {sign}
-                    {btns}
                 </div>
+                    {btns}
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )

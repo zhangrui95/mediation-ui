@@ -91,44 +91,44 @@ body {
 .index-logo img{
 	float: left;
 }
-.logo-name{
-	width:60%;
-	height:56px;
+.logo-name {
+	width: 60%;
+	height: 56px;
 	color: #fff;
 	font-size: 18px;
 	float: left;
 	margin-top: 15px;
-	margin-left:2px;
+	margin-left: 2px;
 }
 .login-main {
 	width: 1000px;
 	position: absolute;
 	right: 15%;
-	top:15%;
+	top: 15%;
 }
 @media screen and (min-width:640px) and (max-width:1024px) {
-	.login-main {
-		right: 18%;
-		top:10%;
-	}
+.login-main {
+	right: 18%;
+	top: 10%;
+}
 }
 @media screen and (min-width:1024px) and (max-width:1360px) {
-	.login-main{
-		right: 20%;
-		top:20%;
-	}
+.login-main {
+	right: 20%;
+	top: 20%;
+}
 }
 @media screen and (min-width:1360px) and (max-width:1680px) {
-	.login-main{
-		right: 20%;
-		top:20%;
-	}
+.login-main {
+	right: 20%;
+	top: 20%;
+}
 }
 @media screen and (min-width:1680px) and (max-width:1920px) {
-	.login-main{
-		right: 25%;
-		top:25%;
-	}
+.login-main {
+	right: 25%;
+	top: 25%;
+}
 }
 .login-left {
 	float: left;
@@ -162,7 +162,7 @@ body {
 	height: 450px;
 	background: rgba(24,96,194,0.8);
 	box-shadow: 0px 0px 15px #333;
-	margin-right:50px;
+	margin-right: 50px;
 }
 .login-head {
 	margin: auto;
@@ -388,7 +388,7 @@ body {
 	width: 950px;
 }
 .list-top {
-	margin: 10px auto 0 auto;
+	margin: 0 auto;
 	height: 40px;
 	font-size: 14px;
 	border: 1px solid #ddd;
@@ -398,20 +398,20 @@ body {
 .list-left {
 	float: left;
 	color: #333;
-	padding: 12px 0 0 10px;
+	padding: 9px 0 0 10px;
 	font-weight: bold;
+	font-size: 16px;
 }
 .list-right {
 	float: right;
-	padding: 6px;
-	font-weight: bold;
+	padding: 4px 8px;
 	background: #2780da;
-	margin: 5px 10px;
+	margin: 6px 10px;
 	border-radius: 4px;
 	color: #fff;
 	font-size: 12px;
 	cursor: pointer;
-	box-shadow: 0px 2px 0px #93bfec;
+	box-shadow: 0px 2px 5px #93bfec;
 }
 .widget-table {
 	margin: 0 auto 5px auto;
@@ -441,29 +441,28 @@ body {
 	color: #1348a9;
 	text-decoration: none;
 }
-.table-list td .view-cell{
+.table-list td .view-cell {
 	width: 228px;
 	overflow: hidden;
 	text-align: left;
 	display: block;
 	white-space: nowrap;
 	text-overflow: ellipsis;
-	padding:0 3px;
-	color: #333;
+	padding: 0 10px;
+	color: #666;
 }
 .table-list td a:hover {
-	color: #333;
+	color: #1348a9;
 	text-decoration: underline;
 }
 .table-list-head {
 	background: url(../images/table-list-head.jpg) repeat-x;
 	text-align: center;
-	color: #333;
-	font-size: 12px;
-	font-weight: bold;
+	color: #666;
+	font-size: 13px;/* font-weight: bold; */
 }
 .pageturning {
-	width: 800px;
+	width: 950px;
 	margin: 5px auto;
 	height: 40px;
 	line-height: 40px;
@@ -506,28 +505,26 @@ body {
 	width: 400px;
 }
 .search-body {
-	margin: 30px 46px;
-	width: 896px;
+	margin: 30px;
+	width: 950px;
 	overflow: hidden;
 	height: auto;
 }
 .search-content {
-	margin: auto;
-	height: 40px;
+	margin: 0 auto;
 	line-height: 40px;
-	/*width: 350px;*/
+	/* width: 350px; */
 	float: left;
 }
 .search-title {
-	padding: 0 0 0 11px;
+	padding: 0 0 0 20px;
 	text-align: right;
 	color: #444;
 	font-size: 12px;
-	float: left;
-	/*width: 120px;*/
+	float: left;/*width: 120px;*/
 }
 .search-text {
-	float: left;;
+	float: left;
 }
 .text-input {
 	border: 1px solid #98a2ad;
@@ -538,7 +535,7 @@ body {
 	line-height: 26px;
 	margin-top: 5px;
 	padding: 0 5px;
-	width: 139px;
+	width: 150px;
 	float: left;
 }
 .text-input-pop {
@@ -552,8 +549,7 @@ body {
 	width: 190px;
 }
 .search-select {
-	float: left;
-	/*width: 215px;*/
+	float: left;/*width: 215px;*/
 }
 .text-select {
 	border: 1px solid #98a2ad;
@@ -562,9 +558,12 @@ body {
 	border-radius: 5px;
 	height: 28px;
 	line-height: 28px;
-	margin-top: 5px;
+<<<<<<< HEAD
+	/*margin-top: 5px;*/
+=======
+>>>>>>> refs/remotes/origin/master
 	padding: 0 5px;
-	width:85px;
+	width: 85px;
 	text-align: left;
 	cursor: pointer;
 }
@@ -763,7 +762,7 @@ body {
 	border-radius: 5px;
 	box-shadow: #444 0px 0px 15px;
 }
-.pop-gray-bg{
+.pop-gray-bg {
 	position: fixed;
 	/*z-index: 1200;*/
 	top: 0;
@@ -843,36 +842,36 @@ body {
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
-	box-shadow: 0px 2px 0px #93bfec;
-	height: 28px;
+	box-shadow: 0px 2px 4px #93bfec;
+	height: 35px;
 	color: #fff;
-	font-size: 12px;
+	font-size: 14px;
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
 	border: 0;
-	line-height: 30px;
+	line-height: 35px;
 	cursor: pointer;
-	padding: 0 15px;
+	padding: 0 25px;
 }
 .btn-pop-over {
-	background: #1659b3;
+	background: #2780da;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
-	box-shadow: 0px 2px 0px #93bfec;
-	height: 30px;
+	box-shadow: 0px 2px 4px #4e9cec;
+	height: 35px;
 	color: #fff;
-	font-size: 12px;
+	font-size: 14px;
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
-	text-align: center;
 	border: 0;
-	line-height: 30px;
+	line-height: 35px;
 	cursor: pointer;
-	padding: 0 15px;
+	padding: 0 25px;
 }
 .search-submit {
-	width:896px;
+	width: 940px;
 	text-align: center;
-	height: 40px;
+	height: 50px;
+	padding-top: 10px;
 }
 /*提示数量*/
 #mainleft .noticetip-jg {  /*左侧导航 监管企业负责人 显示数量*/
@@ -1198,24 +1197,20 @@ to {
 	left: 1000px;
 }
 }
-
-
-.error-login{
+.error-login {
 	float: right;
 	font-size: 12px;
 	color: #ff0000;
 	text-align: right;
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
-
-	}
-
-.odd{
-	height:36px;
 }
-.even{
-	height:36px;
+.odd {
+	height: 36px;
+	color: #666;
 }
-
+.even {
+	height: 36px;
+}
 .queue-anim-leaving {
 	position: absolute;
 	width: 100%;
@@ -1229,67 +1224,68 @@ to {
 	-webkit-transition: height 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 	transition: height 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 }
-.new-search-style{
+.new-search-style {
 	float: left;
-	height:40px;
+	height: 40px;
 	line-height: 40px;
+	padding-right: 8px;
 }
-.new-search-text{
+.new-search-text {
 	float: left;
 	width: 11px;
 	text-align: center;
-	color:#999;
+	color: #999;
 }
-.new-search-data{
-	width:140px;
+.new-search-data {
+	width: 120px;
 }
-.search-checkbox{
+.search-checkbox {
 	width: 315px;
 	margin-top: 5px;
 	padding-left: 35px;
 }
-.btn-reset{
+.btn-reset {
 	background: #ccc;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
-	box-shadow: 0px 2px 0px #bbb;
-	height: 28px;
+	box-shadow: 0px 0px 0px #bbb;
+	height: 35px;
 	color: #fff;
-	font-size: 12px;
+	font-size: 14px;
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
 	text-align: center;
 	border: 0;
-	line-height: 30px;
+	line-height: 35px;
 	cursor: pointer;
-	padding: 0 15px;
+	padding: 0 25px;
 	margin-left: 30px;
 }
-.btn-reset-red{
-	background:#DB3F24;
+.btn-reset-red {
+	background: #DB3F24;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
-	box-shadow: 0px 2px 0px #DB3F24;
-	height: 28px;
+	box-shadow: 0px 2px 4px #DB3F24;
+	height: 35px;
 	color: #fff;
-	font-size: 12px;
+	font-size: 14px;
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
 	text-align: center;
 	border: 0;
-	line-height: 30px;
+	line-height: 35px;
 	cursor: pointer;
-	padding: 0 15px;
+	padding: 0 25px;
 	margin-left: 30px;
 }
-.select-news-search{
+.select-news-search {
 	height: 40px;
 	line-height: 40px;
 	width: 300px;
 	text-align: left;
 	padding-left: 100px;
 }
-.select-news{
+.select-news {
 	overflow: hidden;
 	height: auto;
 	min-height: 35px;
@@ -1298,118 +1294,126 @@ to {
 	text-align: left;
 	padding-left: 100px;
 }
-.data-name-news{
-	height:auto;
-	width:220px;
+.data-name-news {
+	height: auto;
+	width: 220px;
 	float: left;
 	line-height: 20px;
 	margin-top: 5px;
 	word-break: break-all;
 }
-.pop-mar-submit{
+.pop-mar-submit {
 	margin: 10px auto 0;
 }
-.table-display{
+.table-display {
 	width: 500px;
-	height:36px;
+	height: 36px;
 }
-.news-warn{
+.news-warn {
 	text-align: center;
 	font-size: 14px;
 }
-.non-news{
+.non-news {
 	width: 800px;
 }
-.select-news-left{
+.select-news-left {
 	width: 80px;
-	float:left;
+	float: left;
 	text-align: right;
 }
-.table-list-evidence{
+.table-list-evidence {
 	width: 90%;
 }
-.table-name{
+.table-name {
 	font-size: 20px;
 }
-.gray-border{
-	border: 1px solid #ddd;
+.gray-border {
+	border: 0px solid #ddd;
 }
-.margin-form-party{
+.margin-form-party {
 	float: left;
-	margin: 5px 20px;
+	margin: 5px 10px;
 }
-.upload-list-inline{
+.upload-list-inline {
 	width: 100%;
 	height: auto;
 	overflow: hidden;
 	float: left;
 }
-.ant-upload-list-item-thumbnail img{
+.ant-upload-list-item-thumbnail img {
 	width: 100px;
 	height: 100px;
 	float: left;
 }
-.ant-upload-list-item-name{
+.ant-upload-list-item-name {
 	float: left;
 	height: 100px;
 	line-height: 100px;
 }
-.anticon-cross{
+.anticon-cross {
 	float: left;
 	height: 100px;
 	line-height: 100px;
 }
-.go-first{
+.go-first {
 	display: block;
 	height: 40px;
 	line-height: 40px;
 	margin-left: 30px;
 	width: 70px;
 }
-.time-right{
+.time-right {
 	width: 90%;
 	text-align: right;
 }
-.font-weight-word{
+.font-weight-word {
 	font-size: 18px;
 	line-height: 100px;
 	font-weight: 900;
 	height: 100px;
 }
-.apply-name{
+.apply-name {
 	height: 60px;
 	line-height: 60px;
 }
-.ant-upload-list-item{
+.ant-upload-list-item {
 	width: 100%;
 	height: 120px;
 }
-.change-btn{
-	width: 65px;
+.change-btn {
+	width:150px;
 	text-align: center;
-	height: 30px;
-	line-height: 30px;
+	height: 36px;
+	line-height: 36px;
 	background: #2780da;
 	border: none;
 	border-radius: 5px;
-	margin-right:15px;
+	margin-right: 15px;
 	color: #fff;
-	box-shadow: 0px 2px 0px #93bfec;
+	box-shadow: 0px 2px 5px #93bfec;
 	cursor: pointer;
+ font-size: 16px;
 }
-.hint{
+.hint {
 	text-align: right;
 	width: 86%;
 	color: #ff0000;
+	margin-left: 10px;
 }
-.btn-box{
-	width: 190px;
+.btn-box {
+	width: 350px;
 }
-.word-title{
+.word-title {
 	font-size: 15px;
+<<<<<<< HEAD
+	font-weight: 600;
+ 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
+=======
 	font-weight: 700;
+	margin-top: 5px;
+>>>>>>> refs/remotes/origin/master
 }
-.del-btn{
+.del-btn {
 	color: #fff;
 	display: block;
 	width: 40px;
@@ -1421,31 +1425,31 @@ to {
 	border-radius: 5px;
 	box-shadow: 0px 2px 0px #f18989;
 }
-.tap-blue{
-	background: #2780da;
+.tap-blue {
+	background: #52cae7;
 }
-.min-img{
-	width:40px;
+.min-img {
+	width: 40px;
 }
-.content{
+.content {
 	width: 80%;
 }
-.ellipsis{
+.ellipsis {
 	width: 135px;
 	text-align: center;
 	padding: 0 3px;
 }
-.table-list td.ellipsis{
+.table-list td.ellipsis {
 	line-height: 20px;
 }
-.table-list td.line{
+.table-list td.line {
 	line-height: 20px;
 }
-.margin-word{
+.margin-word {
 	float: left;
 	margin-top: 7px;
 }
-.ant-btn{
+.ant-btn {
 	background: #2780da;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -1460,36 +1464,43 @@ to {
 	cursor: pointer;
 	padding: 0 15px;
 }
-.goback{
+.goback {
 	margin-left: 20px;
 	color: #2db7f5;
 	cursor: pointer;
 }
-.content-text{
+.content-text {
 	width: 80%;
 	margin: 8px 30px;
 }
-.logo{
+.logo {
 	margin: 3px 0 3px 20px;
 }
-.title-font-size{
+.title-font-size {
 	font-size: 16px;
 }
-.form-title-margin{
+.form-title-margin {
 	margin: 12px auto 0;
 }
-.news-width{
+.news-width {
 	width: 80px;
 	text-align: right;
 	float: left;
 }
-.news-width-margin{
+.news-width-margin {
 	width: 80px;
 	text-align: right;
 	float: left;
 	margin-top: 7px;
 }
-.address-width{
-	width:373px;
+.address-width {
+	width: 373px;
 	display: block;
 }
+<<<<<<< HEAD
+=======
+.show-style{
+	float: left;
+	width: 139px;
+}
+>>>>>>> refs/remotes/origin/master

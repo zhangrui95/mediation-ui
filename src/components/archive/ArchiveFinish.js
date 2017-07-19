@@ -53,8 +53,8 @@ class ArchiveFinish extends Component {
                 <div className="formBorder">
                     <div className="formArch word-title">协议书扫描件</div>
                     <div className="formArch"><UpLoading className="btn-pop" dataId={id}/></div>
-                    {btns}
                 </div>
+                {btns}
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )

@@ -114,7 +114,8 @@ class CheckVisit extends Component {
             if(data === null || data === undefined){
                 return null;
             }
-            content = <div className="margin-word">{data.content}</div>;
+            let contents = data.content.replace(/\n/g, "<br/>").replace(/["“”]/g,"");
+            content = <div className="margin-word">{contents}</div>;
             time = <div className="margin-word">{getDateTime(data.visitTime)}</div>;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
         }else{
@@ -133,8 +134,8 @@ class CheckVisit extends Component {
                     <div className="formArch"><div className="margin-form word-title">回访时间：</div>{time}</div>
                     <div className="formArch"><div className="margin-form word-title">被回访人：</div><div className="margin-word">{litigantsName}</div></div>
                     <div className="formArch"><div className="margin-form word-title">回访情况：</div>{content}</div>
-                    {btns}
                 </div>
+                {btns}
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
