@@ -114,7 +114,8 @@ class CheckVisit extends Component {
             if(data === null || data === undefined){
                 return null;
             }
-            content = <div className="margin-word">{data.content}</div>;
+            let contents = data.content.replace(/\n/g, "<br/>").replace(/["“”]/g,"");
+            content = <div className="margin-word">{contents}</div>;
             time = <div className="margin-word">{getDateTime(data.visitTime)}</div>;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
         }else{

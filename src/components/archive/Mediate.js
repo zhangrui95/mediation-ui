@@ -132,8 +132,9 @@ class Mediate extends Component {
             if(data === null || data === undefined){
                 return null;
             }
+            let cont = content.replace(/\n/g, "<br/>").replace(/["“”]/g,"");
             time = <div className="margin-word">{getDateTime(mediateTime)}</div>;
-            contents =  <div className="margin-word">{content}</div>;
+            contents =  <div className="content-text">{cont}</div>;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="编辑" className="change-btn"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
             // sign = <div>
             //             <div className="formArch">当事人签字：</div>

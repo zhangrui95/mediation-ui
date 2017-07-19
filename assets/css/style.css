@@ -1335,7 +1335,7 @@ to {
 }
 .margin-form-party{
 	float: left;
-	margin: 5px 20px;
+	margin: 5px 10px;
 }
 .upload-list-inline{
 	width: 100%;
@@ -1493,4 +1493,8 @@ to {
 .address-width{
 	width:373px;
 	display: block;
+}
+.show-style{
+	float: left;
+	width: 139px;
 }
