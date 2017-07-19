@@ -4,6 +4,7 @@ import Select from '../Select'
 import merge from 'lodash/merge'
 import PopAlert from '../pop/PopAlert';
 import {cardValid} from './RegularValidator';
+import PopConfirm from '../pop/PopConfirm'
 
 class PartyInput extends Component {
 
@@ -30,6 +31,11 @@ class PartyInput extends Component {
     }
 
     handleRemove(){
+        this.setState({msg:'确定删除此当事人？'});
+        return false;
+    }
+
+    confirmOperation(){
         if(this.onRemove){
             const {item} = this.props;
             this.onRemove(item);
@@ -111,6 +117,7 @@ class PartyInput extends Component {
                 <div className={itemStyle}><span className={styleName}>联系方式：</span>{contact}</div>
                 {remove}
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                <PopConfirm visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} information={this.state.msg}  onOk={this.confirmOperation.bind(this)}  closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
     }
