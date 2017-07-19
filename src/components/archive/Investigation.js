@@ -226,8 +226,8 @@ class Investigation extends Component {
                     </Pop>
                     <div className="formArch"><div className="margin-form word-title">调查记录：</div><span>{contents}</span></div>
                     {sign}
-                    {btns}
                 </div>
+                    {btns}
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )

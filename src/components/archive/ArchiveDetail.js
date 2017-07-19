@@ -347,8 +347,8 @@ class ArchiveDetail extends Component {
                     <div className="formArch"><span className="word-title">当事人姓名：</span><span>{litigantsName}</span></div>
                     <div className="formArch"><span className="word-title">登记人：</span><span>{creater}</span></div>
                     <div className="formArch"><span className="word-title">登记日期：</span><span>{createTime}</span></div>
-                    {btns}
                 </div>
+                {btns}
                 <PopAlertHtml visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
