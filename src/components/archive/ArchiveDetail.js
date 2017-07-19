@@ -337,17 +337,17 @@ class ArchiveDetail extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="formArch"><span className="word-title">立卷人：</span><span>{creater}</span></div>
-                    <div className="formArch"><span className="word-title">立卷时间：</span><span>{createTime}</span></div>
-                    <div className="formArch"><span className="word-title">调解日期：</span><span>{protoTime}</span></div>
-                    <div className="formArch"><span className="word-title">保管期限：</span><span>{keepTime}</span></div>
-                    <div className="formArch"><span className="word-title">达成协议时间：</span><span>{protoTime}</span></div>
-                    <div className="formArch"><span className="word-title">调解协议：</span><span>{protoText}</span></div>
-                    <div className="formArch"><span className="word-title">协议履行情况：</span><span>{checkText}</span></div>
-                    <div className="formArch"><span className="word-title">调解失败时间：</span><span>{failTime}</span></div>
-                    <div className="formArch"><span className="word-title">当事人姓名：</span><span>{litigantsName}</span></div>
-                    <div className="formArch"><span className="word-title">登记人：</span><span>{creater}</span></div>
-                    <div className="formArch"><span className="word-title">登记日期：</span><span>{createTime}</span></div>
+                    <div className="formArch"><span className="word-title find-style-left">立卷人</span><span className="left-news">{creater}</span></div>
+                    <div className="formArch"><span className="word-title find-style-left">立卷时间</span><span className="left-news">{createTime}</span></div>
+                    <div className="formArch"><span className="word-title find-style-left">调解日期</span><span className="left-news">{protoTime}</span></div>
+                    <div className="formArch"><span className="word-title find-style-left">保管期限</span><span className="left-news">{keepTime}</span></div>
+                    <div className="formArch"><span className="word-title find-style-left">达成协议时间</span><span className="left-news">{protoTime}</span></div>
+                    <div className="formArch"><span className="word-title find-style-left">调解协议</span><span className="left-news">{protoText}</span></div>
+                    <div className="formArch"><span className="word-title find-style-left">协议履行情况</span><span className="left-news">{checkText}</span></div>
+                    <div className="formArch"><span className="word-title find-style-left">调解失败时间</span><span className="left-news">{failTime}</span></div>
+                    <div className="formArch"><span className="word-title find-style-left">当事人姓名</span><span className="left-news">{litigantsName}</span></div>
+                    <div className="formArch"><span className="word-title find-style-left">登记人</span><span className="left-news">{creater}</span></div>
+                    <div className="formArch"><span className="word-title find-style-left">登记日期</span><span className="left-news">{createTime}</span></div>
                 </div>
                 {btns}
                 <PopAlertHtml visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
