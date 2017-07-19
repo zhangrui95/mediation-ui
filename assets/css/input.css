@@ -414,3 +414,91 @@ width: 86%;
 	width: 100%;
 	border-bottom: 1px solid #000;
 }
+<<<<<<< HEAD
+=======
+.ant-input-group > .ant-input:last-child,
+.ant-input-group-addon:last-child {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.ant-input-group > .ant-input:last-child .ant-select .ant-select-selection,
+.ant-input-group-addon:last-child .ant-select .ant-select-selection {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.ant-input-group-lg .ant-input,
+.ant-input-group-lg > .ant-input-group-addon {
+  padding: 6px 7px;
+  height: 32px;
+}
+.ant-input-group-sm .ant-input,
+.ant-input-group-sm > .ant-input-group-addon {
+  padding: 1px 7px;
+  height: 22px;
+  border-radius: 4px;
+}
+.formArch{
+  width: 90%;
+  margin: 12px auto;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+}
+.margin-form{
+  float: left;
+  margin: 5px;
+}
+.margin-form-right{
+  float: right;
+  margin: 5px;
+}
+.title-form-name{
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 70px;
+}
+.addPerson{
+  height: 36px;
+  width: 150px;
+  line-height: 36px;
+  background: #2780da;
+  color: #ffffff;
+  text-align: center;
+  margin: 0 0 0 50%;
+  border: none;
+  border-radius: 5px;
+  position: absolute;
+  left: -75px;
+  box-shadow: 0px 2px 0px #93bfec;
+  cursor: pointer;
+}
+.header-top{
+  width: 100px;
+  text-align: center;
+  background: #CCCCCC;
+  color: #ffffff;
+  line-height: 36px;
+  height: 36px;
+  float: left;
+  margin-left: 22px;
+  cursor: pointer;
+}
+.archeader-box{
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  margin: 0px 0 15px 0;
+}
+.formBorder{
+  width: 86%;
+  margin: 10px 7% 30px;
+  height: auto;
+  overflow: hidden;
+  border: 1px solid #000;
+}
+.border-box{
+  width: 100%;
+  border-bottom: 1px solid #000;
+}
+>>>>>>> refs/remotes/origin/master

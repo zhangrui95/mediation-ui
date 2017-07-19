@@ -172,8 +172,8 @@ class Protocol extends Component {
                                 <span className="word-title pull-left">履行方式、时限：</span>{remarktext}
                             </div>
                         </div>
-                        {btns}
                  </div>
+                {btns}
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
