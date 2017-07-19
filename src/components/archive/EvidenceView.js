@@ -16,7 +16,7 @@ class EvidenceView extends Component {
         return (
             <table cellPadding="0" cellSpacing="0" className="table-list table-list-evidence">
                 <thead>
-                <tr>
+                <tr className="table-list-head">
                     <td>序号</td>
                     <td>{name}名称</td>
                     <td>大小</td>

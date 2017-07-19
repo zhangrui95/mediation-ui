@@ -14,9 +14,11 @@ import PopAlert from '../pop/PopAlert';
 class Investigation extends Component {
     constructor(props, context) {
         super(props, context);
-        const { params} = props;
+        const { params,location} = props;
         const {mid} = params;
-        this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? 1 : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',workersName:'',defaultTime:getDateTime(new Date().getTime()),msg:''};
+        const {query} = location;
+        const {edit} = query||{};
+        this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? (edit?2:1) : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',workersName:'',defaultTime:getDateTime(new Date().getTime()),msg:''};
     }
     componentWillReceiveProps(next){
         const {actions,params} = this.props;
@@ -39,9 +41,9 @@ class Investigation extends Component {
         }else if(response){
             const {state,data} = response||{};
             if(state === 0){
-                this.setState({model:1,time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:Investigation.getWorkersValue(data),workersName:Investigation.getWorkersName(data)});
+                this.setState({time:getDateTime(data.investTime),address:data.address,otherPerson:data.otherPerson,targetPerson:data.targetPerson,content:data.content,workerIds:Investigation.getWorkersValue(data),workersName:Investigation.getWorkersName(data)});
             }else{
-                this.setState({model:0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',workersName:''});
+                this.setState({time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',workersName:''});
             }
         }
     }
@@ -172,6 +174,7 @@ class Investigation extends Component {
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
         const workerValue = this.getWorkers();
         const workerNames = this.state.workersName;
+
         if(model === 0){
             times = <TimeChoice name="investTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
             addresss = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.address} placeholder=""  onChange={this.addressChange.bind(this)}/>
@@ -210,7 +213,7 @@ class Investigation extends Component {
         return (
             <div>
                 <div className="title-form-name" id={params.mid}>调解调查详情</div>
-                <div className="formArch goback" onClick={this.goBack.bind(this)}>返回列表</div>
+                <div className="formArch"><sapn className="goback" onClick={this.goBack.bind(this)}>返回列表</sapn></div>
                 <div className="formBorder">
                     <div className="formArch"><div className="margin-form word-title">调查时间：</div>{times}</div>
                     <div className="formArch"><div className="margin-form word-title">调查地点：</div>{addresss}</div>

@@ -536,15 +536,21 @@ textarea.ant-input {
   margin: 12px auto;
   height: auto;
   overflow: hidden;
+  position: relative;
 }
 .margin-form{
   float: left;
   margin: 5px;
 }
+.margin-form-right{
+  float: right;
+  margin: 5px;
+}
 .title-form-name{
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 700;
   text-align: center;
+  line-height: 70px;
 }
 .addPerson{
   height: 36px;
@@ -558,6 +564,8 @@ textarea.ant-input {
   border-radius: 5px;
   position: absolute;
   left: -75px;
+  box-shadow: 0px 2px 0px #93bfec;
+  cursor: pointer;
 }
 .header-top{
   width: 100px;
