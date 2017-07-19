@@ -20,7 +20,7 @@ class SurveyRow extends Component {
     render() {
         const {idx,item} = this.props;
         return (<tr className="odd">
-            <td width="40">{idx+1}</td>
+            <td width="40">0{idx+1}</td>
             <td width="160">
                 <a className="ellipsis" href="javascript:;" onClick={this.getDetail.bind(this)}>{getDateTime(item.investTime)}</a>
             </td>

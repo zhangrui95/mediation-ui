@@ -67,7 +67,7 @@ class EvidenceRow extends Component {
             printImgAction = <a onClick={this.printImg.bind(this)}>打印</a>
         }
         return (<tr className="odd">
-            <td width="40">{idx}</td>
+            <td width="40">0{idx}</td>
             <td className="line" width={previewPreWidth}>{data.name}</td>
             <td>{EvidenceRow.getHumanSize(data.size)}</td>
             <td>{getDateTime(data.createTime)}</td>

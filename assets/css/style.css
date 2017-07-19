@@ -424,7 +424,7 @@ body {
 	border-right: none;
 	background: #fff;
 	line-height: 35px;
-	color: #333;
+	color: #666;
 	font-size: 12px;
 	border-collapse: collapse;
 }
@@ -558,10 +558,7 @@ body {
 	border-radius: 5px;
 	height: 28px;
 	line-height: 28px;
-<<<<<<< HEAD
 	/*margin-top: 5px;*/
-=======
->>>>>>> refs/remotes/origin/master
 	padding: 0 5px;
 	width: 85px;
 	text-align: left;
@@ -851,6 +848,7 @@ body {
 	line-height: 35px;
 	cursor: pointer;
 	padding: 0 25px;
+	margin-right: 5px;
 }
 .btn-pop-over {
 	background: #2780da;
@@ -1405,13 +1403,10 @@ to {
 }
 .word-title {
 	font-size: 15px;
-<<<<<<< HEAD
 	font-weight: 600;
  	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
-=======
 	font-weight: 700;
 	margin-top: 5px;
->>>>>>> refs/remotes/origin/master
 }
 .del-btn {
 	color: #fff;
@@ -1497,10 +1492,24 @@ to {
 	width: 373px;
 	display: block;
 }
-<<<<<<< HEAD
-=======
 .show-style{
 	float: left;
 	width: 139px;
 }
->>>>>>> refs/remotes/origin/master
+.find-style{
+	width: 120px;
+	text-align: right;
+}
+.text-margin-left{
+	margin: 5px 30px;
+}
+.bottom-border{
+	border-bottom: 1px dashed #666;
+	padding-bottom: 10px;
+}
+.red-news-bottom{
+	color:#ff0000;
+	height: 36px;
+	line-height: 26px;
+}
+

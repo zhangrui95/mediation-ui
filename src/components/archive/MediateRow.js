@@ -19,7 +19,7 @@ class MediateRow extends Component {
     render() {
         const {idx,item,litigants,workers} = this.props;
         return (<tr className="odd">
-            <td width="40">{idx+1}</td>
+            <td width="40">0{idx+1}</td>
             <td width="230">
                 <a className="ellipsis" href="javascript:;" onClick={this.getDetail.bind(this)}>{getDateTime(item.mediateTime)}</a>
             </td>

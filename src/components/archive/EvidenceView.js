@@ -14,7 +14,7 @@ class EvidenceView extends Component {
             return <EvidenceRow key={i} data={it} idx={i+1} type={type} reload={reload}/>
         });
         return (
-            <table cellPadding="0" cellSpacing="0" className="table-list table-list-evidence">
+            <table cellPadding="0" cellSpacing="0" className="table-list">
                 <thead>
                 <tr className="table-list-head">
                     <td>序号</td>

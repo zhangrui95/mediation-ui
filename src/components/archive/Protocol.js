@@ -126,8 +126,8 @@ class Protocol extends Component {
         let contenttext = '';
         let btns = '';
         if(model === 0){
-            remarktext = <Input className="text-input" disabled={this.state.result === '-1'}  style={{ width: 400 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} style={{ width: 700 }} onChange={this.textChange.bind(this)} value={this.state.content} />
+            remarktext = <Input type="textarea"  className="text-margin-left" disabled={this.state.result === '-1'} rows={4}  style={{ width: 700 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
+            contenttext = <Input type="textarea" className="text-margin-left" disabled={this.state.result === '-1'} rows={4} style={{ width: 700 }} onChange={this.textChange.bind(this)} value={this.state.content} />
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
             resulttext = <Select domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} head="请选择" onChangeHandler={this.handleChange.bind(this)} value={this.state.result} />
         }else if(model === 1){
@@ -143,8 +143,8 @@ class Protocol extends Component {
             if(!data){
                 return null;
             }
-            remarktext = <Input className="text-input" disabled={this.state.result === '-1'}  style={{ width: 400 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} style={{ width: 700 }} onChange={this.textChange.bind(this)} value={this.state.content}/>
+            remarktext = <Input type="textarea" className="text-margin-left" disabled={this.state.result === '-1'} rows={4}  style={{ width: 700 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
+            contenttext = <Input type="textarea" className="text-margin-left" disabled={this.state.result === '-1'} rows={4} style={{ width: 700 }} onChange={this.textChange.bind(this)} value={this.state.content}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
             resulttext = <Select domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} value={this.state.result} head="请选择" onChangeHandler={this.handleChange.bind(this)}/>
         }
@@ -158,18 +158,18 @@ class Protocol extends Component {
                         <PartyCell litigants={this.getLitigants()}/>
                     </div>
                         <div className="formArch">
-                            <div className="margin-form"><span className="word-title">调解结果：</span>
+                            <div className="margin-form"><span className="word-title find-style">调解结果：</span>
                                 {resulttext}
                             </div>
                         </div>
                         <div className="formArch">
                             <div className="margin-form">
-                                <span className="word-title">调解协议：</span>{contenttext}
+                                <span className="word-title find-style">调解协议：</span>{contenttext}
                             </div>
                          </div>
                         <div className="formArch">
                             <div className="margin-form">
-                                <span className="word-title pull-left">履行方式、时限：</span>{remarktext}
+                                <span className="word-title pull-left find-style">履行方式、时限：</span>{remarktext}
                             </div>
                         </div>
                  </div>

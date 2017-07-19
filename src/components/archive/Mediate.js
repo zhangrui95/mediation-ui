@@ -126,7 +126,7 @@ class Mediate extends Component {
         let sign = '';
         if(model === 0){
             time = <TimeChoice name="mediateTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
-            contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
+            contents =  <Input type="textarea" style={{ width: 600 }} rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="取消" onClick={this.goBack.bind(this)} className="change-btn"/><input type="button" value="保存" onClick={this.onSave.bind(this)} className="change-btn"/></div>
         }else if(model === 1){
             if(data === null || data === undefined){
@@ -146,7 +146,7 @@ class Mediate extends Component {
                 return null;
             }
             time = <TimeChoice name="mediateTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
-            contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
+            contents =  <Input type="textarea" style={{ width: 600 }} rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
         }
         return (
@@ -154,11 +154,11 @@ class Mediate extends Component {
                 <div className="title-form-name" id={params.mid}>调解详情</div>
                 <div className="formArch"><sapn className="goback" onClick={this.goBack.bind(this)}>返回列表</sapn></div>
                 <div className="formBorder">
-                    <div className="formArch"><div className="margin-form word-title">调解时间：</div>{time}</div>
-                    <div className="formArch"><div className="margin-form word-title">调解地点：</div><div className="margin-word">清滨调解中心</div></div>
-                    <div className="formArch"><div className="margin-form word-title">当事人：</div><div className="margin-word">{this.getLitigants(archive)}</div></div>
-                    <div className="formArch"><div className="margin-form word-title">调解人：</div><div className="margin-word">{this.getWorkers(archive)}</div></div>
-                    <div className="formArch"><div className="margin-form word-title">调解记录：</div>{contents}</div>
+                    <div className="formArch"><div className="margin-form word-title find-style">调解时间：</div>{time}</div>
+                    <div className="formArch"><div className="margin-form word-title find-style">调解地点：</div><div className="margin-word">清滨调解中心</div></div>
+                    <div className="formArch"><div className="margin-form word-title find-style">当事人：</div><div className="margin-word">{this.getLitigants(archive)}</div></div>
+                    <div className="formArch"><div className="margin-form word-title find-style">调解人：</div><div className="margin-word">{this.getWorkers(archive)}</div></div>
+                    <div className="formArch"><div className="margin-form word-title find-style">调解记录：</div>{contents}</div>
                     {sign}
                 </div>
                 {btns}

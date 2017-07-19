@@ -96,18 +96,18 @@ class PartyInput extends Component {
             if(!item){
                 return null;
             }
-            name = <Input style={{ width: 80 }} className="text-input" placeholder="" value={item.name} onChange={this.handleChange('name').bind(this)} maxLength={10}/>
+            name = <Input style={{ width: 80 }} className="text-margin" placeholder="" value={item.name} onChange={this.handleChange('name').bind(this)} maxLength={10}/>
             sex = <Select domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择" value={item.sex+''} onChangeHandler={this.handleChange('sex').bind(this)}/>
             nation = <Input className="text-input" placeholder="" style={{ width: 40 }} value={item.nation} onChange={this.handleChange('nation').bind(this)} maxLength={20}/>
             age = <Input className="text-input" type="number" placeholder="" style={{ width: 40 }} value={item.age} onChange={this.handleChange('age').bind(this)} />
-            card = <Input className="text-input" placeholder="" value={item.card} onChange={this.handleChange('card').bind(this)} onBlur={this.getCard.bind(this)} maxLength={18}/>
+            card = <Input className="text-input" placeholder="" style={{ width: 145 }} value={item.card} onChange={this.handleChange('card').bind(this)} onBlur={this.getCard.bind(this)} maxLength={18}/>
             address = <Input className="text-input" style={{ width: 395 }} placeholder="" value={item.address} onChange={this.handleChange('address').bind(this)} maxLength={200}/>
-            contact = <Input className="text-input" placeholder="" value={item.contact} onChange={this.handleChange('contact').bind(this)} onBlur={this.getContact.bind(this)} maxLength={30}/>
+            contact = <Input className="text-input" placeholder="" style={{ width: 145 }} value={item.contact} onChange={this.handleChange('contact').bind(this)} onBlur={this.getContact.bind(this)} maxLength={30}/>
             remove = <div className={itemStyle}><a href="javascript:;" onClick={this.handleRemove.bind(this)} className="del-btn">删除</a></div>
             styleName = 'news-width-margin';
         }
         return (
-            <div className="formArch">
+            <div className="formArch bottom-border">
                 <div className={itemStyle}><span className={styleName}>当事人姓名：</span>{name}</div>
                 <div className={itemStyle}><span className={styleName} style={{width:40}}>性别：</span>{sex}</div>
                 <div className={itemStyle}><span className={styleName} style={{width:40}}>民族：</span>{nation}</div>
