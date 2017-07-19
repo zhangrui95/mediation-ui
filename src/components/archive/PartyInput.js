@@ -67,9 +67,8 @@ class PartyInput extends Component {
         }
         return this.renderByItem(item)
     }
-
     renderByItem(item) {
-        const {model} = this.props;
+        const {model,length,idx} = this.props;
         const itemStyle = model === 1 ? 'margin-form-party': 'margin-form';
         let name;
         let sex;
@@ -79,10 +78,14 @@ class PartyInput extends Component {
         let address;
         let contact;
         let remove;
+        let style = 'formArch bottom-border';
         let styleName = '';
         if(model === 1){
             if(!item){
                 return null;
+            }
+            if(idx == length-1){
+                style = 'formArch';
             }
             name = <span className="show-style" style={{ width: 80 }}>{item.name}</span>
             sex = <span className="show-style" style={{ width: 40 }}>{(item.sex+'') === '1'? '男':'女'}</span>
@@ -107,7 +110,7 @@ class PartyInput extends Component {
             styleName = 'news-width-margin';
         }
         return (
-            <div className="formArch bottom-border">
+            <div className={style}>
                 <div className={itemStyle}><span className={styleName}>当事人姓名：</span>{name}</div>
                 <div className={itemStyle}><span className={styleName} style={{width:40}}>性别：</span>{sex}</div>
                 <div className={itemStyle}><span className={styleName} style={{width:40}}>民族：</span>{nation}</div>

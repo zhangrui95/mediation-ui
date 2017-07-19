@@ -58,6 +58,7 @@ class AddPartyinput extends Component {
     render() {
         const {model} = this.props;
         const {datas} = this.state;
+        let length = datas.length;
         const tables = datas.map((it,i) =>{
             if(!it.key){
                 let key = it.id;
@@ -66,7 +67,7 @@ class AddPartyinput extends Component {
                 }
                 it.key = key
             }
-            return <PartyInput ref={'sub'+i} key={it.key} model={model} item={it} onRemove={this.remove.bind(this)}/>
+            return <PartyInput ref={'sub'+i} key={it.key} model={model} length={length} item={it} idx={i} onRemove={this.remove.bind(this)}/>
         });
         let submitBtn;
         if(model !== 1){
