@@ -1481,5 +1481,14 @@ to {
 	width: 80px;
 	text-align: right;
 	float: left;
+}
+.news-width-margin{
+	width: 80px;
+	text-align: right;
+	float: left;
 	margin-top: 7px;
+}
+.address-width{
+	width:373px;
+	display: block;
 }

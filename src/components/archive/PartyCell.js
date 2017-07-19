@@ -5,13 +5,13 @@ class PartyCell extends Component {
         const { litigants } = this.props;
         const arr = (litigants||[]).map(function (i,idx) {
             return (<div className="formArch" key={idx}>
-                <div className="margin-form-party">姓名：<span>{i.name}</span></div>
-                <div className="margin-form-party">性别：<span>{i.sex === 1 ? '男':'女'}</span></div>
-                <div className="margin-form-party">民族：<span>{i.nation}</span></div>
-                <div className="margin-form-party">年龄：<span>{i.age}</span></div>
-                <div className="margin-form-party">身份证号码：<span>{i.card}</span></div>
-                <div className="margin-form-party">单位/住址：<span>{i.address}</span></div>
-                <div className="margin-form-party">联系方式：<span>{i.contact}</span></div>
+                <div className="margin-form-party"><span className="news-width">当事人姓名：</span><span>{i.name}</span></div>
+                <div className="margin-form-party"><span className="news-width" style={{width:40}}>性别：</span><span>{i.sex === 1 ? '男':'女'}</span></div>
+                <div className="margin-form-party"><span className="news-width" style={{width:40}}>民族：</span><span>{i.nation}</span></div>
+                <div className="margin-form-party"><span className="news-width" style={{width:40}}>年龄：</span><span>{i.age}</span></div>
+                <div className="margin-form-party"><span className="news-width">身份证号码：</span><span>{i.card}</span></div>
+                <div className="margin-form-party"><span className="news-width">单位/住址：</span><span className="address-width">{i.address}</span></div>
+                <div className="margin-form-party"><span className="news-width">联系方式：</span><span>{i.contact}</span></div>
             </div>);
         });
         return (

@@ -83,9 +83,9 @@ class PartyInput extends Component {
             nation = <span>{item.nation}</span>
             age = <span>{item.age}</span>
             card = <span>{item.card}</span>
-            address = <span>{item.address}</span>
+            address = <span className="address-width">{item.address}</span>
             contact = <span>{item.contact}</span>
-            styleName = '';
+            styleName = 'news-width';
         } else{
             if(!item){
                 return null;
@@ -98,7 +98,7 @@ class PartyInput extends Component {
             address = <Input className="text-input" style={{ width: 395 }} placeholder="" value={item.address} onChange={this.handleChange('address').bind(this)} maxLength={200}/>
             contact = <Input className="text-input" placeholder="" value={item.contact} onChange={this.handleChange('contact').bind(this)} onBlur={this.getContact.bind(this)} maxLength={30}/>
             remove = <div className={itemStyle}><a href="javascript:;" onClick={this.handleRemove.bind(this)} className="del-btn">删除</a></div>
-            styleName = 'news-width';
+            styleName = 'news-width-margin';
         }
         return (
             <div className="formArch">
