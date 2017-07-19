@@ -562,7 +562,6 @@ body {
 	border-radius: 5px;
 	height: 28px;
 	line-height: 28px;
-	margin-top: 5px;
 	padding: 0 5px;
 	width:85px;
 	text-align: left;
@@ -1401,6 +1400,7 @@ to {
 	text-align: right;
 	width: 86%;
 	color: #ff0000;
+	margin-left: 10px;
 }
 .btn-box{
 	width: 190px;
@@ -1408,6 +1408,7 @@ to {
 .word-title{
 	font-size: 15px;
 	font-weight: 700;
+	margin-top: 5px;
 }
 .del-btn{
 	color: #fff;

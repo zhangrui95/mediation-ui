@@ -168,7 +168,7 @@ class Protocol extends Component {
                          </div>
                         <div className="formArch">
                             <div className="margin-form">
-                                <span className="word-title">履行方式、时限：</span>{remarktext}
+                                <span className="word-title pull-left">履行方式、时限：</span>{remarktext}
                             </div>
                         </div>
                         {btns}

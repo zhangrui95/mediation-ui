@@ -230,6 +230,7 @@ class ArchiveDetail extends Component {
         let litigants = '';
         let manager = '';
         let btns;
+        let styleName = '';
         if(model === 0){
             if(!header.user){
                 return null;
@@ -243,6 +244,7 @@ class ArchiveDetail extends Component {
             litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants}  onChange={this.handleLitigantChange.bind(this)}/>
             creater = header.user.response.user.name;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.addNewArchive.bind(this)} className="addPerson"/></div>
+            styleName = 'news-width-margin';
         }else if(model === 1){
             if(state !== 0){
                 return null;
@@ -270,6 +272,7 @@ class ArchiveDetail extends Component {
             litigantsName = (data.litigants||[]).map((i)=>i.name).join(',');
             creater = data.creater.name;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} /><input type="button" className="change-btn" value="打印" /></div>
+            styleName = 'news-width';
         }else{
             if(state !== 0){
                 return null;
@@ -296,6 +299,7 @@ class ArchiveDetail extends Component {
             litigantsName = (data.litigants||[]).map((i)=>i.name).join(',');
             creater = readData.creater.name;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
+            styleName = 'news-width-margin';
         }
         let workerValue = [];
         if(data.workerIds){
@@ -307,7 +311,7 @@ class ArchiveDetail extends Component {
                 <div className="formBorder">
                     <div className="border-box">
                         <div className="formArch">
-                            <div className="margin-form"><span className="news-width">卷宗名称：</span>{name}</div>
+                            <div className="margin-form"><span className={styleName}>卷宗名称：</span>{name}</div>
                             <div className="margin-form-right">卷宗类别：{type}</div>
                         </div>
                     </div>
