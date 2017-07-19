@@ -85,7 +85,7 @@ class PartyInput extends Component {
                 return null;
             }
             name = <span className="show-style" style={{ width: 80 }}>{item.name}</span>
-            sex = <span className="show-style" style={{ width: 40 }}>{item.sex === 1 ? '男':'女'}</span>
+            sex = <span className="show-style" style={{ width: 40 }}>{(item.sex+'') === '1'? '男':'女'}</span>
             nation = <span className="show-style" style={{ width: 40 }}>{item.nation}</span>
             age = <span className="show-style" style={{ width: 40 }}>{item.age}</span>
             card = <span className="show-style">{item.card}</span>
