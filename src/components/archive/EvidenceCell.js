@@ -24,7 +24,7 @@ class EvidenceCell extends Component {
         const isLt2M = file.size / 1024 / 1024 < 100;
         let text = '(开始上传...)';
         if (!isLt2M) {
-            text = '(文件大于100M)';
+            text = '(文件不能大于100M)';
         }
         this.setState({text});
         return isLt2M;
@@ -39,7 +39,7 @@ class EvidenceCell extends Component {
         const isLt2M = file.size / 1024 / 1024 < 10;
         let text1 = '(开始上传...)';
         if (!isLt2M) {
-            text1 = '(文件大于10M)';
+            text1 = '(文件不能大于10M)';
         }
         this.setState({text1});
         return isLt2M;
@@ -49,7 +49,7 @@ class EvidenceCell extends Component {
         const isLt2M = file.size / 1024 / 1024 < 20;
         let text2 = '(开始上传...)';
         if (!isLt2M) {
-            text2 = '(文件大于20M）';
+            text2 = '(文件不能大于20M）';
         }
         this.setState({text2});
         return isLt2M;
