@@ -187,11 +187,12 @@ class Investigation extends Component {
             if(data === null || data === undefined){
                 return null;
             }
+            let cont = content.replace(/\n/g, "<br/>").replace(/["“”]/g,"");
             times = <div className="margin-word">{getDateTime(investTime)}</div>;
             addresss =  <div className="margin-word">{address}</div>;
             otherPersons =  <div className="margin-word">{otherPerson}</div>;
             targetPersons =  <div className="margin-word">{targetPerson}</div>;
-            contents =  <div className="margin-word">{content}</div>;
+            contents =  <div className="content-text">{cont}</div>;
             creatPerson = <div className="formArch"><div className="margin-form word-title">调查人：</div><div className="margin-word">{workerNames}</div></div>
             // sign = <div>
             //             <div className="formArch">被调查人签字：</div>

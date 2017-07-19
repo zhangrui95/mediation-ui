@@ -84,13 +84,13 @@ class PartyInput extends Component {
             if(!item){
                 return null;
             }
-            name = <span>{item.name}</span>
-            sex = <span>{item.sex === 1 ? '男':'女'}</span>
-            nation = <span>{item.nation}</span>
-            age = <span>{item.age}</span>
-            card = <span>{item.card}</span>
-            address = <span className="address-width">{item.address}</span>
-            contact = <span>{item.contact}</span>
+            name = <span className="show-style" style={{ width: 80 }}>{item.name}</span>
+            sex = <span className="show-style" style={{ width: 40 }}>{item.sex === 1 ? '男':'女'}</span>
+            nation = <span className="show-style" style={{ width: 40 }}>{item.nation}</span>
+            age = <span className="show-style" style={{ width: 40 }}>{item.age}</span>
+            card = <span className="show-style">{item.card}</span>
+            address = <span className="address-width" style={{ width: 460 }}>{item.address}</span>
+            contact = <span className="show-style">{item.contact}</span>
             styleName = 'news-width';
         } else{
             if(!item){

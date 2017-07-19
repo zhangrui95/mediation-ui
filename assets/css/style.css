@@ -86,9 +86,9 @@ body {
 	text-shadow: #333 0px 1px 1px;
 	position: absolute;
 	left: 0;
-	top: 0;
+	top:0;
 }
-.index-logo img {
+.index-logo img{
 	float: left;
 }
 .logo-name {
@@ -558,7 +558,10 @@ body {
 	border-radius: 5px;
 	height: 28px;
 	line-height: 28px;
+<<<<<<< HEAD
 	/*margin-top: 5px;*/
+=======
+>>>>>>> refs/remotes/origin/master
 	padding: 0 5px;
 	width: 85px;
 	text-align: left;
@@ -1329,7 +1332,7 @@ to {
 }
 .margin-form-party {
 	float: left;
-	margin: 5px 20px;
+	margin: 5px 10px;
 }
 .upload-list-inline {
 	width: 100%;
@@ -1395,14 +1398,20 @@ to {
 	text-align: right;
 	width: 86%;
 	color: #ff0000;
+	margin-left: 10px;
 }
 .btn-box {
 	width: 350px;
 }
 .word-title {
 	font-size: 15px;
+<<<<<<< HEAD
 	font-weight: 600;
  	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
+=======
+	font-weight: 700;
+	margin-top: 5px;
+>>>>>>> refs/remotes/origin/master
 }
 .del-btn {
 	color: #fff;
@@ -1488,3 +1497,10 @@ to {
 	width: 373px;
 	display: block;
 }
+<<<<<<< HEAD
+=======
+.show-style{
+	float: left;
+	width: 139px;
+}
+>>>>>>> refs/remotes/origin/master
