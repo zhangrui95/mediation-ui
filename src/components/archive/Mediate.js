@@ -151,6 +151,9 @@ class Mediate extends Component {
         }
         return (
             <div>
+                <div className="center-box">
+                    <div className="top-left"></div>
+                    <div className="top-right"></div>
                 <div className="title-form-name" id={params.mid}>调解详情</div>
                 <div className="formArch"><sapn className="goback" onClick={this.goBack.bind(this)}>返回列表</sapn></div>
                 <div className="formBorder">
@@ -162,6 +165,9 @@ class Mediate extends Component {
                     {sign}
                 </div>
                 {btns}
+                    <div className="bottom-left"></div>
+                    <div className="bottom-right"></div>
+                </div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )

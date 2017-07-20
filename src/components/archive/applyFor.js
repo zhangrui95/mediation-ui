@@ -97,6 +97,9 @@ class ApplyFor extends Component {
         }
         return (
             <div>
+                <div className="center-box">
+                    <div className="top-left"></div>
+                    <div className="top-right"></div>
                 <div className="title-form-name">人民调解申请书</div>
                 <div className="formBorder">
                         <div className="border-box">
@@ -111,6 +114,9 @@ class ApplyFor extends Component {
                         {time}
                     </div>
                         {btns}
+                    <div className="bottom-left"></div>
+                    <div className="bottom-right"></div>
+                </div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )

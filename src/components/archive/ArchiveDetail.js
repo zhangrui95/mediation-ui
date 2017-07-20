@@ -308,48 +308,54 @@ class ArchiveDetail extends Component {
         }
         return (
             <div>
-                <div className="title-form-name">人民调解登记表</div>
-                <div className="formBorder">
-                    <div className="border-box">
-                        <div className="formArch">
-                            <div className="margin-form"><span className={styleName}>卷宗名称：</span>{name}</div>
-                            <div className="margin-form-right">卷宗类别：{type}</div>
-                        </div>
-                    </div>
-                    <div className="border-box">
-                        <div className="formArch word-title">当事人</div>
-                        {litigants}
-                    </div>
-                    <div className="border-box">
-                        <div className="formArch word-title">纠纷简要情况</div>
-                        <div className="formArch">{content}</div>
-                    </div>
-                    <div className="border-box">
-                        <div className="formArch word-title">调解员</div>
-                        <div className="formArch">
-                            <div className="margin-form">第一调解员：{manager}</div>
-                        </div>
-                        <div className="formArch">
-                            <div className="margin-form">第二调解员：{workers} {workersName}
-                                <Pop title="添加调解员" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
-                                    <PopMediator domain="manager.id" url="api/user/listByRole.json?role=2" name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
-                                </Pop>
+                <div className="center-box">
+                    <div className="top-left"></div>
+                    <div className="top-right"></div>
+                    <div className="title-form-name">人民调解登记表</div>
+                    <div className="formBorder">
+                        <div className="border-box">
+                            <div className="formArch">
+                                <div className="margin-form"><span className={styleName}>卷宗名称：</span>{name}</div>
+                                <div className="margin-form-right">卷宗类别：{type}</div>
                             </div>
                         </div>
+                        <div className="border-box">
+                            <div className="formArch word-title">当事人</div>
+                            {litigants}
+                        </div>
+                        <div className="border-box">
+                            <div className="formArch word-title">纠纷简要情况</div>
+                            <div className="formArch">{content}</div>
+                        </div>
+                        <div className="border-box">
+                            <div className="formArch word-title">调解员</div>
+                            <div className="formArch">
+                                <div className="margin-form">第一调解员：{manager}</div>
+                            </div>
+                            <div className="formArch">
+                                <div className="margin-form">第二调解员：{workers} {workersName}
+                                    <Pop title="添加调解员" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
+                                        <PopMediator domain="manager.id" url="api/user/listByRole.json?role=2" name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
+                                    </Pop>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="formArch"><span className="word-title find-style-left">立卷人</span><span className="left-news">{creater}</span></div>
+                        <div className="formArch"><span className="word-title find-style-left">立卷时间</span><span className="left-news">{createTime}</span></div>
+                        <div className="formArch"><span className="word-title find-style-left">调解日期</span><span className="left-news">{protoTime}</span></div>
+                        <div className="formArch"><span className="word-title find-style-left">保管期限</span><span className="left-news">{keepTime}</span></div>
+                        <div className="formArch"><span className="word-title find-style-left">达成协议时间</span><span className="left-news">{protoTime}</span></div>
+                        <div className="formArch"><span className="word-title find-style-left">调解协议</span><span className="left-news">{protoText}</span></div>
+                        <div className="formArch"><span className="word-title find-style-left">协议履行情况</span><span className="left-news">{checkText}</span></div>
+                        <div className="formArch"><span className="word-title find-style-left">调解失败时间</span><span className="left-news">{failTime}</span></div>
+                        <div className="formArch"><span className="word-title find-style-left">当事人姓名</span><span className="left-news">{litigantsName}</span></div>
+                        <div className="formArch"><span className="word-title find-style-left">登记人</span><span className="left-news">{creater}</span></div>
+                        <div className="formArch"><span className="word-title find-style-left">登记日期</span><span className="left-news">{createTime}</span></div>
                     </div>
-                    <div className="formArch"><span className="word-title find-style-left">立卷人</span><span className="left-news">{creater}</span></div>
-                    <div className="formArch"><span className="word-title find-style-left">立卷时间</span><span className="left-news">{createTime}</span></div>
-                    <div className="formArch"><span className="word-title find-style-left">调解日期</span><span className="left-news">{protoTime}</span></div>
-                    <div className="formArch"><span className="word-title find-style-left">保管期限</span><span className="left-news">{keepTime}</span></div>
-                    <div className="formArch"><span className="word-title find-style-left">达成协议时间</span><span className="left-news">{protoTime}</span></div>
-                    <div className="formArch"><span className="word-title find-style-left">调解协议</span><span className="left-news">{protoText}</span></div>
-                    <div className="formArch"><span className="word-title find-style-left">协议履行情况</span><span className="left-news">{checkText}</span></div>
-                    <div className="formArch"><span className="word-title find-style-left">调解失败时间</span><span className="left-news">{failTime}</span></div>
-                    <div className="formArch"><span className="word-title find-style-left">当事人姓名</span><span className="left-news">{litigantsName}</span></div>
-                    <div className="formArch"><span className="word-title find-style-left">登记人</span><span className="left-news">{creater}</span></div>
-                    <div className="formArch"><span className="word-title find-style-left">登记日期</span><span className="left-news">{createTime}</span></div>
+                    {btns}
+                    <div className="bottom-left"></div>
+                    <div className="bottom-right"></div>
                 </div>
-                {btns}
                 <PopAlertHtml visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
