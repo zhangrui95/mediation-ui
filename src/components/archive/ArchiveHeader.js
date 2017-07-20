@@ -46,7 +46,13 @@ const msg=[
 class ArchiveHeader extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {index:this.findIndex(props)};
+        const { params } = props;
+        const {id} = params;
+        let add = 'add';
+        if(id !==null && id !== undefined && id!== ''){
+            add = '';
+        }
+        this.state = {index:this.findIndex(props),add:add};
     }
     componentWillReceiveProps(next) {
         const index = this.findIndex(next)
@@ -89,7 +95,7 @@ class ArchiveHeader extends Component {
     }
     render() {
         const list = msg.map((data,i)=>{
-            return <HeaderTop key={i} isActive={i===this.state.index} data={data}/>
+            return <HeaderTop key={i} isActive={i===this.state.index} add={this.state.add} data={data}/>
         });
         return (
             <div>

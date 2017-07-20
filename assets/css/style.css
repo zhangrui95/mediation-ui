@@ -406,7 +406,7 @@ body {
 	float: right;
 	padding: 4px 8px;
 	background: #2780da;
-	margin: 6px 10px;
+	margin: 7px 10px;
 	border-radius: 4px;
 	color: #fff;
 	font-size: 12px;
@@ -1394,7 +1394,7 @@ to {
 }
 .hint {
 	text-align: right;
-	width: 86%;
+	width: 82%;
 	color: #ff0000;
 	margin-left: 10px;
 }
@@ -1513,7 +1513,7 @@ to {
 	padding-bottom: 10px;
 }
 .red-news-bottom{
-	color:#ff0000;
+	color:#2780da;
 	height: 36px;
 	line-height: 26px;
 }

@@ -359,7 +359,7 @@ textarea.ant-input {
 }
 .margin-form-right {
 	float: right;
-	margin:8px 5px 0 5px;
+	margin:6px 5px 0 5px;
 }
 .title-form-name {
 	font-size: 36px;
@@ -397,6 +397,19 @@ textarea.ant-input {
 	cursor: pointer;
 	font-size: 18px;
 	font-weight: 600;
+}
+.header-top-gary{
+	width: 107px;
+	text-align: center;
+	background: #CCCCCC;
+	color: #ffffff;
+	line-height: 60px;
+	height: 60px;
+	float: left;
+	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
+	font-size: 18px;
+	font-weight: 600;
+	cursor: default;
 }
 .archeader-box{
 	width: 856px;
