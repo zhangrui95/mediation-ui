@@ -22,7 +22,7 @@ class EvidenceCell extends Component {
 
     beforeUploadView(file) {
         let text = '(开始上传...)';
-        const isView = file.type === 'video/avi'||'video/mkv'||'video/mp4'||'video/wmv'||'video/flv'||'video/mov'||'video/3gp';
+        const isView = file.type === 'video/avi'||file.type === 'video/mkv'||file.type === 'video/mp4'||file.type === 'video/wmv'||file.type === 'video/flv'||file.type === 'video/mov'||file.type === 'video/3gp';
         if (!isView) {
             text = '(只能上传AVI、MKV、MP4、WMV、FLV、MOV、3GP格式的视频)';
         }
@@ -36,7 +36,7 @@ class EvidenceCell extends Component {
     
     beforeUploadImg(file) {
         let text1 = '(开始上传...)';
-        const isJPG = file.type === 'image/jpeg'||'image/png';
+        const isJPG = file.type === 'image/jpeg'||file.type === 'image/png';
         if (!isJPG) {
             text1 = '(只能上传JPG,PNG,JPEG格式的图片)';
         }
@@ -50,7 +50,7 @@ class EvidenceCell extends Component {
     
     beforeUploadRecord(file) {
         let text2 = '(开始上传...)';
-        const isAidio = file.type === 'audio/mp3'||'audio/wma'||'audio/acc'||'audio/wav'||'audio/m4a';
+        const isAidio = file.type === 'audio/mp3'|| file.type === 'audio/wma'||file.type === 'audio/acc'||file.type === 'audio/wav'||file.type === 'audio/m4a';
         if (!isAidio) {
             text2 = '(只能上传MP3、WMA、ACC、WAV、M4A格式的录音)';
         }
