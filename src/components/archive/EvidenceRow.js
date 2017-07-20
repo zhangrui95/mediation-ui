@@ -52,19 +52,23 @@ class EvidenceRow extends Component {
     }
 
     render() {
-        const {data,type,idx} = this.props;
-        let previewCell;
+        const {data,type,idx,header} = this.props;
+        if(!header.user){
+            return null;
+        }
         let printImgPre;
         let printImgAction;
         let previewPreWidth = 230;
         let pop = <PopConfirm visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} information={this.state.msg}  onOk={this.confirmOperation.bind(this)}  closeDoneHandler={()=>this.setState({msg:""})}/>;
         if(type===0){
-            // previewPreWidth = 180;
-            // previewCell = <td>
-            //     <img className="min-img" src={'api/evidence/photo.json?id='+data.id}/>
-            // </td>;
             printImgPre = <span> | </span>
             printImgAction = <a onClick={this.printImg.bind(this)}>打印</a>
+        }
+        let deleteImgPre;
+        let deleteImgAction;
+        if(data.creater.id === header.user.response.user.id){
+            deleteImgPre = <span> | </span>
+            deleteImgAction = <a onClick={this.deleteEvidence.bind(this)}>删除</a>
         }
         let num = idx>9?idx:('0'+idx);
         return (<tr className="odd">
@@ -73,7 +77,7 @@ class EvidenceRow extends Component {
             <td>{EvidenceRow.getHumanSize(data.size)}</td>
             <td>{getDateTime(data.createTime)}</td>
             <td>{data.creater.name}</td>
-            <td><a onClick={this.download.bind(this)}>下载</a><span> | </span><a onClick={this.deleteEvidence.bind(this)}>删除</a>{printImgPre}{printImgAction}{pop}</td>
+            <td><a onClick={this.download.bind(this)}>下载</a>{deleteImgPre}{deleteImgAction}{printImgPre}{printImgAction}{pop}</td>
         </tr>)
     }
 }
@@ -87,6 +91,7 @@ EvidenceRow.propTypes = {
 
 function	select(state)	{
     return	{
+        header:state.header,
         evidenceDelete:state.evidenceDelete
     };
 }
