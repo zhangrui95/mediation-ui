@@ -34,7 +34,7 @@ class InvestigationList extends Component {
                         <div className="form-title-margin"><div className="list-top"><div className="list-left"></div><div className="list-right" onClick={this.clickHandler.bind(this)}>新建调查记录</div></div></div>
                         <SurveyList dataId={id}  data={data}/>
                     </div>
-        if(data === null||data === undefined){
+        if(data === null||data === undefined||data.length === 0){
             list = <div className="formBorder gray-border">
                         <img className="list-left empty-img" src={IMG_NO_DATA}/>
                         <div className="empty-btn" onClick={this.clickHandler.bind(this)}>新建调查记录</div>

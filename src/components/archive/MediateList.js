@@ -52,7 +52,7 @@ class MediateList extends Component {
                         </div>
                         <MediateCell dataId={id} data={data} litigants={this.getLitigants(archive)} workers={this.getWorkers(archive)}/>
                     </div>
-        if(data === null||data === undefined){
+        if(data === null||data === undefined||data.length === 0){
             list = <div className="formBorder gray-border">
                         <img className="list-left empty-img" src={IMG_NO_DATA}/>
                         <div className="empty-btn" onClick={this.clickHandler.bind(this)}>新建调解记录</div>
