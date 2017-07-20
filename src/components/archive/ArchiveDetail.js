@@ -272,7 +272,11 @@ class ArchiveDetail extends Component {
             }
             litigantsName = (data.litigants||[]).map((i)=>i.name).join(',');
             creater = data.creater.name;
-            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} /><input type="button" className="change-btn" value="打印" /></div>
+            let editBtn;
+            if(data.finishState !== 0){
+                editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
+            }
+            btns = <div className="formArch btn-box" style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
             styleName = 'news-width';
         }else{
             if(state !== 0){
