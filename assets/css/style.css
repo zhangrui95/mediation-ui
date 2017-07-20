@@ -1580,3 +1580,28 @@ to {
 	cursor: pointer;
 	box-shadow: 0px 2px 5px #93bfec;
 }
+.num-blue{
+	position: absolute;
+	top: 0;
+	left: -20px;
+	color: #3cb5d8;
+	font-size: 60px;
+}
+.num-click-blue{
+	position: absolute;
+	top: 0;
+	left: -20px;
+	color: #6bd0ea;
+	font-size: 60px;
+}
+.num-gray{
+	position: absolute;
+	top: 0;
+	left: -20px;
+	color: #d2d2d2;
+	font-size: 60px;
+}
+.data-name{
+	position: relative;
+	z-index: 999;
+}

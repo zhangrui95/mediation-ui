@@ -397,6 +397,9 @@ textarea.ant-input {
 	cursor: pointer;
 	font-size: 18px;
 	font-weight: 600;
+	position: relative;
+	overflow: hidden;
+	user-select: none;
 }
 .header-top-gary{
 	width: 107px;
@@ -410,6 +413,9 @@ textarea.ant-input {
 	font-size: 18px;
 	font-weight: 600;
 	cursor: default;
+	position: relative;
+	overflow: hidden;
+	user-select: none;
 }
 .archeader-box{
 	width: 856px;
