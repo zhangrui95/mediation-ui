@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import  MediateCell from './MediateCell'
 import {MEDIATE_LIST} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
+import {IMG_NO_DATA} from '../../constants/Constant';
 
 class MediateList extends Component {
     componentWillMount(){
@@ -53,7 +54,7 @@ class MediateList extends Component {
                     </div>
         if(data === null||data === undefined){
             list = <div className="formBorder gray-border">
-                        <img className="list-left empty-img" src="assets/images/nodata.jpg"/>
+                        <img className="list-left empty-img" src={IMG_NO_DATA}/>
                         <div className="empty-btn" onClick={this.clickHandler.bind(this)}>新建调解记录</div>
                     </div>
         }

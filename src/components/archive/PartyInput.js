@@ -12,7 +12,7 @@ class PartyInput extends Component {
         super(props, context);
         const {onRemove ,item} = props;
         this.onRemove = onRemove;
-        this.state = {data:merge({},item||{}),msg:''};
+        this.state = {data:merge({},item||{}),msg:'',information:''};
     }
 
     componentWillReceiveProps(next) {
@@ -31,7 +31,7 @@ class PartyInput extends Component {
     }
 
     handleRemove(){
-        this.setState({msg:'确定删除此当事人？'});
+        this.setState({information:'确定删除此当事人？'});
         return false;
     }
 
@@ -120,7 +120,7 @@ class PartyInput extends Component {
                 <div className={itemStyle}><span className={styleName}>联系方式：</span>{contact}</div>
                 {remove}
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
-                <PopConfirm visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} information={this.state.msg}  onOk={this.confirmOperation.bind(this)}  closeDoneHandler={()=>this.setState({msg:""})}/>
+                <PopConfirm visible={this.state.information!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} information={this.state.information}  onOk={this.confirmOperation.bind(this)}  closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
     }
