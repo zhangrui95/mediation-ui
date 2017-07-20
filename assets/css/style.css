@@ -1605,3 +1605,9 @@ to {
 	position: relative;
 	z-index: 999;
 }
+.color-blue{
+	color:#1348a9;
+}
+.color-red{
+	color:#db3f24;
+}

@@ -10,6 +10,7 @@ class DataCell extends Component {
         const {width,classes,data,dataKey,maxLength} = this.props;
         const value = getPathValSep(data,dataKey);
         let text = '';
+        let colorFont = '';
         if(maxLength!=null && text.length>maxLength){
             text = text.substring(0,maxLength)+'...';
         }
@@ -17,21 +18,25 @@ class DataCell extends Component {
         {
             case -1:
                 text = '调解失败';
+                colorFont = 'color-blue';
                 break;
             case '':
-                text = '未完成';
+                text = '未完成'
+                colorFont = 'color-red';
                 break;
             case 1:
                 text = '调解成功';
+                colorFont = 'color-blue';
                 break;
             case 2:
                 text = '调解中止';
+                colorFont = 'color-blue';
                 break;
             default:
                 text = value;
         }
         return (
-            <td width={width} className={classes} title={text}>
+            <td width={width} className={colorFont} title={text}>
                 {text}
             </td>
         )
