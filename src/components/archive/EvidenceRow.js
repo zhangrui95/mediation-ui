@@ -66,7 +66,7 @@ class EvidenceRow extends Component {
             printImgPre = <span> | </span>
             printImgAction = <a onClick={this.printImg.bind(this)}>打印</a>
         }
-        let num = idx>9?idx:'0'+idx;
+        let num = idx>9?idx:('0'+idx);
         return (<tr className="odd">
             <td width="40">{num}</td>
             <td className="line" width={previewPreWidth}>{data.name}</td>
