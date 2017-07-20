@@ -21,38 +21,45 @@ class EvidenceCell extends Component {
     }
 
     beforeUploadView(file) {
-        const isLt2M = file.size / 1024 / 1024 < 100;
         let text = '(开始上传...)';
+        const isView = file.type === 'video/avi'||'video/mkv'||'video/mp4'||'video/wmv'||'video/flv'||'video/mov'||'video/3gp';
+        if (!isView) {
+            text = '(只能上传AVI、MKV、MP4、WMV、FLV、MOV、3GP格式的视频)';
+        }
+        const isLt2M = file.size / 1024 / 1024 < 100;
         if (!isLt2M) {
             text = '(文件不能大于100M)';
         }
         this.setState({text});
-        return isLt2M;
+        return isView &&isLt2M;
     }
     
     beforeUploadImg(file) {
-        // const isJPG = true;
-        // const isJPG = file.type === 'image/jpeg'||'image/png';
-        // if (!isJPG) {
-        //     text1 = '(只能上传JPG,PNG,JPEG格式的图片)';
-        // }
-        const isLt2M = file.size / 1024 / 1024 < 10;
         let text1 = '(开始上传...)';
+        const isJPG = file.type === 'image/jpeg'||'image/png';
+        if (!isJPG) {
+            text1 = '(只能上传JPG,PNG,JPEG格式的图片)';
+        }
+        const isLt2M = file.size / 1024 / 1024 < 10;
         if (!isLt2M) {
             text1 = '(文件不能大于10M)';
         }
         this.setState({text1});
-        return isLt2M;
+        return isJPG && isLt2M;
     }
     
     beforeUploadRecord(file) {
-        const isLt2M = file.size / 1024 / 1024 < 20;
         let text2 = '(开始上传...)';
+        const isAidio = file.type === 'audio/mp3'||'audio/wma'||'audio/acc'||'audio/wav'||'audio/m4a';
+        if (!isAidio) {
+            text2 = '(只能上传MP3、WMA、ACC、WAV、M4A格式的录音)';
+        }
+        const isLt2M = file.size / 1024 / 1024 < 20;
         if (!isLt2M) {
             text2 = '(文件不能大于20M）';
         }
         this.setState({text2});
-        return isLt2M;
+        return isAidio && isLt2M;
     }
 
     onChangeView(info){
