@@ -413,6 +413,7 @@ textarea.ant-input {
   border: 1px solid #000;
 }
 .border-box{
-  width: 100%;
-  border-bottom: 1px solid #000;
+	width: 100%;
+	border-bottom: 1px solid #000;
+	padding: 10px 0 10px 0;
 }
