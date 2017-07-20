@@ -1565,3 +1565,18 @@ to {
 	bottom:20px;
 	right: 66px;
 }
+.empty-img{
+	width: 40%;
+	margin-left: 110px;
+}
+.empty-btn{
+	float: right;
+	padding: 12px 30px;
+	background: #2780da;
+	margin: 150px 200px 0 0;
+	border-radius: 4px;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+	box-shadow: 0px 2px 5px #93bfec;
+}

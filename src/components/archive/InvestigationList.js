@@ -29,16 +29,20 @@ class InvestigationList extends Component {
         const {id} = params;
         const {response} = investigation;
         const {data} = response||{};
+        let list = <div className="formBorder gray-border">
+                        <div className="form-title-margin"><div className="list-top"><div className="list-left"></div><div className="list-right" onClick={this.clickHandler.bind(this)}>新建调查记录</div></div></div>
+                        <SurveyList dataId={id}  data={data}/>
+                    </div>
         if(data === null||data === undefined){
-            return null;
+            list = <div className="formBorder gray-border">
+                        <img className="list-left empty-img" src="assets/images/nodata.jpg"/>
+                        <div className="empty-btn" onClick={this.clickHandler.bind(this)}>新建调查记录</div>
+                    </div>
         }
         return (
             <div>
                 <div className="title-form-name">人民调解调查记录</div>
-                <div className="formBorder gray-border">
-                    <div className="form-title-margin"><div className="list-top"><div className="list-left"></div><div className="list-right" onClick={this.clickHandler.bind(this)}>新建</div></div></div>
-                    <SurveyList dataId={id}  data={data}/>
-                </div>
+                {list}
             </div>
         )
     }
