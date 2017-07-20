@@ -117,12 +117,12 @@ class EvidenceCell extends Component {
         return (
                 <div className="formBorder gray-border">
                     <div className="form-title-margin">
-                        <div className="list-top"><div className="list-left">视频</div><div className="list-left hint">{this.state.text}</div><div className="list-right"><Upload {...videoProps} accept="video/*" data={{'archive.id':dataId,type:2}} onChange={this.onChangeView.bind(this)} beforeUpload={this.beforeUploadView.bind(this)}>上传视频</Upload></div></div>
+                        <div className="list-top"><div className="list-left">视频</div><div className="list-left hint">{this.state.text}</div><div className="list-right"><Upload {...videoProps} accept="video/avi,video/mkv,video/mp4,video/wmv,video/flv,video/mov,video/3gp" data={{'archive.id':dataId,type:2}} onChange={this.onChangeView.bind(this)} beforeUpload={this.beforeUploadView.bind(this)}>上传视频</Upload></div></div>
                     </div>
                     <EvidenceView data={data} type={2} reload={reload}/>
                     <div className="red-news-bottom">(以上格式为：AVI、MKV、MP4、WMV、FLV、MOV、3GP，单个文件大小不得大于100M，全部大小不得大于300M。)</div>
                     <div className="form-title-margin">
-                        <div className="list-top"><div className="list-left">照片</div><div className="list-left hint">{this.state.text1}</div><div className="list-right"><Upload {...videoProps} accept="image/*" data={{'archive.id':dataId,type:0}} onChange={this.onChangeImg.bind(this)}  beforeUpload={this.beforeUploadImg.bind(this)} >上传照片</Upload></div></div>
+                        <div className="list-top"><div className="list-left">照片</div><div className="list-left hint">{this.state.text1}</div><div className="list-right"><Upload {...videoProps} accept="image/jpg,image/jpeg,image/png" data={{'archive.id':dataId,type:0}} onChange={this.onChangeImg.bind(this)}  beforeUpload={this.beforeUploadImg.bind(this)} >上传照片</Upload></div></div>
                     </div>
                     <EvidenceView data={data} type={0} reload={reload}/>
                     <div className="red-news-bottom">(以上格式为：JPG、PNG、JPEG，单个文件大小不得大于10M，全部大小不得大于100M。)</div>
