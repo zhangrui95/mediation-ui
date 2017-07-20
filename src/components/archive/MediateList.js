@@ -48,7 +48,7 @@ class MediateList extends Component {
         const {data} = response||{};
         let list = <div className="formBorder gray-border">
                         <div className="form-title-margin">
-                            <div className="list-top"><div className="list-right" onClick={this.clickHandler.bind(this)}>新建调解记录</div></div>
+                            <div className="list-top"><div className="list-left">调解记录列表</div><div className="list-right" onClick={this.clickHandler.bind(this)}>新建调解记录</div></div>
                         </div>
                         <MediateCell dataId={id} data={data} litigants={this.getLitigants(archive)} workers={this.getWorkers(archive)}/>
                     </div>

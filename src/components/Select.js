@@ -74,9 +74,9 @@ class Select extends Component {
     }
 
     render(){
-        const {name} = this.props;
+        const {name,className} = this.props;
         return (
-            <select ref="select" name={name} className="text-select" value={this.state.value} onChange={this.handleChange.bind(this)} onBlur={this.onBlurHandler}>
+            <select ref="select" name={name} className={className} value={this.state.value} onChange={this.handleChange.bind(this)} onBlur={this.onBlurHandler}>
                 {this.getHeadOpt()}
                 {this.getOptions()}
             </select>
@@ -95,6 +95,7 @@ Select.propTypes = {
     valueKey: PropTypes.string,
     showHead: PropTypes.bool,
     head: PropTypes.string,
+    className: PropTypes.string,
     onChangeHandler: PropTypes.func,
     onBlurHandler: PropTypes.func
 };
@@ -103,6 +104,7 @@ Select.defaultProps = {
     showHead:true,
     value:'',
     textKey:'name',
+    className:'text-select',
     head:'全部',
     valueKey:'id'
 };

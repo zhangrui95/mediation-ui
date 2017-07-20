@@ -1466,7 +1466,7 @@ to {
 }
 .content-text {
 	width: 80%;
-	margin: 8px 30px;
+	margin: 8px 0 0 110px;
 }
 .logo {
 	margin: 3px 0 3px 20px;
@@ -1610,4 +1610,7 @@ to {
 }
 .color-red{
 	color:#db3f24;
+}
+.color-gray{
+	color:#bbb;
 }

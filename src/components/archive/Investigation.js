@@ -187,7 +187,7 @@ class Investigation extends Component {
             if(data === null || data === undefined){
                 return null;
             }
-            let cont = content.replace(/\n/g, "<br/>").replace(/["“”]/g,"");
+            let cont = content.split('\n').map((i,k)=><p key={k}>{i}</p>);
             times = <div className="margin-word">{getDateTime(investTime)}</div>;
             addresss =  <div className="margin-word">{address}</div>;
             otherPersons =  <div className="margin-word">{otherPerson}</div>;

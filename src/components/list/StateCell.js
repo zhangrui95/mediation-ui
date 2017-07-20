@@ -18,7 +18,7 @@ class DataCell extends Component {
         {
             case -1:
                 text = '调解失败';
-                colorFont = 'color-blue';
+                colorFont = 'color-gray';
                 break;
             case '':
                 text = '未完成'
@@ -30,7 +30,7 @@ class DataCell extends Component {
                 break;
             case 2:
                 text = '调解中止';
-                colorFont = 'color-blue';
+                colorFont = '';
                 break;
             default:
                 text = value;

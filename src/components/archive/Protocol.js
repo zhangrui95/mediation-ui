@@ -134,7 +134,7 @@ class Protocol extends Component {
             if(!data){
                 return null;
             }
-            let contents = data.content.replace(/\n/g, "<br/>").replace(/["“”]/g,"");
+            let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
             remarktext = <div className="margin-word">{data.remark}</div>;
             contenttext = <div className="margin-word">{contents}</div>;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" className="change-btn" value="打印" /></div>

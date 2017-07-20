@@ -31,7 +31,7 @@ class InvestigationList extends Component {
         const {response} = investigation;
         const {data} = response||{};
         let list = <div className="formBorder gray-border">
-                        <div className="form-title-margin"><div className="list-top"><div className="list-left"></div><div className="list-right" onClick={this.clickHandler.bind(this)}>新建调查记录</div></div></div>
+                        <div className="form-title-margin"><div className="list-top"><div className="list-left">调查记录列表</div><div className="list-right" onClick={this.clickHandler.bind(this)}>新建调查记录</div></div></div>
                         <SurveyList dataId={id}  data={data}/>
                     </div>
         if(data === null||data === undefined||data.length === 0){
