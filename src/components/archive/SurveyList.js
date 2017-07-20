@@ -9,9 +9,9 @@ class SurveyList extends Component {
             return <SurveyRow key={i} dataId={dataId} idx={i} item={e}/>;
         });
         return (
-            <table cellPadding="0" cellSpacing="0" className="table-list table-list-evidence">
+            <table cellPadding="0" cellSpacing="0" className="table-list">
                 <thead>
-                <tr>
+                <tr className="table-list-head">
                     <td>序号</td>
                     <td>调查时间</td>
                     <td>调查地点</td>

@@ -35,10 +35,10 @@ class InvestigationList extends Component {
         return (
             <div>
                 <div className="title-form-name">人民调解调查记录</div>
-                <div className="formArch">
-                    <dic className="list-right" onClick={this.clickHandler.bind(this)}>新建</dic>
+                <div className="formBorder gray-border">
+                    <div className="form-title-margin"><div className="list-top"><div className="list-left"></div><div className="list-right" onClick={this.clickHandler.bind(this)}>新建</div></div></div>
+                    <SurveyList dataId={id}  data={data}/>
                 </div>
-                <SurveyList dataId={id}  data={data}/>
             </div>
         )
     }
