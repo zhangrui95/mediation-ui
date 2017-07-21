@@ -135,8 +135,8 @@ class ArchiveHeader extends Component {
         return (
             <div>
                 <div className="name-style">
-                    <div className="name-left">卷宗名称：{name}<span className={colorFont}>({text})</span></div>
-                    <div className="name-right"></div>
+                    <div className="name-left">卷宗名称：{name}<span className={colorFont}>（{text}）</span></div>
+                    <div className="name-right"><a className="go-first" onClick={this.goBack.bind(this)}>返回首页</a></div>
                 </div>
                 <div className="archeader-box" onClick={this.clickHandler.bind(this)} >
                     {list}
