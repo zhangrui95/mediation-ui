@@ -15,7 +15,7 @@ class HeaderTop extends Component {
             style = 'header-top tap-blue';
             numStyle = 'num-click-blue'
         }else{
-            if(add =="add"){
+            if(add ==='add'){
                 style = 'header-top-gary';
                 numStyle = 'num-gray'
             }else{
@@ -24,11 +24,9 @@ class HeaderTop extends Component {
             }
         }
         return (
-            <div
-                className={style}
-                data-index={data.index}>
+            <div className={style} >
                 <div className={numStyle}>0{data.index+1}</div>
-                <div className="data-name" data-route={data.route}>{data.name}</div>
+                <div className="data-name" data-route={data.route} data-index={data.index}>{data.name}</div>
             </div>
         )
     }
