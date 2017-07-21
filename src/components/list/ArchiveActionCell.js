@@ -39,7 +39,7 @@ class ArchiveActionCell extends Component {
         let linkName = '';
         let pop = <PopConfirm visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} information={this.state.msg}  onOk={this.confirmOperation.bind(this)}  closeDoneHandler={()=>this.setState({msg:""})}/>;
         if(value == 0){
-            linkName =<a href='javascript:;' onClick={this.handClick.bind(this)}>中止</a>;
+            linkName =<a href='javascript:;' onClick={this.handClick.bind(this)}>中止卷宗</a>;
         }
         return (
             <td width={width} id={data.id} className={classes}>

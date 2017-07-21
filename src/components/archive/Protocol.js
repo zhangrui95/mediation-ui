@@ -130,8 +130,8 @@ class Protocol extends Component {
         let contenttext = '';
         let btns = '';
         if(model === 0){
-            remarktext = <Input type="textarea"  className="text-margin-left" disabled={this.state.result === '-1'} rows={4}  style={{ width: 550 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" className="text-margin-left" disabled={this.state.result === '-1'} rows={4} style={{ width: 550 }} onChange={this.textChange.bind(this)} value={this.state.content} />
+            remarktext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4}  style={{ width: 550 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
+            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} style={{ width: 550 }} onChange={this.textChange.bind(this)} value={this.state.content} />
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
             resulttext = <Select className="result-select" domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} head="请选择" onChangeHandler={this.handleChange.bind(this)} value={this.state.result} />
         }else if(model === 1){

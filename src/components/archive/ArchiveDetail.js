@@ -331,7 +331,7 @@ class ArchiveDetail extends Component {
                         </div>
                         <div className="border-box">
                             <div className="formArch word-title">纠纷简要情况</div>
-                            <div className="formArch">{content}</div>
+                            <div className="formArch content-indent">{content}</div>
                         </div>
                         <div className="border-box">
                             <div className="formArch word-title">调解员</div>

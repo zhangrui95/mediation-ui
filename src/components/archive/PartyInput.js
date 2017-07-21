@@ -101,7 +101,7 @@ class PartyInput extends Component {
             }
             name = <Input style={{ width: 80 }} className="text-margin" placeholder="" value={item.name} onChange={this.handleChange('name').bind(this)} maxLength={10}/>
             sex = <Select className="select-sex" domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择" value={item.sex+''} onChangeHandler={this.handleChange('sex').bind(this)}/>
-            nation = <Input className="text-input" placeholder="" style={{ width: 70 }} value={item.nation} onChange={this.handleChange('nation').bind(this)} maxLength={20}/>
+            nation = <Input className="text-input" placeholder="" style={{ width: 50 }} value={item.nation} onChange={this.handleChange('nation').bind(this)} maxLength={20}/>
             age = <Input className="text-input" type="number" placeholder="" style={{ width: 45 }} value={item.age} onChange={this.handleChange('age').bind(this)} />
             card = <Input className="text-input" placeholder="" style={{ width: 145 }} value={item.card} onChange={this.handleChange('card').bind(this)} onBlur={this.getCard.bind(this)} maxLength={18}/>
             address = <Input className="text-input" style={{ width: 395 }} placeholder="" value={item.address} onChange={this.handleChange('address').bind(this)} maxLength={200}/>

@@ -188,7 +188,7 @@ class Investigation extends Component {
             targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" value={this.state.targetPerson} onChange={this.targetPersonChange.bind(this)}/>
             creatPerson = <div className="formArch"><div className="margin-form word-title find-style">调查人：</div><input className="btn-pop" type="button" value="选择" onClick={this.upAddClick.bind(this)}/> {workerNames}</div>
             contents =  <Input type="textarea" style={{ width: 600 }} rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
-            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="取消" onClick={this.goBack.bind(this)} className="change-btn"/><input type="button" value="保存" onClick={this.onSave.bind(this)} className="change-btn"/></div>
+            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="change-btn"/><input type="button" value="取消" onClick={this.goBack.bind(this)} className="change-btn"/></div>
         }else if(model === 1){
             if(data === null || data === undefined){
                 return null;
