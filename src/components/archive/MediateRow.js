@@ -26,7 +26,7 @@ class MediateRow extends Component {
         return finishState;
     }
     render() {
-        const {idx,item,litigants,workers} = this.props;
+        const {idx,item,litigants,workers,archive} = this.props;
         let index = idx+1;
         let num = index>9?index:('0'+index);
         let updataBtn = '';

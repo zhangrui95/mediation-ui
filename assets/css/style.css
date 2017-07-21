@@ -1355,12 +1355,14 @@ to {
 }
 .go-first {
 	margin-left: 20px;
-	padding: 7px 10px 7px 37px;
+	padding: 7px 10px 7px 40px;
 	background: #2880d7;
 	color: #fff;
 	font-size: 15px;
 	-webkit-border-top-left-radius:30px;
 	-webkit-border-bottom-left-radius:30px;
+	box-shadow: 0px 2px 5px #93bfec;
+	position: relative;
 }
 .time-right {
 	width: 90%;
@@ -1673,4 +1675,11 @@ to {
 }
 .title-num{
 	margin-left: 90px;
+}
+.go-back-img{
+	margin-top: 10px;
+	position: absolute;
+	top: -7px;
+	left: 10px;
+	width: 26px;
 }
