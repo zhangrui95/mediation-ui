@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import HeaderTop from "./HeaderTop";
+import {GO_BACK_URL} from '../../constants/Constant';
 const msg=[
     {
         'route':'',
@@ -112,6 +113,7 @@ class ArchiveHeader extends Component {
         const {name,state} = data||{};
         let colorFont = '';
         let text = '';
+        let names = name;
         switch(state)
         {
             case -1:
@@ -132,11 +134,14 @@ class ArchiveHeader extends Component {
                 break;
             default:
         }
+        if(name === null||name===''){
+            names = '新建卷宗';
+        }
         return (
             <div>
                 <div className="name-style">
-                    <div className="name-left">卷宗名称：{name}<span className={colorFont}>（{text}）</span></div>
-                    <div className="name-right"><a className="go-first" onClick={this.goBack.bind(this)}>返回首页</a></div>
+                    <div className="name-left">卷宗名称：{names}<span className={colorFont}>（{text}）</span></div>
+                    <div className="name-right"><a className="go-first" onClick={this.goBack.bind(this)}><img className="go-back-img" src={GO_BACK_URL}/> 返回首页</a></div>
                 </div>
                 <div className="archeader-box" onClick={this.clickHandler.bind(this)} >
                     {list}

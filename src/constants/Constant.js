@@ -22,3 +22,4 @@ export const IMG_OUT_URL = IMG_DIR_URL + 'icon-out.png';
 export const IMG_LOGIN_BG_URL = IMG_DIR_URL + 'login-bg.png';
 export const IMG_NO_DATA = IMG_DIR_URL + 'nodata.jpg';
 export const IMG_Loading_URL = IMG_DIR_URL + 'loading.gif';
+export const GO_BACK_URL = IMG_DIR_URL + 'icon-back.png';

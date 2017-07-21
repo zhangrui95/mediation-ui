@@ -376,9 +376,9 @@ a {
 /*a:hover {*/
   /*color: #fff;*/
 /*}*/
-a:active {
-	color: #2baee9;
-}
+/*a:active {*/
+	/*color: #2baee9;*/
+/*}*/
 a:active, a:hover {
 	outline: 0;
 	text-decoration: none;
