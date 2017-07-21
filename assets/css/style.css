@@ -1523,7 +1523,7 @@ to {
 	line-height: 26px;
 }
 .left-news{
-	line-height: 35px;
+	line-height: 36px;
 }
 .center-box{
 	padding-bottom: 60px;
@@ -1681,8 +1681,8 @@ to {
 	margin-top: 10px;
 	position: absolute;
 	top: -7px;
-	left: 10px;
-	width: 26px;
+	left: 14px;
+	width: 24px;
 }
 .content-indent{
 	text-indent: 2em;

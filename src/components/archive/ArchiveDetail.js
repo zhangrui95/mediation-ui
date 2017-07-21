@@ -252,7 +252,8 @@ class ArchiveDetail extends Component {
             }
             name = data.name;
             type = data.type.name;
-            content = <div className="content-indent">{data.content}</div>;
+            let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
+            content = <div className="content-indent">{contents}</div>;
             manager = data.manager.name;
             if(data.workers){
                 workers = data.workers.map((i)=>i.worker.name).join(',');

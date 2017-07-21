@@ -143,7 +143,7 @@ class Investigation extends Component {
             this.setState({msg:'参加人不能为空'});
             return false;
         }
-        if(this.state.otherPerson === ''){
+        if(this.state.targetPerson === ''){
             this.setState({msg:'被调查人不能为空'});
             return false;
         }
