@@ -4,10 +4,22 @@ import { connect } from 'react-redux'
 import  MediateCell from './MediateCell'
 import {MEDIATE_LIST} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
-import {IMG_NO_DATA} from '../../constants/Constant';
+import {IMG_NO_DATA,IMG_Loading_URL} from '../../constants/Constant';
 
 class MediateList extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {load:''};
+    }
+
+    componentWillReceiveProps(next) {
+        if(next){
+            this.setState({load:'false'});
+        }
+    }
+
     componentWillMount(){
+        this.setState({load:'true'});
         this.load();
     }
 
@@ -46,17 +58,26 @@ class MediateList extends Component {
         const {id} = params;
         const {response} = mediate;
         const {data} = response||{};
-        let list = <div className="formBorder gray-border">
-                        <div className="form-title-margin">
-                            <div className="list-top"><div className="list-left">调解记录列表</div><div className="list-right" onClick={this.clickHandler.bind(this)}>新建调解记录</div></div>
-                        </div>
-                        <MediateCell dataId={id} data={data} litigants={this.getLitigants(archive)} workers={this.getWorkers(archive)}/>
-                    </div>
-        if(data === null||data === undefined||data.length === 0){
+        let loading = this.state.load;
+        let list = '';
+        if(loading == 'true'){
             list = <div className="formBorder gray-border">
-                        <img className="list-left empty-img" src={IMG_NO_DATA}/>
-                        <div className="empty-btn" onClick={this.clickHandler.bind(this)}>新建调解记录</div>
+                        <img className="list-left load-img" src={IMG_Loading_URL}/>
                     </div>
+        }else{
+            if(data === null||data === undefined||data.length === 0){
+                list = <div className="formBorder gray-border">
+                            <img className="list-left empty-img" src={IMG_NO_DATA}/>
+                            <div className="empty-btn" onClick={this.clickHandler.bind(this)}>新建调解记录</div>
+                        </div>
+            }else{
+                list = <div className="formBorder gray-border">
+                            <div className="form-title-margin">
+                                <div className="list-top"><div className="list-left">调解记录列表</div><div className="list-right" onClick={this.clickHandler.bind(this)}>新建调解记录</div></div>
+                            </div>
+                            <MediateCell dataId={id} data={data} litigants={this.getLitigants(archive)} workers={this.getWorkers(archive)}/>
+                        </div>
+            }
         }
         return (
             <div>

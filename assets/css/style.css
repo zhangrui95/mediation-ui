@@ -1528,8 +1528,8 @@ to {
 .top-left{
 	width: 20px;
 	height: 20px;
-	border-top:1px solid #999;
-	border-left:1px solid #999;
+	border-bottom:1px solid #999;
+	border-right:1px solid #999;
 	background: #fff;
 	position:absolute;
 	top:10px;
@@ -1538,8 +1538,8 @@ to {
 .top-right{
 	width: 20px;
 	height: 20px;
-	border-top:1px solid #999;
-	border-right:1px solid #999;
+	border-bottom:1px solid #999;
+	border-left:1px solid #999;
 	background: #fff;
 	position:absolute;
 	top:10px;
@@ -1548,8 +1548,8 @@ to {
 .bottom-left{
 	 width: 20px;
 	 height: 20px;
-	 border-bottom:1px solid #999;
-	 border-left:1px solid #999;
+	 border-top:1px solid #999;
+	 border-right:1px solid #999;
 	 background: #fff;
 	 position:absolute;
 	 bottom:20px;
@@ -1558,16 +1558,20 @@ to {
 .bottom-right{
 	width: 20px;
 	height: 20px;
-	border-bottom:1px solid #999;
-	border-right:1px solid #999;
+	border-top:1px solid #999;
+	border-left:1px solid #999;
 	background: #fff;
 	position:absolute;
 	bottom:20px;
 	right: 66px;
 }
 .empty-img{
-	width: 40%;
-	margin-left: 110px;
+	 width: 40%;
+	 margin-left: 110px;
+ }
+.load-img{
+	width: 50%;
+	margin: 0 245px;
 }
 .empty-btn{
 	float: right;
