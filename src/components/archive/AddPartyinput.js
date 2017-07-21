@@ -25,7 +25,7 @@ class AddPartyinput extends Component {
         const datas = this.state.datas.map((e, i) => {
             return this.refs['sub'+i].data();
         });
-        datas.push({});
+        datas.push({idx:datas.length});
         const newData = merge([],datas)
         this.setState({datas:newData});
         if(this.onChange){
@@ -59,7 +59,19 @@ class AddPartyinput extends Component {
         const {model} = this.props;
         const {datas} = this.state;
         let length = datas.length;
-        const tables = datas.map((it,i) =>{
+        const tables = datas.sort((a,b)=>{
+            const timeA = a.createTime ? a.createTime:a.time;
+            const timeB = b.createTime ? b.createTime:b.time;
+            if(timeA && timeB){
+                return timeA-timeB;
+            }else if(timeA){
+                return -1;
+            }else if(timeB){
+                return 1;
+            }else{
+                return a.idx-b.idx;
+            }
+        }).map((it,i) =>{
             if(!it.key){
                 let key = it.id;
                 if(!key){

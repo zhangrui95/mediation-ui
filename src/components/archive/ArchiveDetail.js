@@ -198,14 +198,14 @@ class ArchiveDetail extends Component {
         return workerValue;
     }
 
-    static getLitigant(data){
-        return {id:data.id,name:data.name,card:data.card,sex:data.sex,nation:data.nation,age:data.age,address:data.address,contact:data.contact};
+    static getLitigant(data,idx){
+        return {id:data.id,name:data.name,card:data.card,sex:data.sex,nation:data.nation,age:data.age,address:data.address,contact:data.contact,time:data.createTime,idx};
     }
 
     static getLitigants(data){
-        let litigants = [{},{}];
+        let litigants = [{idx:0},{idx:1}];
         if(data && data.litigants){
-            litigants = (data.litigants||[]).map(i=>ArchiveDetail.getLitigant(i||{}));
+            litigants = (data.litigants||[]).map((i,idx)=>ArchiveDetail.getLitigant(i||{},idx));
         }
         return litigants;
     }
@@ -274,7 +274,7 @@ class ArchiveDetail extends Component {
             creater = data.creater.name;
             let editBtn;
             let btnBox = 'formArch btn-box print-btn';
-            if(data.finishState !== 0){
+            if(data.finishState === 0){
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
