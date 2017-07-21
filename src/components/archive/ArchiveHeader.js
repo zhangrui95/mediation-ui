@@ -99,15 +99,11 @@ class ArchiveHeader extends Component {
         }
         return 0;
     }
-    render() {
-        const list = msg.map((data,i)=>{
-            return <HeaderTop key={i} isActive={i===this.state.index} add={this.state.add} data={data}/>
-        });
-        const {archive} = this.props;
+    static getTitle(archive){
         const {response} = archive;
         const {data} = response||{};
         if(data === null || data === undefined){
-            return null;
+            return {name:'新建卷宗',state:'未保存',colorFont : 'color-red name-left-font'};
         }
         const {name,state} = data||{};
         let colorFont = '';
@@ -132,10 +128,19 @@ class ArchiveHeader extends Component {
                 break;
             default:
         }
+        return {name,state:text,colorFont};
+    }
+
+    render() {
+        const list = msg.map((data,i)=>{
+            return <HeaderTop key={i} isActive={i===this.state.index} add={this.state.add} data={data}/>
+        });
+        const {archive} = this.props;
+        const title = ArchiveHeader.getTitle(archive);
         return (
             <div>
                 <div className="name-style">
-                    <div className="name-left">卷宗名称：{name}<span className={colorFont}>（{text}）</span></div>
+                    <div className="name-left">卷宗名称：{title.name}<span className={title.colorFont}>（{title.state}）</span></div>
                     <div className="name-right"><a className="go-first" onClick={this.goBack.bind(this)}>返回首页</a></div>
                 </div>
                 <div className="archeader-box" onClick={this.clickHandler.bind(this)} >
