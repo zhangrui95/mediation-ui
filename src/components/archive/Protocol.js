@@ -126,10 +126,10 @@ class Protocol extends Component {
         let contenttext = '';
         let btns = '';
         if(model === 0){
-            remarktext = <Input type="textarea"  className="text-margin-left" disabled={this.state.result === '-1'} rows={4}  style={{ width: 700 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" className="text-margin-left" disabled={this.state.result === '-1'} rows={4} style={{ width: 700 }} onChange={this.textChange.bind(this)} value={this.state.content} />
+            remarktext = <Input type="textarea"  className="text-margin-left" disabled={this.state.result === '-1'} rows={4}  style={{ width: 550 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
+            contenttext = <Input type="textarea" className="text-margin-left" disabled={this.state.result === '-1'} rows={4} style={{ width: 550 }} onChange={this.textChange.bind(this)} value={this.state.content} />
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
-            resulttext = <Select domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} head="请选择" onChangeHandler={this.handleChange.bind(this)} value={this.state.result} />
+            resulttext = <Select className="result-select" domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} head="请选择" onChangeHandler={this.handleChange.bind(this)} value={this.state.result} />
         }else if(model === 1){
             if(!data){
                 return null;
@@ -143,10 +143,10 @@ class Protocol extends Component {
             if(!data){
                 return null;
             }
-            remarktext = <Input type="textarea"  disabled={this.state.result === '-1'} rows={4}  style={{ width: 600 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} style={{ width: 600 }} onChange={this.textChange.bind(this)} value={this.state.content}/>
+            remarktext = <Input type="textarea"  disabled={this.state.result === '-1'} rows={4}  style={{ width: 550 }} placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
+            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} style={{ width: 550 }} onChange={this.textChange.bind(this)} value={this.state.content}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
-            resulttext = <Select domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} value={this.state.result} head="请选择" onChangeHandler={this.handleChange.bind(this)}/>
+            resulttext = <Select className="result-select" domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} value={this.state.result} head="请选择" onChangeHandler={this.handleChange.bind(this)}/>
         }
         return (
             <div>
@@ -161,15 +161,14 @@ class Protocol extends Component {
                         <PartyCell litigants={this.getLitigants()}/>
                     </div>
                         <div className="formArch">
-                            <div className="margin-form"><div className="margin-form word-title find-style">调解结果：</div>
-                                {resulttext}
-                            </div>
+                            <div className="margin-form word-title find-style-left">调解结果：</div>
+                            {resulttext}
                         </div>
                         <div className="formArch">
-                                <div className="margin-form word-title find-style">调解协议：</div><span>{contenttext}</span>
+                                <div className="margin-form word-title find-style-left">调解协议：</div><span>{contenttext}</span>
                          </div>
                         <div className="formArch">
-                                <div className="margin-form word-title find-style">履行方式、<br/>时限：</div>{remarktext}
+                                <div className="margin-form word-title find-style-left">履行方式、时限：</div>{remarktext}
                         </div>
                  </div>
                 {btns}

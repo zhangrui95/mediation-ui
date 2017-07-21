@@ -1330,7 +1330,7 @@ to {
 }
 .margin-form-party {
 	float: left;
-	margin: 5px 10px;
+	margin: 5px;
 }
 .upload-list-inline {
 	width: 100%;
@@ -1442,7 +1442,7 @@ to {
 }
 .margin-word {
 	float: left;
-	margin-top: 7px;
+	margin-top: 9px;
 }
 .ant-btn {
 	background: #2780da;
@@ -1613,4 +1613,30 @@ to {
 }
 .color-gray{
 	color:#bbb;
+}
+.select-sex{
+	border: 1px solid #98a2ad;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	height: 28px;
+	line-height: 28px;
+	padding: 0 5px;
+	width: 50px;
+	text-align: left;
+	cursor: pointer;
+	margin-top:3px;
+}
+.result-select{
+	border: 1px solid #98a2ad;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	height: 28px;
+	line-height: 28px;
+	padding: 0 5px;
+	width: 85px;
+	text-align: left;
+	cursor: pointer;
+	margin-top:5px;
 }

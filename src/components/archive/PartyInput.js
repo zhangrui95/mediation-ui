@@ -87,12 +87,12 @@ class PartyInput extends Component {
             if(idx == length-1){
                 style = 'formArch';
             }
-            name = <span className="show-style" style={{ width: 80 }}>{item.name}</span>
-            sex = <span className="show-style" style={{ width: 40 }}>{(item.sex+'') === '1'? '男':'女'}</span>
-            nation = <span className="show-style" style={{ width: 40 }}>{item.nation}</span>
-            age = <span className="show-style" style={{ width: 40 }}>{item.age}</span>
+            name = <span className="show-style" style={{ width: 90 }}>{item.name}</span>
+            sex = <span className="show-style" style={{ width: 65 }}>{(item.sex+'') === '1'? '男':'女'}</span>
+            nation = <span className="show-style" style={{ width: 65 }}>{item.nation}</span>
+            age = <span className="show-style" style={{ width: 65 }}>{item.age}</span>
             card = <span className="show-style">{item.card}</span>
-            address = <span className="address-width" style={{ width: 460 }}>{item.address}</span>
+            address = <span className="address-width" style={{ width: 515 }}>{item.address}</span>
             contact = <span className="show-style">{item.contact}</span>
             styleName = 'news-width';
         } else{
@@ -100,9 +100,9 @@ class PartyInput extends Component {
                 return null;
             }
             name = <Input style={{ width: 80 }} className="text-margin" placeholder="" value={item.name} onChange={this.handleChange('name').bind(this)} maxLength={10}/>
-            sex = <Select domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择" value={item.sex+''} onChangeHandler={this.handleChange('sex').bind(this)}/>
-            nation = <Input className="text-input" placeholder="" style={{ width: 40 }} value={item.nation} onChange={this.handleChange('nation').bind(this)} maxLength={20}/>
-            age = <Input className="text-input" type="number" placeholder="" style={{ width: 40 }} value={item.age} onChange={this.handleChange('age').bind(this)} />
+            sex = <Select className="select-sex" domain="sex" data={[{id:'1',name:'男'},{id:'2',name:'女'}]} head="请选择" value={item.sex+''} onChangeHandler={this.handleChange('sex').bind(this)}/>
+            nation = <Input className="text-input" placeholder="" style={{ width: 70 }} value={item.nation} onChange={this.handleChange('nation').bind(this)} maxLength={20}/>
+            age = <Input className="text-input" type="number" placeholder="" style={{ width: 45 }} value={item.age} onChange={this.handleChange('age').bind(this)} />
             card = <Input className="text-input" placeholder="" style={{ width: 145 }} value={item.card} onChange={this.handleChange('card').bind(this)} onBlur={this.getCard.bind(this)} maxLength={18}/>
             address = <Input className="text-input" style={{ width: 395 }} placeholder="" value={item.address} onChange={this.handleChange('address').bind(this)} maxLength={200}/>
             contact = <Input className="text-input" placeholder="" style={{ width: 145 }} value={item.contact} onChange={this.handleChange('contact').bind(this)} onBlur={this.getContact.bind(this)} maxLength={30}/>
