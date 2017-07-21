@@ -4,9 +4,9 @@ class PartyCell extends Component {
     render() {
         const { litigants } = this.props;
         let length = litigants.length;
-        const arr = (litigants||[]).map(function (i,idx) {
+        const arr = (litigants||[]).sort((a,b)=>a.createTime-b.createTime).map(function (i,idx) {
             let style = '';
-            if(idx == length-1){
+            if(idx === length-1){
                 style = 'formArch'
             }else{
                 style = 'formArch bottom-border'
