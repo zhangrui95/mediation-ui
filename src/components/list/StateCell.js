@@ -20,8 +20,8 @@ class DataCell extends Component {
                 text = '调解失败';
                 colorFont = 'color-gray';
                 break;
-            case '':
-                text = '未完成'
+            case 0:
+                text = '未完成';
                 colorFont = 'color-red';
                 break;
             case 1:

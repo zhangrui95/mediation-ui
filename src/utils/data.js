@@ -1,14 +1,14 @@
 
 export function getPathVal(data, dataKey){
-    var path = dataKey;
-    if(path==null){
+    let path = dataKey;
+    if(path === null || path === undefined){
         return;
     }
     path = path.split('.');
-    var ret = data;
-    for(var i in path){
+    let ret = data;
+    for(let i in path){
         ret = ret[path[i]];
-        if(ret==null){
+        if(ret === null || ret === undefined){
             return;
         }
     }
@@ -16,13 +16,13 @@ export function getPathVal(data, dataKey){
 }
 
 export function getPathValOrDefault(data, dataKey,defaultVal){
-    var ret = getPathVal(data,dataKey);
-    return ret == null ? defaultVal:ret;
+    const ret = getPathVal(data,dataKey);
+    return (ret === null || ret === undefined) ? defaultVal:ret;
 }
 
 export function getPathValNotEmpty(data, dataKey,defaultVal){
-    var ret = getPathVal(data,dataKey);
-    return ret == null || ret == '' ? defaultVal:ret;
+    const ret = getPathVal(data,dataKey);
+    return (ret === null || ret === undefined || ret === '') ? defaultVal:ret;
 }
 
 export function getPathValSep(data, dataKey){

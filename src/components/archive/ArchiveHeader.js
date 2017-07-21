@@ -118,8 +118,8 @@ class ArchiveHeader extends Component {
                 text = '调解失败';
                 colorFont = 'color-gray name-left-font';
                 break;
-            case '':
-                text = '未完成'
+            case 0:
+                text = '未完成';
                 colorFont = 'color-red name-left-font';
                 break;
             case 1:
