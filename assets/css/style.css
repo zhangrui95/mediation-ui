@@ -1640,3 +1640,6 @@ to {
 	cursor: pointer;
 	margin-top:5px;
 }
+.print-btn{
+	width: 150px;
+}
