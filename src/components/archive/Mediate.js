@@ -101,7 +101,7 @@ class Mediate extends Component {
     }
     validate(){
         if(this.state.content === ''){
-            this.setState({msg:'调查记录不能为空'});
+            this.setState({msg:'调解记录不能为空'});
             return false;
         }
         return true;
@@ -170,17 +170,20 @@ class Mediate extends Component {
                 <div className="title-form-name" id={params.mid}>调解详情</div>
                 <div className="formArch"><sapn className="goback" onClick={this.goBack.bind(this)}>返回列表</sapn></div>
                 <div className="formBorder">
+                    <div className="fixed-box"></div>
                     <div className="formArch"><div className="margin-form word-title find-style">调解时间：</div>{time}</div>
                     <div className="formArch"><div className="margin-form word-title find-style">调解地点：</div><div className="margin-word">清滨调解中心</div></div>
                     <div className="formArch"><div className="margin-form word-title find-style">当事人：</div><div className="margin-word">{this.getLitigants(archive)}</div></div>
                     <div className="formArch"><div className="margin-form word-title find-style">调解人：</div><div className="margin-word">{this.getWorkers(archive)}</div></div>
                     <div className="formArch"><div className="margin-form word-title find-style">调解记录：</div>{contents}</div>
                     {sign}
+                    <div className="fixed-box"></div>
                 </div>
-                {btns}
                     <div className="bottom-left"></div>
                     <div className="bottom-right"></div>
                 </div>
+                {btns}
+                <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )

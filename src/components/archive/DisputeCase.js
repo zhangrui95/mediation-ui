@@ -13,7 +13,7 @@ class DisputeCase extends Component {
         const {data} = response||{};
         const {content} = data||{};
         return (
-            <div className="formArch">{content}</div>
+            <div className="formArch content-indent">{content}</div>
         )
     }
 }

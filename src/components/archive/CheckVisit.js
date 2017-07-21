@@ -162,10 +162,11 @@ class CheckVisit extends Component {
                     <div className="formArch"><div className="margin-form word-title">被回访人：</div><div className="margin-word">{litigantsName}</div></div>
                     <div className="formArch"><div className="margin-form word-title">回访情况：</div>{content}</div>
                 </div>
-                {btns}
                     <div className="bottom-left"></div>
                     <div className="bottom-right"></div>
                 </div>
+                {btns}
+                <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )

@@ -1526,7 +1526,7 @@ to {
 	line-height: 35px;
 }
 .center-box{
-	padding-bottom: 40px;
+	padding-bottom: 60px;
 	position: relative;
 	margin: 20px 0;
 }
@@ -1686,4 +1686,12 @@ to {
 }
 .content-indent{
 	text-indent: 2em;
+}
+.fixed-box{
+	height: 30px;
+}
+.margin-left-result{
+	width: 70px;
+	float: left;
+	line-height: 26px;
 }

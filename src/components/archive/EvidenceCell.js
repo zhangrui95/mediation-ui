@@ -13,6 +13,15 @@ const videoProps = {
     withCredentials: true
 };
 
+const suffix = {
+    video:{
+        suf:['avi','mkv','mp4','wmv','flv','mov','3gp']
+    },
+    sound:{
+        suf:['mp3','wma','acc','wav','m4a']
+    }
+}
+
 class EvidenceCell extends Component {
 
     constructor(props, context) {
@@ -22,7 +31,12 @@ class EvidenceCell extends Component {
 
     beforeUploadView(file) {
         let text = '(开始上传...)';
-        const isView = file.type === 'video/avi'||file.type === 'video/mkv'||file.type === 'video/mp4'||file.type === 'video/wmv'||file.type === 'video/flv'||file.type === 'video/mov'||file.type === 'video/3gp';
+        const idx = file.name.lastIndexOf('.')
+        let ext = '';
+        if(idx !== -1){
+            ext = file.name.substring(idx+1)
+        }
+        const isView = suffix.video.suf.indexOf(ext) !== -1;
         if (!isView) {
             text = '(只能上传AVI、MKV、MP4、WMV、FLV、MOV、3GP格式的视频)';
         }
@@ -50,7 +64,7 @@ class EvidenceCell extends Component {
     
     beforeUploadRecord(file) {
         let text2 = '(开始上传...)';
-        const isAidio = file.type === 'audio/mp3'|| file.type === 'audio/wma'||file.type === 'audio/acc'||file.type === 'audio/wav'||file.type === 'audio/m4a';
+        const isAidio = suffix.sound.suf.indexOf(ext) !== -1;
         if (!isAidio) {
             text2 = '(只能上传MP3、WMA、ACC、WAV、M4A格式的录音)';
         }

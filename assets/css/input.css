@@ -425,11 +425,12 @@ textarea.ant-input {
 	border-radius:5px ;
 }
 .formBorder{
-  width: 856px;
-  margin: 10px 7% 30px;
-  height: auto;
-  overflow: hidden;
-  border: 1px solid #000;
+    width: 856px;
+    margin: 10px 7% 30px;
+    height: auto;
+    overflow: hidden;
+    border: 1px solid #000;
+	min-height: 400px;
 }
 .border-box{
 	width: 100%;

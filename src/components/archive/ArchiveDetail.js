@@ -252,7 +252,7 @@ class ArchiveDetail extends Component {
             }
             name = data.name;
             type = data.type.name;
-            content = data.content;
+            content = <div className="content-indent">{data.content}</div>;
             manager = data.manager.name;
             if(data.workers){
                 workers = data.workers.map((i)=>i.worker.name).join(',');
@@ -331,7 +331,7 @@ class ArchiveDetail extends Component {
                         </div>
                         <div className="border-box">
                             <div className="formArch word-title">纠纷简要情况</div>
-                            <div className="formArch content-indent">{content}</div>
+                            <div className="formArch">{content}</div>
                         </div>
                         <div className="border-box">
                             <div className="formArch word-title">调解员</div>
@@ -358,10 +358,11 @@ class ArchiveDetail extends Component {
                         <div className="formArch"><span className="word-title find-style-left">登记人</span><span className="left-news">{creater}</span></div>
                         <div className="formArch"><span className="word-title find-style-left">登记日期</span><span className="left-news">{createTime}</span></div>
                     </div>
-                    {btns}
                     <div className="bottom-left"></div>
                     <div className="bottom-right"></div>
                 </div>
+                {btns}
+                <div className="fixed-box"></div>
                 <PopAlertHtml visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )

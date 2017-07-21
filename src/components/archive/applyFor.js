@@ -119,10 +119,11 @@ class ApplyFor extends Component {
                         <div className="formArch font-weight-word">人民调解委员会已将申请人民调解的相关规定告知我，现自愿申请人民调解委员会进行调解。</div>
                         {time}
                     </div>
-                        {btns}
                     <div className="bottom-left"></div>
                     <div className="bottom-right"></div>
                 </div>
+                {btns}
+                <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
