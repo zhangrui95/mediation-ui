@@ -53,6 +53,12 @@ class MediateList extends Component {
         }
         return ((manager||{}).name||'')+wnames;
     }
+    getFinish(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        const {finishState} = data||{}
+        return finishState;
+    }
     render() {
         const { mediate,params,archive} = this.props;
         const {id} = params;
@@ -60,23 +66,42 @@ class MediateList extends Component {
         const {data} = response||{};
         let loading = this.state.load;
         let list = '';
+        let btns = '';
         if(loading == true){
             list = <div className="formBorder gray-border">
                         <img className="list-left load-img" src={IMG_Loading_URL}/>
                     </div>
         }else{
-            if(data === null||data === undefined||data.length === 0){
-                list = <div className="formBorder gray-border">
-                            <img className="list-left empty-img" src={IMG_NO_DATA}/>
-                            <div className="empty-btn" onClick={this.clickHandler.bind(this)}>新建调解记录</div>
+            const finish = this.getFinish(archive);
+            if(finish !== 0){
+                if(data === null||data === undefined||data.length === 0){
+                    btns = <div className="empty-btn" onClick={this.clickHandler.bind(this)}>新建调解记录</div>;
+                    list = <div className="formBorder gray-border">
+                        <img className="list-left empty-img" src={IMG_NO_DATA}/>
+                        {btns}
+                    </div>
+                }else{
+                    btns = <div className="list-right" onClick={this.clickHandler.bind(this)}>新建调解记录</div>;
+                    list = <div className="formBorder gray-border">
+                        <div className="form-title-margin">
+                            <div className="list-top"><div className="list-left">调解记录列表</div>{btns}</div>
                         </div>
+                        <MediateCell dataId={id} data={data} litigants={this.getLitigants(archive)} workers={this.getWorkers(archive)}/>
+                    </div>
+                }
             }else{
-                list = <div className="formBorder gray-border">
-                            <div className="form-title-margin">
-                                <div className="list-top"><div className="list-left">调解记录列表</div><div className="list-right" onClick={this.clickHandler.bind(this)}>新建调解记录</div></div>
-                            </div>
-                            <MediateCell dataId={id} data={data} litigants={this.getLitigants(archive)} workers={this.getWorkers(archive)}/>
+                if(data === null||data === undefined||data.length === 0){
+                    list = <div className="formBorder gray-border">
+                        <img className="list-left load-img" src={IMG_NO_DATA}/>
+                    </div>
+                }else{
+                    list = <div className="formBorder gray-border">
+                        <div className="form-title-margin">
+                            <div className="list-top"><div className="list-left">调解记录列表</div></div>
                         </div>
+                        <MediateCell dataId={id} data={data} litigants={this.getLitigants(archive)} workers={this.getWorkers(archive)}/>
+                    </div>
+                }
             }
         }
         return (

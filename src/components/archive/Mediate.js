@@ -114,6 +114,12 @@ class Mediate extends Component {
             router.push('/archive/'+id+'/mediate');
         }
     }
+    getFinish(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        const {finishState} = data||{}
+        return finishState;
+    }
     render() {
         const { params,mediateDetail,archive} = this.props;
         const {response} = mediateDetail;
@@ -133,9 +139,16 @@ class Mediate extends Component {
                 return null;
             }
             let cont = content.split('\n').map((i,k)=><p key={k}>{i}</p>);
+            let editBtn;
+            let btnBox = 'formArch btn-box print-btn';
+            const finish = this.getFinish(archive);
+            if(finish !== 0){
+                editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
+                btnBox = 'formArch btn-box';
+            }
+            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
             time = <div className="margin-word">{getDateTime(mediateTime)}</div>;
             contents =  <div className="content-text">{cont}</div>;
-            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="编辑" className="change-btn"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
             // sign = <div>
             //             <div className="formArch">当事人签字：</div>
             //             <div className="formArch">调解人签字：</div>
