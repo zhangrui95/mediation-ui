@@ -18,7 +18,7 @@ class ApplyFor extends Component {
         const {response} = archive;
         const {data} = response||{};
         const {applyTime} = data||{};
-        this.state = {model: 0,applyTime:getDateTime(applyTime),defaultTime:getDateTime(new Date().getTime()),msg:''};
+        this.state = {model: applyTime?1:0,applyTime:getDateTime(applyTime),defaultTime:getDateTime(new Date().getTime()),msg:''};
     }
 
     componentWillReceiveProps(next) {
@@ -82,7 +82,13 @@ class ApplyFor extends Component {
                 <div className="margin-form"><span className="word-title">申请时间：</span></div><TimeChoice name="applyTime" hide={0} onChange={this.onChangeHandler.bind(this)} value={this.state.applyTime}  defaultValue={this.state.defaultTime}/>
             </div>
         }else if(model === 1){
-            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
+            let editBtn;
+            let btnBox = 'formArch btn-box print-btn';
+            if(data.finishState !== 0){
+                editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
+                btnBox = 'formArch btn-box';
+            }
+            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input className="change-btn" type="button" value="打印" /></div>
             time = <div className="formArch" >
                         <div className="apply-name">申请人签字：</div>
                         <div className="time-right">

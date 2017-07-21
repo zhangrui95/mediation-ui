@@ -51,9 +51,15 @@ class EvidenceRow extends Component {
 
     }
 
+    static getArchiveData(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        return data
+    }
+
     render() {
-        const {data,type,idx,header} = this.props;
-        if(!header.user){
+        const {archive,data,type,idx,header} = this.props;
+        if(!header.user || !archive.response){
             return null;
         }
         let printImgPre;
@@ -66,7 +72,7 @@ class EvidenceRow extends Component {
         }
         let deleteImgPre;
         let deleteImgAction;
-        if(data.creater.id === header.user.response.user.id){
+        if(EvidenceRow.getArchiveData(archive).finishState !== 0 && data.creater.id === header.user.response.user.id){
             deleteImgPre = <span> | </span>
             deleteImgAction = <a onClick={this.deleteEvidence.bind(this)}>删除</a>
         }
@@ -92,6 +98,7 @@ EvidenceRow.propTypes = {
 function	select(state)	{
     return	{
         header:state.header,
+        archive:state.archive,
         evidenceDelete:state.evidenceDelete
     };
 }
