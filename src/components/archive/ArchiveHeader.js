@@ -52,12 +52,18 @@ class ArchiveHeader extends Component {
         if(id !==null && id !== undefined && id!== ''){
             add = '';
         }
-        this.state = {index:this.findIndex(props),add:add};
+        this.state = {index:this.findIndex(props),add};
     }
     componentWillReceiveProps(next) {
-        const index = this.findIndex(next)
-        if(this.state.index !== index){
-            this.setState({index});
+        const { params } = next;
+        const {id} = params;
+        let add = 'add';
+        if(id !==null && id !== undefined && id!== ''){
+            add = '';
+        }
+        const index = this.findIndex(next);
+        if(this.state.index !== index || this.state.add !== add ){
+            this.setState({index,add});
         }
     }
     clickHandler(e){
