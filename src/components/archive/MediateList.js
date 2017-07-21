@@ -14,12 +14,12 @@ class MediateList extends Component {
 
     componentWillReceiveProps(next) {
         if(next){
-            this.setState({load:'false'});
+            this.setState({load:false});
         }
     }
 
     componentWillMount(){
-        this.setState({load:'true'});
+        this.setState({load:true});
         this.load();
     }
 
@@ -60,7 +60,7 @@ class MediateList extends Component {
         const {data} = response||{};
         let loading = this.state.load;
         let list = '';
-        if(loading == 'true'){
+        if(loading == true){
             list = <div className="formBorder gray-border">
                         <img className="list-left load-img" src={IMG_Loading_URL}/>
                     </div>

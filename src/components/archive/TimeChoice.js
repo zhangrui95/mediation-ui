@@ -15,20 +15,28 @@ class TimeChoice extends Component{
         return current && current.valueOf() > Date.now();
     }
     render() {
-        const { value, defaultValue,hide} = this.props;
+        const { value, defaultValue,hide,dis} = this.props;
         let time = value;
+        let html;
         if(time === ''){
             time =  defaultValue;
         }
-        let html;
-        if(hide === 0){
-            html = <div><div className="margin-form"><DatePicker disabledDate={this.disabledDate} showTime={true} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD')} format="YYYY-MM-DD" allowClear="false"/></div></div>;
-        }else{
+        if(dis === 0){
             html = <div>
                 <div className="margin-form">
-                    <DatePicker showTime={true} disabledDate={this.disabledDate} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss" allowClear="false"/>
+                    <DatePicker showTime={true} disabledDate={this.disabledDate} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss" allowClear="false" disabled/>
                 </div>
-            </div>;
+            </div>
+        }else{
+            if(hide === 0){
+                html = <div><div className="margin-form"><DatePicker disabledDate={this.disabledDate} showTime={true} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD')} format="YYYY-MM-DD" allowClear="false"/></div></div>;
+            }else{
+                html = <div>
+                    <div className="margin-form">
+                        <DatePicker showTime={true} disabledDate={this.disabledDate} onChange={this.onChange.bind(this)} defaultValue={moment(time,'YYYY-MM-DD HH:mm:ss')} format="YYYY-MM-DD HH:mm:ss" allowClear="false"/>
+                    </div>
+                </div>;
+            }
         }
 
         return (

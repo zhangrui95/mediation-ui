@@ -69,7 +69,7 @@ const archiveData = {id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},st
 fetchMock.post(DEV_REQ_HOST+'api/archive/detail.json',function(){
     return {state:0,
         data:archiveData,
-        protocol:{id:'1',remark:'xxx',result:1,content:'xxx',createTime:1499240237246,creater:{},archive:{}},
+        protocol:{id:'1',remark:'xxx',result:-1,content:'xxx',createTime:1499240237246,creater:{},archive:{}},
         check:{id:'1',visitTime:1499240237246,content:'xxx',createTime:1499240237246,creater:{},archive:{}}
     }
 });
