@@ -101,6 +101,11 @@ class CheckVisit extends Component {
         const {result}= protocol||{};
         return result;
     }
+    getData(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        return data;
+    }
     render() {
         let time = '';
         let content = '';
@@ -126,10 +131,17 @@ class CheckVisit extends Component {
             if(data === null || data === undefined){
                 return null;
             }
+            let editBtn;
+            let btnBox = 'formArch btn-box print-btn';
+            const archiveData = this.getData(archive)
+            if(archiveData.finishState !== 0){
+                editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
+                btnBox = 'formArch btn-box';
+            }
+            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
             let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
             content = <div className="margin-word">{contents}</div>;
             time = <div className="margin-word">{getDateTime(data.visitTime)}</div>;
-            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input className="change-btn" type="button" value="打印" /></div>
         }else{
             if(data === null || data === undefined){
                 return null;

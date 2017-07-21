@@ -115,10 +115,14 @@ class Protocol extends Component {
         }
         return true;
     }
-
+    getData(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        return data;
+    }
     render() {
         const model = this.state.model;
-        const { protocol} = this.props;
+        const { archive ,protocol} = this.props;
         const {response} = protocol;
         const {data} = response||{};
         let resulttext = '';
@@ -134,10 +138,17 @@ class Protocol extends Component {
             if(!data){
                 return null;
             }
+            let editBtn;
+            let btnBox = 'formArch btn-box print-btn';
+            const archiveData = this.getData(archive)
+            if(archiveData.finishState !== 0){
+                editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
+                btnBox = 'formArch btn-box';
+            }
+            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
             let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
             remarktext = <div className="margin-word">{data.remark}</div>;
             contenttext = <div className="margin-word">{contents}</div>;
-            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" className="change-btn" value="编辑"  onClick={this.updateModel.bind(this)}/><input type="button" className="change-btn" value="打印" /></div>
             resulttext = <div className="margin-word">{data.result === 0 ? '调解成功':'调解失败'}</div>;
         }else{
             if(!data){

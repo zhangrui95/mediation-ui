@@ -53,7 +53,7 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
 });
 
 const archiveData = {id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:0,createTime:1499240237246,keepTime:1509240237246,applyTime:1409240238246,canPause:0,content:'xxxxxasdasd',protocolPath:'',
-    finishState:1,
+    finishState:0,
     manager:{id:'2',name:'调解员1'},
     creater:{id:'2',name:'调解员1'},
     litigants:[
