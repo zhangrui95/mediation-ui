@@ -16,18 +16,24 @@ class EvidenceList extends Component {
         actions.request(LIST_BY_ARCHIVE,{id});
     }
 
+    static getArchiveData(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        return data
+    }
+
     render() {
-        const { evidence ,params} = this.props;
+        const { archive,evidence ,params} = this.props;
         const {id} = params;
         const {response} = evidence;
         const {data} = response||{};
-        if(data == null){
+        if(data === null || data === undefined){
             return null;
         }
         return (
             <div>
                 <div className="title-form-name">证据上传</div>
-                <EvidenceCell data={data} dataId={id} reload={this.load.bind(this)}/>
+                <EvidenceCell archive={EvidenceList.getArchiveData(archive)} data={data} dataId={id} reload={this.load.bind(this)}/>
             </div>
         )
     }
@@ -39,6 +45,7 @@ EvidenceList.propTypes = {
 
 function	select(state)	{
     return	{
+        archive:state.archive,
         evidence:state.evidence
     };
 }
