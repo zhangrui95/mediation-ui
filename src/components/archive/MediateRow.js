@@ -32,7 +32,7 @@ class MediateRow extends Component {
         let updataBtn = '';
         let updataImg = '';
         const finish = this.getFinish(archive);
-        if(finish !== 0){
+        if(finish === 0){
             updataBtn = <a onClick={this.clickHandler.bind(this)}>编辑</a>;
             updataImg = <span> | </span>;
         }

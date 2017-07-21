@@ -142,7 +142,7 @@ class Mediate extends Component {
             let editBtn;
             let btnBox = 'formArch btn-box print-btn';
             const finish = this.getFinish(archive);
-            if(finish !== 0){
+            if(finish === 0){
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }

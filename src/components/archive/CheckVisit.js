@@ -134,7 +134,7 @@ class CheckVisit extends Component {
             let editBtn;
             let btnBox = 'formArch btn-box print-btn';
             const archiveData = this.getData(archive)
-            if(archiveData.finishState !== 0){
+            if(archiveData.finishState === 0){
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
