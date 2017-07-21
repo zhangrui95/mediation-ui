@@ -157,6 +157,12 @@ class Investigation extends Component {
         }
         return true;
     }
+    getFinish(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        const {finishState} = data||{}
+        return finishState;
+    }
     render() {
         let times =  '';
         let addresss =  '';
@@ -167,7 +173,7 @@ class Investigation extends Component {
         let sign = '';
         let btns = '';
         const model = this.state.model;
-        const { params,investigationDetail} = this.props;
+        const { params,investigationDetail,archive} = this.props;
         const {id} = params;
         const {response} = investigationDetail;
         const {data} =  response||{};
@@ -188,6 +194,14 @@ class Investigation extends Component {
                 return null;
             }
             let cont = content.split('\n').map((i,k)=><p key={k}>{i}</p>);
+            let editBtn;
+            let btnBox = 'formArch btn-box print-btn';
+            const finish = this.getFinish(archive);
+            if(finish !== 0){
+                editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
+                btnBox = 'formArch btn-box';
+            }
+            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
             times = <div className="margin-word">{getDateTime(investTime)}</div>;
             addresss =  <div className="margin-word">{address}</div>;
             otherPersons =  <div className="margin-word">{otherPerson}</div>;
@@ -198,7 +212,6 @@ class Investigation extends Component {
             //             <div className="formArch">被调查人签字：</div>
             //             <div className="formArch">调查人签字：</div>
             //         </div>
-            btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="编辑" className="change-btn"  onClick={this.updateModel.bind(this)}/><input type="button" className="change-btn" value="打印" /></div>
         }else{
             if(data === null || data === undefined){
                 return null;
@@ -250,6 +263,7 @@ Investigation.contextTypes = {
 
 function	select(state)	{
     return	{
+        archive:state.archive,
         investigationDetail:state.investigationDetail
     };
 }
