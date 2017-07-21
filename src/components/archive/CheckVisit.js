@@ -116,10 +116,12 @@ class CheckVisit extends Component {
                 content = <Input type="textarea" style={{ width: 600 }} rows={4} onChange={this.inputChange.bind(this)} value={this.state.input} disabled/>;
                 time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime} dis={0}/>;
                 btns = ''
+            }else{
+                content = <Input type="textarea" style={{ width: 600 }} rows={4} onChange={this.inputChange.bind(this)} value={this.state.input}/>;
+                time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime}/>;
+                btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
             }
-            content = <Input type="textarea" style={{ width: 600 }} rows={4} onChange={this.inputChange.bind(this)} value={this.state.input}/>;
-            time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime}/>;
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
+
         }else if(model === 1){
             if(data === null || data === undefined){
                 return null;
