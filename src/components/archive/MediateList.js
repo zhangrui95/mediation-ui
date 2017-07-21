@@ -73,7 +73,7 @@ class MediateList extends Component {
                     </div>
         }else{
             const finish = this.getFinish(archive);
-            if(finish !== 0){
+            if(finish === 0){
                 if(data === null||data === undefined||data.length === 0){
                     btns = <div className="empty-btn" onClick={this.clickHandler.bind(this)}>新建调解记录</div>;
                     list = <div className="formBorder gray-border">

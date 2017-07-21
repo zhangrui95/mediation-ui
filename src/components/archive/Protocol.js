@@ -141,7 +141,7 @@ class Protocol extends Component {
             let editBtn;
             let btnBox = 'formArch btn-box print-btn';
             const archiveData = this.getData(archive)
-            if(archiveData.finishState !== 0){
+            if(archiveData.finishState === 0){
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
@@ -165,7 +165,7 @@ class Protocol extends Component {
                     <div className="top-left"></div>
                     <div className="top-right"></div>
                 <div className="title-form-name">人民调解协议书</div>
-                <div className="formArch word-title">文号：<span>{this.getCode()}</span></div>
+                <div className="formArch word-title title-num">文号：<span>{this.getCode()}</span></div>
                 <div className="formBorder">
                     <div className="border-box">
                         <div className="formArch word-title">当事人</div>

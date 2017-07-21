@@ -72,7 +72,7 @@ class EvidenceRow extends Component {
         }
         let deleteImgPre;
         let deleteImgAction;
-        if(EvidenceRow.getArchiveData(archive).finishState !== 0 && data.creater.id === header.user.response.user.id){
+        if(EvidenceRow.getArchiveData(archive).finishState === 0 && data.creater.id === header.user.response.user.id){
             deleteImgPre = <span> | </span>
             deleteImgAction = <a onClick={this.deleteEvidence.bind(this)}>删除</a>
         }

@@ -274,7 +274,7 @@ class ArchiveDetail extends Component {
             creater = data.creater.name;
             let editBtn;
             let btnBox = 'formArch btn-box print-btn';
-            if(data.finishState !== 0){
+            if(data.finishState === 0){
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }

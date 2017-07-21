@@ -80,7 +80,7 @@ class ArchiveHeader extends Component {
         router.push('/list/archive');
     }
     findIndex(props){
-        const { params,location } = props;
+        const { params,location} = props;
         const {id,mid} = params;
         const { basename,pathname } = location;
         if(id !==null && id !== undefined && id!== ''){
@@ -97,9 +97,41 @@ class ArchiveHeader extends Component {
         const list = msg.map((data,i)=>{
             return <HeaderTop key={i} isActive={i===this.state.index} add={this.state.add} data={data}/>
         });
+        const {archive} = this.props;
+        const {response} = archive;
+        const {data} = response||{};
+        if(data === null || data === undefined){
+            return null;
+        }
+        const {name,state} = data||{};
+        let colorFont = '';
+        let text = '';
+        switch(state)
+        {
+            case -1:
+                text = '调解失败';
+                colorFont = 'color-gray name-left-font';
+                break;
+            case '':
+                text = '未完成'
+                colorFont = 'color-red name-left-font';
+                break;
+            case 1:
+                text = '调解成功';
+                colorFont = 'color-blue name-left-font';
+                break;
+            case 2:
+                text = '调解中止';
+                colorFont = 'color-grays name-left-font';
+                break;
+            default:
+        }
         return (
             <div>
-                <a className="go-first" onClick={this.goBack.bind(this)}>&lt;&lt;返回首页</a>
+                <div className="name-style">
+                    <div className="name-left">卷宗名称：{name}<span className={colorFont}>({text})</span></div>
+                    <div className="name-right"></div>
+                </div>
                 <div className="archeader-box" onClick={this.clickHandler.bind(this)} >
                     {list}
                 </div>
@@ -107,7 +139,7 @@ class ArchiveHeader extends Component {
         )
     }
 }
-
+// <a className="go-first" onClick={this.goBack.bind(this)}>&lt;&lt;返回首页</a>
 ArchiveHeader.propTypes = {
     children: PropTypes.node
 };

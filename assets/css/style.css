@@ -1618,6 +1618,9 @@ to {
 .color-gray{
 	color:#bbb;
 }
+.color-grays{
+	color:#666;
+}
 .select-sex{
 	border: 1px solid #98a2ad;
 	-moz-border-radius: 5px;
@@ -1646,4 +1649,26 @@ to {
 }
 .print-btn{
 	width: 150px;
+}
+.name-style{
+	width:85%;
+	height:80px;
+	line-height: 80px;
+	margin: 0 auto;
+}
+.name-left{
+	width: 60%;
+	float: left;
+	font-size: 16px;
+	font-weight: 900;
+}
+.name-left-font{
+	font-size: 14px;
+}
+.name-right{
+	width: 40%;
+	float: right;
+}
+.title-num{
+	margin-left: 90px;
 }

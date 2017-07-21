@@ -84,7 +84,7 @@ class ApplyFor extends Component {
         }else if(model === 1){
             let editBtn;
             let btnBox = 'formArch btn-box print-btn';
-            if(data.finishState !== 0){
+            if(data.finishState === 0){
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
