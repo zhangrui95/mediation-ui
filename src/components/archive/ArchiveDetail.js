@@ -13,7 +13,7 @@ import PopMediator from './PopMediator'
 import AddPartyinput from './AddPartyinput'
 import merge from 'lodash/merge'
 import PopAlertHtml from '../pop/PopAlertHtml';
-
+import PopLoading from '../pop/PopLoading';
 class ArchiveDetail extends Component {
     constructor(props, context) {
         super(props, context);
@@ -21,7 +21,7 @@ class ArchiveDetail extends Component {
         const {id} = params;
         const {response} = archive;
         const {data} = response || {};
-        this.state = {addBox:false,model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},ArchiveDetail.data2state(data||{})),msg:'',workersName:ArchiveDetail.getWorkersName(data)};
+        this.state = {addBox:false,model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},ArchiveDetail.data2state(data||{})),msg:'',workersName:ArchiveDetail.getWorkersName(data),load:''};
     }
 
     componentWillReceiveProps(next) {
@@ -223,7 +223,7 @@ class ArchiveDetail extends Component {
     renderByData(data,readData) {
         const { archive,header } = this.props;
         const {model} = this.state;
-        const {response} = archive;
+        const {response,action} = archive;
         const {state,protocol,check} = response||{};
         let name;
         let type;
@@ -242,6 +242,12 @@ class ArchiveDetail extends Component {
         let manager = '';
         let btns;
         let styleName = '';
+        let loading = this.state.load;
+        if(action === null||action === ''||action === undefined){
+            loading = ''
+        }else{
+            loading = '保存中……'
+        }
         if(model === 0){
             if(!header.user){
                 return null;
@@ -375,6 +381,8 @@ class ArchiveDetail extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlertHtml visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                <PopLoading visible={loading!==''} title=""  width={400} zIndex={1270} modalzIndex={1260} />
+
             </div>
         )
     }

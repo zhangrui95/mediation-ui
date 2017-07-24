@@ -1584,6 +1584,9 @@ to {
 	width: 40%;
 	margin: 0 250px;
 }
+.pop-img{
+	width: 40%;
+}
 .empty-btn{
 	float: right;
 	padding: 12px 30px;
@@ -1704,4 +1707,7 @@ to {
 }
 .margin-top-name{
 	margin-top: 3px;
+}
+.error-title-null{
+	display: none;
 }

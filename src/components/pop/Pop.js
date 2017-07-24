@@ -115,10 +115,14 @@ class Pop extends Component {
         const modalDiv = modal ? <div className="pop-gray-bg" style={{zIndex:modalzIndex}}></div>:null;
         const {top,left} = this.state.location;
         const display = this.state.visible?'block':'none';
+        let titleStyle = 'error-top';
+        if(title==''){
+            titleStyle = 'error-title-null';
+        }
         return (
         <div style={{display}}>
             <div ref="panel" className="pop-error" style={{width,top,left,zIndex}} onClick={this.handlerClose.bind(this)}>
-                <div className="error-top" style={{width}}>
+                <div className={titleStyle} style={{width}}>
                     <div className="error-title">{title}</div>
                     <div className="cls"></div>
                 </div>
