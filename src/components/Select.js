@@ -74,9 +74,9 @@ class Select extends Component {
     }
 
     render(){
-        const {name,className} = this.props;
+        const {name,className,disabled} = this.props;
         return (
-            <select ref="select" name={name} className={className} value={this.state.value} onChange={this.handleChange.bind(this)} onBlur={this.onBlurHandler}>
+            <select ref="select" name={name} className={className} value={this.state.value} onChange={this.handleChange.bind(this)} disabled={disabled} onBlur={this.onBlurHandler}>
                 {this.getHeadOpt()}
                 {this.getOptions()}
             </select>
@@ -97,7 +97,8 @@ Select.propTypes = {
     head: PropTypes.string,
     className: PropTypes.string,
     onChangeHandler: PropTypes.func,
-    onBlurHandler: PropTypes.func
+    onBlurHandler: PropTypes.func,
+    disabled:PropTypes.string
 };
 
 Select.defaultProps = {
