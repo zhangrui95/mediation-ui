@@ -50,9 +50,6 @@ class Investigation extends Component {
     upAddClick(){
         this.setState({addBox:true});
     }
-    saveButtonClick(){
-        return true;
-    }
     handleWorkersChange(e,value,name){
         this.setState({workerIds:value.join(','),workersName:name.join(',')});
     }
@@ -238,7 +235,7 @@ class Investigation extends Component {
                     <div className="formArch"><div className="margin-form word-title name-style-left">参加人员</div>{otherPersons}</div>
                     <div className="formArch"><div className="margin-form word-title name-style-left">被调查人</div>{targetPersons}</div>
                     {creatPerson}
-                    <Pop title="选择调查人" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
+                    <Pop title="选择调查人" visible={this.state.addBox} closeDoneHandler={()=>this.setState({addBox:false})}>
                         <PopMediator domain="workers" url={'api/archiveWorker/workers.json?aid='+id} name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
                     </Pop>
                     <div className="formArch"><div className="margin-form word-title name-style-left">调查记录</div>{contents}</div>

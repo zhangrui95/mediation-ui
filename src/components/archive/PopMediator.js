@@ -45,24 +45,24 @@ class PopMediator extends Component {
     }
 
     handleChange(e){
+        const value =  this.state.value;
         if(e.target.checked){
-            const value =  this.state.value;
             if(value.indexOf(e.target.value) === -1 || value.length === 0){
                 value.push(e.target.value);
                 this.setState({value:Object.assign([],value)});
-                if(this.onChangeHandler){
-                    this.onChangeHandler(e, value,this.name(value));
-                }
             }
         }else{
-            const value =  this.state.value;
             if(value.indexOf(e.target.value) !== -1){
                 const value2 = value.filter((i)=>i !== e.target.value);
                 this.setState({value: Object.assign([],value2)});
-                if(this.onChangeHandler){
-                    this.onChangeHandler(e, value2,this.name(value2));
-                }
             }
+        }
+    }
+
+    onOk(e){
+        if(this.onChangeHandler){
+            const value =  this.state.value;
+            this.onChangeHandler(e, value,this.name(value));
         }
     }
 
@@ -85,14 +85,14 @@ class PopMediator extends Component {
             <div >
                 {this.getOptions()}
                 <div className="pop-submit">
-                    <input type="button" name="button" data-close="save" value="保存"  className="btn-pop"/>
+                    <input type="button" name="button" data-close="save" value="保存"  className="btn-pop" onClick={this.onOk.bind(this)}/>
+                    <input type="button" name="button" value="取消"  className="btn-reset" data-close="pop_cross"/>
                 </div>
                 <div className="error-height"></div>
             </div>
         )
     }
 }
-//<input type="button" name="button" value="取消"  className="btn-reset" data-close="pop_cross"/>
 
 PopMediator.propTypes = {
     filter: PropTypes.string,

@@ -68,10 +68,6 @@ class ArchiveDetail extends Component {
         this.setState({addBox:true});
     }
 
-    saveButtonClick(){
-        return true;
-    }
-
     getData(){
         this.state.data.litigants = [];
         return merge({},this.state.data,{litigants:this.refs.litigants.datas()})
@@ -366,7 +362,7 @@ class ArchiveDetail extends Component {
                             </div>
                             <div className="formArch">
                                 <div className="margin-form">第二调解员：{workers} {workersName}
-                                    <Pop title="添加调解员" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
+                                    <Pop title="添加调解员" visible={this.state.addBox} closeDoneHandler={()=>this.setState({addBox:false})}>
                                         <PopMediator domain="manager.id" url="api/user/listByRole.json?role=2" name="workers" filter={(data.manager||{}).id} onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
                                     </Pop>
                                 </div>
