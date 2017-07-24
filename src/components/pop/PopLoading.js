@@ -16,7 +16,7 @@ class PopLoading extends Component {
             <div className="error-height"></div>
             <div className="news-warn">
                 <img className="pop-img" src={IMG_Loading_URL}/>
-                <div className="news-warn">保存中……</div>
+                <div className="news-warn">{this.props.load}</div>
             </div>
             <div className="error-height"></div>
         </Pop>);
@@ -24,8 +24,7 @@ class PopLoading extends Component {
 }
 
 Pop.propTypes = {
-    load: PropTypes.string,
-    loading:PropTypes.string
+    load: PropTypes.string
 };
 
 export default PopLoading;

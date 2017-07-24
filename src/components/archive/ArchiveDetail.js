@@ -234,9 +234,9 @@ class ArchiveDetail extends Component {
         let styleName = '';
         let loading = this.state.load;
         if(action === null||action === ''||action === undefined){
-            loading = ''
+            loading = '';
         }else{
-            loading = '保存中……'
+            loading = '保存中……';
         }
         if(model === 0){
             if(!header.user){
@@ -371,7 +371,7 @@ class ArchiveDetail extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlertHtml visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
-                <PopLoading visible={loading!==''} title=""  width={400} zIndex={1270} modalzIndex={1260} />
+                <PopLoading visible={loading!==''} title=""  width={400} zIndex={1270} modalzIndex={1260} load={loading}/>
 
             </div>
         )
