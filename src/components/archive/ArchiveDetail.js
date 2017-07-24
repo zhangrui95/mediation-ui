@@ -144,9 +144,9 @@ class ArchiveDetail extends Component {
             errs.push('身份证号码不能正确');
         };
         let contact = item.contact;
-        let phone = /^1[34578]\d{9}$/;
+        let phone =  /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
         if(phone.test(contact)==false){
-            errs.push('手机号码不能正确');
+            errs.push('联系方式不能正确');
         };
         if(!item.name || item.name === ''){
             errs.push('姓名不能为空');

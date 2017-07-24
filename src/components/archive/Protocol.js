@@ -68,7 +68,7 @@ class Protocol extends Component {
     }
     handleChange(e){
         const result = e.target.value;
-        this.setState({result,content:result === '-1'?'未达成调解。':'',remark:''});
+        this.setState({result,content:result === '-1'?'未达成协议。':'',remark:''});
     }
     textChange(e){
         this.setState({content:e.target.value});
