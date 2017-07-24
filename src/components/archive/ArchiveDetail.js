@@ -17,42 +17,50 @@ import PopLoading from '../pop/PopLoading';
 class ArchiveDetail extends Component {
     constructor(props, context) {
         super(props, context);
-        const { params,archive} = props;
+        const { params,archive,header} = props;
         const {id} = params;
         const {response} = archive;
         const {data} = response || {};
-        this.state = {addBox:false,model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},ArchiveDetail.data2state(data||{})),msg:'',workersName:ArchiveDetail.getWorkersName(data),load:''};
+        this.state = {addBox:false,model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},ArchiveDetail.data2state(data||{},header)),msg:'',workersName:ArchiveDetail.getWorkersName(data),load:''};
     }
 
     componentWillReceiveProps(next) {
         const {actions} = this.props;
-        const {archive} = next;
+        const {archive,header} = next;
         const {response,action,actionResponse} = archive;
         if(action === 'add' && response) {
             const {state, data} = response || {};
             if (state === 0) {
                 const	{router}	=	this.context;
                 router.replace('/archive/'+data.id);
-                this.setState({model:1,data:merge({},ArchiveDetail.data2state(data)),workersName:ArchiveDetail.getWorkersName(data)});
+                this.setState({model:1,data:merge({},ArchiveDetail.data2state(data,header)),workersName:ArchiveDetail.getWorkersName(data)});
             }
             actions.resetAction();
         }else if(action === 'update' && actionResponse){
             const {state,data} = actionResponse || {};
             if (state === 0) {
-                this.setState({model:1,data:merge({},ArchiveDetail.data2state(data)),workersName:ArchiveDetail.getWorkersName(data)});
+                this.setState({model:1,data:merge({},ArchiveDetail.data2state(data,header)),workersName:ArchiveDetail.getWorkersName(data)});
             }
             actions.resetAction(data);
         }else if(response){
             if(!this.state.data.id){
                 const {data} = response || {};
-                this.setState({data:merge({},ArchiveDetail.data2state(data||{})),workersName:ArchiveDetail.getWorkersName(data)});
+                this.setState({data:merge({},ArchiveDetail.data2state(data||{},header)),workersName:ArchiveDetail.getWorkersName(data)});
             }
         }
     }
 
-    static data2state(data){
+    static getUser(header){
+        return header.user ? header.user.response.user.id : null;
+    }
+
+    static data2state(data, header){
+        let mid = (data.manager || {}).id;
+        if(!mid){
+            mid = ArchiveDetail.getUser(header)
+        }
         return {id:data.id,name:data.name,type:{id:(data.type||{}).id},state:data.state,
-            manager:{id:(data.manager||{}).id},content:data.content,
+            manager:{id:mid},content:data.content,
             workerIds:ArchiveDetail.getWorkersValue(data),litigants:ArchiveDetail.getLitigants(data),litigantsDel:''};
     }
 
