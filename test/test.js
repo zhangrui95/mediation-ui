@@ -53,7 +53,7 @@ fetchMock.post(DEV_REQ_HOST+'api/archive/list.json',function(){
 });
 
 const archiveData = {id:'1',name:'卷宗1',type:{id:'13',name:'其他纠纷'},state:1,createTime:1499240237246,keepTime:1509240237246,applyTime:1409240238246,canPause:0,content:'xxxxxasdasd',protocolPath:'',
-    finishState:1,
+    finishState:0,
     manager:{id:'2',name:'调解员1'},
     creater:{id:'2',name:'调解员1'},
     litigants:[
@@ -121,7 +121,7 @@ fetchMock.mock(DEV_REQ_HOST+'api/mediate/save.json',{state:0,data:{id:'1',mediat
 fetchMock.mock(DEV_REQ_HOST+'api/mediate/update.json',{state:0,data:{id:'1',mediateTime:1499240237246,address:'xxx1',content:'xxx1',createTime:1499240237246,creater:{},archive:{},workers:[]}});
 
 
-fetchMock.mock(DEV_REQ_HOST+'api/protocol/detailByArchive.json',{state:0,data:{id:'1',remark:'xxx',result:0,content:'xxx',createTime:1499240237246,creater:{},archive:{}}});
+fetchMock.mock(DEV_REQ_HOST+'api/protocol/detailByArchive.json',{state:-1,data:null});
 fetchMock.mock(DEV_REQ_HOST+'api/protocol/save.json',{state:0,data:{id:'1',remark:'xxx',result:0,content:'xxx',createTime:1499240237246,creater:{},archive:{}}});
 fetchMock.mock(DEV_REQ_HOST+'api/protocol/update.json',{state:0,data:{id:'1',remark:'xxx',result:0,content:'xxx',createTime:1499240237246,creater:{},archive:{}}});
 
