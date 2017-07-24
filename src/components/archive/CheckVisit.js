@@ -117,16 +117,22 @@ class CheckVisit extends Component {
         const litigantsName = this.getLitigants(archive);
         const result = this.getResult(archive);
         if(model === 0){
-            if(result == -1){
+            const archiveData = this.getData(archive);
+            if(archiveData.finishState === 0){
+                if(result == -1){
+                    content = <Input type="textarea" style={{ width: 600 }} rows={4} onChange={this.inputChange.bind(this)} value={this.state.input} disabled/>;
+                    time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime} dis={0}/>;
+                    btns = ''
+                }else{
+                    content = <Input type="textarea" style={{ width: 600 }} rows={4} onChange={this.inputChange.bind(this)} value={this.state.input}/>;
+                    time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime}/>;
+                    btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
+                }
+            }else{
                 content = <Input type="textarea" style={{ width: 600 }} rows={4} onChange={this.inputChange.bind(this)} value={this.state.input} disabled/>;
                 time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime} dis={0}/>;
                 btns = ''
-            }else{
-                content = <Input type="textarea" style={{ width: 600 }} rows={4} onChange={this.inputChange.bind(this)} value={this.state.input}/>;
-                time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime}/>;
-                btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
             }
-
         }else if(model === 1){
             if(data === null || data === undefined){
                 return null;
@@ -159,9 +165,9 @@ class CheckVisit extends Component {
                 <div className="title-form-name">人民调解回访记录</div>
                 <div className="formBorder">
                     <div className="fixed-box"></div>
-                    <div className="formArch"><div className="margin-form word-title name-style-left">回访时间</div>{time}</div>
-                    <div className="formArch"><div className="margin-form word-title name-style-left">被回访人</div><div className="margin-word">{litigantsName}</div></div>
-                    <div className="formArch"><div className="margin-form word-title name-style-left">回访情况</div>{content}</div>
+                    <div className="formArch"><div className="margin-form word-title find-style-left">回访时间</div>{time}</div>
+                    <div className="formArch"><div className="margin-form word-title find-style-left">被回访人</div><div className="margin-word">{litigantsName}</div></div>
+                    <div className="formArch"><div className="margin-form word-title find-style-left">回访情况</div>{content}</div>
                 </div>
                     <div className="bottom-left"></div>
                     <div className="bottom-right"></div>

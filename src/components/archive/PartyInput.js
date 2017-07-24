@@ -116,7 +116,7 @@ class PartyInput extends Component {
                 <div className={itemStyle}><span className={styleName} style={{width:40}}>民族：</span>{nation}</div>
                 <div className={itemStyle}><span className={styleName} style={{width:40}}>年龄：</span>{age}</div>
                 <div className={itemStyle}><span className={styleName}>身份证号：</span>{card}</div>
-                <div className={itemStyle}><span className={styleName}>单位/住址：</span>{address}</div>
+                <div className={itemStyle}><span className={styleName}>单位或住址：</span>{address}</div>
                 <div className={itemStyle}><span className={styleName}>联系方式：</span>{contact}</div>
                 {remove}
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>

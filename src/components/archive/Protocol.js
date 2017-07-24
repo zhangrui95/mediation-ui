@@ -130,9 +130,12 @@ class Protocol extends Component {
         let contenttext = '';
         let btns = '';
         if(model === 0){
-            remarktext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4}  placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4} onChange={this.textChange.bind(this)} value={this.state.content} />
-            btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
+            const archiveData = this.getData(archive);
+            if(archiveData.finishState === 0){
+                btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
+            }
+            remarktext = <Input type="textarea" disabled={this.state.result === '-1'||this.state.result === ''} rows={4}  placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
+            contenttext = <Input type="textarea" disabled={this.state.result === '-1'||this.state.result === ''} rows={4} onChange={this.textChange.bind(this)} value={this.state.content} />
             resulttext = <Select className="result-select" domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} head="请选择" onChangeHandler={this.handleChange.bind(this)} value={this.state.result} />
         }else if(model === 1){
             if(!data){
@@ -154,8 +157,8 @@ class Protocol extends Component {
             if(!data){
                 return null;
             }
-            remarktext = <Input type="textarea"  disabled={this.state.result === '-1'} rows={4}  placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" disabled={this.state.result === '-1'} rows={4}  onChange={this.textChange.bind(this)} value={this.state.content}/>
+            remarktext = <Input type="textarea"  disabled={this.state.result === '-1'||this.state.result === ''} rows={4}  placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
+            contenttext = <Input type="textarea" disabled={this.state.result === '-1'||this.state.result === ''} rows={4}  onChange={this.textChange.bind(this)} value={this.state.content}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
             resulttext = <Select className="result-select" domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} value={this.state.result} head="请选择" onChangeHandler={this.handleChange.bind(this)}/>
         }
