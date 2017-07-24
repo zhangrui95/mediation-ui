@@ -51,9 +51,9 @@ class PartyInput extends Component {
     }
     getContact(e){
         let contact = e.target.value;
-        let phone = /^1[34578]\d{9}$/;
+        let phone =  /^((0\d{2,3}-\d{7,8})|(1[3584]\d{9}))$/;
         if(phone.test(contact)==false){
-            this.setState({msg:'请输入正确的手机号码！'});
+            this.setState({msg:'请输入正确的联系方式！(如：18345888888或0451-86071888)'});
             return false;
         };
     }

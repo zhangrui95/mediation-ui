@@ -11,7 +11,7 @@ const props = {
     action: 'api/archive/uploadProtocol.json',
     listType: 'picture',
     defaultFileList: [...fileList],
-    className: 'upload-list-inline',
+    className: 'upload-end',
     withCredentials: true,
     showUploadList: false
 };

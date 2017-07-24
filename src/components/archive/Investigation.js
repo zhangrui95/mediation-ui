@@ -184,7 +184,7 @@ class Investigation extends Component {
             otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" value={this.state.otherPerson} onChange={this.otherPersonChange.bind(this)}/>
             targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" value={this.state.targetPerson} onChange={this.targetPersonChange.bind(this)}/>
             creatPerson = <div className="formArch"><div className="margin-form word-title name-style-left">调查人员</div><input className="btn-pop" type="button" value="选择" onClick={this.upAddClick.bind(this)}/> {workerNames}</div>
-            contents =  <Input type="textarea" style={{ width: 600 }} rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
+            contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="change-btn"/><input type="button" value="取消" onClick={this.goBack.bind(this)} className="change-btn"/></div>
         }else if(model === 1){
             if(data === null || data === undefined){
@@ -219,7 +219,7 @@ class Investigation extends Component {
             targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.targetPerson} placeholder="" onChange={this.targetPersonChange.bind(this)}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
             creatPerson = <div className="formArch"><div className="margin-form word-title name-style-left">调查人员</div><input type="button" className="btn-pop" value="选择" onClick={this.upAddClick.bind(this)}/> {workerNames} </div>
-            contents =  <Input type="textarea" style={{ width: 600 }} rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
+            contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
         }
         return (
             <div>
@@ -228,17 +228,19 @@ class Investigation extends Component {
                     <div className="top-right"></div>
                 <div className="title-form-name" id={params.mid}>调查详情</div>
                 <div className="formArch"><sapn className="goback" onClick={this.goBack.bind(this)}>返回列表</sapn></div>
-                <div className="formBorder">
-                    <div className="fixed-box"></div>
-                    <div className="formArch"><div className="margin-form word-title name-style-left">调查时间</div>{times}</div>
-                    <div className="formArch"><div className="margin-form word-title name-style-left">调查地点</div>{addresss}</div>
-                    <div className="formArch"><div className="margin-form word-title name-style-left">参加人员</div>{otherPersons}</div>
-                    <div className="formArch"><div className="margin-form word-title name-style-left">被调查人</div>{targetPersons}</div>
-                    {creatPerson}
-                    <Pop title="选择调查人" visible={this.state.addBox} closeDoneHandler={()=>this.setState({addBox:false})}>
-                        <PopMediator domain="workers" url={'api/archiveWorker/workers.json?aid='+id} name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
-                    </Pop>
-                    <div className="formArch"><div className="margin-form word-title name-style-left">调查记录</div>{contents}</div>
+                    <div className="formBorder">
+                        <div className="border-box">
+                            <div className="formArch"><div className="margin-form word-title name-style-left">调查时间</div>{times}</div>
+                            <div className="formArch"><div className="margin-form word-title name-style-left">调查地点</div>{addresss}</div>
+                            <div className="formArch"><div className="margin-form word-title name-style-left">参加人员</div>{otherPersons}</div>
+                            <div className="formArch"><div className="margin-form word-title name-style-left">被调查人</div>{targetPersons}</div>
+                            {creatPerson}
+                            <Pop title="选择调查人" visible={this.state.addBox} closeDoneHandler={()=>this.setState({addBox:false})}>
+                                <PopMediator domain="workers" url={'api/archiveWorker/workers.json?aid='+id} name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
+                            </Pop>
+                        </div>
+                    <div className="formArch"><div className="margin-form word-title name-style-left">调查记录</div></div>
+                    <div className="formArch">{contents}</div>
                     {sign}
                     <div className="fixed-box"></div>
                 </div>
