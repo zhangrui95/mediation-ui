@@ -145,8 +145,8 @@ class EvidenceCell extends Component {
         let audioUpload;
         if(archive && archive.finishState === 0){
             videoUpload = <div className="list-right"><Upload {...videoProps} data={{'archive.id':dataId,type:2}} onChange={this.onChangeView.bind(this)} beforeUpload={this.beforeUploadView.bind(this)}>上传视频</Upload></div>
-            imgUpload = <div className="list-right"><Upload {...videoProps} accept="image/jpg,image/jpeg,image/png" data={{'archive.id':dataId,type:0}} onChange={this.onChangeImg.bind(this)}  beforeUpload={this.beforeUploadImg.bind(this)} >上传照片</Upload></div>
-            audioUpload = <div className="list-right"><Upload {...videoProps} accept="audio/*" data={{'archive.id':dataId,type:1}} onChange={this.onChangeRecord.bind(this)}  beforeUpload={this.beforeUploadRecord.bind(this)} >上传录音</Upload></div>;
+            imgUpload = <div className="list-right"><Upload {...videoProps} data={{'archive.id':dataId,type:0}} onChange={this.onChangeImg.bind(this)}  beforeUpload={this.beforeUploadImg.bind(this)} >上传照片</Upload></div>
+            audioUpload = <div className="list-right"><Upload {...videoProps} data={{'archive.id':dataId,type:1}} onChange={this.onChangeRecord.bind(this)}  beforeUpload={this.beforeUploadRecord.bind(this)} >上传录音</Upload></div>;
         }
         return (
                 <div className="formBorder gray-border">
