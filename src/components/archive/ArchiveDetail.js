@@ -105,6 +105,16 @@ class ArchiveDetail extends Component {
         }
     }
 
+    handleManageChange(e){
+        const id = e.target.value;
+        const {options,selectedIndex} = e.target;
+        const name = options[selectedIndex].text;
+        const workersName = (this.state.workersName||'').split(',').filter(i=>i!==name).join(',');
+        const workerIds = (this.state.data.workerIds||'').split(',').filter(i=>i!==id).join(',');
+        const newData = {manager:{id},workerIds};
+        this.setState({data: merge({},this.state.data,newData),workersName});
+    }
+
     handleWorkersChange(e,value, name){
         this.setState({data: merge({},this.state.data,{workerIds:value.join(',')}),workersName:name.join(',')});
     }
@@ -239,7 +249,7 @@ class ArchiveDetail extends Component {
             name = <Input name="name" className="text-input" style={{ width: 453 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
             type = <Select name="type" domain="type.id" url="api/archiveType/options.json" head="请选择" value={(data.type||{}).id} onChangeHandler={this.handleChange('type.id').bind(this)} />
             content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
-            manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleChange('manager.id').bind(this)}/>
+            manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleManageChange.bind(this)}/>
             workersName = this.state.workersName;
             workers = <input className="btn-pop" onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
             litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants}  onChange={this.handleLitigantChange.bind(this)}/>
@@ -288,7 +298,7 @@ class ArchiveDetail extends Component {
             name = <Input name="name" className="text-input" style={{ width: 453 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
             type = <Select domain="type.id" url="api/archiveType/options.json" head="请选择" value={(data.type||{}).id} onChangeHandler={this.handleChange('type.id').bind(this)} />
             content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
-            manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleChange('manager.id').bind(this)}/>
+            manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleManageChange.bind(this)}/>
             workersName = this.state.workersName;
             workers = <input className="btn-pop" onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
             litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants} onChange={this.handleLitigantChange.bind(this)}/>
@@ -342,7 +352,7 @@ class ArchiveDetail extends Component {
                             <div className="formArch">
                                 <div className="margin-form">第二调解员：{workers} {workersName}
                                     <Pop title="添加调解员" visible={this.state.addBox} closeHandlers={{save:this.saveButtonClick.bind(this)}} closeDoneHandler={()=>this.setState({addBox:false})}>
-                                        <PopMediator domain="manager.id" url="api/user/listByRole.json?role=2" name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
+                                        <PopMediator domain="manager.id" url="api/user/listByRole.json?role=2" name="workers" filter={(data.manager||{}).id} onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
                                     </Pop>
                                 </div>
                             </div>

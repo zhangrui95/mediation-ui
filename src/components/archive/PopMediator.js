@@ -67,11 +67,11 @@ class PopMediator extends Component {
     }
 
     getOptions(){
-        const {id,selectItemData,textKey,valueKey,domain,data,name} = this.props;
+        const {id,selectItemData,textKey,valueKey,domain,data,name,filter} = this.props;
         const domainData =(selectItemData||{})[domain]||data;
         let options;
         if(domainData!==null && domainData !== undefined){
-            options = domainData.map((value,index)=>{
+            options = domainData.filter(v=>v[valueKey] !== filter).map((value,index)=>{
                 return <div key={id+'_select_cell_'+index} className="formArch"><Checkbox
                     onChange={this.handleChange.bind(this)} name={name+'['+index+'].id'}
                     checked={this.state.value.indexOf(value[valueKey]) !== -1}
@@ -95,6 +95,7 @@ class PopMediator extends Component {
 //<input type="button" name="button" value="取消"  className="btn-reset" data-close="pop_cross"/>
 
 PopMediator.propTypes = {
+    filter: PropTypes.string,
     value: PropTypes.array,
     url: PropTypes.string,
     domain: PropTypes.string,
