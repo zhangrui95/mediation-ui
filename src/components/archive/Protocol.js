@@ -149,7 +149,7 @@ class Protocol extends Component {
             let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
             remarktext = <div className="content-indent">{data.remark}</div>;
             contenttext = <div className="content-indent">{contents}</div>;
-            resulttext = <div className="margin-word">{data.result === 0 ? '调解成功':'调解失败'}</div>;
+            resulttext = <div className="content-indent">{data.result === 0 ? '调解成功':'调解失败'}</div>;
         }else{
             if(!data){
                 return null;
@@ -167,6 +167,7 @@ class Protocol extends Component {
                 <div className="title-form-name">人民调解协议书</div>
                 <div className="formArch word-title title-num">文号：<span>{this.getCode()}</span></div>
                 <div className="formBorder">
+                    <div className="fixed-box"></div>
                     <div className="border-box">
                         <div className="formArch word-title">当事人</div>
                         <PartyCell litigants={this.getLitigants()}/>
@@ -174,6 +175,8 @@ class Protocol extends Component {
                     <div className="border-box">
                         <div className="formArch">
                             <div className="margin-form word-title margin-left-result">调解结果</div>
+                        </div>
+                        <div className="formArch">
                             {resulttext}
                         </div>
                     </div>
@@ -191,6 +194,7 @@ class Protocol extends Component {
                     <div className="formArch">
                     {remarktext}
                     </div>
+                    <div className="fixed-box"></div>
                  </div>
                     <div className="bottom-left"></div>
                     <div className="bottom-right"></div>

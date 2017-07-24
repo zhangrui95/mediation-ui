@@ -108,6 +108,7 @@ class ApplyFor extends Component {
                     <div className="top-right"></div>
                 <div className="title-form-name">人民调解申请书</div>
                 <div className="formBorder">
+                    <div className="fixed-box"></div>
                         <div className="border-box">
                             <div className="formArch word-title">当事人</div>
                             <PartyCell litigants={this.getLitigants()}/>
@@ -118,6 +119,7 @@ class ApplyFor extends Component {
                         </div>
                         <div className="formArch font-weight-word">人民调解委员会已将申请人民调解的相关规定告知我，现自愿申请人民调解委员会进行调解。</div>
                         {time}
+                    <div className="fixed-box"></div>
                     </div>
                     <div className="bottom-left"></div>
                     <div className="bottom-right"></div>

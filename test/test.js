@@ -94,7 +94,7 @@ fetchMock.mock('^'+DEV_REQ_HOST+'api/archiveWorker/workers.json',function(){
     ]
 });
 
-const investData = {id:'1',investTime:1499240237246,address:'xxx',otherPerson:'xxx',targetPerson:'xxx',content:'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx芜湖扩所多军付军付多或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或\nyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',createTime:1499240237246,
+const investData = {id:'1',investTime:1499240237246,address:'xxx',otherPerson:'xxx',targetPerson:'xxx',content:'芜湖扩所多军付军付多或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或\n芜湖扩所多军付军付多或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或或军付多芜湖扩所多军付军付多或或或或或或或或或或或或或或或或或或或或或或或或或或或或',createTime:1499240237246,
     workers:[
         {id:'3',worker:{id:'2',name:'调解员1'},createTime:1499240237246,investigation:{}},
         {id:'4',worker:{id:'3',name:'调解员2'},createTime:1499240237246,investigation:{}},

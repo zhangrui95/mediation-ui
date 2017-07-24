@@ -140,7 +140,7 @@ class CheckVisit extends Component {
             }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
             let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
-            content = <div className="margin-word">{contents}</div>;
+            content = <div className="margin-word content-indent">{contents}</div>;
             time = <div className="margin-word">{getDateTime(data.visitTime)}</div>;
         }else{
             if(data === null || data === undefined){
@@ -158,9 +158,10 @@ class CheckVisit extends Component {
                     <div className="top-right"></div>
                 <div className="title-form-name">人民调解回访记录</div>
                 <div className="formBorder">
-                    <div className="formArch"><div className="margin-form word-title">回访时间：</div>{time}</div>
-                    <div className="formArch"><div className="margin-form word-title">被回访人：</div><div className="margin-word">{litigantsName}</div></div>
-                    <div className="formArch"><div className="margin-form word-title">回访情况：</div>{content}</div>
+                    <div className="fixed-box"></div>
+                    <div className="formArch"><div className="margin-form word-title name-style-left">回访时间</div>{time}</div>
+                    <div className="formArch"><div className="margin-form word-title name-style-left">被回访人</div><div className="margin-word">{litigantsName}</div></div>
+                    <div className="formArch"><div className="margin-form word-title name-style-left">回访情况</div>{content}</div>
                 </div>
                     <div className="bottom-left"></div>
                     <div className="bottom-right"></div>

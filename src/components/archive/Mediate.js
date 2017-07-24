@@ -148,7 +148,7 @@ class Mediate extends Component {
             }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
             time = <div className="margin-word">{getDateTime(mediateTime)}</div>;
-            contents =  <div className="content-text">{cont}</div>;
+            contents =  <div className="content-text content-indent">{cont}</div>;
             // sign = <div>
             //             <div className="formArch">当事人签字：</div>
             //             <div className="formArch">调解人签字：</div>
@@ -171,11 +171,11 @@ class Mediate extends Component {
                 <div className="formArch"><sapn className="goback" onClick={this.goBack.bind(this)}>返回列表</sapn></div>
                 <div className="formBorder">
                     <div className="fixed-box"></div>
-                    <div className="formArch"><div className="margin-form word-title find-style">调解时间：</div>{time}</div>
-                    <div className="formArch"><div className="margin-form word-title find-style">调解地点：</div><div className="margin-word">清滨调解中心</div></div>
-                    <div className="formArch"><div className="margin-form word-title find-style">当事人：</div><div className="margin-word">{this.getLitigants(archive)}</div></div>
-                    <div className="formArch"><div className="margin-form word-title find-style">调解人：</div><div className="margin-word">{this.getWorkers(archive)}</div></div>
-                    <div className="formArch"><div className="margin-form word-title find-style">调解记录：</div>{contents}</div>
+                    <div className="formArch"><div className="margin-form word-title name-style-left">调解时间</div>{time}</div>
+                    <div className="formArch"><div className="margin-form word-title name-style-left">调解地点</div><div className="margin-word">清滨调解中心</div></div>
+                    <div className="formArch"><div className="margin-form word-title name-style-left">当事人员</div><div className="margin-word">{this.getLitigants(archive)}</div></div>
+                    <div className="formArch"><div className="margin-form word-title name-style-left">调解人员</div><div className="margin-word">{this.getWorkers(archive)}</div></div>
+                    <div className="formArch"><div className="margin-form word-title name-style-left">调解记录</div>{contents}</div>
                     {sign}
                     <div className="fixed-box"></div>
                 </div>

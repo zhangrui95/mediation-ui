@@ -1471,7 +1471,8 @@ to {
 }
 .content-text {
 	width: 80%;
-	margin: 8px 0 0 110px;
+	float: left;
+	margin-top: 10px;
 }
 .logo {
 	margin: 3px 0 3px 20px;
@@ -1507,6 +1508,11 @@ to {
 }
 .find-style-left{
 	width: 130px;
+	float: left;
+	line-height: 30px;
+}
+.name-style-left{
+	width: 100px;
 	float: left;
 	line-height: 30px;
 }
@@ -1664,11 +1670,12 @@ to {
 .name-left{
 	width: 85%;
 	float: left;
-	font-size: 16px;
+	font-size: 18px;
 	font-weight: 900;
+	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
 }
 .name-left-font{
-	font-size: 14px;
+	font-size: 16px;
 }
 .name-right{
 	width: 15%;
@@ -1694,4 +1701,7 @@ to {
 	width: 70px;
 	float: left;
 	line-height: 26px;
+}
+.margin-top-name{
+	margin-top: 3px;
 }

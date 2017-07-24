@@ -51,6 +51,7 @@ class ArchiveFinish extends Component {
             <div>
                 <div className="title-form-name">结案</div>
                 <div className="formBorder">
+                    <div className="fixed-box"></div>
                     <div className="formArch word-title">协议书扫描件</div>
                     <div className="formArch"><UpLoading className="btn-pop" dataId={id}/></div>
                 </div>
