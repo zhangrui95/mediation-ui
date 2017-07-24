@@ -90,6 +90,7 @@ class ArchiveDetail extends Component {
     updateModel(){
         this.refs.litigants.updateDatas(this.state.data.litigants);
         this.setState({model:2});
+        this.node.scrollIntoView();
     }
 
     handleChange(name){
@@ -145,7 +146,7 @@ class ArchiveDetail extends Component {
             errs.push('年龄不能为空或小于1');
         }
         if(!item.address || item.address === ''){
-            errs.push('单位/住址不能为空');
+            errs.push('单位或住址不能为空');
         }
         if(!item.contact || item.contact === ''){
             errs.push('联系方式不能为空');
@@ -320,7 +321,7 @@ class ArchiveDetail extends Component {
             workerValue = data.workerIds.split(',');
         }
         return (
-            <div>
+            <div ref={node => this.node = node}>
                 <div className="center-box">
                     <div className="top-left"></div>
                     <div className="top-right"></div>

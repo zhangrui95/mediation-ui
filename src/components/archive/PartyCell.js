@@ -17,7 +17,7 @@ class PartyCell extends Component {
                 <div className="margin-form-party"><span className="news-width" style={{width:40}}>民族：</span><span  className="show-style" style={{ width: 65 }}>{i.nation}</span></div>
                 <div className="margin-form-party"><span className="news-width" style={{width:40}}>年龄：</span><span  className="show-style" style={{ width: 65 }}>{i.age}</span></div>
                 <div className="margin-form-party"><span className="news-width">身份证号：</span><span  className="show-style">{i.card}</span></div>
-                <div className="margin-form-party"><span className="news-width">单位/住址：</span><span className="address-width" style={{ width: 515 }}>{i.address}</span></div>
+                <div className="margin-form-party"><span className="news-width">单位或住址：</span><span className="address-width" style={{ width: 515 }}>{i.address}</span></div>
                 <div className="margin-form-party"><span className="news-width">联系方式：</span><span  className="show-style">{i.contact}</span></div>
             </div>);
         });
