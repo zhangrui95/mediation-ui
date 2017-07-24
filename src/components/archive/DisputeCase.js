@@ -12,8 +12,9 @@ class DisputeCase extends Component {
         const {response} = archive;
         const {data} = response||{};
         const {content} = data||{};
+        let cont = content.split('\n').map((i,k)=><p key={k}>{i}</p>);
         return (
-            <div className="formArch content-indent">{content}</div>
+            <div className="formArch content-indent">{cont}</div>
         )
     }
 }

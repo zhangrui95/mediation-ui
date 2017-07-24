@@ -104,32 +104,33 @@ class ArchiveHeader extends Component {
         const {response} = archive;
         const {data} = response||{};
         if(data === null || data === undefined){
-            return {name:'新建卷宗',state:'未保存',colorFont : 'color-red name-left-font'};
+            return {name:'创建新案件',state:'',colorFont : 'color-red name-left-font',headline:''};
         }
         const {name,state} = data||{};
         let colorFont = '';
         let text = '';
+        let headline = '卷宗名称：';
         switch(state)
         {
             case -1:
-                text = '调解失败';
+                text = '(调解失败)';
                 colorFont = 'color-gray name-left-font';
                 break;
             case 0:
-                text = '未完成';
+                text = '(未完成)';
                 colorFont = 'color-red name-left-font';
                 break;
             case 1:
-                text = '调解成功';
+                text = '(调解成功)';
                 colorFont = 'color-blue name-left-font';
                 break;
             case 2:
-                text = '调解中止';
+                text = '(调解中止)';
                 colorFont = 'color-grays name-left-font';
                 break;
             default:
         }
-        return {name,state:text,colorFont};
+        return {name,state:text,colorFont,headline};
     }
 
     render() {
@@ -141,7 +142,7 @@ class ArchiveHeader extends Component {
         return (
             <div>
                 <div className="name-style">
-                    <div className="name-left">卷宗名称：{title.name}<span className={title.colorFont}>（{title.state}）</span></div>
+                    <div className="name-left">{title.headline}{title.name}<span className={title.colorFont}>{title.state}</span></div>
                     <div className="name-right"><a className="go-first" onClick={this.goBack.bind(this)}><img className="go-back-img" src={GO_BACK_URL}/> 返回首页</a></div>
                 </div>
                 <div className="archeader-box" onClick={this.clickHandler.bind(this)} >

@@ -1590,7 +1590,7 @@ to {
 	margin: 0 250px;
 }
 .pop-img{
-	width: 40%;
+	width: 50%;
 }
 .empty-btn{
 	float: right;
@@ -1680,6 +1680,8 @@ to {
 	float: left;
 	font-size: 18px;
 	font-weight: 900;
+	line-height: 30px;
+	margin: 26px 0 10px 0;
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
 }
 .name-left-font{
