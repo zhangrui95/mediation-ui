@@ -343,12 +343,12 @@ class ArchiveDetail extends Component {
                     <div className="formBorder">
                         <div className="border-box">
                             <div className="formArch">
-                                <div className="margin-form"><span className='word-title name-style-left null-margin'>卷宗名称</span>{name}</div>
+                                <div><span className='word-title name-style-left null-margin'>卷宗名称</span>{name}</div>
                             </div>
                         </div>
                         <div className="border-box">
                             <div className="formArch">
-                                <div className="margin-form"><span className='word-title name-style-left null-margin'>卷宗类别</span>{type}</div>
+                                <div><span className='word-title name-style-left null-margin'>卷宗类别</span>{type}</div>
                             </div>
                         </div>
                         <div className="border-box">
