@@ -1,4 +1,4 @@
-.no-print{
+.no-print,.print-hide{
     display: none;
 }
 
@@ -37,10 +37,14 @@
     display: none;
 }
 
-.bottom-position,.print-header-box,.print-bottom-box{
+.bottom-position,.print-header-box,.print-bottom-box,.print-show{
     display: block;
 }
+
 .min-height{
     min-height: 1450px;
 }
 
+.address-width{
+    width: 319px;
+}
