@@ -37,7 +37,7 @@ class ApplyFor extends Component {
         }else if(response){
             const {data} = response||{};
             const {applyTime} = data||{};
-            this.setState({applyTime:getDateTime(applyTime)});
+            this.setState({model:applyTime?1:0,applyTime:getDateTime(applyTime)});
         }
     }
 
@@ -86,7 +86,7 @@ class ApplyFor extends Component {
         }else if(model === 1){
             let editBtn;
             let btnBox = 'formArch btn-box print-btn';
-            if(data.finishState === 0){
+            if(data && data.finishState === 0){
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }

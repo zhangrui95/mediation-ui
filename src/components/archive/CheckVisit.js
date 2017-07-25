@@ -118,8 +118,8 @@ class CheckVisit extends Component {
         const result = this.getResult(archive);
         if(model === 0){
             const archiveData = this.getData(archive);
-            if(archiveData.finishState === 0){
-                if(result == -1){
+            if(archiveData && archiveData.finishState === 0){
+                if(result === -1){
                     content = <Input type="textarea" rows={4} onChange={this.inputChange.bind(this)} value={this.state.input} disabled/>;
                     time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime} dis={0}/>;
                     btns = ''
@@ -140,7 +140,7 @@ class CheckVisit extends Component {
             let editBtn;
             let btnBox = 'formArch btn-box print-btn';
             const archiveData = this.getData(archive)
-            if(archiveData.finishState === 0){
+            if(archiveData && archiveData.finishState === 0){
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }

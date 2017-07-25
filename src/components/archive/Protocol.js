@@ -132,7 +132,7 @@ class Protocol extends Component {
         let disabled = '';
         if(model === 0){
             const archiveData = this.getData(archive);
-            if(archiveData.finishState === 0){
+            if(archiveData && archiveData.finishState === 0){
                 btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
             }else{
                 disabled = 'disabled';
@@ -147,7 +147,7 @@ class Protocol extends Component {
             let editBtn;
             let btnBox = 'formArch btn-box print-btn';
             const archiveData = this.getData(archive)
-            if(archiveData.finishState === 0){
+            if(archiveData && archiveData.finishState === 0){
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
