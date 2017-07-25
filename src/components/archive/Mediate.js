@@ -147,7 +147,7 @@ class Mediate extends Component {
                 btnBox = 'formArch btn-box';
             }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
-            time = <div className="margin-word">{getDateTime(mediateTime)}</div>;
+            time = <div className="margin-word font-big">{getDateTime(mediateTime)}</div>;
             contents =  <div className="content-text content-indent">{cont}</div>;
             // sign = <div>
             //             <div className="formArch">当事人签字：</div>
@@ -172,9 +172,9 @@ class Mediate extends Component {
                 <div className="formBorder">
                     <div className="border-box">
                         <div className="formArch"><div className="margin-form word-title name-style-left">调解时间</div>{time}</div>
-                        <div className="formArch"><div className="margin-form word-title name-style-left">调解地点</div><div className="margin-word">清滨调解中心</div></div>
-                        <div className="formArch"><div className="margin-form word-title name-style-left">当事人员</div><div className="margin-word">{this.getLitigants(archive)}</div></div>
-                        <div className="formArch"><div className="margin-form word-title name-style-left">调解人员</div><div className="margin-word">{this.getWorkers(archive)}</div></div>
+                        <div className="formArch"><div className="margin-form word-title name-style-left">调解地点</div><div className="margin-word font-big">清滨调解中心</div></div>
+                        <div className="formArch"><div className="margin-form word-title name-style-left">当事人员</div><div className="margin-word font-big">{this.getLitigants(archive)}</div></div>
+                        <div className="formArch"><div className="margin-form word-title name-style-left">调解人员</div><div className="margin-word font-big">{this.getWorkers(archive)}</div></div>
                     </div>
                     <div className="formArch"><div className="margin-form word-title name-style-left">调解记录</div></div>
                     <div className="formArch">{contents}</div>

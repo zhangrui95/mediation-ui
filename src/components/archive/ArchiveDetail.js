@@ -266,13 +266,13 @@ class ArchiveDetail extends Component {
             litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants}  onChange={this.handleLitigantChange.bind(this)}/>
             creater = header.user.response.user.name;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.addNewArchive.bind(this)} className="addPerson"/></div>
-            styleName = 'news-width-margin';
+            styleName = '';
         }else if(model === 1){
             if(state !== 0){
                 return null;
             }
-            name = data.name;
-            type = data.type.name;
+            name = <div className="font-margin font-big">{data.name}</div>;
+            type = <div className="font-margin font-big">{data.type.name}</div>;
             let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
             content = <div className="content-indent">{contents}</div>;
             manager = data.manager.name;
@@ -301,7 +301,7 @@ class ArchiveDetail extends Component {
                 btnBox = 'formArch btn-box';
             }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
-            styleName = 'news-width';
+            styleName = '';
         }else{
             if(state !== 0){
                 return null;
@@ -328,7 +328,7 @@ class ArchiveDetail extends Component {
             litigantsName = (data.litigants||[]).map((i)=>i.name).join(',');
             creater = readData.creater.name;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
-            styleName = 'news-width-margin';
+            styleName = '';
         }
         let workerValue = [];
         if(data.workerIds){
@@ -343,8 +343,12 @@ class ArchiveDetail extends Component {
                     <div className="formBorder">
                         <div className="border-box">
                             <div className="formArch">
-                                <div className="margin-form"><span className={styleName}>卷宗名称：</span>{name}</div>
-                                <div className="margin-form-right">卷宗类别：{type}</div>
+                                <div className="margin-form"><span className='word-title name-style-left null-margin'>卷宗名称</span>{name}</div>
+                            </div>
+                        </div>
+                        <div className="border-box">
+                            <div className="formArch">
+                                <div className="margin-form"><span className='word-title name-style-left null-margin'>卷宗类别</span>{type}</div>
                             </div>
                         </div>
                         <div className="border-box">
@@ -358,10 +362,10 @@ class ArchiveDetail extends Component {
                         <div className="border-box">
                             <div className="formArch word-title">调解员</div>
                             <div className="formArch">
-                                <div className="margin-form">第一调解员：{manager}</div>
+                                <div className="margin-form font-big">第一调解员：{manager}</div>
                             </div>
                             <div className="formArch">
-                                <div className="margin-form">第二调解员：{workers} {workersName}
+                                <div className="margin-form font-big">第二调解员：{workers} {workersName}
                                     <Pop title="添加调解员" visible={this.state.addBox} closeDoneHandler={()=>this.setState({addBox:false})}>
                                         <PopMediator domain="manager.id" url="api/user/listByRole.json?role=2" name="workers" filter={(data.manager||{}).id} onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
                                     </Pop>

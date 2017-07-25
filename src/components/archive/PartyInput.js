@@ -87,14 +87,14 @@ class PartyInput extends Component {
             if(idx == length-1){
                 style = 'formArch';
             }
-            name = <span className="show-style" style={{ width: 90 }}>{item.name}</span>
-            sex = <span className="show-style" style={{ width: 65 }}>{(item.sex+'') === '1'? '男':'女'}</span>
-            nation = <span className="show-style" style={{ width: 65 }}>{item.nation}</span>
-            age = <span className="show-style" style={{ width: 65 }}>{item.age}</span>
-            card = <span className="show-style">{item.card}</span>
-            address = <span className="address-width" style={{ width: 515 }}>{item.address}</span>
-            contact = <span className="show-style">{item.contact}</span>
-            styleName = 'news-width';
+            name = <span className="show-style font-big" style={{ width: 90 }}>{item.name}</span>
+            sex = <span className="show-style font-big" style={{ width: 65 }}>{(item.sex+'') === '1'? '男':'女'}</span>
+            nation = <span className="show-style font-big" style={{ width: 65 }}>{item.nation}</span>
+            age = <span className="show-style font-big" style={{ width: 60 }}>{item.age}</span>
+            card = <span className="show-style font-big">{item.card}</span>
+            address = <span className="address-width font-big" style={{ width: 436 }}>{item.address}</span>
+            contact = <span className="show-style font-big">{item.contact}</span>
+            styleName = 'news-width font-big';
         } else{
             if(!item){
                 return null;
@@ -112,9 +112,9 @@ class PartyInput extends Component {
         return (
             <div className={style}>
                 <div className={itemStyle}><span className={styleName}>当事人姓名：</span>{name}</div>
-                <div className={itemStyle}><span className={styleName} style={{width:40}}>性别：</span>{sex}</div>
-                <div className={itemStyle}><span className={styleName} style={{width:40}}>民族：</span>{nation}</div>
-                <div className={itemStyle}><span className={styleName} style={{width:40}}>年龄：</span>{age}</div>
+                <div className={itemStyle}><span className={styleName} style={{width:42}}>性别：</span>{sex}</div>
+                <div className={itemStyle}><span className={styleName} style={{width:42}}>民族：</span>{nation}</div>
+                <div className={itemStyle}><span className={styleName} style={{width:42}}>年龄：</span>{age}</div>
                 <div className={itemStyle}><span className={styleName}>身份证号：</span>{card}</div>
                 <div className={itemStyle}><span className={styleName}>单位或住址：</span>{address}</div>
                 <div className={itemStyle}><span className={styleName}>联系方式：</span>{contact}</div>

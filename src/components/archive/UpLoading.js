@@ -73,7 +73,7 @@ class UpLoading extends Component {
         let img,upload;
         if(this.state.show === 1 || (protocolPath && protocolPath !== '')){
             // img = <img src={'api/archive/protocolPhoto.json?id='+dataId+'&rn='+this.state.count}/>
-            img = <a onClick={this.download.bind(this)}>{name}协议书扫描件下载</a>
+            img = <a onClick={this.download.bind(this)}>《{name}》<span className="black-word">协议书扫描件下载</span></a>
         }
         if(finishState === 0){
             upload = (<Upload {...props} data={{id:dataId}} onChange={this.onChangeHandler.bind(this)} beforeUpload={this.beforeUpload.bind(this)}>

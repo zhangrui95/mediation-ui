@@ -199,12 +199,12 @@ class Investigation extends Component {
                 btnBox = 'formArch btn-box';
             }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
-            times = <div className="margin-word">{getDateTime(investTime)}</div>;
-            addresss =  <div className="margin-word">{address}</div>;
-            otherPersons =  <div className="margin-word">{otherPerson}</div>;
-            targetPersons =  <div className="margin-word">{targetPerson}</div>;
+            times = <div className="margin-word font-big">{getDateTime(investTime)}</div>;
+            addresss =  <div className="margin-word font-big">{address}</div>;
+            otherPersons =  <div className="margin-word font-big">{otherPerson}</div>;
+            targetPersons =  <div className="margin-word font-big">{targetPerson}</div>;
             contents =  <div className="content-text content-indent">{cont}</div>;
-            creatPerson = <div className="formArch"><div className="margin-form word-title name-style-left">调查人员</div><div className="margin-word">{workerNames}</div></div>
+            creatPerson = <div className="formArch"><div className="margin-form word-title name-style-left">调查人员</div><div className="margin-word font-big">{workerNames}</div></div>
             // sign = <div>
             //             <div className="formArch">被调查人签字：</div>
             //             <div className="formArch">调查人签字：</div>
