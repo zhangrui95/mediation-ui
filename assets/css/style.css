@@ -1510,6 +1510,10 @@ to {
 	float: left;
 	width: 139px;
 }
+.name-sex-width{
+	float: left;
+	width: 90px;
+}
 .find-style{
 	width: 100px;
 	text-align: right;
