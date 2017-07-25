@@ -140,7 +140,7 @@ class ArchiveHeader extends Component {
         const {archive} = this.props;
         const title = ArchiveHeader.getTitle(archive);
         return (
-            <div>
+            <div className="no-print">
                 <div className="name-style">
                     <div className="name-left">{title.headline}{title.name}<span className={title.colorFont}>{title.state}</span></div>
                     <div className="name-right"><a className="go-first" onClick={this.goBack.bind(this)}><img className="go-back-img" src={GO_BACK_URL}/> 返回首页</a></div>

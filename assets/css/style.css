@@ -377,6 +377,7 @@ body {
 	width: 1000px;
 	background: #fff;
 	min-height: 850px;
+	position: relative;
 }
 .blue-body {
 	background: url(../images/blue-bg.jpg) no-repeat;
@@ -1734,4 +1735,61 @@ to {
 }
 .font-margin{
 	margin-top: 4px;
+}
+.bottom-position{
+	display: none;
+	width: 86%;
+	position: absolute;
+	bottom:100px;
+	left: 50%;
+	margin-left: -43%;
+}
+.print-header-box{
+	display: none;
+	height: 56px;
+	line-height: 56px;
+	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
+	width: 86%;
+	margin: 0 auto;
+}
+.word-title-box{
+	width: 306px;
+	margin: 0 auto;
+	background: #fff;
+	position: relative;
+	z-index: 111;
+	height: 56px;
+	padding: 0 18px;
+}
+.border-header{
+	border-bottom: 1px solid #999;
+	position: relative;
+	top: 30px;
+	left: 0;
+}
+.word-title-box-bottom{
+	width: 140px;
+	margin: 0 auto;
+	background: #fff;
+	position: relative;
+	z-index: 111;
+	height: 56px;
+	padding: 0 18px;
+}
+.print-bottom-box{
+	height: 56px;
+	line-height: 56px;
+	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
+	width: 86%;
+	margin-left: -43%;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	display: none;
+}
+.logo-margin{
+	margin: 0 5px;
+}
+.large-font{
+	font-size: 16px;
 }

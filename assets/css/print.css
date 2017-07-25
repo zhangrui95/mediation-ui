@@ -1,0 +1,46 @@
+.no-print{
+    display: none;
+}
+
+.top-left{
+    display: none;
+}
+
+.top-right{
+    display: none;
+}
+
+.bottom-left{
+    display: none;
+}
+
+.bottom-right{
+    display: none;
+}
+.btn-box,.change-btn{
+    display: none;
+}
+
+.fixed-box{
+    display: none;
+}
+
+.main,.main-body,.center-box{
+    margin: 0;
+}
+
+.formBorder,.border-box,.bottom-border{
+    border: 0;
+}
+
+.bottom-hide{
+    display: none;
+}
+
+.bottom-position,.print-header-box,.print-bottom-box{
+    display: block;
+}
+.min-height{
+    min-height: 1450px;
+}
+
