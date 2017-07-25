@@ -257,7 +257,7 @@ class ArchiveDetail extends Component {
             if(!header.user){
                 return null;
             }
-            name = <Input name="name" className="text-input" style={{ width: 453 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
+            name = <Input name="name" className="text-input" style={{ width: 635 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
             type = <Select name="type" domain="type.id" url="api/archiveType/options.json" head="请选择" value={(data.type||{}).id} onChangeHandler={this.handleChange('type.id').bind(this)} />
             content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleManageChange.bind(this)}/>
@@ -306,7 +306,7 @@ class ArchiveDetail extends Component {
             if(state !== 0){
                 return null;
             }
-            name = <Input name="name" className="text-input" style={{ width: 453 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
+            name = <Input name="name" className="text-input" style={{ width: 635 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
             type = <Select domain="type.id" url="api/archiveType/options.json" head="请选择" value={(data.type||{}).id} onChangeHandler={this.handleChange('type.id').bind(this)} />
             content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleManageChange.bind(this)}/>
