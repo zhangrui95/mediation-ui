@@ -52,3 +52,11 @@
 .name-sex-width{
     width: 120px;
 }
+
+#mainright{
+    float: none;
+}
+
+.page-next{
+    page-break-after: always;
+}
