@@ -70,6 +70,10 @@ class ApplyFor extends Component {
         return litigants||[];
     }
 
+    getPrint(){
+        window.print();
+    }
+
     render() {
         const { archive} = this.props;
         const {response} = archive;
@@ -90,7 +94,7 @@ class ApplyFor extends Component {
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
-            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input className="change-btn" type="button" value="打印" /></div>
+            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input className="change-btn"  onClick={this.getPrint.bind(this)} type="button" value="打印" /></div>
             time = <div className="formArch" >
                         <div className="apply-name">申请人签字：</div>
                         <div className="time-right">
