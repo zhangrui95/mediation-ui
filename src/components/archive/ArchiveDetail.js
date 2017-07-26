@@ -133,6 +133,10 @@ class ArchiveDetail extends Component {
         this.setState({data: merge({},this.state.data,{litigants:datas,litigantsDel})});
     }
 
+    getPrint(){
+        window.print();
+    }
+
     static validateLitigants(item, idx){
         const errs = [];
         let value = item.card;
@@ -300,7 +304,7 @@ class ArchiveDetail extends Component {
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
-            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
+            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" onClick={this.getPrint.bind(this)} className="change-btn" value="打印" /></div>
             styleName = '';
         }else{
             if(state !== 0){
@@ -341,7 +345,7 @@ class ArchiveDetail extends Component {
                     <div className="top-right"></div>
                     <div className="title-form-name">人民调解登记表</div>
                     <div className="formBorder">
-                        <div className="border-box">
+                        <div className="border-box no-print">
                             <div className="formArch">
                                 <div><span className='word-title name-style-left null-margin'>卷宗名称</span>{name}</div>
                             </div>
@@ -349,6 +353,7 @@ class ArchiveDetail extends Component {
                         <div className="border-box">
                             <div className="formArch">
                                 <div><span className='word-title name-style-left null-margin'>卷宗类别</span>{type}</div>
+                                <div className="word-num hidden print-show"><span className='word-title name-style-left null-margin'>文号</span><span>{data.code||''}</span></div>
                             </div>
                         </div>
                         <div className="border-box">
@@ -359,7 +364,7 @@ class ArchiveDetail extends Component {
                             <div className="formArch word-title">纠纷简要情况</div>
                             <div className="formArch">{content}</div>
                         </div>
-                        <div className="border-box">
+                        <div className="border-box no-print">
                             <div className="formArch word-title">调解员</div>
                             <div className="formArch">
                                 <div className="margin-form font-big">第一调解员：{manager}</div>
@@ -372,17 +377,20 @@ class ArchiveDetail extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div className="formArch"><span className="word-title find-style-left">立卷人</span><span className="left-news">{creater}</span></div>
-                        <div className="formArch"><span className="word-title find-style-left">立卷时间</span><span className="left-news">{createTime}</span></div>
-                        <div className="formArch"><span className="word-title find-style-left">调解日期</span><span className="left-news">{protoTime}</span></div>
-                        <div className="formArch"><span className="word-title find-style-left">保管期限</span><span className="left-news">{keepTime}</span></div>
-                        <div className="formArch"><span className="word-title find-style-left">达成协议时间</span><span className="left-news">{protoTime}</span></div>
-                        <div className="formArch"><span className="word-title find-style-left">调解协议</span><span className="left-news">{protoText}</span></div>
-                        <div className="formArch"><span className="word-title find-style-left">协议履行情况</span><span className="left-news">{checkText}</span></div>
-                        <div className="formArch"><span className="word-title find-style-left">调解失败时间</span><span className="left-news">{failTime}</span></div>
-                        <div className="formArch"><span className="word-title find-style-left">当事人姓名</span><span className="left-news">{litigantsName}</span></div>
-                        <div className="formArch"><span className="word-title find-style-left">登记人</span><span className="left-news">{creater}</span></div>
-                        <div className="formArch"><span className="word-title find-style-left">登记日期</span><span className="left-news">{createTime}</span></div>
+                        <div className="formArch no-print"><span className="word-title find-style-left">立卷人</span><span className="left-news">{creater}</span></div>
+                        <div className="formArch no-print"><span className="word-title find-style-left">立卷时间</span><span className="left-news">{createTime}</span></div>
+                        <div className="formArch no-print"><span className="word-title find-style-left">调解日期</span><span className="left-news">{protoTime}</span></div>
+                        <div className="formArch no-print"><span className="word-title find-style-left">保管期限</span><span className="left-news">{keepTime}</span></div>
+                        <div className="formArch"><span className="word-title find-style-left">达成协议时间</span><span className="left-news print-hide">{protoTime}</span></div>
+                        <div className="formArch content-indent hidden print-show">{protoTime}</div>
+                        <div className="formArch"><span className="word-title find-style-left">调解协议</span><span className="left-news print-hide">{protoText}</span></div>
+                        <div className="formArch content-indent hidden print-show">{protoText}</div>
+                        <div className="formArch"><span className="word-title find-style-left">协议履行情况</span><span className="left-news print-hide">{checkText}</span></div>
+                        <div className="formArch content-indent hidden print-show">{checkText}</div>
+                        <div className="formArch no-print"><span className="word-title find-style-left">调解失败时间</span><span className="left-news">{failTime}</span></div>
+                        <div className="formArch no-print"><span className="word-title find-style-left">当事人姓名</span><span className="left-news">{litigantsName}</span></div>
+                        <div className="formArch no-print"><span className="word-title find-style-left">登记人</span><span className="left-news">{creater}</span></div>
+                        <div className="formArch no-print"><span className="word-title find-style-left">登记日期</span><span className="left-news">{createTime}</span></div>
                     </div>
                     <div className="bottom-left"></div>
                     <div className="bottom-right"></div>
@@ -391,7 +399,10 @@ class ArchiveDetail extends Component {
                 <div className="fixed-box"></div>
                 <PopAlertHtml visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
                 <PopLoading visible={loading!==''} title=""  width={400} zIndex={1270} modalzIndex={1260} load={loading}/>
-
+                <div className="bottom-position">
+                    <div className="sign-margin">登记人签字：</div>
+                    <div className="time-right">{createTime}</div>
+                </div>
             </div>
         )
     }

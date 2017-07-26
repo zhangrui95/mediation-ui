@@ -70,6 +70,7 @@ class PartyInput extends Component {
     renderByItem(item) {
         const {model,length,idx} = this.props;
         const itemStyle = model === 1 ? 'margin-form-party': 'margin-form';
+        const printStyle = model === 1 ? 'margin-form-party print-hide': 'margin-form print-hide';
         let name;
         let sex;
         let nation;
@@ -87,12 +88,12 @@ class PartyInput extends Component {
             if(idx == length-1){
                 style = 'formArch';
             }
-            name = <span className="show-style font-big" style={{ width: 90 }}>{item.name}</span>
+            name = <span className="name-sex-width font-big"><span className="font-big">{item.name}</span><span className="font-big hidden print-show">({(item.sex+'') === '1'? '男':'女'})</span></span>
             sex = <span className="show-style font-big" style={{ width: 65 }}>{(item.sex+'') === '1'? '男':'女'}</span>
             nation = <span className="show-style font-big" style={{ width: 65 }}>{item.nation}</span>
             age = <span className="show-style font-big" style={{ width: 60 }}>{item.age}</span>
             card = <span className="show-style font-big">{item.card}</span>
-            address = <span className="address-width font-big" style={{ width: 436 }}>{item.address}</span>
+            address = <span className="address-width font-big">{item.address}</span>
             contact = <span className="show-style font-big">{item.contact}</span>
             styleName = 'news-width font-big';
         } else{
@@ -112,7 +113,7 @@ class PartyInput extends Component {
         return (
             <div className={style}>
                 <div className={itemStyle}><span className={styleName}>当事人姓名：</span>{name}</div>
-                <div className={itemStyle}><span className={styleName} style={{width:42}}>性别：</span>{sex}</div>
+                <div className={printStyle}><span className={styleName} style={{width:42}}>性别：</span>{sex}</div>
                 <div className={itemStyle}><span className={styleName} style={{width:42}}>民族：</span>{nation}</div>
                 <div className={itemStyle}><span className={styleName} style={{width:42}}>年龄：</span>{age}</div>
                 <div className={itemStyle}><span className={styleName}>身份证号：</span>{card}</div>
