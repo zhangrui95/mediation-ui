@@ -160,6 +160,10 @@ class Investigation extends Component {
         const {finishState} = data||{}
         return finishState;
     }
+    getPrint(){
+        window.print();
+    }
+    
     render() {
         let times =  '';
         let addresss =  '';
@@ -198,7 +202,7 @@ class Investigation extends Component {
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
-            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
+            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" onClick={this.getPrint.bind(this)} className="change-btn" value="打印" /></div>
             times = <div className="margin-word font-big">{getDateTime(investTime)}</div>;
             addresss =  <div className="margin-word font-big">{address}</div>;
             otherPersons =  <div className="margin-word font-big">{otherPerson}</div>;
@@ -250,6 +254,10 @@ class Investigation extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                <div className="bottom-position">
+                    <div className="sign-margin">被调查人签字：</div>
+                    <div className="sign-margin">记录人签字：</div>
+                </div>
             </div>
         )
     }

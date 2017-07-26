@@ -120,6 +120,9 @@ class Mediate extends Component {
         const {finishState} = data||{}
         return finishState;
     }
+    getPrint(){
+        window.print();
+    }
     render() {
         const { params,mediateDetail,archive} = this.props;
         const {response} = mediateDetail;
@@ -146,7 +149,7 @@ class Mediate extends Component {
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
-            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
+            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" onClick={this.getPrint.bind(this)} value="打印" /></div>
             time = <div className="margin-word font-big">{getDateTime(mediateTime)}</div>;
             contents =  <div className="content-text content-indent">{cont}</div>;
             // sign = <div>
@@ -187,6 +190,11 @@ class Mediate extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                <div className="bottom-position">
+                    <div className="sign-margin">当事人签字：</div>
+                    <div className="sign-margin">调解人签字：</div>
+                    <div className="sign-margin">记录人签字：</div>
+                </div>
             </div>
         )
     }

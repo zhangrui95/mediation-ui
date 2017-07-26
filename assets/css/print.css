@@ -33,7 +33,7 @@
     border: 0;
 }
 
-.bottom-hide{
+.bottom-hide,.goback{
     display: none;
 }
 
@@ -71,7 +71,7 @@
 
 .sign-margin{
     width: 90%;
-    margin: 60px auto;
+    margin: 50px auto;
     height: auto;
     overflow: hidden;
     position: relative;
