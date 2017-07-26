@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import {IMG_LOGO_URL} from '../../constants/Constant';
 
-class pageHeader extends Component {
+class PageHeader extends Component {
     render() {
         return (
-            <div>
                 <div className="print-header-box">
                     <div className="border-header"></div>
                     <div className="word-title-box">
@@ -13,16 +12,9 @@ class pageHeader extends Component {
                         <div className="font-big">多一分<span className="large-font">宽容</span>和<span className="large-font">关爱</span></div>
                     </div>
                 </div>
-                <div className="print-bottom-box">
-                    <div className="border-header"></div>
-                    <div className="word-title-box-bottom">
-                        <div className="font-big">哈尔滨市清滨人员调解</div>
-                    </div>
-                </div>
-            </div>
 
         )
     }
 }
 
-export  default pageHeader;
+export  default PageHeader;

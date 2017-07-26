@@ -120,6 +120,11 @@ class Protocol extends Component {
         const {data} = response||{};
         return data;
     }
+
+    getPrint(){
+        window.print();
+    }
+
     render() {
         const model = this.state.model;
         const { archive ,protocol} = this.props;
@@ -151,7 +156,7 @@ class Protocol extends Component {
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
-            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
+            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" onClick={this.getPrint.bind(this)} className="change-btn" value="打印" /></div>
             let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
             remarktext = <div className="content-indent">{data.remark}</div>;
             contenttext = <div className="content-indent">{contents}</div>;
@@ -171,7 +176,7 @@ class Protocol extends Component {
                     <div className="top-left"></div>
                     <div className="top-right"></div>
                 <div className="title-form-name">人民调解协议书</div>
-                <div className="formArch word-title title-num">文号：<span>{this.getCode()}</span></div>
+                <div className="formArch word-title title-num"><div className="word-num">文号：<span>{this.getCode()}</span></div></div>
                 <div className="formBorder">
                     <div className="fixed-box"></div>
                     <div className="border-box">

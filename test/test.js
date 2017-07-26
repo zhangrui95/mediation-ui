@@ -121,7 +121,7 @@ fetchMock.mock(DEV_REQ_HOST+'api/mediate/save.json',{state:0,data:{id:'1',mediat
 fetchMock.mock(DEV_REQ_HOST+'api/mediate/update.json',{state:0,data:{id:'1',mediateTime:1499240237246,address:'xxx1',content:'xxx1',createTime:1499240237246,creater:{},archive:{},workers:[]}});
 
 
-fetchMock.mock(DEV_REQ_HOST+'api/protocol/detailByArchive.json',{state:-1,data:null});
+fetchMock.mock(DEV_REQ_HOST+'api/protocol/detailByArchive.json',{state:-1,data:{id:'1',code:'清滨人调【2017】3号',remark:'xxx',result:0,content:'xxx',createTime:1499240237246,creater:{},archive:{}}});
 fetchMock.mock(DEV_REQ_HOST+'api/protocol/save.json',{state:0,data:{id:'1',remark:'xxx',result:0,content:'xxx',createTime:1499240237246,creater:{},archive:{}}});
 fetchMock.mock(DEV_REQ_HOST+'api/protocol/update.json',{state:0,data:{id:'1',remark:'xxx',result:0,content:'xxx',createTime:1499240237246,creater:{},archive:{}}});
 
