@@ -60,3 +60,7 @@
 .page-next{
     page-break-after: always;
 }
+
+.center-box{
+    margin-top: 60px;
+}

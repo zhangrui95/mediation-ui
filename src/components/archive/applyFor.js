@@ -10,7 +10,6 @@ import TimeChoice from './TimeChoice';
 import DisputeCase from './DisputeCase';
 import PopAlert from '../pop/PopAlert';
 import PageHeader from './pageHeader';
-import {IMG_LOGO_URL} from '../../constants/Constant';
 
 class ApplyFor extends Component {
 
@@ -136,6 +135,7 @@ class ApplyFor extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                <div className="page-next"></div>
                 <div className="bottom-position">
                     <div className="formArch font-weight-word">人民调解委员会已将申请人民调解的相关规定告知我，现自愿申请人民调解委员会进行调解。</div>
                     {time}
