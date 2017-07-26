@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {ARCHIVE_ADD,ARCHIVE_UPDATE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction';
 import * as arhciveActions from '../../actions/arhcive';
-import {getDateTime} from '../../utils/date';
+import {getDateTime,getDate} from '../../utils/date';
 import {cardValid} from './RegularValidator';
 import { Input } from 'antd';
 import Select from '../Select'
@@ -401,7 +401,7 @@ class ArchiveDetail extends Component {
                 <PopLoading visible={loading!==''} title=""  width={400} zIndex={1270} modalzIndex={1260} load={loading}/>
                 <div className="bottom-position">
                     <div className="sign-margin">登记人签字：</div>
-                    <div className="time-right">{createTime}</div>
+                    <div className="time-right">{getDate(data.createTime)}</div>
                 </div>
             </div>
         )

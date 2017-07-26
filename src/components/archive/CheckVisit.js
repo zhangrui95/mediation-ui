@@ -7,7 +7,7 @@ import {CHECKVISIT_SAVE,CHECKVISIT_DETAIL,CHECKVISIT_UPDATE} from '../../constan
 import * as syncActions from '../../actions/syncAction'
 import * as checkvisitActions from '../../actions/checkvisit'
 import * as arhciveActions from '../../actions/arhcive'
-import {getDateTime} from '../../utils/date';
+import {getDateTime,getDate} from '../../utils/date';
 import PopAlert from '../pop/PopAlert';
 
 class CheckVisit extends Component {
@@ -184,7 +184,7 @@ class CheckVisit extends Component {
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
                 <div className="bottom-position">
                     <div className="sign-margin">回访人签字：</div>
-                    <div className="time-right">{getDateTime(data.visitTime)}</div>
+                    <div className="time-right">{getDate(data.visitTime)}</div>
                 </div>
             </div>
         )
