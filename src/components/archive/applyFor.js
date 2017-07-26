@@ -77,7 +77,7 @@ class ApplyFor extends Component {
         const { archive} = this.props;
         const {response} = archive;
         const {data} = response||{};
-        const {applyTime} = data||{};
+        const {applyTime,content} = data||{};
         const model = this.state.model;
         let btns = '';
         let time = '';
@@ -119,6 +119,7 @@ class ApplyFor extends Component {
                             <div className="formArch word-title">当事人</div>
                             <PartyCell litigants={this.getLitigants()}/>
                         </div>
+                        <div className="page-next"></div>
                         <div className="border-box">
                             <div className="formArch word-title">纠纷简要情况</div>
                             <DisputeCase/>
@@ -135,7 +136,6 @@ class ApplyFor extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
-                <div className="page-next"></div>
                 <div className="bottom-position">
                     <div className="formArch font-weight-word">人民调解委员会已将申请人民调解的相关规定告知我，现自愿申请人民调解委员会进行调解。</div>
                     {time}
