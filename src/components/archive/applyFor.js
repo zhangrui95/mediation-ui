@@ -9,7 +9,6 @@ import PartyCell from './PartyCell';
 import TimeChoice from './TimeChoice';
 import DisputeCase from './DisputeCase';
 import PopAlert from '../pop/PopAlert';
-import PageHeader from './pageHeader';
 
 class ApplyFor extends Component {
 
@@ -108,7 +107,6 @@ class ApplyFor extends Component {
         }
         return (
             <div className="min-height">
-                <PageHeader/>
                 <div className="center-box">
                     <div className="top-left"></div>
                     <div className="top-right"></div>
@@ -119,7 +117,6 @@ class ApplyFor extends Component {
                             <div className="formArch word-title">当事人</div>
                             <PartyCell litigants={this.getLitigants()}/>
                         </div>
-                        <div className="page-next"></div>
                         <div className="border-box">
                             <div className="formArch word-title">纠纷简要情况</div>
                             <DisputeCase/>

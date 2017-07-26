@@ -41,9 +41,9 @@
     display: block;
 }
 
-.min-height{
-    min-height: 1450px;
-}
+/*.min-height{*/
+    /*min-height: 1450px;*/
+/*}*/
 
 .address-width{
     width: 349px;
@@ -55,11 +55,10 @@
 
 #mainright{
     float: none;
+    padding: 50px 0;
 }
 
 .page-next{
     page-break-after: always;
 }
-.title-form-name{
-    padding: 50px 0 20px 0;
-}
+
