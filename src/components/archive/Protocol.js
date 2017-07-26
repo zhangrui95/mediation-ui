@@ -213,6 +213,12 @@ class Protocol extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                <div className="bottom-position">
+                    <div className="formArch font-weight-word">本协议一式三份，当事人、人民调解委员会各持一份。</div>
+                    <div className="sign-margin">当事人签字：</div>
+                    <div className="sign-margin">调解人签字：</div>
+                    <div className="sign-margin">记录人签字：</div>
+                </div>
             </div>
         )
     }

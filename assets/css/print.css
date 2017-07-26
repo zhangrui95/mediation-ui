@@ -63,5 +63,17 @@
 }
 
 .title-num{
-    margin-right: 90px;
+    margin:0 90px 0 0;
+}
+.word-num{
+    float: right;
+}
+
+.sign-margin{
+    width: 90%;
+    margin: 60px auto;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    color: #333;
 }

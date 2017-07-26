@@ -106,6 +106,11 @@ class CheckVisit extends Component {
         const {data} = response||{};
         return data;
     }
+
+    getPrint(){
+        window.print();
+    }
+
     render() {
         let time = '';
         let content = '';
@@ -144,7 +149,7 @@ class CheckVisit extends Component {
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
-            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" value="打印" /></div>
+            btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" onClick={this.getPrint.bind(this)} className="change-btn" value="打印" /></div>
             let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
             content = <div className="margin-word content-indent">{contents}</div>;
             time = <div className="margin-word font-big">{getDateTime(data.visitTime)}</div>;
@@ -177,6 +182,10 @@ class CheckVisit extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                <div className="bottom-position">
+                    <div className="sign-margin">回访人签字：</div>
+                    <div className="time-right">{getDateTime(data.visitTime)}</div>
+                </div>
             </div>
         )
     }
