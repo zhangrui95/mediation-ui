@@ -185,7 +185,7 @@ class Protocol extends Component {
                     </div>
                     <div className="border-box">
                         <div className="formArch">
-                            <div className="margin-form word-title margin-left-result">调解结果</div>
+                            <div className="margin-form word-title find-style-left">调解结果</div>
                         </div>
                         <div className="formArch">
                             {resulttext}

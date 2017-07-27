@@ -338,6 +338,14 @@ class ArchiveDetail extends Component {
         if(data.workerIds){
             workerValue = data.workerIds.split(',');
         }
+        let next = '';
+        let length = data.content.length;
+        if(length>1000){
+            next = <div>
+                <div className="page-next"></div>
+                <div className="page-fixed-height"></div>
+            </div>
+        }
         return (
             <div ref={node => this.node = node}>
                 <div className="center-box">
@@ -353,7 +361,7 @@ class ArchiveDetail extends Component {
                         <div className="border-box">
                             <div className="formArch">
                                 <div><span className='word-title name-style-left null-margin'>卷宗类别</span>{type}</div>
-                                <div className="word-num hidden print-show"><span className='word-title name-style-left null-margin'>文号</span><span>{data.code||''}</span></div>
+                                <div className="word-num hidden print-show"><span className='reference-number'>文号</span><span className="font-big">{data.code||''}</span></div>
                             </div>
                         </div>
                         <div className="border-box">
@@ -377,12 +385,15 @@ class ArchiveDetail extends Component {
                                 </div>
                             </div>
                         </div>
+                        {next}
                         <div className="formArch no-print"><span className="word-title find-style-left">立卷人</span><span className="left-news">{creater}</span></div>
                         <div className="formArch no-print"><span className="word-title find-style-left">立卷时间</span><span className="left-news">{createTime}</span></div>
                         <div className="formArch no-print"><span className="word-title find-style-left">调解日期</span><span className="left-news">{protoTime}</span></div>
                         <div className="formArch no-print"><span className="word-title find-style-left">保管期限</span><span className="left-news">{keepTime}</span></div>
                         <div className="formArch"><span className="word-title find-style-left">达成协议时间</span><span className="left-news print-hide">{protoTime}</span></div>
                         <div className="formArch content-indent hidden print-show">{protoTime}</div>
+                        <div className="formArch hidden print-show"><div className="margin-form word-title find-style-left">调解结果</div></div>
+                        <div className="formArch hidden print-show"><div className="content-indent">{data.result === 0 ? '调解成功':'调解失败'}</div></div>
                         <div className="formArch"><span className="word-title find-style-left">调解协议</span><span className="left-news print-hide">{protoText}</span></div>
                         <div className="formArch content-indent hidden print-show">{protoText}</div>
                         <div className="formArch"><span className="word-title find-style-left">协议履行情况</span><span className="left-news print-hide">{checkText}</span></div>

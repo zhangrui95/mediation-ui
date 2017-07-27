@@ -230,7 +230,8 @@ class Investigation extends Component {
                 <div className="center-box">
                     <div className="top-left"></div>
                     <div className="top-right"></div>
-                <div className="title-form-name" id={params.mid}>调查详情</div>
+                <div className="title-form-name print-hide" id={params.mid}>调查详情</div>
+                <div className="title-form-name hidden print-show" id={params.mid}>人民调解调查记录</div>
                 <div className="formArch"><sapn className="goback" onClick={this.goBack.bind(this)}>返回列表</sapn></div>
                     <div className="formBorder">
                         <div className="border-box">

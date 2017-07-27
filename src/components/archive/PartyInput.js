@@ -81,6 +81,7 @@ class PartyInput extends Component {
         let remove;
         let style = 'formArch bottom-border';
         let styleName = '';
+        let styles = '';
         if(model === 1){
             if(!item){
                 return null;
@@ -89,13 +90,14 @@ class PartyInput extends Component {
                 style = 'formArch';
             }
             name = <span className="name-sex-width font-big"><span className="font-big">{item.name}</span><span className="font-big hidden print-show">（{(item.sex+'') === '1'? '男':'女'}）</span></span>
-            sex = <span className="show-style font-big" style={{ width: 65 }}>{(item.sex+'') === '1'? '男':'女'}</span>
-            nation = <span className="show-style font-big" style={{ width: 65 }}>{item.nation}</span>
-            age = <span className="show-style font-big" style={{ width: 60 }}>{item.age}</span>
+            sex = <span className="show-style font-big all-width">{(item.sex+'') === '1'? '男':'女'}</span>
+            nation = <span className="show-style font-big all-width">{item.nation}</span>
+            age = <span className="show-style font-big all-width">{item.age}</span>
             card = <span className="show-style font-big">{item.card}</span>
             address = <span className="address-width font-big">{item.address}</span>
             contact = <span className="show-style font-big">{item.contact}</span>
             styleName = 'news-width font-big';
+            styles = 'news-width font-big width-box'
         } else{
             if(!item){
                 return null;
@@ -108,14 +110,14 @@ class PartyInput extends Component {
             address = <Input className="text-input" style={{ width: 395 }} placeholder="" value={item.address} onChange={this.handleChange('address').bind(this)} maxLength={200}/>
             contact = <Input className="text-input" placeholder="" style={{ width: 145 }} value={item.contact} onChange={this.handleChange('contact').bind(this)} onBlur={this.getContact.bind(this)} maxLength={30}/>
             remove = <div className={itemStyle}><a href="javascript:;" onClick={this.handleRemove.bind(this)} className="del-btn">删除</a></div>
-            styleName = 'news-width-margin';
+            styleName,styles = 'news-width-margin';
         }
         return (
             <div className={style}>
                 <div className={itemStyle}><span className={styleName}>当事人姓名：</span>{name}</div>
-                <div className={printStyle}><span className={styleName} style={{width:42}}>性别：</span>{sex}</div>
-                <div className={itemStyle}><span className={styleName} style={{width:42}}>民族：</span>{nation}</div>
-                <div className={itemStyle}><span className={styleName} style={{width:42}}>年龄：</span>{age}</div>
+                <div className={printStyle}><span className={styles}>性别：</span>{sex}</div>
+                <div className={itemStyle}><span className={styles}>民族：</span>{nation}</div>
+                <div className={itemStyle}><span className={styles}>年龄：</span>{age}</div>
                 <div className={itemStyle}><span className={styleName}>身份证号：</span>{card}</div>
                 <div className={itemStyle}><span className={styleName}>单位或住址：</span>{address}</div>
                 <div className={itemStyle}><span className={styleName}>联系方式：</span>{contact}</div>
