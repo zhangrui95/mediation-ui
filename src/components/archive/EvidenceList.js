@@ -33,7 +33,7 @@ class EvidenceList extends Component {
         return (
             <div>
                 <div className="title-form-name">证据上传</div>
-                <EvidenceCell archive={EvidenceList.getArchiveData(archive)} data={data} dataId={id} reload={this.load.bind(this)}/>
+                <EvidenceCell dataId={id} archive={EvidenceList.getArchiveData(archive)} data={data} dataId={id} reload={this.load.bind(this)}/>
             </div>
         )
     }

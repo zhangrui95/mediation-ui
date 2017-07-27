@@ -4,14 +4,14 @@ import EvidenceRow from "./EvidenceRow";
 class EvidenceView extends Component {
 
     render() {
-        const {data,type,reload} = this.props;
+        const {data,type,reload,dataId} = this.props;
         const name = type===0?'照片':(type===1?'录音':'视频');
         let previewHead;
         // if(type===0){
         //     previewHead = <td>照片浏览</td>;
         // }
         const rows = data.filter(i => i.type === type).map(function(it,i){
-            return <EvidenceRow key={i} data={it} idx={i+1} type={type} reload={reload}/>
+            return <EvidenceRow dataId={dataId} key={i} data={it} idx={i+1} type={type} reload={reload}/>
         });
         return (
             <table cellPadding="0" cellSpacing="0" className="table-list">

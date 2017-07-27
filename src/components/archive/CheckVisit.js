@@ -115,6 +115,7 @@ class CheckVisit extends Component {
         let time = '';
         let content = '';
         let btns = '';
+        let visitTime = '';
         const model = this.state.model;
         const { archive ,checkvisit} = this.props;
         const {response} = checkvisit;
@@ -153,6 +154,7 @@ class CheckVisit extends Component {
             let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
             content = <div className="margin-word content-indent">{contents}</div>;
             time = <div className="margin-word font-big">{getDateTime(data.visitTime)}</div>;
+            visitTime = getDate(data.visitTime);
         }else{
             if(data === null || data === undefined){
                 return null;
@@ -184,7 +186,7 @@ class CheckVisit extends Component {
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
                 <div className="bottom-position">
                     <div className="sign-margin">回访人签字：</div>
-                    <div className="time-right">{getDate(data.visitTime)}</div>
+                    <div className="time-right">{visitTime}</div>
                 </div>
             </div>
         )

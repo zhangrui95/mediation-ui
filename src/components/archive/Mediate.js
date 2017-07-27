@@ -133,6 +133,7 @@ class Mediate extends Component {
         let contents = '';
         let btns = '';
         let sign = '';
+        let next = '';
         if(model === 0){
             time = <TimeChoice name="mediateTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
             contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
@@ -148,6 +149,13 @@ class Mediate extends Component {
             if(finish === 0){
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
+            }
+            let length = content.length;
+            if(length>1000){
+                next = <div>
+                    <div className="page-next"></div>
+                    <div className="page-fixed-height"></div>
+                </div>
             }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" onClick={this.getPrint.bind(this)} value="打印" /></div>
             time = <div className="margin-word font-big">{getDateTime(mediateTime)}</div>;
@@ -180,6 +188,7 @@ class Mediate extends Component {
                         <div className="formArch"><div className="margin-form word-title name-style-left">当事人员</div><div className="margin-word font-big">{this.getLitigants(archive)}</div></div>
                         <div className="formArch"><div className="margin-form word-title name-style-left">调解人员</div><div className="margin-word font-big">{this.getWorkers(archive)}</div></div>
                     </div>
+                    {next}
                     <div className="formArch"><div className="margin-form word-title name-style-left">调解记录</div></div>
                     <div className="formArch">{contents}</div>
                     {sign}

@@ -181,7 +181,7 @@ class Investigation extends Component {
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
         const workerValue = this.getWorkers();
         const workerNames = this.state.workersName;
-
+        let next = '';
         if(model === 0){
             times = <TimeChoice name="investTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
             addresss = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.address} placeholder=""  onChange={this.addressChange.bind(this)}/>
@@ -201,6 +201,13 @@ class Investigation extends Component {
             if(finish === 0){
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
+            }
+            let length = content.length;
+            if(length>1000){
+                next = <div>
+                    <div className="page-next"></div>
+                    <div className="page-fixed-height"></div>
+                </div>
             }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" onClick={this.getPrint.bind(this)} className="change-btn" value="打印" /></div>
             times = <div className="margin-word font-big">{getDateTime(investTime)}</div>;
@@ -244,6 +251,7 @@ class Investigation extends Component {
                                 <PopMediator domain="workers" url={'api/archiveWorker/workers.json?aid='+id} name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
                             </Pop>
                         </div>
+                        {next}
                     <div className="formArch"><div className="margin-form word-title name-style-left">调查记录</div></div>
                     <div className="formArch">{contents}</div>
                     {sign}
