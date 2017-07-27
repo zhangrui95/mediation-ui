@@ -1384,7 +1384,7 @@ to {
 	height: 100px;
 }
 .apply-name {
-	height: 60px;
+	height: 100px;
 	line-height: 60px;
 	font-size: 14px;
 }
@@ -1712,6 +1712,7 @@ to {
 .content-indent{
 	text-indent: 2em;
 	font-size: 14px;
+	line-height: 24px;
 }
 .fixed-box{
 	height: 25px;
@@ -1750,8 +1751,8 @@ to {
 }
 .print-header-box{
 	display: none;
-	height: 56px;
-	line-height: 56px;
+	height: 70px;
+	line-height: 70px;
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
 	width: 86%;
 	margin-left: 50%;
@@ -1760,32 +1761,32 @@ to {
 	left: -43%;
 }
 .word-title-box{
-	width: 306px;
+	width: 352px;
 	margin: 0 auto;
 	background: #fff;
 	position: relative;
 	z-index: 111;
-	height: 56px;
+	height: 70px;
 	padding: 0 18px;
 }
 .border-header{
 	border-bottom: 1px solid #999;
 	position: relative;
-	top: 30px;
+	top: 38px;
 	left: 0;
 }
 .word-title-box-bottom{
-	width: 140px;
+	width: 160px;
 	margin: 0 auto;
 	background: #fff;
 	position: relative;
 	z-index: 111;
-	height: 56px;
+	height: 70px;
 	padding: 0 18px;
 }
 .print-bottom-box{
-	height: 56px;
-	line-height: 56px;
+	height: 70px;
+	line-height: 70px;
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
 	width: 86%;
 	margin-left: 50%;
@@ -1796,8 +1797,14 @@ to {
 }
 .logo-margin{
 	margin: 0 5px;
+	width: 70px;
 }
 .large-font{
-	font-size: 16px;
+	font-size: 18px;
 }
-
+.width-box{
+	width:42px;
+}
+.all-width{
+	width: 65px;
+}

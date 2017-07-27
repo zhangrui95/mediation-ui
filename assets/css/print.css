@@ -46,7 +46,7 @@
 /*}*/
 
 .address-width{
-    width: 349px;
+    width: 404px;
 }
 
 .name-sex-width{
@@ -76,4 +76,37 @@
     overflow: hidden;
     position: relative;
     color: #333;
+}
+
+.title-form-name{
+    font-size: 40px;
+    padding: 50px 0 30px 0;
+}
+.word-title{
+    font-size: 18px;
+}
+.font-big{
+    font-size: 16px;
+}
+.print-name-width{
+    width: 98px;
+}
+.width-box{
+    width:48px;
+}
+.news-width{
+    width:98px;
+}
+.margin-form-party{
+    margin: 5px 1px;
+}
+.all-width{
+    width: 41px;
+}
+.content-indent,.apply-name,.time-right{
+    font-size: 16px;
+}
+.page-fixed-height{
+    width: 100%;
+    height: 70px;
 }

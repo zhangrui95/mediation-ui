@@ -80,6 +80,14 @@ class ApplyFor extends Component {
         const model = this.state.model;
         let btns = '';
         let time = '';
+        let next = '';
+        let length = content.length;
+        if(length>1000){
+            next = <div>
+                        <div className="page-next"></div>
+                        <div className="page-fixed-height"></div>
+                    </div>
+        }
         if(model === 0){
             btns =  <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.saveApply.bind(this)} className="addPerson"/></div>
             time = <div className="formArch">
@@ -117,6 +125,7 @@ class ApplyFor extends Component {
                             <div className="formArch word-title">当事人</div>
                             <PartyCell litigants={this.getLitigants()}/>
                         </div>
+                        {next}
                         <div className="border-box">
                             <div className="formArch word-title">纠纷简要情况</div>
                             <DisputeCase/>

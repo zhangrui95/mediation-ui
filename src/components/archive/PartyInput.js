@@ -88,7 +88,7 @@ class PartyInput extends Component {
             if(idx == length-1){
                 style = 'formArch';
             }
-            name = <span className="name-sex-width font-big"><span className="font-big">{item.name}</span><span className="font-big hidden print-show">({(item.sex+'') === '1'? '男':'女'})</span></span>
+            name = <span className="name-sex-width font-big"><span className="font-big">{item.name}</span><span className="font-big hidden print-show">（{(item.sex+'') === '1'? '男':'女'}）</span></span>
             sex = <span className="show-style font-big" style={{ width: 65 }}>{(item.sex+'') === '1'? '男':'女'}</span>
             nation = <span className="show-style font-big" style={{ width: 65 }}>{item.nation}</span>
             age = <span className="show-style font-big" style={{ width: 60 }}>{item.age}</span>
