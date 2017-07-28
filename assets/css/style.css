@@ -1780,12 +1780,12 @@ to {
 	left: 0;
 }
 .word-title-box-bottom{
-	width: 140px;
-	margin: 0 auto;
+	width: 160px;
 	background: #fff;
 	position: fixed;
 	z-index: 111;
-	left: -70px;
+	top:0;
+	left: -80px;
 	margin-left: 50%;
 	height: 70px;
 	padding: 0 18px;
