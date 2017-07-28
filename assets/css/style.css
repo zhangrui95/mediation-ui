@@ -1757,11 +1757,10 @@ to {
 	height: 70px;
 	line-height: 70px;
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
-	width: 86%;
-	margin-left: 50%;
+	width: 100%;
 	position: fixed;
 	top: 0;
-	left: -43%;
+	left: 0;
 }
 .word-title-box{
 	width: 352px;
@@ -1771,6 +1770,8 @@ to {
 	z-index: 111;
 	height: 70px;
 	padding: 0 18px;
+	left: -176px;
+	margin-left: 50%;
 }
 .border-header{
 	border-bottom: 1px solid #999;
@@ -1779,11 +1780,13 @@ to {
 	left: 0;
 }
 .word-title-box-bottom{
-	width: 160px;
+	width: 140px;
 	margin: 0 auto;
 	background: #fff;
-	position: relative;
+	position: fixed;
 	z-index: 111;
+	left: -70px;
+	margin-left: 50%;
 	height: 70px;
 	padding: 0 18px;
 }
@@ -1791,11 +1794,10 @@ to {
 	height: 70px;
 	line-height: 70px;
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
-	width: 86%;
-	margin-left: 50%;
+	width: 100%;
 	position: fixed;
 	bottom: 0;
-	left: -43%;
+	left: 0;
 	display: none;
 }
 .logo-margin{

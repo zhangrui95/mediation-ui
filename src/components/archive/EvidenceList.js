@@ -9,6 +9,7 @@ class EvidenceList extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {imgId:''};
+        this.print = false;
     }
     
     componentWillMount(){
@@ -29,7 +30,7 @@ class EvidenceList extends Component {
 
     getPrint(e){
         this.setState({imgId:e.target.id});
-        window.print();
+        this.print = true;
     }
     
     render() {
@@ -40,6 +41,10 @@ class EvidenceList extends Component {
         let imgId = this.state.imgId;
         if(data === null || data === undefined){
             return null;
+        }
+        if(this.print){
+            this.print = false;
+            window.print();
         }
         return (
             <div>
