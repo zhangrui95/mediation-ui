@@ -338,14 +338,6 @@ class ArchiveDetail extends Component {
         if(data.workerIds){
             workerValue = data.workerIds.split(',');
         }
-        let next = '';
-        let length = data.content.length;
-        if(length>1000){
-            next = <div>
-                <div className="page-next"></div>
-                <div className="page-fixed-height"></div>
-            </div>
-        }
         return (
             <div ref={node => this.node = node}>
                 <div className="center-box">
@@ -385,7 +377,6 @@ class ArchiveDetail extends Component {
                                 </div>
                             </div>
                         </div>
-                        {next}
                         <div className="formArch no-print"><span className="word-title find-style-left">立卷人</span><span className="left-news">{creater}</span></div>
                         <div className="formArch no-print"><span className="word-title find-style-left">立卷时间</span><span className="left-news">{createTime}</span></div>
                         <div className="formArch no-print"><span className="word-title find-style-left">调解日期</span><span className="left-news">{protoTime}</span></div>

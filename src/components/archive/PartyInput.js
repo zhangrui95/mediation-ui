@@ -110,7 +110,8 @@ class PartyInput extends Component {
             address = <Input className="text-input" style={{ width: 395 }} placeholder="" value={item.address} onChange={this.handleChange('address').bind(this)} maxLength={200}/>
             contact = <Input className="text-input" placeholder="" style={{ width: 145 }} value={item.contact} onChange={this.handleChange('contact').bind(this)} onBlur={this.getContact.bind(this)} maxLength={30}/>
             remove = <div className={itemStyle}><a href="javascript:;" onClick={this.handleRemove.bind(this)} className="del-btn">删除</a></div>
-            styleName,styles = 'news-width-margin';
+            styles = 'news-width width-box title-margin-all';
+            styleName = 'news-width-margin';
         }
         return (
             <div className={style}>

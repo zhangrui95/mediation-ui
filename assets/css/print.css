@@ -1,5 +1,6 @@
-.no-print,.print-hide{
+.no-print,.print-hide,.yun{
     display: none;
+    height: 0;
 }
 
 .top-left{
@@ -55,7 +56,6 @@
 
 #mainright{
     float: none;
-    padding: 50px 0 0 0;
 }
 
 .page-next{
@@ -86,7 +86,6 @@
 
 .title-form-name{
     font-size: 40px;
-    padding: 50px 0 30px 0;
 }
 .word-title{
     font-size: 18px;

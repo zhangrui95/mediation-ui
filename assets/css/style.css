@@ -1728,6 +1728,9 @@ to {
 .margin-top-name{
 	margin-top: 3px;
 }
+.title-margin-all{
+	margin-top: 7px;
+}
 .error-title-null{
 	display: none;
 }
@@ -1754,10 +1757,10 @@ to {
 }
 .print-header-box{
 	display: none;
-	/*height: 70px;*/
+	height: 70px;
 	/*line-height: 70px;*/
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
-	/*width: 100%;*/
+	width: 100%;
 	/*position: fixed;*/
 	/*top: 0;*/
 	/*left: 0;*/
@@ -1802,10 +1805,10 @@ to {
 	line-height: 70px;
 }
 .print-bottom-box{
-	/*height: 70px;*/
+	height: 70px;
 	/*line-height: 70px;*/
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
-	/*width: 100%;*/
+	width: 100%;
 	/*position: fixed;*/
 	/*bottom: 0;*/
 	/*left: 0;*/
