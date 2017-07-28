@@ -38,17 +38,17 @@ class MediateRow extends Component {
         }
         return (<tr className="odd">
             <td width="40">{num}</td>
-            <td width="230">
+            <td width="160">
                 <a className="ellipsis" href="javascript:;" onClick={this.getDetail.bind(this)}>{getDateTime(item.mediateTime)}</a>
             </td>
-            <td className="ellipsis">{item.address}</td>
-            <td className="ellipsis">{litigants}</td>
-            <td className="ellipsis">{workers}</td>
-            <td>{updataBtn}{updataImg}<a>打印</a></td>
+            <td className="ellipsis med">{item.address}</td>
+            <td className="ellipsis med">{litigants}</td>
+            <td className="ellipsis med">{workers}</td>
+            <td>{updataBtn}</td>
         </tr>)
     }
 }
-
+// {updataImg}<a>打印</a>
 MediateRow.contextTypes = {
     router: PropTypes.object
 };

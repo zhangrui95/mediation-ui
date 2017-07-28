@@ -46,11 +46,11 @@ class SurveyRow extends Component {
             <td className="ellipsis">{item.otherPerson}</td>
             <td className="ellipsis">{item.targetPerson}</td>
             <td className="ellipsis">{(item.workers||[]).map(i=>(i.worker||{}).name||'').join(',')}</td>
-            <td>{updataBtn}{updataImg}<a>打印</a></td>
+            <td>{updataBtn}</td>
         </tr>)
     }
 }
-
+// {updataImg}<a>打印</a>
 SurveyRow.contextTypes = {
     router: PropTypes.object
 };

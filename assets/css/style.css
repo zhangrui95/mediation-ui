@@ -1444,9 +1444,12 @@ to {
 	width: 80%;
 }
 .ellipsis {
-	width: 135px;
+	width: 140px;
 	text-align: center;
 	padding: 0 3px;
+}
+.med{
+	width: 188px;
 }
 .table-list td.ellipsis {
 	line-height: 20px;
@@ -1503,7 +1506,7 @@ to {
 	margin-top: 7px;
 }
 .address-width {
-	width: 436px;
+	width: 441px;
 	display: block;
 }
 .show-style{
