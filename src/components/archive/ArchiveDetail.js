@@ -338,6 +338,10 @@ class ArchiveDetail extends Component {
         if(data.workerIds){
             workerValue = data.workerIds.split(',');
         }
+        let wordNum = '';
+        if(data.result !== -1){
+            wordNum = <div className="word-num hidden print-show"><span className='reference-number'>文号</span><span className="font-big">{data.code||''}</span></div>;
+        }
         return (
             <div ref={node => this.node = node}>
                 <div className="center-box">
@@ -353,7 +357,7 @@ class ArchiveDetail extends Component {
                         <div className="border-box">
                             <div className="formArch">
                                 <div><span className='word-title name-style-left null-margin'>卷宗类别</span>{type}</div>
-                                <div className="word-num hidden print-show"><span className='reference-number'>文号</span><span className="font-big">{data.code||''}</span></div>
+                                {wordNum}
                             </div>
                         </div>
                         <div className="border-box">

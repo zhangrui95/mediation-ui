@@ -39,6 +39,10 @@ class EvidenceList extends Component {
         const {response} = evidence;
         const {data} = response||{};
         let imgId = this.state.imgId;
+        let imgBox = '';
+        if(imgId !== ''){
+            imgBox = <div><div className="title-form-name hidden print-show">证据照片</div><div className="hidden print-show"><div className="formArch word-title">证据照片</div><img className="evid-img" src={'api/evidence/photo.json?id='+imgId}/></div></div>
+        }
         if(data === null || data === undefined){
             return null;
         }
@@ -49,8 +53,7 @@ class EvidenceList extends Component {
         return (
             <div>
                 <div className="title-form-name print-hide">证据上传</div>
-                <div className="title-form-name hidden print-show">证据照片</div>
-                <div className="hidden print-show"><div className="formArch word-title">证据照片</div><img className="evid-img" src={'api/evidence/photo.json?id='+imgId}/></div>
+                {imgBox}
                 <EvidenceCell getPrint={this.getPrint.bind(this)} dataId={id} archive={EvidenceList.getArchiveData(archive)} data={data} dataId={id} reload={this.load.bind(this)}/>
             </div>
         )
