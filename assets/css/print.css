@@ -1,6 +1,6 @@
 .no-print,.print-hide,.yun{
     display: none;
-    height: 0;
+    height: 0px;
 }
 
 .top-left{
