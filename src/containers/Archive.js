@@ -5,8 +5,6 @@ import {ARCHIVE_DETAIL} from '../constants/ActionTypes'
 import * as syncActions from '../actions/syncAction';
 import * as arhciveActions from '../actions/arhcive';
 import ArchiveHeader from './../components/archive/ArchiveHeader'
-import PageHeader from './../components/archive/PageHeader';
-import PageFooter from './../components/archive/PageFooter';
 
 class Archive extends Component {
 
@@ -28,10 +26,8 @@ class Archive extends Component {
         const { children } = this.props;
         return (
             <div id="mainright">
-                <PageHeader/>
                 <ArchiveHeader {...this.props}/>
                 { children }
-                <PageFooter/>
             </div>
         )
     }

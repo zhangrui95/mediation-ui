@@ -4,7 +4,7 @@ class PageFooter extends Component {
     render() {
         return (
                 <div className="print-bottom-box">
-                    <div className="border-header"></div>
+                    <div className="border-bottom"></div>
                     <div className="word-title-box-bottom">
                         <div className="font-big">哈尔滨市清滨人员调解</div>
                     </div>

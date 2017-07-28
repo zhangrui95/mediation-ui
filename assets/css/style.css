@@ -1754,13 +1754,13 @@ to {
 }
 .print-header-box{
 	display: none;
-	height: 70px;
-	line-height: 70px;
+	/*height: 70px;*/
+	/*line-height: 70px;*/
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
-	width: 100%;
-	position: fixed;
-	top: 0;
-	left: 0;
+	/*width: 100%;*/
+	/*position: fixed;*/
+	/*top: 0;*/
+	/*left: 0;*/
 }
 .word-title-box{
 	width: 352px;
@@ -1771,32 +1771,44 @@ to {
 	padding: 0 18px;
 	left: -176px;
 	margin-left: 50%;
+	line-height: 70px;
 }
 .border-header{
+	width: 100%;
 	border-bottom: 1px solid #999;
-	position: relative;
+	position: fixed;
 	top: 38px;
 	left: 0;
+	z-index: 99;
+}
+.border-bottom{
+	width: 100%;
+	border-bottom: 1px solid #999;
+	position: fixed;
+	bottom: 36px;
+	left: 0;
+	z-index: 99;
 }
 .word-title-box-bottom{
 	width: 160px;
 	background: #fff;
 	position: fixed;
 	z-index: 111;
-	top:0;
+	bottom:0;
 	left: -80px;
 	margin-left: 50%;
 	height: 70px;
 	padding: 0 18px;
+	line-height: 70px;
 }
 .print-bottom-box{
-	height: 70px;
-	line-height: 70px;
+	/*height: 70px;*/
+	/*line-height: 70px;*/
 	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
-	width: 100%;
-	position: fixed;
-	bottom: 0;
-	left: 0;
+	/*width: 100%;*/
+	/*position: fixed;*/
+	/*bottom: 0;*/
+	/*left: 0;*/
 	display: none;
 }
 .logo-margin{
