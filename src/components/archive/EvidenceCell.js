@@ -149,21 +149,21 @@ class EvidenceCell extends Component {
             audioUpload = <div className="list-right"><Upload {...videoProps} data={{'archive.id':dataId,type:1}} onChange={this.onChangeRecord.bind(this)}  beforeUpload={this.beforeUploadRecord.bind(this)} >上传录音</Upload></div>;
         }
         return (
-                <div className="formBorder gray-border">
+                <div className="formBorder gray-border no-print">
                     <div className="form-title-margin">
                         <div className="list-top"><div className="list-left">视频</div><div className="list-left hint">{this.state.text}</div>{videoUpload}</div>
                     </div>
-                    <EvidenceView data={data} type={2} reload={reload}/>
+                    <EvidenceView getPrint={this.props.getPrint} data={data} type={2} reload={reload}/>
                     <div className="red-news-bottom">(以上格式为：AVI、MKV、MP4、WMV、FLV、MOV、3GP，单个文件大小不得大于100M，全部大小不得大于300M。)</div>
                     <div className="form-title-margin">
                         <div className="list-top"><div className="list-left">照片</div><div className="list-left hint">{this.state.text1}</div>{imgUpload}</div>
                     </div>
-                    <EvidenceView data={data} type={0} reload={reload} dataId={dataId}/>
+                    <EvidenceView getPrint={this.props.getPrint} data={data} type={0} reload={reload} dataId={dataId}/>
                     <div className="red-news-bottom">(以上格式为：JPG、PNG、JPEG，单个文件大小不得大于10M，全部大小不得大于100M。)</div>
                     <div className="form-title-margin">
                         <div className="list-top"><div className="list-left">录音</div><div className="list-left hint">{this.state.text2}</div>{audioUpload}</div>
                     </div>
-                    <EvidenceView data={data} type={1} reload={reload}/>
+                    <EvidenceView getPrint={this.props.getPrint} data={data} type={1} reload={reload}/>
                     <div className="red-news-bottom">(以上格式为：MP3、WMA、ACC、WAV、M4A，单个文件大小不得大于20M，全部大小不得大于100M。)</div>
                 </div>
         )

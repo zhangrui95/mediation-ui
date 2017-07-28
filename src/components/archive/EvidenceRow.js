@@ -47,13 +47,7 @@ class EvidenceRow extends Component {
         const {syncActions,data} = this.props;
         syncActions.request(EVIDENCE_DELETE,{id:data.id});
     }
-    printImg(e){
-        const {dataId} = this.props;
-        const	{router}	=	this.context;
-        router.push({
-            pathname: '/archive/'+dataId+'/evidence/'+e.target.id,
-        });
-    }
+    
 
     static getArchiveData(archive){
         const {response} = archive;
@@ -62,7 +56,7 @@ class EvidenceRow extends Component {
     }
 
     render() {
-        const {archive,data,type,idx,header} = this.props;
+        const {archive,data,type,idx,header,getPrint} = this.props;
         if(!header.user || !archive.response){
             return null;
         }
@@ -72,7 +66,7 @@ class EvidenceRow extends Component {
         let pop = <PopConfirm visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} information={this.state.msg}  onOk={this.confirmOperation.bind(this)}  closeDoneHandler={()=>this.setState({msg:""})}/>;
         if(type===0){
             printImgPre = <span> | </span>
-            printImgAction = <a id={data.id} onClick={this.printImg.bind(this)}>打印</a>
+            printImgAction = <a id={data.id} onClick={getPrint}>打印</a>
         }
         let deleteImgPre;
         let deleteImgAction;

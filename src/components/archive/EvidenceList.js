@@ -6,6 +6,11 @@ import {LIST_BY_ARCHIVE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 
 class EvidenceList extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {imgId:''};
+    }
+    
     componentWillMount(){
         this.load();
     }
@@ -22,18 +27,26 @@ class EvidenceList extends Component {
         return data
     }
 
+    getPrint(e){
+        this.setState({imgId:e.target.id});
+        window.print();
+    }
+    
     render() {
         const { archive,evidence ,params} = this.props;
         const {id} = params;
         const {response} = evidence;
         const {data} = response||{};
+        let imgId = this.state.imgId;
         if(data === null || data === undefined){
             return null;
         }
         return (
             <div>
-                <div className="title-form-name">证据上传</div>
-                <EvidenceCell dataId={id} archive={EvidenceList.getArchiveData(archive)} data={data} dataId={id} reload={this.load.bind(this)}/>
+                <div className="title-form-name print-hide">证据上传</div>
+                <div className="title-form-name hidden print-show">证据照片</div>
+                <div className="hidden print-show"><div className="formArch word-title">证据照片</div><img className="evid-img" src={'api/evidence/photo.json?id='+imgId}/></div>
+                <EvidenceCell getPrint={this.getPrint.bind(this)} dataId={id} archive={EvidenceList.getArchiveData(archive)} data={data} dataId={id} reload={this.load.bind(this)}/>
             </div>
         )
     }

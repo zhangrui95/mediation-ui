@@ -81,13 +81,6 @@ class ApplyFor extends Component {
         let btns = '';
         let time = '';
         let next = '';
-        let length = content.length;
-        if(length>1000){
-            next = <div>
-                        <div className="page-next"></div>
-                        <div className="page-fixed-height"></div>
-                    </div>
-        }
         if(model === 0){
             btns =  <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.saveApply.bind(this)} className="addPerson"/></div>
             time = <div className="formArch">
@@ -99,6 +92,20 @@ class ApplyFor extends Component {
             if(data && data.finishState === 0){
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
+            }
+            let litigantsLen=this.getLitigants().length;
+            let n = '';
+            let allnum = 0;
+            let cont = (content||'').split('\n')
+            for(var i = 0;i<cont.length;i++){
+              n = Math.ceil(cont[i].length/48);
+                allnum = allnum + n;
+            }
+            if((litigantsLen === 2&&allnum > 25)||(litigantsLen === 3&&allnum > 21)||(litigantsLen === 4&&allnum > 17)||(litigantsLen === 5&&allnum > 13)||(litigantsLen === 6&&allnum > 9)||(litigantsLen === 7&&allnum > 5)||(litigantsLen === 8&&allnum > 2||litigantsLen>8)){
+                next = <div>
+                    <div className="page-next"></div>
+                    <div className="page-fixed-height"></div>
+                </div>
             }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input className="change-btn"  onClick={this.getPrint.bind(this)} type="button" value="打印" /></div>
             time = <div className="formArch" >
