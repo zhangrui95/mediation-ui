@@ -16,6 +16,13 @@ class EvidenceList extends Component {
         this.load();
     }
 
+    componentDidUpdate(){
+        if(this.print){
+            this.print = false;
+            window.print();
+        }
+    }
+
     load(){
         const {actions,params} = this.props;
         const {id} = params;
@@ -45,10 +52,6 @@ class EvidenceList extends Component {
         }
         if(data === null || data === undefined){
             return null;
-        }
-        if(this.print){
-            this.print = false;
-            window.print();
         }
         return (
             <div>

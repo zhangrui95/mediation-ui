@@ -234,6 +234,11 @@ class ArchiveDetail extends Component {
         const {model} = this.state;
         const {response,action} = archive;
         const {state,protocol,check} = response||{};
+        const {code} = protocol||{};
+        let proof = ''
+        if(protocol !== null||protocol !== undefined){
+            proof = <span><span className='reference-number'>文号</span><span className="font-big font-margin-top">{code}</span></span>
+        }
         let name;
         let type;
         let content;
@@ -340,7 +345,7 @@ class ArchiveDetail extends Component {
         }
         let wordNum = '';
         if(data.result !== -1){
-            wordNum = <div className="word-num hidden print-show"><span className='reference-number'>文号</span><span className="font-big font-margin-top">{data.code||''}</span></div>;
+            wordNum = <div className="word-num hidden print-show">{proof}</div>;
         }
         return (
             <div ref={node => this.node = node}>
