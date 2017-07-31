@@ -176,7 +176,7 @@ class Protocol extends Component {
                     <div className="top-left"></div>
                     <div className="top-right"></div>
                 <div className="title-form-name">人民调解协议书</div>
-                <div className="formArch word-title title-num"><div className="word-num">文号：<span>{this.getCode()}</span></div></div>
+                <div className="formArch word-title title-num"><div className="word-num">文号：<span className="weight-no">{this.getCode()}</span></div></div>
                 <div className="formBorder">
                     <div className="fixed-box"></div>
                     <div className="border-box">

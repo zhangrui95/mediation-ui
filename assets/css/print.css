@@ -47,7 +47,7 @@
 /*}*/
 
 .address-width{
-    width: 403px;
+    width: 490px;
 }
 
 .name-sex-width{
@@ -63,7 +63,8 @@
 }
 
 .title-num{
-    margin:0 90px 0 0;
+    width: 96%;
+    margin:0;
 }
 .word-num{
     float: right;
@@ -71,7 +72,7 @@
 .reference-number{
     width: 50px;
     font-weight:900;
-    font-size: 18px;
+    font-size: 22px;
     float: left;
 }
 .sign-margin{
@@ -81,37 +82,63 @@
     overflow: hidden;
     position: relative;
     color: #333;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .title-form-name{
     font-size: 40px;
 }
-.word-title{
-    font-size: 18px;
+.word-title,.font-weight-word{
+    font-size: 22px;
 }
 .font-big{
-    font-size: 16px;
+    font-size: 18px;
 }
 .print-name-width{
     width: 98px;
 }
 .width-box{
-    width:48px;
+    width:54px;
 }
 .news-width{
-    width:98px;
+    width:108px;
 }
 .margin-form-party{
     margin: 5px 1px;
 }
 .all-width{
-    width: 41px;
+    width: 75px;
 }
 .content-indent,.apply-name,.time-right{
-    font-size: 16px;
+    font-size: 18px;
+    line-height: 28px;
 }
 .page-fixed-height{
     width: 100%;
     height: 70px;
+}
+.formBorder{
+    width: 1000px;
+    margin:10px 0 30px;
+}
+.name-style-left{
+    width: 95px;
+}
+.font-margin-top{
+    margin-top:4px;
+}
+.font-margin{
+    margin-top: 2px;
+}
+.find-style-left{
+    width: 160px;
+}
+.bottom-position{
+    margin-left: -50%;
+}
+.time-right{
+    width: 100%;
+}
+.margin-word{
+    margin-top: 6px;
 }

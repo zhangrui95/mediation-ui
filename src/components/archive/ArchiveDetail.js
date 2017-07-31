@@ -340,7 +340,7 @@ class ArchiveDetail extends Component {
         }
         let wordNum = '';
         if(data.result !== -1){
-            wordNum = <div className="word-num hidden print-show"><span className='reference-number'>文号</span><span className="font-big">{data.code||''}</span></div>;
+            wordNum = <div className="word-num hidden print-show"><span className='reference-number'>文号</span><span className="font-big font-margin-top">{data.code||''}</span></div>;
         }
         return (
             <div ref={node => this.node = node}>
