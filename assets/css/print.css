@@ -29,7 +29,9 @@
 .main,.main-body,.center-box{
     margin: 0;
 }
-
+.no-margin{
+    margin: 0 auto;
+}
 .formBorder,.border-box,.bottom-border{
     border: 0;
 }
@@ -90,6 +92,9 @@
 }
 .word-title,.font-weight-word{
     font-size: 22px;
+}
+.font-news{
+    font-size: 21px;
 }
 .font-big{
     font-size: 18px;

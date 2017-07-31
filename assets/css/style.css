@@ -1379,13 +1379,13 @@ to {
 }
 .font-weight-word {
 	font-size: 18px;
-	line-height: 100px;
+	line-height: 80px;
 	font-weight: 900;
-	height: 100px;
+	height: 80px;
 }
 .apply-name {
-	height: 100px;
-	line-height: 60px;
+	height: 60px;
+	line-height: 25px;
 	font-size: 14px;
 }
 .ant-upload-list-item {
@@ -1713,9 +1713,12 @@ to {
 	width: 24px;
 }
 .content-indent{
-	text-indent: 2em;
+	/*text-indent: 2em;*/
 	font-size: 14px;
 	line-height: 24px;
+}
+.first-line{
+	text-indent: 2em;
 }
 .fixed-box{
 	height: 25px;

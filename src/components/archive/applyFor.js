@@ -8,6 +8,7 @@ import {getDateTime,getDate} from '../../utils/date';
 import PartyCell from './PartyCell';
 import TimeChoice from './TimeChoice';
 import DisputeCase from './DisputeCase';
+import PageContent from './PageContent';
 import PopAlert from '../pop/PopAlert';
 
 class ApplyFor extends Component {
@@ -80,7 +81,6 @@ class ApplyFor extends Component {
         const model = this.state.model;
         let btns = '';
         let time = '';
-        let next = '';
         if(model === 0){
             btns =  <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.saveApply.bind(this)} className="addPerson"/></div>
             time = <div className="formArch">
@@ -93,28 +93,8 @@ class ApplyFor extends Component {
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
-            // let litigantsLen=this.getLitigants().length;
-            // let n = '';
-            // let allnum = 0;
-            // let cont = (content||'').split('\n');
-            // for(var i = 0;i<cont.length;i++){
-            //   n = Math.ceil(cont[i].length/48);
-            //     console.log(n);
-            //     if(n>10){
-            //
-            //     }
-            //     allnum = allnum + n;
-            // }
-            // let conts = (content||'').substr(allnum,(allnum+4)*48);
-            // console.log(conts);
-            // if((litigantsLen === 2&&allnum > 25)||(litigantsLen === 3&&allnum > 21)||(litigantsLen === 4&&allnum > 17)||(litigantsLen === 5&&allnum > 13)||(litigantsLen === 6&&allnum > 9)||(litigantsLen === 7&&allnum > 5)||(litigantsLen === 8&&allnum > 2||litigantsLen>8)){
-            //     next = <div>
-            //         <div className="page-next"></div>
-            //         <div className="page-fixed-height"></div>
-            //     </div>
-            // }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input className="change-btn"  onClick={this.getPrint.bind(this)} type="button" value="打印" /></div>
-            time = <div className="formArch" >
+            time = <div className="formArch no-margin" >
                         <div className="apply-name">申请人签字：</div>
                         <div className="time-right">
                             {getDate(applyTime)}
@@ -125,6 +105,12 @@ class ApplyFor extends Component {
             time = <div className="formArch">
                 <div className="margin-form"><span className="word-title">申请时间：</span></div><TimeChoice name="applyTime" hide={0} onChange={this.onChangeHandler.bind(this)} value={this.state.applyTime}  defaultValue={this.state.defaultTime}/>
             </div>
+        }
+        const {rows,rowNum} = PageContent.getRows(content);
+        let lastRows = (rowNum - 29)%43;
+        let next;
+        if((rowNum >= 22&&rowNum < 29)||lastRows >= 36){
+            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
         }
         return (
             <div className="min-height">
@@ -140,7 +126,7 @@ class ApplyFor extends Component {
                         </div>
                         <div className="border-box">
                             <div className="formArch word-title">纠纷简要情况</div>
-                            <DisputeCase/>
+                            <DisputeCase rows={rows} content={content}/>
                         </div>
                     <div className="bottom-hide">
                         <div className="formArch font-weight-word">人民调解委员会已将申请人民调解的相关规定告知我，现自愿申请人民调解委员会进行调解。</div>
@@ -154,8 +140,9 @@ class ApplyFor extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                {next}
                 <div className="bottom-position">
-                    <div className="formArch font-weight-word">人民调解委员会已将申请人民调解的相关规定告知我，现自愿申请人民调解委员会进行调解。</div>
+                    <div className="formArch font-weight-word font-news no-margin">人民调解委员会已将申请人民调解的相关规定告知我，现自愿申请人民调解委员会进行调解。</div>
                     {time}
                 </div>
             </div>

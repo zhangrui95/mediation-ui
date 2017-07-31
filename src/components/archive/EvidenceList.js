@@ -18,6 +18,7 @@ class EvidenceList extends Component {
 
     componentDidUpdate(){
         if(this.print){
+            console.log('this.state',this.state)
             this.print = false;
             window.print();
         }
