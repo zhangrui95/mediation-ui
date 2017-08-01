@@ -8,6 +8,8 @@ import {getDateTime} from '../../utils/date';
 import { Input } from 'antd';
 import TimeChoice from './TimeChoice'
 import PopAlert from '../pop/PopAlert';
+import DisputeCase from './DisputeCase';
+import PageContent from './PageContent';
 
 class Mediate extends Component {
     constructor(props, context) {
@@ -133,16 +135,20 @@ class Mediate extends Component {
         let contents = '';
         let btns = '';
         let sign = '';
-        let next = '';
+        const {rows,rowNum} = PageContent.getRows(content,30); 
+        let lastRows = (rowNum - 30)%42;
+        let next;
+        if((rowNum >= 22&&rowNum < 30)||lastRows >= 34){
+            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+        }
         if(model === 0){
             time = <TimeChoice name="mediateTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
-            contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
+            contents =  <div className="formArch"><Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/></div>;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="change-btn"/><input type="button" value="取消" onClick={this.goBack.bind(this)} className="change-btn"/></div>
         }else if(model === 1){
             if(data === null || data === undefined){
                 return null;
             }
-            let cont = content.split('\n').map((i,k)=><p key={k}>{i}</p>);
             let editBtn;
             let btnBox = 'formArch btn-box print-btn';
             const finish = this.getFinish(archive);
@@ -150,27 +156,15 @@ class Mediate extends Component {
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
-            let length = content.length;
-            if(length>1000){
-                next = <div>
-                    <div className="page-next"></div>
-                    <div className="page-fixed-height"></div>
-                </div>
-            }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" className="change-btn" onClick={this.getPrint.bind(this)} value="打印" /></div>
             time = <div className="margin-word font-big">{getDateTime(mediateTime)}</div>;
-            contents =  <div className="content-text content-indent">{cont}</div>;
-            // sign = <div>
-            //             <div className="formArch">当事人签字：</div>
-            //             <div className="formArch">调解人签字：</div>
-            //             <div className="formArch">记录人签字：</div>
-            //         </div>
+            contents =  <DisputeCase rows={rows} content={content}/>;
         }else{
             if(data === null || data === undefined){
                 return null;
             }
             time = <TimeChoice name="mediateTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
-            contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
+            contents =  <div className="formArch"><Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/></div>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
         }
         return (
@@ -188,9 +182,8 @@ class Mediate extends Component {
                         <div className="formArch"><div className="margin-form word-title name-style-left">当事人员</div><div className="margin-word font-big">{this.getLitigants(archive)}</div></div>
                         <div className="formArch"><div className="margin-form word-title name-style-left">调解人员</div><div className="margin-word font-big">{this.getWorkers(archive)}</div></div>
                     </div>
-                    {next}
                     <div className="formArch"><div className="margin-form word-title name-style-left">调解记录</div></div>
-                    <div className="formArch">{contents}</div>
+                    {contents}
                     {sign}
                     <div className="fixed-box"></div>
                 </div>
@@ -200,6 +193,7 @@ class Mediate extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                {next}
                 <div className="bottom-position">
                     <div className="sign-margin">当事人签字：</div>
                     <div className="sign-margin">调解人签字：</div>

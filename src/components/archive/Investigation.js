@@ -10,6 +10,8 @@ import PopMediator from './PopMediator'
 import { Input } from 'antd';
 import TimeChoice from './TimeChoice'
 import PopAlert from '../pop/PopAlert';
+import DisputeCase from './DisputeCase';
+import PageContent from './PageContent';
 
 class Investigation extends Component {
     constructor(props, context) {
@@ -181,20 +183,24 @@ class Investigation extends Component {
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
         const workerValue = this.getWorkers();
         const workerNames = this.state.workersName;
-        let next = '';
+        const {rows,rowNum} = PageContent.getRows(content,28);
+        let lastRows = (rowNum - 28)%42;
+        let next;
+        if((rowNum >= 21&&rowNum < 28)||lastRows >= 35){
+            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+        }
         if(model === 0){
             times = <TimeChoice name="investTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;
             addresss = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.address} placeholder=""  onChange={this.addressChange.bind(this)}/>
             otherPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" value={this.state.otherPerson} onChange={this.otherPersonChange.bind(this)}/>
             targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} placeholder="" value={this.state.targetPerson} onChange={this.targetPersonChange.bind(this)}/>
             creatPerson = <div className="formArch"><div className="margin-form word-title name-style-left">调查人员</div><input className="btn-pop" type="button" value="选择" onClick={this.upAddClick.bind(this)}/> {workerNames}</div>
-            contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
+            contents =  <div className="formArch"><Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/></div>;
             btns = <div className="formArch btn-box" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="change-btn"/><input type="button" value="取消" onClick={this.goBack.bind(this)} className="change-btn"/></div>
         }else if(model === 1){
             if(data === null || data === undefined){
                 return null;
             }
-            let cont = content.split('\n').map((i,k)=><p key={k}>{i}</p>);
             let editBtn;
             let btnBox = 'formArch btn-box print-btn';
             const finish = this.getFinish(archive);
@@ -202,19 +208,12 @@ class Investigation extends Component {
                 editBtn = <input type="button" className="change-btn" value="编辑" onClick={this.updateModel.bind(this)} />
                 btnBox = 'formArch btn-box';
             }
-            let length = content.length;
-            if(length>1000){
-                next = <div>
-                    <div className="page-next"></div>
-                    <div className="page-fixed-height"></div>
-                </div>
-            }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" onClick={this.getPrint.bind(this)} className="change-btn" value="打印" /></div>
             times = <div className="margin-word font-big">{getDateTime(investTime)}</div>;
             addresss =  <div className="margin-word font-big">{address}</div>;
             otherPersons =  <div className="margin-word font-big">{otherPerson}</div>;
             targetPersons =  <div className="margin-word font-big">{targetPerson}</div>;
-            contents =  <div className="content-text content-indent">{cont}</div>;
+            contents =  <DisputeCase rows={rows} content={content}/>;
             creatPerson = <div className="formArch"><div className="margin-form word-title name-style-left">调查人员</div><div className="margin-word font-big">{workerNames}</div></div>
             // sign = <div>
             //             <div className="formArch">被调查人签字：</div>
@@ -230,7 +229,7 @@ class Investigation extends Component {
             targetPersons = <Input name="name" className="text-input"  style={{ width: 300 }} value={this.state.targetPerson} placeholder="" onChange={this.targetPersonChange.bind(this)}/>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
             creatPerson = <div className="formArch"><div className="margin-form word-title name-style-left">调查人员</div><input type="button" className="btn-pop" value="选择" onClick={this.upAddClick.bind(this)}/> {workerNames} </div>
-            contents =  <Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/>;
+            contents =  <div className="formArch"><Input type="textarea" rows={4} value={this.state.content} onChange={this.contentChange.bind(this)}/></div>;
         }
         return (
             <div>
@@ -253,7 +252,7 @@ class Investigation extends Component {
                         </div>
                         {next}
                     <div className="formArch"><div className="margin-form word-title name-style-left">调查记录</div></div>
-                    <div className="formArch">{contents}</div>
+                    {contents}
                     {sign}
                     <div className="fixed-box"></div>
                 </div>
@@ -263,6 +262,7 @@ class Investigation extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                {next}
                 <div className="bottom-position">
                     <div className="sign-margin">被调查人签字：</div>
                     <div className="sign-margin">记录人签字：</div>

@@ -9,6 +9,8 @@ import * as checkvisitActions from '../../actions/checkvisit'
 import * as arhciveActions from '../../actions/arhcive'
 import {getDateTime,getDate} from '../../utils/date';
 import PopAlert from '../pop/PopAlert';
+import DisputeCase from './DisputeCase';
+import PageContent from './PageContent';
 
 class CheckVisit extends Component {
     constructor(props, context) {
@@ -113,29 +115,36 @@ class CheckVisit extends Component {
 
     render() {
         let time = '';
-        let content = '';
+        let contents = '';
         let btns = '';
         let visitTime = '';
         const model = this.state.model;
         const { archive ,checkvisit} = this.props;
         const {response} = checkvisit;
         const {data} = response||{};
+        const {content} = data||{}
         const litigantsName = this.getLitigants(archive);
         const result = this.getResult(archive);
+        const {rows,rowNum} = PageContent.getRows(content,33);
+        let lastRows = (rowNum - 33)%42;
+        let next;
+        if((rowNum >= 26&&rowNum < 33)||lastRows >= 35){
+            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+        }
         if(model === 0){
             const archiveData = this.getData(archive);
             if(archiveData && archiveData.finishState === 0){
                 if(result === -1){
-                    content = <Input type="textarea" rows={4} onChange={this.inputChange.bind(this)} value={this.state.input} disabled/>;
+                    contents = <div className="formArch"><Input type="textarea" rows={4} onChange={this.inputChange.bind(this)} value={this.state.input} disabled/></div>;
                     time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime} dis={0}/>;
                     btns = ''
                 }else{
-                    content = <Input type="textarea" rows={4} onChange={this.inputChange.bind(this)} value={this.state.input}/>;
+                    contents = <div className="formArch"><Input type="textarea" rows={4} onChange={this.inputChange.bind(this)} value={this.state.input}/></div>;
                     time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime}/>;
                     btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.onSave.bind(this)} className="addPerson"/></div>
                 }
             }else{
-                content = <Input type="textarea" rows={4} onChange={this.inputChange.bind(this)} value={this.state.input} disabled/>;
+                contents = <div className="formArch"><Input type="textarea" rows={4} onChange={this.inputChange.bind(this)} value={this.state.input} disabled/></div>;
                 time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime} dis={0}/>;
                 btns = ''
             }
@@ -151,15 +160,14 @@ class CheckVisit extends Component {
                 btnBox = 'formArch btn-box';
             }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" onClick={this.getPrint.bind(this)} className="change-btn" value="打印" /></div>
-            let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
-            content = <div className="margin-word content-indent">{contents}</div>;
+            contents = <DisputeCase rows={rows} content={content}/>;
             time = <div className="margin-word font-big">{getDateTime(data.visitTime)}</div>;
             visitTime = getDate(data.visitTime);
         }else{
             if(data === null || data === undefined){
                 return null;
             }
-            content = <Input type="textarea" rows={4} onChange={this.inputChange.bind(this)} value={this.state.input}/>;
+            contents = <div className="formArch"><Input type="textarea" rows={4} onChange={this.inputChange.bind(this)} value={this.state.input}/></div>;
             time = <TimeChoice name="visitTime" onChange={this.timeChange.bind(this)} value={this.state.date} defaultValue={this.state.defaultTime}/>;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
         }
@@ -176,7 +184,7 @@ class CheckVisit extends Component {
                         <div className="formArch"><div className="margin-form word-title name-style-left">被回访人</div><div className="margin-word font-big">{litigantsName}</div></div>
                     </div>
                     <div className="formArch"><div className="margin-form word-title name-style-left">回访情况</div></div>
-                    <div className="formArch">{content}</div>
+                    {contents}
                 </div>
                     <div className="bottom-left"></div>
                     <div className="bottom-right"></div>
@@ -184,6 +192,7 @@ class CheckVisit extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                {next}
                 <div className="bottom-position">
                     <div className="sign-margin">回访人签字：</div>
                     <div className="time-right">{visitTime}</div>

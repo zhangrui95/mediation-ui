@@ -3,7 +3,7 @@ const printLength = 50;
 const printPageKey = '@@page';
 class PageContent extends Component {
 
-    static getRows(content){
+    static getRows(content,num){
         const ps = (content||'').split('\n');
         let rowNum = 1;
         const rows = ps.map((i)=>{
@@ -12,6 +12,7 @@ class PageContent extends Component {
             let row = 0;
             let inRows = [];
             let chr = '';
+            console.log(num);
             for(let c in i){
                 chr = i[c];
                 line += chr;
@@ -22,12 +23,12 @@ class PageContent extends Component {
                     count = 0;
                     row += 1;
                     rowNum+=1;
-                    if(rowNum <= 29){
-                        if(rowNum % 29 === 0) {
+                    if(rowNum <= num){
+                        if(rowNum % num === 0) {
                             inRows.push(printPageKey);
                         }
                     }else{
-                        if((rowNum - 29)% 43 === 0){
+                        if((rowNum - num)% 42 === 0){
                              inRows.push(printPageKey);
                         }
                     }

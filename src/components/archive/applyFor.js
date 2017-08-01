@@ -106,10 +106,10 @@ class ApplyFor extends Component {
                 <div className="margin-form"><span className="word-title">申请时间：</span></div><TimeChoice name="applyTime" hide={0} onChange={this.onChangeHandler.bind(this)} value={this.state.applyTime}  defaultValue={this.state.defaultTime}/>
             </div>
         }
-        const {rows,rowNum} = PageContent.getRows(content);
-        let lastRows = (rowNum - 29)%43;
+        const {rows,rowNum} = PageContent.getRows(content,29);
+        let lastRows = (rowNum - 29)%42;
         let next;
-        if((rowNum >= 22&&rowNum < 29)||lastRows >= 36){
+        if((rowNum >= 22&&rowNum < 29)||lastRows >= 35){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
         }
         return (
