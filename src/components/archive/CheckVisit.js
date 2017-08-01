@@ -122,7 +122,7 @@ class CheckVisit extends Component {
         const { archive ,checkvisit} = this.props;
         const {response} = checkvisit;
         const {data} = response||{};
-        const {content} = data||{}
+        const {content} = data||{};
         const litigantsName = this.getLitigants(archive);
         const result = this.getResult(archive);
         const {rows,rowNum} = PageContent.getRows(content,33);

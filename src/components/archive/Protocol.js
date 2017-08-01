@@ -9,6 +9,9 @@ import * as arhciveActions from '../../actions/arhcive'
 import * as protocolActions from '../../actions/protocol'
 import Select from '../Select'
 import PopAlert from '../pop/PopAlert';
+import DisputeCase from './DisputeCase';
+import PageContent from './PageContent';
+import PageRemark from './PageRemark';
 
 class Protocol extends Component {
     constructor(props, context) {
@@ -130,11 +133,40 @@ class Protocol extends Component {
         const { archive ,protocol} = this.props;
         const {response} = protocol;
         const {data} = response||{};
+        const {content,remark} = data||{}
         let resulttext = '';
         let remarktext = '';
         let contenttext = '';
         let btns = '';
         let disabled = '';
+        let length = this.getLitigants().length;
+        let num = 23 - 3*(length-2);
+        let nextPage;
+        if(num < 0){
+            nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+            num =  0;
+        }
+        const {rows,rowNum} = PageContent.getRows(content,num);
+        let lastRows = (rowNum - num)%42;
+        let next;
+        let remarkRows = 40 - lastRows;
+        if(remarkRows === 0){
+            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+        }
+        const {row,rowNumber} = PageRemark.getRemark(remark,remarkRows);
+        let nextPages;
+        if((rowNumber - remarkRows) < 0){
+            let nums =40 - rowNumber - lastRows;
+            if(nums <= 10){
+                nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+            }
+        }else{
+            let lastRow = (rowNumber - remarkRows)%42;
+            if((rowNumber >= (remarkRows - 10)&&rowNum < remarkRows)||lastRow >= 32){
+                nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+            }
+        }
+
         if(model === 0){
             const archiveData = this.getData(archive);
             if(archiveData && archiveData.finishState === 0){
@@ -142,8 +174,8 @@ class Protocol extends Component {
             }else{
                 disabled = 'disabled';
             }
-            remarktext = <Input type="textarea" disabled={this.state.result === '-1'||this.state.result === ''} rows={4}  placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" disabled={this.state.result === '-1'||this.state.result === ''} rows={4} onChange={this.textChange.bind(this)} value={this.state.content} />
+            remarktext = <div className="formArch"><Input type="textarea" disabled={this.state.result === '-1'||this.state.result === ''} rows={4}  placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/></div>
+            contenttext = <div className="formArch"><Input type="textarea" disabled={this.state.result === '-1'||this.state.result === ''} rows={4} onChange={this.textChange.bind(this)} value={this.state.content} /></div>
             resulttext = <Select className="result-select" domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} head="请选择" disabled = {disabled} onChangeHandler={this.handleChange.bind(this)} value={this.state.result} />
         }else if(model === 1){
             if(!data){
@@ -157,16 +189,15 @@ class Protocol extends Component {
                 btnBox = 'formArch btn-box';
             }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" onClick={this.getPrint.bind(this)} className="change-btn" value="打印" /></div>
-            let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
-            remarktext = <div className="content-indent">{data.remark}</div>;
-            contenttext = <div className="content-indent">{contents}</div>;
-            resulttext = <div className="content-indent">{data.result === 0 ? '调解成功':'调解失败'}</div>;
+            remarktext =  <div className="formArch content-indent"><PageRemark row={row} isPrint={true}/><PageRemark remark={remark} isPrint={false}/></div>;
+            contenttext = <DisputeCase rows={rows} content={content}/>;
+            resulttext = <div className="content-indent first-line">{data.result === 0 ? '调解成功':'调解失败'}</div>;
         }else{
             if(!data){
                 return null;
             }
-            remarktext = <Input type="textarea"  disabled={this.state.result === '-1'||this.state.result === ''} rows={4}  placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/>
-            contenttext = <Input type="textarea" disabled={this.state.result === '-1'||this.state.result === ''} rows={4}  onChange={this.textChange.bind(this)} value={this.state.content}/>
+            remarktext = <div className="formArch"><Input type="textarea"  disabled={this.state.result === '-1'||this.state.result === ''} rows={4}  placeholder="" value={this.state.remark} onChange={this.remarkChange.bind(this)}/></div>
+            contenttext =<div className="formArch"><Input type="textarea" disabled={this.state.result === '-1'||this.state.result === ''} rows={4}  onChange={this.textChange.bind(this)} value={this.state.content}/></div>
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
             resulttext = <Select className="result-select" domain="result" data={[{id:'0',name:'调解成功'},{id:'-1',name:'调解失败'}]} value={this.state.result} head="请选择" onChangeHandler={this.handleChange.bind(this)}/>
         }
@@ -183,6 +214,7 @@ class Protocol extends Component {
                         <div className="formArch word-title">当事人</div>
                         <PartyCell litigants={this.getLitigants()}/>
                     </div>
+                    {nextPage}
                     <div className="border-box">
                         <div className="formArch">
                             <div className="margin-form word-title find-style-left">调解结果</div>
@@ -195,16 +227,13 @@ class Protocol extends Component {
                         <div className="formArch">
                                 <div className="margin-form word-title find-style-left">调解协议</div>
                          </div>
-                        <div className="formArch">
-                            {contenttext}
-                        </div>
+                        {contenttext}
                     </div>
-                        <div className="formArch">
-                                <div className="margin-form word-title find-style-left">履行方式、时限</div>
-                        </div>
+                    {next}
                     <div className="formArch">
-                    {remarktext}
+                        <div className="margin-form word-title find-style-left">履行方式、时限</div>
                     </div>
+                    {remarktext}
                     <div className="fixed-box"></div>
                  </div>
                     <div className="bottom-left"></div>
@@ -213,6 +242,7 @@ class Protocol extends Component {
                 {btns}
                 <div className="fixed-box"></div>
                 <PopAlert visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
+                {nextPages}
                 <div className="bottom-position">
                     <div className="formArch font-weight-word">本协议一式三份，当事人、人民调解委员会各持一份。</div>
                     <div className="sign-margin">当事人签字：</div>
@@ -225,7 +255,9 @@ class Protocol extends Component {
 }
 
 Protocol.propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node,
+    row: PropTypes.array,
+    remark: PropTypes.string
 };
 
 function	select(state)	{
