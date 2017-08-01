@@ -106,10 +106,17 @@ class ApplyFor extends Component {
                 <div className="margin-form"><span className="word-title">申请时间：</span></div><TimeChoice name="applyTime" hide={0} onChange={this.onChangeHandler.bind(this)} value={this.state.applyTime}  defaultValue={this.state.defaultTime}/>
             </div>
         }
-        const {rows,rowNum} = PageContent.getRows(content,29);
-        let lastRows = (rowNum - 29)%42;
+        let length = this.getLitigants().length;
+        let num = 29 - 3*(length-2);
+        let nextPage;
+        if(num < 0){
+            nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+            num =  0;
+        }
+        const {rows,rowNum} = PageContent.getRows(content,num);
+        let lastRows = (rowNum - num)%42;
         let next;
-        if((rowNum >= 22&&rowNum < 29)||lastRows >= 35){
+        if((rowNum >= (num-7)&&rowNum < num)||lastRows >= 35){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
         }
         return (
@@ -124,6 +131,7 @@ class ApplyFor extends Component {
                             <div className="formArch word-title">当事人</div>
                             <PartyCell litigants={this.getLitigants()}/>
                         </div>
+                        {nextPage}
                         <div className="border-box">
                             <div className="formArch word-title">纠纷简要情况</div>
                             <DisputeCase rows={rows} content={content}/>

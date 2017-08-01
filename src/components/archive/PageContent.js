@@ -12,7 +12,6 @@ class PageContent extends Component {
             let row = 0;
             let inRows = [];
             let chr = '';
-            console.log(num);
             for(let c in i){
                 chr = i[c];
                 line += chr;

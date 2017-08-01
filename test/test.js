@@ -58,7 +58,9 @@ const archiveData = {id:'1',name:'卷宗1',result:0,type:{id:'13',name:'其他�
     creater:{id:'2',name:'调解员1'},
     litigants:[
         {id:'1',name:'p1',card:'230132199602200369',sex:1,nation:'汉',age:12,address:'地址1',contact:'13012345678',createTime:1499240237246,archive:{}},
-        {id:'2',name:'p2',card:'230132199602200360',sex:1,nation:'汉',age:12,address:'地址2',contact:'13012345679',createTime:1499240237246,archive:{}},
+        {id:'2',name:'p2',card:'230132199602200369',sex:1,nation:'汉',age:12,address:'地址2',contact:'13012345679',createTime:1499240237246,archive:{}},
+        {id:'3',name:'p3',card:'230132199602200369',sex:1,nation:'汉',age:12,address:'地址2',contact:'13012345679',createTime:1499240237246,archive:{}},
+        {id:'4',name:'p1',card:'230132199602200369',sex:1,nation:'汉',age:12,address:'地址1',contact:'13012345678',createTime:1499240237246,archive:{}}
     ],
     workers:[
         {id:'3',worker:{id:'2',name:'调解员1'},createTime:1499240237246,archive:{}},
