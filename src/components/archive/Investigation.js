@@ -183,10 +183,10 @@ class Investigation extends Component {
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
         const workerValue = this.getWorkers();
         const workerNames = this.state.workersName;
-        const {rows,rowNum} = PageContent.getRows(content,28);
-        let lastRows = (rowNum - 28)%42;
+        const {rows,rowNum} = PageContent.getRows(content,30);
+        let lastRows = (rowNum - 30)%44;
         let next;
-        if((rowNum >= 21&&rowNum < 28)||lastRows >= 35){
+        if((rowNum >= 22&&rowNum < 30)||lastRows >= 36){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
         }
         if(model === 0){
@@ -250,7 +250,6 @@ class Investigation extends Component {
                                 <PopMediator domain="workers" url={'api/archiveWorker/workers.json?aid='+id} name="workers" onChangeHandler={this.handleWorkersChange.bind(this)} value={workerValue}/>
                             </Pop>
                         </div>
-                        {next}
                     <div className="formArch"><div className="margin-form word-title name-style-left">调查记录</div></div>
                     {contents}
                     {sign}

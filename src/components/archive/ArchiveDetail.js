@@ -14,6 +14,11 @@ import AddPartyinput from './AddPartyinput'
 import merge from 'lodash/merge'
 import PopAlertHtml from '../pop/PopAlertHtml';
 import PopLoading from '../pop/PopLoading';
+import DisputeCase from './DisputeCase';
+import PageContent from './PageContent';
+import PageProContent from './PageProContent'
+import PageCheckContent from './PageCheckContent';
+
 class ArchiveDetail extends Component {
     constructor(props, context) {
         super(props, context);
@@ -229,19 +234,34 @@ class ArchiveDetail extends Component {
         return litigants;
     }
 
+    getProContent(response){
+        const {protocol} = response||{};
+        const {content} = protocol||{};
+        return content;
+    }
+
+    getCheckContent(response){
+        const {check} = response||{};
+        const {content} = check||{};
+        return content;
+    }
+
     renderByData(data,readData) {
         const { archive,header } = this.props;
         const {model} = this.state;
         const {response,action} = archive;
         const {state,protocol,check} = response||{};
         const {code} = protocol||{};
-        let proof = ''
+        const {content,litigants} = data||{};
+        let proContent = this.getProContent(response);
+        let checkContent = this.getCheckContent(response);
+        let proof = '';
         if(protocol !== null||protocol !== undefined){
             proof = <span><span className='reference-number'>文号</span><span className="font-big font-margin-top">{code}</span></span>
         }
         let name;
         let type;
-        let content;
+        let contents;
         let creater;
         let createTime = '';
         let keepTime = '';
@@ -252,43 +272,80 @@ class ArchiveDetail extends Component {
         let litigantsName = '';
         let workersName = '';
         let workers = '';
-        let litigants = '';
+        let litigant = '';
         let manager = '';
         let btns;
-        let styleName = '';
         let loading = this.state.load;
         if(action === null||action === ''||action === undefined){
             loading = '';
         }else{
             loading = '保存中……';
         }
+        let length = (litigants||[]).length;
+        let num = 26 - 3*(length-2);
+        let nextPage;
+        if(num < 0){
+            nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+            num =  0;
+        }
+        const {rows,rowNum} = PageContent.getRows(content,num);
+        let lastRows = (rowNum - num)%42;
+        let next;
+        if((rowNum >= (num-7)&&rowNum < num)||lastRows >= 35){
+            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+        }
+
+        let proNum = 34 - lastRows;
+        const {rowsPro,rowProNum} = PageProContent.getProCont(proContent,proNum);
+        let lastRow = (rowProNum - proNum)%42;
+        let nextPro;
+        if(proNum === 0){
+            nextPro = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+        }
+        let remarkRows = 34 - lastRow - rowProNum;
+        const {rowsCheck,rowCheckNum} = PageCheckContent.getCheckCont(checkContent,remarkRows);
+        let nextPages;
+        let nextCheck;
+        if(remarkRows === 0){
+            nextCheck = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+        }
+        if((rowCheckNum - remarkRows) < 0){
+            let nums = 34 - rowCheckNum - lastRow;
+            if(nums <= 7){
+                nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+            }
+        }else{
+            let lastCheckRow = (rowCheckNum - remarkRows)%42;
+            if((rowCheckNum >= (remarkRows - 7)&&rowNum < remarkRows)||lastCheckRow >= 35){
+                nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+            }
+        }
+
         if(model === 0){
             if(!header.user){
                 return null;
             }
             name = <Input name="name" className="text-input" style={{ width: 635 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
             type = <Select name="type" domain="type.id" url="api/archiveType/options.json" head="请选择" value={(data.type||{}).id} onChangeHandler={this.handleChange('type.id').bind(this)} />
-            content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
+            contents = <div className="formArch"><Input name="content" type="textarea" rows={4} value={content} onChange={this.handleChange('content').bind(this)}/></div>
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleManageChange.bind(this)}/>
             workersName = this.state.workersName;
             workers = <input className="btn-pop" onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
-            litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants}  onChange={this.handleLitigantChange.bind(this)}/>
+            litigant = <AddPartyinput ref="litigants" model={model} data={litigants}  onChange={this.handleLitigantChange.bind(this)}/>
             creater = header.user.response.user.name;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.addNewArchive.bind(this)} className="addPerson"/></div>
-            styleName = '';
         }else if(model === 1){
             if(state !== 0){
                 return null;
             }
             name = <div className="font-margin font-big">{data.name}</div>;
             type = <div className="font-margin font-big">{data.type.name}</div>;
-            let contents = data.content.split('\n').map((i,k)=><p key={k}>{i}</p>);
-            content = <div className="content-indent">{contents}</div>;
+            contents = <DisputeCase rows={rows} content={content}/>;
             manager = data.manager.name;
             if(data.workers){
                 workers = data.workers.map((i)=>i.worker.name).join(',');
             }
-            litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants} onChange={this.handleLitigantChange.bind(this)}/>
+            litigant = <AddPartyinput ref="litigants" model={model} data={litigants} onChange={this.handleLitigantChange.bind(this)}/>
             createTime = getDateTime(data.createTime);
             keepTime = getDateTime(data.keepTime);
             if(protocol){
@@ -296,12 +353,12 @@ class ArchiveDetail extends Component {
                 if(data.state === -1){
                     failTime = protoTime;
                 }
-                protoText = protocol.content;
+                protoText = <div><PageProContent rowsPro={rowsPro} isPrint={true}/><PageProContent content={proContent} isPrint={false}/></div>;
             }
             if(check){
-                checkText = check.content
+                checkText = <div><PageCheckContent rowsCheck={rowsCheck} isPrint={true}/><PageCheckContent content={checkContent} isPrint={false}/></div>;
             }
-            litigantsName = (data.litigants||[]).map((i)=>i.name).join(',');
+            litigantsName = (litigants||[]).map((i)=>i.name).join(',');
             creater = data.creater.name;
             let editBtn;
             let btnBox = 'formArch btn-box print-btn';
@@ -310,18 +367,17 @@ class ArchiveDetail extends Component {
                 btnBox = 'formArch btn-box';
             }
             btns = <div className={btnBox} style={{ height:40 }}>{editBtn}<input type="button" onClick={this.getPrint.bind(this)} className="change-btn" value="打印" /></div>
-            styleName = '';
         }else{
             if(state !== 0){
                 return null;
             }
             name = <Input name="name" className="text-input" style={{ width: 635 }} placeholder="" value={data.name}  onChange={this.handleChange('name').bind(this)} maxLength={50}/>
             type = <Select domain="type.id" url="api/archiveType/options.json" head="请选择" value={(data.type||{}).id} onChangeHandler={this.handleChange('type.id').bind(this)} />
-            content = <Input name="content" type="textarea" rows={4} value={data.content} onChange={this.handleChange('content').bind(this)}/>
+            contents = <div className="formArch"><Input name="content" type="textarea" rows={4} value={content} onChange={this.handleChange('content').bind(this)}/></div>
             manager = <Select domain="manager.id" url="api/user/listByRole.json?role=2" head="请选择" value={(data.manager||{}).id} onChangeHandler={this.handleManageChange.bind(this)}/>
             workersName = this.state.workersName;
             workers = <input className="btn-pop" onClick={this.upAddClick.bind(this)} type="button" value="选择"/>
-            litigants = <AddPartyinput ref="litigants" model={model} data={data.litigants} onChange={this.handleLitigantChange.bind(this)}/>
+            litigant = <AddPartyinput ref="litigants" model={model} data={litigants} onChange={this.handleLitigantChange.bind(this)}/>
             createTime = getDateTime(readData.createTime);
             keepTime = getDateTime(readData.keepTime);
             if(protocol){
@@ -334,10 +390,9 @@ class ArchiveDetail extends Component {
             if(check){
                 checkText = check.content
             }
-            litigantsName = (data.litigants||[]).map((i)=>i.name).join(',');
+            litigantsName = (litigants||[]).map((i)=>i.name).join(',');
             creater = readData.creater.name;
             btns = <div className="formArch" style={{ height:40 }}><input type="button" value="保存" onClick={this.updateArchive.bind(this)} className="addPerson"/></div>
-            styleName = '';
         }
         let workerValue = [];
         if(data.workerIds){
@@ -367,11 +422,12 @@ class ArchiveDetail extends Component {
                         </div>
                         <div className="border-box">
                             <div className="formArch word-title">当事人</div>
-                            {litigants}
+                            {litigant}
                         </div>
+                        {nextPage}
                         <div className="border-box">
                             <div className="formArch word-title">纠纷简要情况</div>
-                            <div className="formArch">{content}</div>
+                            {contents}
                         </div>
                         <div className="border-box no-print">
                             <div className="formArch word-title">调解员</div>
@@ -390,14 +446,17 @@ class ArchiveDetail extends Component {
                         <div className="formArch no-print"><span className="word-title find-style-left">立卷时间</span><span className="left-news">{createTime}</span></div>
                         <div className="formArch no-print"><span className="word-title find-style-left">调解日期</span><span className="left-news">{protoTime}</span></div>
                         <div className="formArch no-print"><span className="word-title find-style-left">保管期限</span><span className="left-news">{keepTime}</span></div>
+                        {next}
                         <div className="formArch"><span className="word-title find-style-left">达成协议时间</span><span className="left-news print-hide">{protoTime}</span></div>
-                        <div className="formArch content-indent hidden print-show">{protoTime}</div>
-                        <div className="formArch hidden print-show"><div className="margin-form word-title find-style-left">调解结果</div></div>
-                        <div className="formArch hidden print-show"><div className="content-indent">{data.result === 0 ? '调解成功':'调解失败'}</div></div>
+                        <div className="formArch content-indent first-line hidden print-show">{protoTime}</div>
+                        <div className="formArch hidden print-show"><span className="word-title find-style-left">调解结果</span></div>
+                        <div className="formArch hidden print-show"><div className="content-indent first-line">{data.result === 0 ? '调解成功':'调解失败'}</div></div>
+                        {nextPro}
                         <div className="formArch"><span className="word-title find-style-left">调解协议</span><span className="left-news print-hide">{protoText}</span></div>
-                        <div className="formArch content-indent hidden print-show">{protoText}</div>
+                        <div className="hidden print-show">{protoText}</div>
+                        {nextCheck}
                         <div className="formArch"><span className="word-title find-style-left">协议履行情况</span><span className="left-news print-hide">{checkText}</span></div>
-                        <div className="formArch content-indent hidden print-show">{checkText}</div>
+                        <div className="hidden print-show">{checkText}</div>
                         <div className="formArch no-print"><span className="word-title find-style-left">调解失败时间</span><span className="left-news">{failTime}</span></div>
                         <div className="formArch no-print"><span className="word-title find-style-left">当事人姓名</span><span className="left-news">{litigantsName}</span></div>
                         <div className="formArch no-print"><span className="word-title find-style-left">登记人</span><span className="left-news">{creater}</span></div>
@@ -410,6 +469,7 @@ class ArchiveDetail extends Component {
                 <div className="fixed-box"></div>
                 <PopAlertHtml visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
                 <PopLoading visible={loading!==''} title=""  width={400} zIndex={1270} modalzIndex={1260} load={loading}/>
+                {nextPages}
                 <div className="bottom-position">
                     <div className="sign-margin">登记人签字：</div>
                     <div className="time-right">{getDate(data.createTime)}</div>

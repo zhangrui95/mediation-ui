@@ -1,13 +1,16 @@
+/**
+ * Created by Administrator on 2017/8/2 0002.
+ */
 import React, { Component, PropTypes } from 'react'
 const printLength = 50;
 const printPageKey = '@@page';
-class PageContent extends Component {
+class PageCheckContent extends Component {
 
-    static getRows(content,num){
+    static getCheckCont(content,num){
         const ps = (content||'').split('\n');
-        let rowNumLen = 1;
-        let rowNum = '';
-        const rows = ps.map((i,k)=>{
+        let rowNumLen =1;
+        let rowCheckNum = '';
+        const rowsCheck = ps.map((i,k)=>{
             let line = '';
             let count = 0;
             let row = 0;
@@ -23,14 +26,14 @@ class PageContent extends Component {
                     count = 0;
                     row += 1;
                     rowNumLen+=1;
-                    rowNum = rowNumLen + k;
-                    if(rowNum <= num){
-                        if(rowNum % num === 0) {
+                    rowCheckNum = rowNumLen + k;
+                    if(rowCheckNum <= num){
+                        if(rowCheckNum % num === 0) {
                             inRows.push(printPageKey);
                         }
                     }else{
-                        if((rowNum - num)% 44 === 0){
-                             inRows.push(printPageKey);
+                        if((rowCheckNum - num)% 44 === 0){
+                            inRows.push(printPageKey);
                         }
                     }
                 }
@@ -40,33 +43,33 @@ class PageContent extends Component {
             }
             return inRows;
         });
-        return {rows,rowNum};
+        return {rowsCheck,rowCheckNum};
     }
 
     render() {
-        const {rows,content,isPrint} = this.props;
+        const {rowsCheck,content,isPrint} = this.props;
         if(isPrint){
-            const cont = (rows||[]).map((i,k)=>
+            const cont = (rowsCheck||[]).map((i,k)=>
                 <div className="content-indent" key={k}>
                     {i.map((r,j)=>
                         (r===printPageKey ?<div key={j}><div className="page-next"></div><div className="page-fixed-height"></div></div>:<p className={j===0?'first-line':''} key={j}>{r}</p>)
                     )}
                 </div>
             );
-            return <div className="hidden print-show">{cont}</div>;
+            return <div className="formArch content-indent hidden print-show">{cont}</div>;
         }else{
             const ps = (content||'').split('\n');
             const cont = ps.map((i,k)=><div key={k}>{i}</div>);
-            return <div className="no-print first-line">{cont}</div>;
+            return <div className="no-print">{cont}</div>;
         }
     }
 }
 
-PageContent.propTypes = {
-    rows: PropTypes.array,
+PageCheckContent.propTypes = {
+    rowsCheck: PropTypes.array,
     content: PropTypes.string,
     isPrint: PropTypes.bool.isRequired
 };
 
 
-export default PageContent;
+export default PageCheckContent;

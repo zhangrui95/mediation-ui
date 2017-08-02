@@ -140,33 +140,32 @@ class Protocol extends Component {
         let btns = '';
         let disabled = '';
         let length = this.getLitigants().length;
-        let num = 23 - 3*(length-2);
+        let num = 24 - 3*(length-2);
         let nextPage;
         if(num < 0){
             nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
             num =  0;
         }
         const {rows,rowNum} = PageContent.getRows(content,num);
-        let lastRows = (rowNum - num)%42;
+        let lastRows = (rowNum - num)%44;
         let next;
-        let remarkRows = 40 - lastRows;
+        let remarkRows = 42 - lastRows;
         if(remarkRows === 0){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
         const {row,rowNumber} = PageRemark.getRemark(remark,remarkRows);
         let nextPages;
         if((rowNumber - remarkRows) < 0){
-            let nums =40 - rowNumber - lastRows;
+            let nums =42 - rowNumber - lastRows;
             if(nums <= 10){
                 nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
             }
         }else{
-            let lastRow = (rowNumber - remarkRows)%42;
-            if((rowNumber >= (remarkRows - 10)&&rowNum < remarkRows)||lastRow >= 32){
+            let lastRow = (rowNumber - remarkRows)%44;
+            if((rowNumber >= (remarkRows - 10)&&rowNum < remarkRows)||lastRow >= 34){
                 nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
             }
         }
-
         if(model === 0){
             const archiveData = this.getData(archive);
             if(archiveData && archiveData.finishState === 0){

@@ -8,8 +8,9 @@ class PageRemark extends Component {
 
     static getRemark(remark,num){
         const ps = (remark||'').split('\n');
-        let rowNumber = 1;
-        const row = ps.map((i)=>{
+        let rowNumLen = 1;
+        let rowNumber = '';
+        const row = ps.map((i,k)=>{
             let line = '';
             let count = 0;
             let row = 0;
@@ -24,13 +25,14 @@ class PageRemark extends Component {
                     line  = '';
                     count = 0;
                     row += 1;
-                    rowNumber+=1;
+                    rowNumLen +=1;
+                    rowNumber = rowNumLen + k;
                     if(rowNumber <= num){
                         if(rowNumber % num === 0) {
                             inRows.push(printPageKey);
                         }
                     }else{
-                        if((rowNumber - num)% 42 === 0){
+                        if((rowNumber - num)% 44 === 0){
                             inRows.push(printPageKey);
                         }
                     }

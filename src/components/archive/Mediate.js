@@ -135,10 +135,10 @@ class Mediate extends Component {
         let contents = '';
         let btns = '';
         let sign = '';
-        const {rows,rowNum} = PageContent.getRows(content,30); 
-        let lastRows = (rowNum - 30)%42;
+        const {rows,rowNum} = PageContent.getRows(content,32);
+        let lastRows = (rowNum - 32)%44;
         let next;
-        if((rowNum >= 22&&rowNum < 30)||lastRows >= 34){
+        if((rowNum >= 24&&rowNum < 32)||lastRows >= 36){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
         }
         if(model === 0){

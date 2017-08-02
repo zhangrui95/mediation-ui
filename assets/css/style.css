@@ -56,7 +56,7 @@ select, input {
 body {
 	margin: 0;
 	padding: 0;
-	font-family: "微软雅黑", "宋体", Arial, Helvetica, sans-serif;
+	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
 	color: #000;
 	background: #fff;
 }
@@ -207,7 +207,7 @@ body {
 	width: 245px;
 	text-align: left;
 	font-size: 13px;
-	font-family: "微软雅黑", "宋体", Arial, Helvetica, sans-serif;
+	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
 	color: #FFF;
 	height: 30px;
 	line-height: 30px;
@@ -714,7 +714,7 @@ body {
 }
 .account-box ul li a {
 	color: #79869c;
-	font-family: "微软雅黑";
+	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
 	font-size: 12px;
 	text-align: center;
 	text-decoration: none;
@@ -722,7 +722,7 @@ body {
 }
 .account-box ul li a:hover {
 	color: #3D444F;
-	font-family: "微软雅黑";
+	font-family: "Microsoft YaHei", "\5b8b\4f53", "Arial", "Helvetica", "sans-serif";
 	font-size: 12px;
 	text-align: center;
 	text-decoration: none;
@@ -1500,7 +1500,7 @@ to {
 	float: left;
 }
 .news-width-margin {
-	width: 80px;
+	/*width: 80px;*/
 	text-align: right;
 	float: left;
 	margin-top: 7px;
@@ -1544,8 +1544,11 @@ to {
 	line-height: 26px;
 }
 .left-news{
-	line-height: 40px;
+	width: 640px;
+	float: left;
+	line-height: 30px;
 	font-size: 14px;
+	margin-top: 5px;
 }
 .center-box{
 	padding-bottom: 60px;
@@ -1838,7 +1841,4 @@ to {
 }
 .weight-no{
 	font-weight: 100;
-}
-.left-news-line{
-
 }
