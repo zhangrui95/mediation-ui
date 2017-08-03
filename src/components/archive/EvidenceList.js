@@ -18,7 +18,6 @@ class EvidenceList extends Component {
 
     componentDidUpdate(){
         if(this.print){
-            console.log('this.state',this.state)
             this.print = false;
             setTimeout(function(){
                 window.print();
@@ -53,7 +52,6 @@ class EvidenceList extends Component {
         let src = 'api/evidence/photo.json?id='+imgId;
         let imgBox = '';
         if(imgId !== ''){
-            console.log(src);
             imgBox = <div><div className="title-form-name hidden print-show">证据照片</div><div className="hidden print-show"><div className="formArch word-title">证据照片</div><img className="evid-img" src={src}/></div></div>
         }
         if(data === null || data === undefined){
