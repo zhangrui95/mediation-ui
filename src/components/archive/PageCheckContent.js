@@ -8,9 +8,8 @@ class PageCheckContent extends Component {
 
     static getCheckCont(content,num){
         const ps = (content||'').split('\n');
-        let rowNumLen =1;
-        let rowCheckNum = '';
-        const rowsCheck = ps.map((i,k)=>{
+        let rowCheckNum =1;
+        const rowsCheck = ps.map((i)=>{
             let line = '';
             let count = 0;
             let row = 0;
@@ -25,8 +24,7 @@ class PageCheckContent extends Component {
                     line  = '';
                     count = 0;
                     row += 1;
-                    rowNumLen+=1;
-                    rowCheckNum = rowNumLen + k;
+                    rowCheckNum+=1;
                     if(rowCheckNum <= num){
                         if(rowCheckNum % num === 0) {
                             inRows.push(printPageKey);

@@ -288,39 +288,41 @@ class ArchiveDetail extends Component {
             nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
             num =  0;
         }
+        let proNum;
         const {rows,rowNum} = PageContent.getRows(content,num);
         let lastRows = (rowNum - num)%42;
         let next;
         if((rowNum >= (num-7)&&rowNum < num)||lastRows >= 35){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
-
-        let proNum = 34 - lastRows;
+        let remarkRows;
+        if(lastRows > 0){
+            proNum = 28 - lastRows;
+        }else{
+            proNum = num - rowNum - 6;
+        }
         const {rowsPro,rowProNum} = PageProContent.getProCont(proContent,proNum);
         let lastRow = (rowProNum - proNum)%42;
         let nextPro;
         if(proNum === 0){
             nextPro = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
-        let remarkRows = 34 - lastRow - rowProNum;
-        const {rowsCheck,rowCheckNum} = PageCheckContent.getCheckCont(checkContent,remarkRows);
-        let nextPages;
-        let nextCheck;
-        if(remarkRows === 0){
-            nextCheck = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
-        }
-        if((rowCheckNum - remarkRows) < 0){
-            let nums = 34 - rowCheckNum - lastRow;
-            if(nums <= 7){
-                nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
-            }
+        if(lastRow > 0){
+            remarkRows = 30 - lastRow;
         }else{
-            let lastCheckRow = (rowCheckNum - remarkRows)%42;
-            if((rowCheckNum >= (remarkRows - 7)&&rowNum < remarkRows)||lastCheckRow >= 35){
+            remarkRows = proNum - rowProNum - 4;
+        }
+        const {rowsCheck,rowCheckNum} = PageCheckContent.getCheckCont(checkContent,remarkRows);
+        let lastCheckRow = (rowCheckNum - remarkRows)%42;
+        let nextCheck;
+        let nextPages;
+        if(lastCheckRow === 42 ||remarkRows < 3){
+            nextCheck = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+        }else{
+            if((rowCheckNum >= (remarkRows - 10)&&rowCheckNum < remarkRows)||lastCheckRow >=35){
                 nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
             }
         }
-
         if(model === 0){
             if(!header.user){
                 return null;
