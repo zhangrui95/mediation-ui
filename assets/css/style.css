@@ -1379,9 +1379,9 @@ to {
 }
 .font-weight-word {
 	font-size: 18px;
-	line-height: 80px;
+	line-height: 50px;
 	font-weight: 900;
-	height: 80px;
+	height: 50px;
 }
 .apply-name {
 	height: 60px;
