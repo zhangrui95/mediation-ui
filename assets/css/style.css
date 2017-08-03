@@ -1836,8 +1836,9 @@ to {
 	width: 65px;
 }
 .evid-img{
-	width: 90%;
-	margin: 0 5%;
+	width: 60%;
+	margin: 10px 20% 0;
+	max-height: 1100px;
 }
 .weight-no{
 	font-weight: 100;

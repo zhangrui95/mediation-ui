@@ -20,7 +20,10 @@ class EvidenceList extends Component {
         if(this.print){
             console.log('this.state',this.state)
             this.print = false;
-            window.print();
+            setTimeout(function(){
+                window.print();
+            },500);
+
         }
     }
 
@@ -47,9 +50,11 @@ class EvidenceList extends Component {
         const {response} = evidence;
         const {data} = response||{};
         let imgId = this.state.imgId;
+        let src = 'api/evidence/photo.json?id='+imgId;
         let imgBox = '';
         if(imgId !== ''){
-            imgBox = <div><div className="title-form-name hidden print-show">证据照片</div><div className="hidden print-show"><div className="formArch word-title">证据照片</div><img className="evid-img" src={'api/evidence/photo.json?id='+imgId}/></div></div>
+            console.log(src);
+            imgBox = <div><div className="title-form-name hidden print-show">证据照片</div><div className="hidden print-show"><div className="formArch word-title">证据照片</div><img className="evid-img" src={src}/></div></div>
         }
         if(data === null || data === undefined){
             return null;

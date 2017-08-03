@@ -106,6 +106,10 @@ class Mediate extends Component {
             this.setState({msg:'调解记录不能为空'});
             return false;
         }
+        if(this.state.content.length > 1000){
+            this.setState({msg:'调查记录字数不能超过1000字'});
+            return false;
+        }
         return true;
     }
     goBack(){

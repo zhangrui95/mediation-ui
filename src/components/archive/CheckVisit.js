@@ -88,6 +88,10 @@ class CheckVisit extends Component {
             this.setState({msg:'回访情况不能为空'});
             return false;
         }
+        if(this.state.input.length > 1000){
+            this.setState({msg:'回访情况字数不能超过1000字'});
+            return false;
+        }
         return true;
     }
 

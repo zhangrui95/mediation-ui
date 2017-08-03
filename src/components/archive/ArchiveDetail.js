@@ -198,6 +198,10 @@ class ArchiveDetail extends Component {
             this.setState({msg:'当事人不能小于2'});
             return false;
         }
+        if(data.content.length > 1000){
+            this.setState({msg:'纠纷简要情况字数不能超过1000字'});
+            return false;
+        }
         const litigants = (data.litigants||[]).map((it,i)=> ArchiveDetail.validateLitigants(it,i)).filter(i=>i!=='').join('<br/>');
         if(litigants !== ''){
             this.setState({msg:litigants});
@@ -234,6 +238,30 @@ class ArchiveDetail extends Component {
         return litigants;
     }
 
+    static getTitle(archive){
+        let text = '';
+        const {response} = archive;
+        const {data} = response||{};
+        const {state} = data||{};
+        switch(state)
+        {
+            case -1:
+                text = '调解失败';
+                break;
+            case 0:
+                text = '未完成';
+                break;
+            case 1:
+                text = '调解成功';
+                break;
+            case 2:
+                text = '调解中止';
+                break;
+            default:
+        }
+        return {state:text};
+    }
+
     getProContent(response){
         const {protocol} = response||{};
         const {content} = protocol||{};
@@ -253,10 +281,11 @@ class ArchiveDetail extends Component {
         const {state,protocol,check} = response||{};
         const {code} = protocol||{};
         const {content,litigants} = data||{};
+        const title = ArchiveDetail.getTitle(archive);
         let proContent = this.getProContent(response);
         let checkContent = this.getCheckContent(response);
         let proof = '';
-        if(protocol !== null||protocol !== undefined){
+        if(code !== null||code !== undefined||code !== ''){
             proof = <span><span className='reference-number'>文号</span><span className="font-big font-margin-top">{code}</span></span>
         }
         let name;
@@ -452,7 +481,7 @@ class ArchiveDetail extends Component {
                         <div className="formArch"><span className="word-title find-style-left">达成协议时间</span><span className="left-news print-hide">{protoTime}</span></div>
                         <div className="formArch content-indent first-line hidden print-show">{protoTime}</div>
                         <div className="formArch hidden print-show"><span className="word-title find-style-left">调解结果</span></div>
-                        <div className="formArch hidden print-show"><div className="content-indent first-line">{data.result === 0 ? '调解成功':'调解失败'}</div></div>
+                        <div className="formArch hidden print-show"><div className="content-indent first-line">{title.state}</div></div>
                         {nextPro}
                         <div className="formArch"><span className="word-title find-style-left">调解协议</span><span className="left-news print-hide">{protoText}</span></div>
                         <div className="hidden print-show">{protoText}</div>

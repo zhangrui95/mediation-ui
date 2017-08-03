@@ -116,6 +116,14 @@ class Protocol extends Component {
             this.setState({msg:'履行方式、时限不能为空'});
             return false;
         }
+        if(this.state.content.length > 1000){
+            this.setState({msg:'调解协议字数不能超过1000字'});
+            return false;
+        }
+        if(this.state.remark.length > 1000){
+            this.setState({msg:'履行方式、时限字数不能超过1000字'});
+            return false;
+        }
         return true;
     }
     getData(archive){
@@ -140,7 +148,7 @@ class Protocol extends Component {
         let btns = '';
         let disabled = '';
         let length = this.getLitigants().length;
-        let num = 24 - 3*(length-2);
+        let num = 32 - 3*(length-2);
         let nextPage;
         if(num < 0){
             nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
@@ -149,22 +157,20 @@ class Protocol extends Component {
         const {rows,rowNum} = PageContent.getRows(content,num);
         let lastRows = (rowNum - num)%44;
         let next;
-        let remarkRows = 42 - lastRows;
-        if(remarkRows === 0){
-            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+        let remarkRows;
+        if(lastRows > 0){
+            remarkRows = 42 - lastRows;
+        }else{
+            remarkRows = num - rowNum - 10;
         }
         const {row,rowNumber} = PageRemark.getRemark(remark,remarkRows);
         let nextPages;
-        if((rowNumber - remarkRows) < 0){
-            let nums =42 - rowNumber - lastRows;
-            if(nums <= 10){
-                nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
-            }
-        }else{
-            let lastRow = (rowNumber - remarkRows)%44;
-            if((rowNumber >= (remarkRows - 10)&&rowNum < remarkRows)||lastRow >= 34){
-                nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
-            }
+        if(remarkRows < 5){
+            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+        }
+        let lastRow = (rowNumber - remarkRows)%44;
+        if((rowNumber >= (remarkRows - 10)&&rowNumber < remarkRows)||lastRow >= 34){
+            nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
         }
         if(model === 0){
             const archiveData = this.getData(archive);
