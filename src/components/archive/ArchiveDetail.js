@@ -326,7 +326,7 @@ class ArchiveDetail extends Component {
         }
         let remarkRows;
         if(lastRows > 0){
-            proNum = 28 - lastRows;
+            proNum = 34 - lastRows;
         }else{
             proNum = num - rowNum - 6;
         }
@@ -339,7 +339,11 @@ class ArchiveDetail extends Component {
         if(lastRow > 0){
             remarkRows = 30 - lastRow;
         }else{
-            remarkRows = proNum - rowProNum - 4;
+            if(lastRows < 0){
+                remarkRows = proNum - rowProNum - 4;
+            }else{
+                remarkRows = 31 - lastRows - rowProNum;
+            }
         }
         const {rowsCheck,rowCheckNum} = PageCheckContent.getCheckCont(checkContent,remarkRows);
         let lastCheckRow = (rowCheckNum - remarkRows)%42;

@@ -148,7 +148,7 @@ class Protocol extends Component {
         let btns = '';
         let disabled = '';
         let length = this.getLitigants().length;
-        let num = 32 - 3*(length-2);
+        let num = 30 - 3*(length-2);
         let nextPage;
         if(num < 0){
             nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
