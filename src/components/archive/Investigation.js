@@ -194,10 +194,12 @@ class Investigation extends Component {
         const {investTime,address,otherPerson,targetPerson,content} = data||{};
         const workerValue = this.getWorkers();
         const workerNames = this.state.workersName;
-        const {rows,rowNum} = PageContent.getRows(content,30);
-        let lastRows = (rowNum - 30)%44;
+        const pageRows = 44;
+        const topRows = 14;
+        const {rows,rowNum} = PageContent.getRows(content,pageRows-topRows);
+        let lastRows = (rowNum  + topRows)%44;
         let next;
-        if((rowNum >= 22&&rowNum < 30)||lastRows >= 36){
+        if(lastRows >= 39){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
         }
         if(model === 0){

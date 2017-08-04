@@ -136,10 +136,12 @@ class CheckVisit extends Component {
         const {content} = data||{};
         const litigantsName = this.getLitigants(archive);
         const result = this.getResult(archive);
-        const {rows,rowNum} = PageContent.getRows(content,35);
-        let lastRows = (rowNum - 35)%44;
+        const pageRows = 44;
+        const topRows = 9;
+        const {rows,rowNum} = PageContent.getRows(content,pageRows-topRows);
+        let lastRows = (rowNum + topRows)%44;
         let next;
-        if((rowNum >= 28&&rowNum < 35)||lastRows >= 37){
+        if(lastRows >= 39){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
         }
         if(model === 0){

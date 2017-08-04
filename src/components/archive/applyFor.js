@@ -113,16 +113,18 @@ class ApplyFor extends Component {
             </div>
         }
         let length = this.getLitigants().length;
-        let num = 30 - 3*(length-2);
+        const pageRows = 44;
+        const topRows = 14;
+        let num = pageRows - topRows - 3*(length-2);
         let nextPage;
         if(num < 0){
-            nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+            nextPage = (<div><div className="page-next"></div></div>);
             num =  0;
         }
         const {rows,rowNum} = PageContent.getRows(content,num);
-        let lastRows = (rowNum - num)%44;
+        let lastRows = (rowNum + topRows + 3*(length-2))%44;
         let next;
-        if((rowNum >= (num-7)&&rowNum < num)||lastRows >= 37){   
+        if(lastRows >= 39){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
         }
         return (
