@@ -18,6 +18,7 @@ import DisputeCase from './DisputeCase';
 import PageContent from './PageContent';
 import PageProContent from './PageProContent'
 import PageCheckContent from './PageCheckContent';
+import {setHeaderClass,setFooterClass} from '../../utils/body'
 
 class ArchiveDetail extends Component {
     constructor(props, context) {
@@ -27,6 +28,11 @@ class ArchiveDetail extends Component {
         const {response} = archive;
         const {data} = response || {};
         this.state = {addBox:false,model: id !== null && id !== undefined && id !== '' ? 1 : 0,data:merge({},ArchiveDetail.data2state(data||{},header)),msg:'',workersName:ArchiveDetail.getWorkersName(data),load:''};
+    }
+
+    componentDidMount() {
+        setHeaderClass('print-header-box');
+        setFooterClass('print-bottom-box');
     }
 
     componentWillReceiveProps(next) {

@@ -35,3 +35,12 @@ export function getDate(ms, type) {
     }
     return dateStr;
 }
+
+export function getYear(ms) {
+    if (ms === null || ms === undefined) {
+        return '';
+    }
+    const date = new Date(ms);
+    const year = date.getFullYear()
+    return year;
+}

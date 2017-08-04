@@ -10,6 +10,7 @@ import TimeChoice from './TimeChoice';
 import DisputeCase from './DisputeCase';
 import PageContent from './PageContent';
 import PopAlert from '../pop/PopAlert';
+import {setHeaderClass,setFooterClass} from '../../utils/body'
 
 class ApplyFor extends Component {
 
@@ -20,6 +21,11 @@ class ApplyFor extends Component {
         const {data} = response||{};
         const {applyTime} = data||{};
         this.state = {model: applyTime?1:0,applyTime:getDateTime(applyTime),defaultTime:getDateTime(new Date().getTime()),msg:''};
+    }
+
+    componentDidMount() {
+        setHeaderClass('print-header-box');
+        setFooterClass('print-bottom-box');
     }
 
     componentWillReceiveProps(next) {

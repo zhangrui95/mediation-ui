@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import EvidenceCell from './EvidenceCell'
 import {LIST_BY_ARCHIVE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
+import {setHeaderClass,setFooterClass} from '../../utils/body'
 
 class EvidenceList extends Component {
     constructor(props, context) {
@@ -12,6 +13,11 @@ class EvidenceList extends Component {
         this.print = false;
     }
     
+    componentDidMount() {
+        setHeaderClass('print-header-box');
+        setFooterClass('print-bottom-box');
+    }
+
     componentWillMount(){
         this.load();
     }
@@ -21,7 +27,7 @@ class EvidenceList extends Component {
             this.print = false;
             setTimeout(function(){
                 window.print();
-            },500);
+            },800);
 
         }
     }

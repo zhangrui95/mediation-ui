@@ -12,6 +12,7 @@ import TimeChoice from './TimeChoice'
 import PopAlert from '../pop/PopAlert';
 import DisputeCase from './DisputeCase';
 import PageContent from './PageContent';
+import {setHeaderClass,setFooterClass} from '../../utils/body'
 
 class Investigation extends Component {
     constructor(props, context) {
@@ -22,6 +23,12 @@ class Investigation extends Component {
         const {edit} = query||{};
         this.state = {addBox:false,model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? (edit?2:1) : 0,time:'',address:'',otherPerson:'',targetPerson:'',content:'',workerIds:'',workersName:'',defaultTime:getDateTime(new Date().getTime()),msg:''};
     }
+
+    componentDidMount() {
+        setHeaderClass('print-header-box');
+        setFooterClass('print-bottom-box');
+    }
+    
     componentWillReceiveProps(next){
         const {actions,params} = this.props;
         const {investigationDetail} = next;

@@ -10,6 +10,7 @@ import TimeChoice from './TimeChoice'
 import PopAlert from '../pop/PopAlert';
 import DisputeCase from './DisputeCase';
 import PageContent from './PageContent';
+import {setHeaderClass,setFooterClass} from '../../utils/body'
 
 class Mediate extends Component {
     constructor(props, context) {
@@ -20,6 +21,12 @@ class Mediate extends Component {
         const {edit} = query||{};
         this.state = {model: mid !== 'create'&& mid !== null && mid !== undefined && mid !== '' ? (edit?2:1) : 0,time:'',content:'',defaultTime:getDateTime(new Date().getTime()),msg:''};
     }
+
+    componentDidMount() {
+        setHeaderClass('print-header-box');
+        setFooterClass('print-bottom-box');
+    }
+
     componentWillReceiveProps(next){
         const {actions,params} = this.props;
         const {mediateDetail} = next;
@@ -107,7 +114,7 @@ class Mediate extends Component {
             return false;
         }
         if(this.state.content.length > 1000){
-            this.setState({msg:'调查记录字数不能超过1000字'});
+            this.setState({msg:'调解记录字数不能超过1000字'});
             return false;
         }
         return true;

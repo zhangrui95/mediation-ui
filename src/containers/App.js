@@ -1,22 +1,19 @@
 import React, { Component, PropTypes } from 'react'
 import Header from '../components/Header'
 import Nav from '../components/nav/NavAssembler'
-import PageHeader from '../components/archive/PageHeader';
-import PageFooter from '../components/archive/PageFooter';
 import {setBodyClass,setMainClass} from '../utils/body'
 
 class App extends Component {
 
   componentDidMount() {
-      setBodyClass('index-bg');
-      setMainClass('main');
-  }
+    setBodyClass('index-bg');
+    setMainClass('main');
+}
 
   render() {
     const { children } = this.props;
     return (
       <div>
-        <PageHeader/>
         <Header/>
         <div className="main-body">
           <Nav/>
@@ -27,7 +24,6 @@ class App extends Component {
         <div className="yun2 yun"> </div>
         <div className="yun3 yun"> </div>
         <div className="yun4 yun"> </div>
-         <PageFooter/>
       </div>
     )
   }

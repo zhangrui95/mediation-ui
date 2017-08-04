@@ -6,12 +6,21 @@ import * as syncActions from '../../actions/syncAction';
 import * as arhciveActions from '../../actions/arhcive';
 import UpLoading from './UpLoading';
 import PopAlert from '../pop/PopAlert';
+import {ENVELOPE_Logo_Img} from '../../constants/Constant';
+import {getDate,getYear} from '../../utils/date';
+import {setHeaderClass,setFooterClass} from '../../utils/body'
 
 class ArchiveFinish extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {msg:''};
     }
+
+    componentDidMount() {
+        setHeaderClass('print-header-box-none');
+        setFooterClass('print-footer-box-none');
+    }
+
     componentWillReceiveProps(next) {
         const {actions} = this.props;
         const {archive} = next;
@@ -35,22 +44,61 @@ class ArchiveFinish extends Component {
         const {syncActions} = this.props;
         syncActions.request(ARCHIVE_FINISH,{id});
     }
-
+    
+    getPrint(){
+        window.print();
+    }
+    
+    getWorkers(archive){
+        const {response} = archive;
+        const {data} = response||{};
+        const {workers,manager}= data||{};
+        let wnames = (workers||[]).map((i)=>(i.worker||{}).name||'').join(',');
+        if(wnames !== ''){
+            wnames = ','+wnames;
+        }
+        return ((manager||{}).name||'')+wnames;
+    }
     render() {
         const { params} = this.props;
         const { id} = params;
         const { archive} = this.props;
         const { response} = archive;
-        const { data} = response||{};
-        const { finishState} = data||{};
+        const { data,protocol} = response||{};
+        const { finishState,type,name,creater} = data||{};
+        const {code} = protocol||{};
+        let  protoTime = getDate(protocol.createTime);
+        let  createTime = getDate(data.createTime);
+        let keepTime = getDate(data.keepTime);
+        let year = getYear(data.createTime);
         let btns;
+        let envelope;
         if(finishState === 0){
-            btns = (<div className="formArch" style={{ height:40 }}><input type="button" value="提交" onClick={this.finish.bind(this)} className="addPerson"/></div>)
+            btns = (<div className="formArch print-hide" style={{ height:40 }}><input type="button" value="提交" onClick={this.finish.bind(this)} className="addPerson"/></div>)
+        }else{
+            envelope = <div className="hidden print-show">
+                            <div className="title-form-name envelope-title-all">清滨人民调解委员会</div>
+                            <div className="envelope-name">卷宗</div>
+                            <div className="formArch">
+                                <img className="envelope-img" src={ENVELOPE_Logo_Img}/>
+                            </div>
+                            <div className="envelope-text"><div className="envelope-title">卷宗类别</div><div>：{type.name}</div></div>
+                            <div className="envelope-text"><div className="envelope-title">卷宗名称</div><div>：{name}</div></div>
+                            <div className="envelope-text"><div className="envelope-title"><span className="envelope-left">年</span><span className="envelope-right">度</span></div><div>：{year}</div></div>
+                            <div className="envelope-text"><div className="envelope-title"><span className="envelope-left">卷</span><span className="envelope-right">号</span></div><div>：{code}</div></div>
+                            <div className="envelope-text"><div className="envelope-title">调解人员</div><div>：{this.getWorkers(archive)}</div></div>
+                            <div className="envelope-text"><div className="envelope-title">调解日期</div><div>：{protoTime}</div></div>
+                            <div className="envelope-text"><div className="envelope-title">立卷人员</div><div>：{creater.name}</div></div>
+                            <div className="envelope-text"><div className="envelope-title">立卷日期</div><div>：{createTime}</div></div>
+                            <div className="envelope-text"><div className="envelope-title">保管期限</div><div>：{keepTime}</div></div>
+                       </div>;
+            btns = (<div className="formArch print-hide" style={{ height:40 }}><input type="button" value="打印封皮" onClick={this.getPrint.bind(this)} className="addPerson"/></div>)
         }
         return (
             <div>
-                <div className="title-form-name">结案</div>
-                <div className="formBorder">
+                {envelope}
+                <div className="title-form-name print-hide">结案</div>
+                <div className="formBorder print-hide">
                     <div className="fixed-box"></div>
                     <div className="formArch word-title">协议书扫描件</div>
                     <div className="formArch"><UpLoading className="btn-pop" dataId={id}/></div>

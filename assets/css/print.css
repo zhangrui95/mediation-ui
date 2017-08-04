@@ -1,4 +1,4 @@
-.no-print,.print-hide,.yun{
+.no-print,.print-hide,.yun,.print-header-box-none,.print-footer-box-none{
     display: none;
     height: 0px;
 }
@@ -153,4 +153,38 @@
 }
 .margin-word{
     margin-top: 6px;
+}
+.envelope-title-all{
+    font-size: 52px;
+    letter-spacing:2px;
+    height: 150px;
+    line-height: 220px;
+}
+.envelope-name{
+    height: 130px;
+    line-height: 140px;
+    width: 100%;
+    text-align: center;
+    font-size: 78px;
+    letter-spacing:25px;
+}
+.envelope-img{
+    width: 44%;
+    margin:20px 28% 50px;
+}
+.envelope-text{
+    width: 70%;
+    margin:15px 0 15px 20%;
+    font-size: 28px;
+}
+.envelope-title{
+    width:105px;
+    font-size: 26px;
+    float: left;
+}
+.envelope-left{
+    float: left;
+}
+.envelope-right{
+    float: right;
 }

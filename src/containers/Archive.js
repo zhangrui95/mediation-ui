@@ -5,8 +5,16 @@ import {ARCHIVE_DETAIL} from '../constants/ActionTypes'
 import * as syncActions from '../actions/syncAction';
 import * as arhciveActions from '../actions/arhcive';
 import ArchiveHeader from './../components/archive/ArchiveHeader'
+import PageHeader from '../components/archive/PageHeader';
+import PageFooter from '../components/archive/PageFooter';
+import {setHeaderClass,setFooterClass} from '../utils/body'
 
 class Archive extends Component {
+
+    componentDidMount() {
+        setHeaderClass('print-header-box');
+        setFooterClass('print-bottom-box');
+    }
 
     constructor(props, context) {
         super(props, context);
@@ -26,8 +34,10 @@ class Archive extends Component {
         const { children } = this.props;
         return (
             <div id="mainright">
+                <PageHeader/>
                 <ArchiveHeader {...this.props}/>
                 { children }
+                <PageFooter/>
             </div>
         )
     }

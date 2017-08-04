@@ -11,12 +11,19 @@ import {getDateTime,getDate} from '../../utils/date';
 import PopAlert from '../pop/PopAlert';
 import DisputeCase from './DisputeCase';
 import PageContent from './PageContent';
+import {setHeaderClass,setFooterClass} from '../../utils/body'
 
 class CheckVisit extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {model: 0,input:'',date:'',defaultTime:getDateTime(new Date().getTime()),msg:''};
     }
+
+    componentDidMount() {
+        setHeaderClass('print-header-box');
+        setFooterClass('print-bottom-box');
+    }
+
     componentWillReceiveProps(next) {
         const {actions,arhciveActions} = this.props;
         const {checkvisit} = next;

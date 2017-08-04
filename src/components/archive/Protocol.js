@@ -12,12 +12,19 @@ import PopAlert from '../pop/PopAlert';
 import DisputeCase from './DisputeCase';
 import PageContent from './PageContent';
 import PageRemark from './PageRemark';
+import {setHeaderClass,setFooterClass} from '../../utils/body'
 
 class Protocol extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {model: 0,result:'',content:'',remark:'',msg:''};
     }
+
+    componentDidMount() {
+        setHeaderClass('print-header-box');
+        setFooterClass('print-bottom-box');
+    }
+    
     componentWillReceiveProps(next) {
         const {actions,arhciveActions} = this.props;
         const {protocol} = next;

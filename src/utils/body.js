@@ -16,6 +16,24 @@ export function setMainClass(className) {
     main.setAttribute('class',className);
 }
 
+export function setHeaderClass(className) {
+    const print = document.getElementById('print');
+    const old = print.getAttribute('class');
+    if(className==old){
+        return;
+    }
+    print.setAttribute('class',className);
+}
+
+export function setFooterClass(className) {
+    const print = document.getElementById('print-footer');
+    const old = print.getAttribute('class');
+    if(className==old){
+        return;
+    }
+    print.setAttribute('class',className);
+}
+
 
 const getBasename = () => {
     const bases = document.getElementsByTagName('base');
