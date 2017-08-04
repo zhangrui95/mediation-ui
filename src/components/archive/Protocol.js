@@ -155,7 +155,7 @@ class Protocol extends Component {
         let btns = '';
         let disabled = '';
         let length = this.getLitigants().length;
-        let num = 30 - 3*(length-2);
+        let num = 24 - 3*(length-2);
         let nextPage;
         if(num < 0){
             nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
@@ -165,8 +165,8 @@ class Protocol extends Component {
         let lastRows = (rowNum - num)%44;
         let next;
         let remarkRows;
-        if(lastRows > 0){
-            remarkRows = 42 - lastRows;
+        if(lastRows >=0){
+            remarkRows = 40 - lastRows;
         }else{
             remarkRows = num - rowNum - 10;
         }
@@ -176,8 +176,10 @@ class Protocol extends Component {
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
         let lastRow = (rowNumber - remarkRows)%44;
-        if((rowNumber >= (remarkRows - 10)&&rowNumber < remarkRows)||lastRow >= 34){
-            nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+        if(lastRow < 0){
+            if((rowNumber >= (remarkRows - 10)&&rowNumber < remarkRows)||lastRow >= 34){
+                nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+            }
         }
         if(model === 0){
             const archiveData = this.getData(archive);

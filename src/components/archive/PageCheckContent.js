@@ -9,6 +9,7 @@ class PageCheckContent extends Component {
     static getCheckCont(content,num){
         const ps = (content||'').split('\n');
         let rowCheckNum =1;
+        let checkLen = ps.length;
         const rowsCheck = ps.map((i)=>{
             let line = '';
             let count = 0;
@@ -41,7 +42,7 @@ class PageCheckContent extends Component {
             }
             return inRows;
         });
-        return {rowsCheck,rowCheckNum};
+        return {rowsCheck,rowCheckNum,checkLen};
     }
 
     render() {

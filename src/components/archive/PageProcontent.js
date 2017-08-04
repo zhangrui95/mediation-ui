@@ -1,6 +1,3 @@
-/**
- * Created by Administrator on 2017/8/1 0001.
- */
 import React, { Component, PropTypes } from 'react'
 const printLength = 50;
 const printPageKey = '@@page';
@@ -42,7 +39,8 @@ class PageProContent extends Component {
             }
             return inRows;
         });
-        return {rowsPro,rowProNum};
+
+        return {rowsPro,rowProNum,len};
     }
 
     render() {

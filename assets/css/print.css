@@ -155,7 +155,7 @@
     margin-top: 6px;
 }
 .envelope-title-all{
-    font-size: 52px;
+    font-size: 50px;
     letter-spacing:2px;
     height: 150px;
     line-height: 220px;
@@ -165,21 +165,21 @@
     line-height: 140px;
     width: 100%;
     text-align: center;
-    font-size: 78px;
+    font-size: 74px;
     letter-spacing:25px;
 }
 .envelope-img{
-    width: 44%;
-    margin:20px 28% 50px;
+    width: 38%;
+    margin:50px 31% 100px;
 }
 .envelope-text{
     width: 70%;
     margin:15px 0 15px 20%;
-    font-size: 28px;
+    font-size: 22px;
 }
 .envelope-title{
-    width:105px;
-    font-size: 26px;
+    width:88px;
+    font-size: 22px;
     float: left;
 }
 .envelope-left{

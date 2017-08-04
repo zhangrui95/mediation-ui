@@ -332,34 +332,35 @@ class ArchiveDetail extends Component {
         }
         let remarkRows;
         if(lastRows > 0){
-            proNum = 34 - lastRows;
+            proNum = 25 - lastRows;
         }else{
             proNum = num - rowNum - 6;
         }
-        const {rowsPro,rowProNum} = PageProContent.getProCont(proContent,proNum);
+        const {rowsPro,rowProNum,len} = PageProContent.getProCont(proContent,proNum);
         let lastRow = (rowProNum - proNum)%42;
         let nextPro;
-        if(proNum === 0){
-            nextPro = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
-        }
         if(lastRow > 0){
             remarkRows = 30 - lastRow;
         }else{
             if(lastRows < 0){
                 remarkRows = proNum - rowProNum - 4;
             }else{
-                remarkRows = 31 - lastRows - rowProNum;
+                remarkRows = 25 - lastRows - rowProNum;
             }
         }
-        const {rowsCheck,rowCheckNum} = PageCheckContent.getCheckCont(checkContent,remarkRows);
+        const {rowsCheck,rowCheckNum,checkLen} = PageCheckContent.getCheckCont(checkContent,remarkRows);
         let lastCheckRow = (rowCheckNum - remarkRows)%42;
         let nextCheck;
         let nextPages;
-        if(lastCheckRow === 42 ||remarkRows < 3){
-            nextCheck = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+        if(proNum === 0||len > remarkRows){
+            nextPro = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }else{
-            if((rowCheckNum >= (remarkRows - 10)&&rowCheckNum < remarkRows)||lastCheckRow >=35){
-                nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+            if(lastCheckRow === 42 ||remarkRows < 3||checkLen > proNum){
+                nextCheck = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+            }else{
+                if((rowCheckNum >= (remarkRows - 10)&&rowCheckNum < remarkRows)||lastCheckRow >=35){
+                    nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+                }
             }
         }
         if(model === 0){
