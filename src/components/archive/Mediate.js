@@ -146,11 +146,13 @@ class Mediate extends Component {
         let contents = '';
         let btns = '';
         let sign = '';
-        const {rows,rowNum} = PageContent.getRows(content,32);
-        let lastRows = (rowNum - 32)%44;
+        const pageRows = 44;
+        const topRows = 12;
+        const {rows,rowNum} = PageContent.getRows(content,pageRows-topRows);
+        let lastRows = (rowNum + topRows)%pageRows;
         let next;
-        if((rowNum >= 24&&rowNum < 32)||lastRows >= 36){
-            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+        if(lastRows >= 39){
+            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
         if(model === 0){
             time = <TimeChoice name="mediateTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;

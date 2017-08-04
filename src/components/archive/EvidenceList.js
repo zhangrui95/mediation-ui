@@ -28,7 +28,6 @@ class EvidenceList extends Component {
             setTimeout(function(){
                 window.print();
             },800);
-
         }
     }
 

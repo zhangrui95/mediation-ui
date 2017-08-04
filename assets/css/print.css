@@ -28,7 +28,9 @@
 
 .main,.main-body,.center-box{
     margin: 0;
+    padding: 0;
 }
+
 .no-margin{
     margin: 0 auto;
 }
@@ -170,7 +172,7 @@
 }
 .envelope-img{
     width: 38%;
-    margin:50px 31% 100px;
+    margin:50px 31% 130px;
 }
 .envelope-text{
     width: 70%;

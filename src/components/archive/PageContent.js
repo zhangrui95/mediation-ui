@@ -5,8 +5,7 @@ class PageContent extends Component {
 
     static getRows(content,num){
         const ps = (content||'').split('\n');
-        let rowNumLen = 1;
-        let rowNum = '';
+        let rowNum = 1;
         const rows = ps.map((i,k)=>{
             let line = '';
             let count = 0;
@@ -22,8 +21,7 @@ class PageContent extends Component {
                     line  = '';
                     count = 0;
                     row += 1;
-                    rowNumLen+=1;
-                    rowNum = rowNumLen + k;
+                    rowNum+=1;
                     if(rowNum <= num){
                         if(rowNum % num === 0) {
                             inRows.push(printPageKey);
@@ -37,6 +35,16 @@ class PageContent extends Component {
             }
             if(line !== ''){
                 inRows.push(line);
+                rowNum+=1;
+                if(rowNum <= num){
+                    if(rowNum % num === 0) {
+                        inRows.push(printPageKey);
+                    }
+                }else{
+                    if((rowNum - num)% 44 === 0){
+                        inRows.push(printPageKey);
+                    }
+                }
             }
             return inRows;
         });

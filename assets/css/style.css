@@ -1757,7 +1757,7 @@ to {
 	display: none;
 	width: 86%;
 	position:relative;
-	bottom:100px;
+	/*bottom:100px;*/
 	left: 50%;
 	margin-left: -43%;
 }

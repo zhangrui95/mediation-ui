@@ -342,11 +342,11 @@ class ArchiveDetail extends Component {
         if(lastRow > 0){
             remarkRows = 30 - lastRow;
         }else{
-            if(lastRows < 0){
-                remarkRows = proNum - rowProNum - 4;
-            }else{
-                remarkRows = 25 - lastRows - rowProNum;
-            }
+                if(lastRows < 0){
+                    remarkRows = proNum - rowProNum - 4;
+                }else{
+                    remarkRows = 25 - lastRows - rowProNum;
+                }
         }
         const {rowsCheck,rowCheckNum,checkLen} = PageCheckContent.getCheckCont(checkContent,remarkRows);
         let lastCheckRow = (rowCheckNum - remarkRows)%42;
