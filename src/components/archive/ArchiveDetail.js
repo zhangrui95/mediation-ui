@@ -318,15 +318,15 @@ class ArchiveDetail extends Component {
         }
         let length = (litigants||[]).length;
         const pageRows = 44;
-        const topRows = 15;
-        let num = pageRows - topRows - 4*(length-2);
+        const topRows = 7;
+        let num = pageRows - topRows - 4*length;
         let nextPage;
         if(num < 0){
             nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
             num =  0;
         }
         const {rows,rowNum} = PageContent.getRows(content,num);
-        let lastRows = (rowNum + topRows + 4*(length-2))%44;
+        let lastRows = (rowNum + topRows + 4*length)%44;
         let proNum = pageRows - lastRows - 6;
         let next;
         let nexts;
@@ -338,7 +338,7 @@ class ArchiveDetail extends Component {
             }
         }
         const {rowsPro,rowProNum} = PageProContent.getProCont(proContent,proNum);
-        let lastRowPro = (rowNum + topRows + 4*(length-2) + rowProNum + 6)%44;
+        let lastRowPro = (rowNum + topRows + 4*length + rowProNum + 6)%44;
         let remarkRows = pageRows - lastRowPro - 3;
         let nextPages;
         if(lastRowPro >= 41){

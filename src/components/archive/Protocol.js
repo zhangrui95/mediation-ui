@@ -156,15 +156,15 @@ class Protocol extends Component {
         let disabled = '';
         let length = this.getLitigants().length;
         const pageRows = 44;
-        const topRows = 18;
-        let num = pageRows - topRows - 4*(length-2);
+        const topRows = 10;
+        let num = pageRows - topRows - 4*length;
         let nextPage;
         if(num < 0){
             nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
             num =  0;
         }
         const {rows,rowNum} = PageContent.getRows(content,num);
-        let lastRows = (rowNum + topRows + 4*(length-2))%44;
+        let lastRows = (rowNum + topRows + 4*length)%44;
         let next;
         if(lastRows >= 41){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
@@ -172,7 +172,7 @@ class Protocol extends Component {
         let remarkRows = pageRows - lastRows - 4;
         const {row,rowNumber} = PageRemark.getRemark(remark,remarkRows);
         let nextPages;
-        let lastRow = (rowNum + topRows + 4*(length-2) + rowNumber)%44;
+        let lastRow = (rowNum + topRows + 4*length + rowNumber)%44;
         if(lastRow >= 34){
             nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }

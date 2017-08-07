@@ -65,36 +65,42 @@ class ArchiveFinish extends Component {
         const { archive} = this.props;
         const { response} = archive;
         const { data,protocol} = response||{};
-        const { finishState,type,name,creater} = data||{};
+        const { finishState,type,name,creater,state} = data||{};
         const {code} = protocol||{};
         let btns;
         let envelope;
         if(finishState === 0){
             btns = (<div className="formArch print-hide" style={{ height:40 }}><input type="button" value="提交" onClick={this.finish.bind(this)} className="addPerson"/></div>)
         }else{
-            let  protoTime = getDate(protocol.createTime);
-            let  createTime = getDate(data.createTime);
-            let keepTime = getDate(data.keepTime);
-            let year = getYear(data.createTime);
-            if(protocol.createTime === null||data.createTime === null||data.keepTime === null||data.createTime === null){
-                return null;
+            let protoTime;
+            let createTime;
+            let keepTime;
+            let year;
+            if(state !== 2){
+                protoTime = getDate(protocol.createTime);
+                createTime = getDate(data.createTime);
+                keepTime = getDate(data.keepTime);
+                year = getYear(data.createTime);
+                if(protocol.createTime === null||data.createTime === null||data.keepTime === null||data.createTime === null){
+                    return null;
+                }
+                envelope = <div className="hidden print-show">
+                    <div className="title-form-name envelope-title-all">清滨人民调解委员会</div>
+                    <div className="envelope-name">卷宗</div>
+                    <div className="formArch">
+                        <img className="envelope-img" src={ENVELOPE_Logo_Img}/>
+                    </div>
+                    <div className="envelope-text"><div className="envelope-title">卷宗类别</div><div>：{type.name}</div></div>
+                    <div className="envelope-text"><div className="envelope-title">卷宗名称</div><div>：{name}</div></div>
+                    <div className="envelope-text"><div className="envelope-title"><span className="envelope-left">年</span><span className="envelope-right">度</span></div><div>：{year}</div></div>
+                    <div className="envelope-text"><div className="envelope-title"><span className="envelope-left">卷</span><span className="envelope-right">号</span></div><div>：{code}</div></div>
+                    <div className="envelope-text"><div className="envelope-title">调解人员</div><div>：{this.getWorkers(archive)}</div></div>
+                    <div className="envelope-text"><div className="envelope-title">调解日期</div><div>：{protoTime}</div></div>
+                    <div className="envelope-text"><div className="envelope-title">立卷人员</div><div>：{creater.name}</div></div>
+                    <div className="envelope-text"><div className="envelope-title">立卷日期</div><div>：{createTime}</div></div>
+                    <div className="envelope-text"><div className="envelope-title">保管期限</div><div>：{keepTime}</div></div>
+                </div>;
             }
-            envelope = <div className="hidden print-show">
-                            <div className="title-form-name envelope-title-all">清滨人民调解委员会</div>
-                            <div className="envelope-name">卷宗</div>
-                            <div className="formArch">
-                                <img className="envelope-img" src={ENVELOPE_Logo_Img}/>
-                            </div>
-                            <div className="envelope-text"><div className="envelope-title">卷宗类别</div><div>：{type.name}</div></div>
-                            <div className="envelope-text"><div className="envelope-title">卷宗名称</div><div>：{name}</div></div>
-                            <div className="envelope-text"><div className="envelope-title"><span className="envelope-left">年</span><span className="envelope-right">度</span></div><div>：{year}</div></div>
-                            <div className="envelope-text"><div className="envelope-title"><span className="envelope-left">卷</span><span className="envelope-right">号</span></div><div>：{code}</div></div>
-                            <div className="envelope-text"><div className="envelope-title">调解人员</div><div>：{this.getWorkers(archive)}</div></div>
-                            <div className="envelope-text"><div className="envelope-title">调解日期</div><div>：{protoTime}</div></div>
-                            <div className="envelope-text"><div className="envelope-title">立卷人员</div><div>：{creater.name}</div></div>
-                            <div className="envelope-text"><div className="envelope-title">立卷日期</div><div>：{createTime}</div></div>
-                            <div className="envelope-text"><div className="envelope-title">保管期限</div><div>：{keepTime}</div></div>
-                       </div>;
             btns = (<div className="formArch print-hide" style={{ height:40 }}><input type="button" value="打印封皮" onClick={this.getPrint.bind(this)} className="addPerson"/></div>)
         }
         return (
