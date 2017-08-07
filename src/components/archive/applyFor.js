@@ -124,8 +124,8 @@ class ApplyFor extends Component {
         const {rows,rowNum} = PageContent.getRows(content,num);
         let lastRows = (rowNum + topRows + 3*(length-2))%44;
         let next;
-        if(lastRows >= 39){
-            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+        if(lastRows >= 40){
+            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
         return (
             <div className="min-height">
