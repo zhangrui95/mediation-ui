@@ -319,18 +319,18 @@ class ArchiveDetail extends Component {
         let length = (litigants||[]).length;
         const pageRows = 44;
         const topRows = 15;
-        let num = pageRows - topRows - 3*(length-2);
+        let num = pageRows - topRows - 4*(length-2);
         let nextPage;
         if(num < 0){
             nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
             num =  0;
         }
         const {rows,rowNum} = PageContent.getRows(content,num);
-        let lastRows = (rowNum + topRows + 3*(length-2))%44;
+        let lastRows = (rowNum + topRows + 4*(length-2))%44;
         let proNum = pageRows - lastRows - 3;
         let next;
         let nexts;
-        if(lastRows >= 41){
+        if(lastRows >= 38){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }else{
             if(lastRows + 6 > 41){
@@ -338,14 +338,14 @@ class ArchiveDetail extends Component {
             }
         }
         const {rowsPro,rowProNum} = PageProContent.getProCont(proContent,proNum);
-        let lastRowPro = (rowNum + topRows + 3*(length-2) + rowProNum + 4)%44;
+        let lastRowPro = (rowNum + topRows + 4*(length-2) + rowProNum + 4)%44;
         let remarkRows = pageRows - lastRowPro - 3;
         let nextPages;
         if(lastRowPro >= 41){
             nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
         const {rowsCheck,rowCheckNum} = PageCheckContent.getCheckCont(checkContent,remarkRows);
-        let lastRowCheck = (rowNum + topRows + 3*(length-2) + rowProNum + rowCheckNum + 6)%44;
+        let lastRowCheck = (rowNum + topRows + 4*(length-2) + rowProNum + rowCheckNum + 6)%44;
         let nextPageCheck;
         if(lastRowCheck >= 40){
             nextPageCheck = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);

@@ -71,6 +71,9 @@ class ArchiveFinish extends Component {
         let  createTime = getDate(data.createTime);
         let keepTime = getDate(data.keepTime);
         let year = getYear(data.createTime);
+        if(protocol.createTime === null||data.createTime === null||data.keepTime === null||data.createTime === null){
+            return null;
+        }
         let btns;
         let envelope;
         if(finishState === 0){
