@@ -66,7 +66,7 @@ class EvidenceList extends Component {
             <div>
                 <div className="title-form-name print-hide">证据上传</div>
                 {imgBox}
-                <EvidenceCell getPrint={this.getPrint.bind(this)} dataId={id} archive={EvidenceList.getArchiveData(archive)} data={data} dataId={id} reload={this.load.bind(this)}/>
+                <EvidenceCell getPrint={this.getPrint.bind(this)} dataId={id} archive={EvidenceList.getArchiveData(archive)} data={data} reload={this.load.bind(this)}/>
             </div>
         )
     }
