@@ -347,7 +347,6 @@ class ArchiveDetail extends Component {
         const {rowsCheck,rowCheckNum} = PageCheckContent.getCheckCont(checkContent,remarkRows);
         let lastRowCheck = (rowNum + topRows + 3*(length-2) + rowProNum + rowCheckNum + 6)%44;
         let nextPageCheck;
-        console.log(lastRowCheck);
         if(lastRowCheck >= 39){
             nextPageCheck = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
