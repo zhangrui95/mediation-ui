@@ -142,7 +142,7 @@ class CheckVisit extends Component {
         let lastRows = (rowNum + topRows)%44;
         let next;
         if(lastRows >= 39){
-            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
         if(model === 0){
             const archiveData = this.getData(archive);
