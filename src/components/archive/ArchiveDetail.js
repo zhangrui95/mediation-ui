@@ -327,7 +327,7 @@ class ArchiveDetail extends Component {
         }
         const {rows,rowNum} = PageContent.getRows(content,num);
         let lastRows = (rowNum + topRows + 4*(length-2))%44;
-        let proNum = pageRows - lastRows - 3;
+        let proNum = pageRows - lastRows - 6;
         let next;
         let nexts;
         if(lastRows >= 38){
@@ -338,7 +338,7 @@ class ArchiveDetail extends Component {
             }
         }
         const {rowsPro,rowProNum} = PageProContent.getProCont(proContent,proNum);
-        let lastRowPro = (rowNum + topRows + 4*(length-2) + rowProNum + 4)%44;
+        let lastRowPro = (rowNum + topRows + 4*(length-2) + rowProNum + 6)%44;
         let remarkRows = pageRows - lastRowPro - 3;
         let nextPages;
         if(lastRowPro >= 41){

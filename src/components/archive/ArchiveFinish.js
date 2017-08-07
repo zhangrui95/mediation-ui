@@ -67,18 +67,18 @@ class ArchiveFinish extends Component {
         const { data,protocol} = response||{};
         const { finishState,type,name,creater} = data||{};
         const {code} = protocol||{};
-        let  protoTime = getDate(protocol.createTime);
-        let  createTime = getDate(data.createTime);
-        let keepTime = getDate(data.keepTime);
-        let year = getYear(data.createTime);
-        if(protocol.createTime === null||data.createTime === null||data.keepTime === null||data.createTime === null){
-            return null;
-        }
         let btns;
         let envelope;
         if(finishState === 0){
             btns = (<div className="formArch print-hide" style={{ height:40 }}><input type="button" value="提交" onClick={this.finish.bind(this)} className="addPerson"/></div>)
         }else{
+            let  protoTime = getDate(protocol.createTime);
+            let  createTime = getDate(data.createTime);
+            let keepTime = getDate(data.keepTime);
+            let year = getYear(data.createTime);
+            if(protocol.createTime === null||data.createTime === null||data.keepTime === null||data.createTime === null){
+                return null;
+            }
             envelope = <div className="hidden print-show">
                             <div className="title-form-name envelope-title-all">清滨人民调解委员会</div>
                             <div className="envelope-name">卷宗</div>
