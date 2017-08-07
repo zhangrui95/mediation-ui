@@ -100,8 +100,9 @@ class ArchiveFinish extends Component {
                     <div className="envelope-text"><div className="envelope-title">立卷日期</div><div>：{createTime}</div></div>
                     <div className="envelope-text"><div className="envelope-title">保管期限</div><div>：{keepTime}</div></div>
                 </div>;
+                btns = (<div className="formArch print-hide" style={{ height:40 }}><input type="button" value="打印封皮" onClick={this.getPrint.bind(this)} className="addPerson"/></div>);
             }
-            btns = (<div className="formArch print-hide" style={{ height:40 }}><input type="button" value="打印封皮" onClick={this.getPrint.bind(this)} className="addPerson"/></div>)
+
         }
         return (
             <div>
