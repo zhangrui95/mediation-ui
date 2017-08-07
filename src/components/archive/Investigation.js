@@ -199,8 +199,8 @@ class Investigation extends Component {
         const {rows,rowNum} = PageContent.getRows(content,pageRows-topRows);
         let lastRows = (rowNum  + topRows)%44;
         let next;
-        if(lastRows >= 39){
-            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
+        if(lastRows >= 40){
+            next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
         if(model === 0){
             times = <TimeChoice name="investTime" onChange={this.timeChange.bind(this)} value={this.state.time} defaultValue={this.state.defaultTime}/>;

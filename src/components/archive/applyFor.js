@@ -114,7 +114,7 @@ class ApplyFor extends Component {
         }
         let length = this.getLitigants().length;
         const pageRows = 44;
-        const topRows = 14;
+        const topRows = 12;
         let num = pageRows - topRows - 3*(length-2);
         let nextPage;
         if(num < 0){
