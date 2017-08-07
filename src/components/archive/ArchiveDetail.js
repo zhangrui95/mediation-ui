@@ -317,51 +317,39 @@ class ArchiveDetail extends Component {
             loading = '保存中……';
         }
         let length = (litigants||[]).length;
-        let num = 26 - 3*(length-2);
+        const pageRows = 44;
+        const topRows = 15;
+        let num = pageRows - topRows - 3*(length-2);
         let nextPage;
         if(num < 0){
             nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
             num =  0;
         }
-        let proNum;
         const {rows,rowNum} = PageContent.getRows(content,num);
-        let lastRows = (rowNum - num)%42;
+        let lastRows = (rowNum + topRows + 3*(length-2))%44;
+        let proNum = pageRows - lastRows - 3;
         let next;
-        if((rowNum >= (num-7)&&rowNum < num)||lastRows >= 35){
+        let nexts;
+        if(lastRows >= 41){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
-        }
-        let remarkRows;
-        if(lastRows > 0){
-            proNum = 25 - lastRows;
         }else{
-            proNum = num - rowNum - 6;
-        }
-        const {rowsPro,rowProNum,len} = PageProContent.getProCont(proContent,proNum);
-        let lastRow = (rowProNum - proNum)%42;
-        let nextPro;
-        if(lastRow > 0){
-            remarkRows = 30 - lastRow;
-        }else{
-                if(lastRows < 0){
-                    remarkRows = proNum - rowProNum - 4;
-                }else{
-                    remarkRows = 25 - lastRows - rowProNum;
-                }
-        }
-        const {rowsCheck,rowCheckNum,checkLen} = PageCheckContent.getCheckCont(checkContent,remarkRows);
-        let lastCheckRow = (rowCheckNum - remarkRows)%42;
-        let nextCheck;
-        let nextPages;
-        if(proNum === 0||len > remarkRows){
-            nextPro = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
-        }else{
-            if(lastCheckRow === 42 ||remarkRows < 3||checkLen > proNum){
-                nextCheck = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
-            }else{
-                if((rowCheckNum >= (remarkRows - 10)&&rowCheckNum < remarkRows)||lastCheckRow >=35){
-                    nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
-                }
+            if(lastRows + 6 > 41){
+                nexts = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
             }
+        }
+        const {rowsPro,rowProNum} = PageProContent.getProCont(proContent,proNum);
+        let lastRowPro = (rowNum + topRows + 3*(length-2) + rowProNum + 4)%44;
+        let remarkRows = pageRows - lastRowPro - 3;
+        let nextPages;
+        if(lastRowPro >= 41){
+            nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
+        }
+        const {rowsCheck,rowCheckNum} = PageCheckContent.getCheckCont(checkContent,remarkRows);
+        let lastRowCheck = (rowNum + topRows + 3*(length-2) + rowProNum + rowCheckNum + 6)%44;
+        let nextPageCheck;
+        console.log(lastRowCheck);
+        if(lastRowCheck >= 39){
+            nextPageCheck = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
         if(model === 0){
             if(!header.user){
@@ -493,10 +481,10 @@ class ArchiveDetail extends Component {
                         <div className="formArch content-indent first-line hidden print-show">{protoTime}</div>
                         <div className="formArch hidden print-show"><span className="word-title find-style-left">调解结果</span></div>
                         <div className="formArch hidden print-show"><div className="content-indent first-line">{title.state}</div></div>
-                        {nextPro}
+                        {nexts}
                         <div className="formArch"><span className="word-title find-style-left">调解协议</span><span className="left-news print-hide">{protoText}</span></div>
                         <div className="hidden print-show">{protoText}</div>
-                        {nextCheck}
+                        {nextPages}
                         <div className="formArch"><span className="word-title find-style-left">协议履行情况</span><span className="left-news print-hide">{checkText}</span></div>
                         <div className="hidden print-show">{checkText}</div>
                         <div className="formArch no-print"><span className="word-title find-style-left">调解失败时间</span><span className="left-news">{failTime}</span></div>
@@ -511,7 +499,7 @@ class ArchiveDetail extends Component {
                 <div className="fixed-box"></div>
                 <PopAlertHtml visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
                 <PopLoading visible={loading!==''} title=""  width={400} zIndex={1270} modalzIndex={1260} load={loading}/>
-                {nextPages}
+                {nextPageCheck}
                 <div className="bottom-position">
                     <div className="sign-margin">登记人签字：</div>
                     <div className="time-right">{getDate(data.createTime)}</div>

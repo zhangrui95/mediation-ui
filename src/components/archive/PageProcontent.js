@@ -6,7 +6,6 @@ class PageProContent extends Component {
     static getProCont(content,num){
         const ps = (content||'').split('\n');
         let rowProNum = 1;
-        let len = ps.length;
         const rowsPro = ps.map((i)=>{
             let line = '';
             let count = 0;
@@ -36,11 +35,21 @@ class PageProContent extends Component {
             }
             if(line !== ''){
                 inRows.push(line);
+                rowProNum+=1;
+                if(rowProNum <= num){
+                    if(rowProNum % num === 0) {
+                        inRows.push(printPageKey);
+                    }
+                }else{
+                    if((rowProNum - num)% 44 === 0){
+                        inRows.push(printPageKey);
+                    }
+                }
             }
             return inRows;
         });
 
-        return {rowsPro,rowProNum,len};
+        return {rowsPro,rowProNum};
     }
 
     render() {

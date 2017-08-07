@@ -155,31 +155,26 @@ class Protocol extends Component {
         let btns = '';
         let disabled = '';
         let length = this.getLitigants().length;
-        let num = 24 - 3*(length-2);
+        const pageRows = 44;
+        const topRows = 18;
+        let num = pageRows - topRows - 3*(length-2);
         let nextPage;
         if(num < 0){
             nextPage = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
             num =  0;
         }
         const {rows,rowNum} = PageContent.getRows(content,num);
-        let lastRows = (rowNum - num)%44;
+        let lastRows = (rowNum + topRows + 3*(length-2))%44;
         let next;
-        let remarkRows;
-        if(lastRows >=0){
-            remarkRows = 40 - lastRows;
-        }else{
-            remarkRows = num - rowNum - 10;
-        }
-        const {row,rowNumber} = PageRemark.getRemark(remark,remarkRows);
-        let nextPages;
-        if(remarkRows < 5){
+        if(lastRows >= 41){
             next = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
-        let lastRow = (rowNumber - remarkRows)%44;
-        if(lastRow < 0){
-            if((rowNumber >= (remarkRows - 10)&&rowNumber < remarkRows)||lastRow >= 34){
-                nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div><div className="page-fixed-height"></div></div>);
-            }
+        let remarkRows = pageRows - lastRows - 3;
+        const {row,rowNumber} = PageRemark.getRemark(remark,remarkRows);
+        let nextPages;
+        let lastRow = (rowNum + topRows + 3*(length-2) + rowNumber)%44;
+        if(lastRow >= 34){
+            nextPages = (<div><div className="page-next"></div><div className="page-fixed-height"></div></div>);
         }
         if(model === 0){
             const archiveData = this.getData(archive);

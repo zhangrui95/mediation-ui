@@ -6,7 +6,7 @@ class PageContent extends Component {
     static getRows(content,num){
         const ps = (content||'').split('\n');
         let rowNum = 1;
-        const rows = ps.map((i,k)=>{
+        const rows = ps.map((i)=>{
             let line = '';
             let count = 0;
             let row = 0;
