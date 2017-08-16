@@ -59,7 +59,7 @@ class EvidenceList extends Component {
         let imgBox = '';
         let text = this.state.text;
         if(imgId !== ''){
-            imgBox = <div><div className="title-form-name hidden print-show">证据照片{src}</div><div className="hidden print-show"><div className="formArch word-title">证据照片</div><img className="evid-img" onLoad={this.imgLoad.bind(this)} onError={this.imgError.bind(this)} src={src}/></div></div>
+            imgBox = <div><div className="title-form-name hidden print-show">证据照片</div><div className="hidden print-show"><div className="formArch word-title">证据照片</div><img className="evid-img" onLoad={this.imgLoad.bind(this)} onError={this.imgError.bind(this)} src={src}/></div></div>
         }
         if(data === null || data === undefined){
             return null;
