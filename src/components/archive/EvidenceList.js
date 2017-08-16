@@ -5,12 +5,13 @@ import EvidenceCell from './EvidenceCell'
 import {LIST_BY_ARCHIVE} from '../../constants/ActionTypes'
 import * as syncActions from '../../actions/syncAction'
 import {setHeaderClass,setFooterClass} from '../../utils/body'
+import PopLoading from '../pop/PopLoading';
+import PopAlertHtml from '../pop/PopAlertHtml';
 
 class EvidenceList extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {imgId:''};
-        this.print = false;
+        this.state = {imgId:'',print:false,text:'',msg:''};
     }
     
     componentDidMount() {
@@ -20,15 +21,6 @@ class EvidenceList extends Component {
 
     componentWillMount(){
         this.load();
-    }
-
-    componentDidUpdate(){
-        if(this.print){
-            this.print = false;
-            setTimeout(function(){
-                window.print();
-            },800);
-        }
     }
 
     load(){
@@ -44,8 +36,17 @@ class EvidenceList extends Component {
     }
 
     getPrint(e){
-        this.setState({imgId:e.target.id});
-        this.print = true;
+        this.setState({imgId:e.target.id,print:true});
+    }
+
+    imgLoad(){
+        window.print();
+        this.setState({imgId:'',print:false});
+    }
+
+    imgError(){
+        this.setState({imgId:'',print:false,msg:'很抱歉，加载打印照片失败！'});
+        return false;
     }
     
     render() {
@@ -56,17 +57,23 @@ class EvidenceList extends Component {
         let imgId = this.state.imgId;
         let src = 'api/evidence/photo.json?id='+imgId;
         let imgBox = '';
+        let text = this.state.text;
         if(imgId !== ''){
-            imgBox = <div><div className="title-form-name hidden print-show">证据照片</div><div className="hidden print-show"><div className="formArch word-title">证据照片</div><img className="evid-img" src={src}/></div></div>
+            imgBox = <div><div className="title-form-name hidden print-show">证据照片{src}</div><div className="hidden print-show"><div className="formArch word-title">证据照片</div><img className="evid-img" onLoad={this.imgLoad.bind(this)} onError={this.imgError.bind(this)} src={src}/></div></div>
         }
         if(data === null || data === undefined){
             return null;
+        }
+        if(this.state.print){
+            text = '加载中……';
         }
         return (
             <div>
                 <div className="title-form-name print-hide">证据上传</div>
                 {imgBox}
                 <EvidenceCell getPrint={this.getPrint.bind(this)} dataId={id} archive={EvidenceList.getArchiveData(archive)} data={data} reload={this.load.bind(this)}/>
+                <PopLoading visible={text!==''} title=""  width={400} zIndex={1270} modalzIndex={1260} load={text}/>
+                <PopAlertHtml visible={this.state.msg!==''} title="消息提醒"  width={400} zIndex={1270} modalzIndex={1260} message={this.state.msg} closeDoneHandler={()=>this.setState({msg:""})}/>
             </div>
         )
     }
