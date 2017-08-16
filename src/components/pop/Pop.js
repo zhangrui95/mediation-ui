@@ -121,7 +121,7 @@ class Pop extends Component {
         }
         return (
         <div style={{display}}>
-            <div ref="panel" className="pop-error" style={{width,top,left,zIndex}} onClick={this.handlerClose.bind(this)}>
+            <div ref="panel" className="pop-error no-print" style={{width,top,left,zIndex}} onClick={this.handlerClose.bind(this)}>
                 <div className={titleStyle} style={{width}}>
                     <div className="error-title">{title}</div>
                     <div className="cls"></div>
